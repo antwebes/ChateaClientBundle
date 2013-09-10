@@ -14,11 +14,7 @@ class AuthorizeController extends ContainerAware
 {
 	public function connectAction(Request $request)
 	{
-		$user = $this->container->get('security.context')->getToken()->getUser();
-		
-		if (!$user instanceof UserInterface) {
-			throw new AccessDeniedException('This user does not have access to this section.');
-		}
+													 
 		$serviceId = $this->container->getParameter('antwebes_chateaclient.auth_client.default');
 		$authService = $this->container->get($serviceId);
 
