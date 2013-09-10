@@ -32,6 +32,6 @@
 	},
 	"target-dir" : "Ant/Bundle/ChateaClientBundle",
 	"replace" : {
-		"antwebes/chatea-client-bundle" : "dev-master"
+		"antwebes/ChateaClientBundle" : "dev-master"
 	}
 }
