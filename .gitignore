@@ -12,6 +12,7 @@ web/js/*
 web/uploads/*
 # -- Composer -----------------------------------------
 composer.phar
+composer.lock
 
 # -- PHPUnit ------------------------------------------
 app/phpunit.xml  
