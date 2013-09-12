@@ -5,4 +5,5 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ChateaClientBundle extends Bundle
 {
+
 }

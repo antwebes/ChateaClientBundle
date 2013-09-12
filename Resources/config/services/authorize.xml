@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+		<parameter key="antwebes_chateaclient.oauth2_client_user_credentials.class">Ant\ChateaClient\OAuth2\OAuth2ClientUserCredentials</parameter>
+		<parameter key="antwebes_chateaclient.oauth2_client_auth_code.class">Ant\ChateaClient\OAuth2\OAuth2ClientAuthCode</parameter>
+		<parameter key="antwebes_chateaclient.oauth2_client_credentials.class">Ant\ChateaClient\OAuth2\OAuth2ClientCredentials</parameter>
+
+
+		<parameter key="antwebes_chateaclient.auth_user_credentials.class">Ant\ChateaClient\Client\AuthUserCredentials</parameter>
+		<parameter key="antwebes_chateaclient.auth_auth_code.class">Ant\ChateaClient\Client\AuthAuthCode</parameter>
+		<parameter key="antwebes_chateaclient.auth_client_credentials.class">Ant\ChateaClient\Client\AuthClientCredentials</parameter>
+
+		<parameter key="antwebes_chateaclient.oauth2_client.client_id">2_63gig21vk9gc0kowgwwwgkcoo0g84kww00c4400gsc0k8oo4ks</parameter>
+		<parameter key="antwebes_chateaclient.oauth2_client.secret">202mykfu3ilckggkwosgkoo8g40w4wws0k0kooo488wo048k0w</parameter>
+		<parameter key="antwebes_chateaclient.oauth2_client.redirect_uri">http://www.chateagratis.net/</parameter>
+        <parameter key="antwebes_chateaclient.oauth2_client.code">OTgxMTIwNzIwODc4OGJhMjNmZDEyM2I4NDhiNmQyOTk4MjU3YzdkNjM5NDI5MjE0MzJiMWM2ODYxNWFjNDAzOQ</parameter>		
+		<parameter key="antwebes_chateaclient.oauth2_client.username">apiuser</parameter>
+		<parameter key="antwebes_chateaclient.oauth2_client.password">apiuser</parameter>
+
+        <parameter key="antwebes_chateaclient.auth_client.default">antwebes_chateaclient.auth_client_credentials</parameter>
+        
+	</parameters>
+
+	<services>
+	    <service id="antwebes_chateaclient.oauth2_client_user_credentials" class="%antwebes_chateaclient.oauth2_client_user_credentials.class%" public="false">
+            <argument>%antwebes_chateaclient.auth_user_credentials.class%</argument>
+            <argument>%antwebes_chateaclient.oauth2_client.secret%</argument>
+            <argument>%antwebes_chateaclient.oauth2_client.username%</argument>
+            <argument>%antwebes_chateaclient.oauth2_client.username%</argument>            
+        </service>
+        <service id="antwebes_chateaclient.oauth2_client_auth_code" class="%antwebes_chateaclient.oauth2_client_auth_code.class%" public="false">
+            <argument>%antwebes_chateaclient.auth_user_credentials.class%</argument>
+            <argument>%antwebes_chateaclient.oauth2_client.secret%</argument>
+            <argument>%antwebes_chateaclient.oauth2_client.code%</argument>
+            <argument>%antwebes_chateaclient.oauth2_client.redirect_uri%</argument>            
+        </service>	
+        <service id="antwebes_chateaclient.oauth2_client_credentials" class="%antwebes_chateaclient.oauth2_client_credentials.class%" public="false">
+            <argument>%antwebes_chateaclient.auth_user_credentials.class%</argument>
+            <argument>%antwebes_chateaclient.oauth2_client.secret%</argument>        
+        </service>  
+		<service id="antwebes_chateaclient.http_client.auth" class="%antwebes_chateaclient.httpclient.class%" public="false">
+			<argument>Ant\ChateaClient\Http\IHttpClient::TOKEN_ENDPOINT</argument>
+		</service>
+
+
+        <service id="antwebes_chateaclient.auth_user_credentials" class="%antwebes_chateaclient.auth_user_credentials.class%" >
+            <argument type="service" id="antwebes_chateaclient.oauth2_client_user_credentials" />
+            <argument type="service" id="antwebes_chateaclient.http_client.auth" />
+        </service>
+                
+        <service id="antwebes_chateaclient.auth_auth_code" class="%antwebes_chateaclient.auth_auth_code.class%">
+            <argument type="service" id="antwebes_chateaclient.oauth2_client_auth_code" />
+            <argument type="service" id="antwebes_chateaclient.http_client.auth" />
+        </service>
+                
+        <service id="antwebes_chateaclient.auth_client_credentials" class="%antwebes_chateaclient.auth_client_credentials.class%" >
+            <argument type="service" id="antwebes_chateaclient.oauth2_client_credentials" />
+            <argument type="service" id="antwebes_chateaclient.http_client.auth" />
+        </service>
+
+        
+	</services>
+</container>    

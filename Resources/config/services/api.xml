@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">   
+    
+    
+    <services>
+        <service id="antwebes_chateaclient.http_client.api" class="%antwebes_chateaclient.httpclient.class%" public="false">
+            <argument>%antwebes_chateaclient.http_client.server_endpoint%</argument>
+        </service>
+
+        <service id="antwebes_chateaclient.api" class="%antwebes_chateaclient.client_api.class%">           
+            <argument type="service" id="antwebes_chateaclient.http_client.api" />
+        </service>   
+        
+    </services>
+</container> 
