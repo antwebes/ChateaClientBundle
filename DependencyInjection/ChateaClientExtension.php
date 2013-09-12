@@ -27,8 +27,12 @@ class ChateaClientExtension extends Extension
 		$configuration = new Configuration();
 		$config = $this->processConfiguration($configuration, $configs);
 		
-		$container->setParameter('antwebes_chateaclient.http_client.server_endpoint', $config['http_client']['server_endpoint']);
-
+	    foreach ($config as $rootKey => $configurationSettings) {
+	    	foreach ($configurationSettings as $configKey => $configValue) {
+	    		$container->setParameter(sprintf('antwebes_chateaclient.%s.%s', $rootKey, $configKey), $configValue);
+            }
+	    	
+        }
 		
  		$loader = new XmlFileLoader(
         	$container,
