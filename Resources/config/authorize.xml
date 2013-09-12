@@ -49,6 +49,7 @@
 		</service>
 
 
+<<<<<<< HEAD
         <service id="antwebes_chateaclient.auth_user_credentials" class="%antwebes_chateaclient.auth_user_credentials.class%" public="false" >
             <argument type="service" id="antwebes_chateaclient.oauth2_client_user_credentials" />
             <argument type="service" id="antwebes_chateaclient.httpclient.class" />
@@ -62,6 +63,21 @@
         <service id="antwebes_chateaclient.auth_client_credentials" class="%antwebes_chateaclient.auth_client_credentials.class%" public="false" >
             <argument type="service" id="antwebes_chateaclient.oauth2_client_credentials" />
             <argument type="service" id="antwebes_chateaclient.httpclient.class" />
+=======
+        <service id="antwebes_chateaclient.auth_user_credentials" class="%antwebes_chateaclient.auth_user_credentials.class%" >
+            <argument type="service" id="antwebes_chateaclient.oauth2_client_user_credentials" />
+            <argument type="service" id="antwebes_chateaclient.http_client.auth" />
+        </service>
+                
+        <service id="antwebes_chateaclient.auth_auth_code" class="%antwebes_chateaclient.auth_auth_code.class%">
+            <argument type="service" id="antwebes_chateaclient.oauth2_client_auth_code" />
+            <argument type="service" id="antwebes_chateaclient.http_client.auth" />
+        </service>
+                
+        <service id="antwebes_chateaclient.auth_client_credentials" class="%antwebes_chateaclient.auth_client_credentials.class%" >
+            <argument type="service" id="antwebes_chateaclient.oauth2_client_credentials" />
+            <argument type="service" id="antwebes_chateaclient.http_client.auth" />
+>>>>>>> 8d515586f3114af034bcaef911aa1268a6cd46ac
         </service>
 
         

@@ -6,7 +6,10 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\ArrayNode;
 use Doctrine\Tests\ORM\Functional\DefaultValueAddress;
+<<<<<<< HEAD
 use Ant\ChateaClient\Http\IHttpClient;
+=======
+>>>>>>> 8d515586f3114af034bcaef911aa1268a6cd46ac
 
 /**
  * Set the configuration of the bundle.
@@ -19,6 +22,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
+<<<<<<< HEAD
         $rootNode = $treeBuilder->root('antwebes_chateaclient');
         $rootNode->children()
         	->arrayNode('http_client')
@@ -33,12 +37,18 @@ class Configuration implements ConfigurationInterface
 	    	     ->end()
 	    	 ->end()  
 	        ->end(); 
+=======
+>>>>>>> 8d515586f3114af034bcaef911aa1268a6cd46ac
 /*
         $rootNode = $treeBuilder->root('antwebs_client');
 
         $rootNode
             ->children()
+<<<<<<< HEAD
                 ->enumNode('antwebes_chateaclient')
+=======
+                ->enumNode('client_type')
+>>>>>>> 8d515586f3114af034bcaef911aa1268a6cd46ac
                 	 ->values(array('user_credentials', 'Auth_code','client_credentials'))                       	          	 
                 	 ->defaultValue('user_credentials')
                 	 ->isRequired()
