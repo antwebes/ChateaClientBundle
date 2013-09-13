@@ -4,8 +4,9 @@ namespace Ant\Bundle\ChateaClientBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class ApiController extends Controller 
+class ApiController extends ChateaClientController 
 {
+	
 	public function indexAction()
 	{
 

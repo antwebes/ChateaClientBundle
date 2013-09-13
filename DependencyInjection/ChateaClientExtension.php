@@ -6,6 +6,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Routing\CompiledRoute;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 /**
  * This is the class that loads and manages your bundle configuration
  *
@@ -33,7 +34,7 @@ class ChateaClientExtension extends Extension
             }
 	    	
         }
-		
+        		
  		$loader = new XmlFileLoader(
         	$container,
         	new FileLocator(__DIR__.'/../Resources/config')

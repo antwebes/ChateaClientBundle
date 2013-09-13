@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<srv:container xmlns="http://symfony.com/schema/dic/security"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://symfony.com/schema/dic/services"
+<srv:container 
+	xmlns="http://symfony.com/schema/dic/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:srv="http://symfony.com/schema/dic/services"
 	xsi:schemaLocation="http://symfony.com/schema/dic/services
         http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-	<!-- app/config/security.xml -->
-
-	<config>
-		<firewall name="secured_area" pattern="^/">
-			<anonymous />
-			<http-basic realm="Secured Demo Area" />
+        
+	<config>	
+		<!-- 			
+		<firewall name="secured_area" pattern="^/api">		
+			<form-login login_path="login" check_path="login_check" />
+			<logout path="/api/logout" target="/" />
 		</firewall>
-
-		<access-control>
-			<rule path="^/admin" role="ROLE_ADMIN" />
-		</access-control>
-
+		-->	
+		<firewall name="secured_area" pattern="^/api">		
+			<chateaAuth />
+		</firewall>		
+		<rule path="^/api/login" role="IS_AUTHENTICATED_ANONYMOUSLY" requires_channel="http"  ips="127.0.0.1, ::1" />
+		<rule path="^/api" role="ROLE_USER" requires_channel="http"  ips="127.0.0.1, ::1" />
+		
 		<provider name="in_memory">
 			<memory>
-				<user name="ryan" password="ryanpass" roles="ROLE_USER" />
-				<user name="admin" password="kitten" roles="ROLE_ADMIN" />
+				<user name="apiuser" password="apiuser" roles="ROLE_API_USER" />
 			</memory>
 		</provider>
-
 		<encoder class="Symfony\Component\Security\Core\User\User"
 			algorithm="plaintext" />
 	</config>

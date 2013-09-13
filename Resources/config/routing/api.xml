@@ -4,7 +4,12 @@
     xsi:schemaLocation="http://symfony.com/schema/routing
         http://symfony.com/schema/routing/routing-1.0.xsd">
         
+	
+	        
     <route id="antwebes_chateaclient_api" pattern="/" methods="GET" schemes="HTTP">
+        <default key="_controller">ChateaClientBundle:Api:index</default>
+    </route>    
+    <route id="antwebes_chateaclient_api_doc" pattern="/doc" methods="GET" schemes="HTTP">
         <default key="_controller">ChateaClientBundle:Api:index</default>
     </route>
     <route id="antwebes_chateaclient_channels" pattern="/channels" methods="GET"  schemes="HTTP">
