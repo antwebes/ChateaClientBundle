@@ -11,17 +11,17 @@ class ChateaAuthFactory implements SecurityFactoryInterface
 {
 	public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
 	{
-		$providerId = 'security.authentication.provider.chateaAuth.'.$id;
+		$providerId = 'antwebes_chateaclient_bundle.security.provider.'.$id;
 		$container
 			->setDefinition(
 					$providerId, 
-					new DefinitionDecorator('antwebes.security.authentication.provider')
+					new DefinitionDecorator('antwebes_chateaclient_bundle.security.authentication.provider')
 					)
 				->replaceArgument(0, new Reference($userProvider));
 
-		$listenerId = 'security.authentication.listener.chateaAuth.'.$id;
+		$listenerId = 'antwebes_chateaclient_bundle.security.listener.'.$id;
 		
-		$listener = $container->setDefinition($listenerId, new DefinitionDecorator('antwebes_chatea.auth.action_listener'));
+		$listener = $container->setDefinition($listenerId, new DefinitionDecorator('antwebes_chateaclient_bundle.security.authentication.listener'));
 
 		return array($providerId, $listenerId, $defaultEntryPoint);
 	}

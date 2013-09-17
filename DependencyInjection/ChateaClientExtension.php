@@ -30,7 +30,7 @@ class ChateaClientExtension extends Extension
 		
 	    foreach ($config as $rootKey => $configurationSettings) {
 	    	foreach ($configurationSettings as $configKey => $configValue) {
-	    		$container->setParameter(sprintf('antwebes_chateaclient.%s.%s', $rootKey, $configKey), $configValue);
+	    		$container->setParameter(sprintf('antwebes_chateaclient-bundle.%s.%s', $rootKey, $configKey), $configValue);
             }
 	    	
         }
@@ -39,7 +39,8 @@ class ChateaClientExtension extends Extension
         	$container,
         	new FileLocator(__DIR__.'/../Resources/config')
     	);
- 	
+ 		
+ 		
  		$loader->load('services/parameters.xml');
         $loader->load('services/api.xml');     
         $loader->load('services/authorize.xml');

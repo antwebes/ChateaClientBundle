@@ -7,25 +7,24 @@
         http://symfony.com/schema/dic/services/services-1.0.xsd">
         
 	<config>	
-		<!-- 			
+		<!--  			
 		<firewall name="secured_area" pattern="^/api">		
 			<form-login login_path="login" check_path="login_check" />
 			<logout path="/api/logout" target="/" />
 		</firewall>
-		-->	
+		-->
 		<firewall name="secured_area" pattern="^/api">		
 			<chateaAuth />
-		</firewall>		
+			<form-login login_path="login" check_path="login_check" />
+			<logout path="/api/logout" target="/" />			
+		</firewall>
+					
 		<rule path="^/api/login" role="IS_AUTHENTICATED_ANONYMOUSLY" requires_channel="http"  ips="127.0.0.1, ::1" />
-		<rule path="^/api" role="ROLE_USER" requires_channel="http"  ips="127.0.0.1, ::1" />
+		<rule path="^/api" role="ROLE_API_USER" requires_channel="http"  ips="127.0.0.1, ::1" />
 		
-		<provider name="in_memory">
-			<memory>
-				<user name="apiuser" password="apiuser" roles="ROLE_API_USER" />
-			</memory>
-		</provider>
-		<encoder class="Symfony\Component\Security\Core\User\User"
-			algorithm="plaintext" />
+		<provider name="chatea_provider" id="antwebes_chateaclient_bundle.user_provider" />
+
+		<encoder class="Symfony\Component\Security\Core\User\User" algorithm="plaintext" />
 	</config>
 </srv:container>
 

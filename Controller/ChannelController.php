@@ -10,7 +10,10 @@ class ChannelController extends ChateaClientController
 {
 	public function showAllAction(Request $request)
 	{
-		
+		$securityContext = $this->container->has('security.context');
+		if (!$this->getUser()->isGranted('ROLE_API_USER')) {
+			throw new AccessDeniedException();
+		}		
 		try {
 		 $channels = $this->getChateaApi()->showChannels();
 		}catch (ApiException $ex){

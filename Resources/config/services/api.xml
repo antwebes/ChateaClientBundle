@@ -5,12 +5,12 @@
     
     
     <services>
-        <service id="antwebes_chateaclient.http_client.api" class="%antwebes_chateaclient.httpclient.class%" public="false">
-            <argument>%antwebes_chateaclient.http_client.server_endpoint%</argument>
+        <service id="antwebes_chateaclient_lib.http_client.api" class="Ant\ChateaClient\Http\HttpClient" public="false">
+            <argument>http://api.chateagratis.local/app_dev.php/</argument>
         </service>
 
-        <service id="antwebes_chateaclient.api" class="%antwebes_chateaclient.client_api.class%">           
-            <argument type="service" id="antwebes_chateaclient.http_client.api" />
+        <service id="antwebes_chateaclient.api" class="Ant\ChateaClient\Client\Api">           
+            <argument type="service" id="antwebes_chateaclient_lib.http_client.api" />
         </service>   
         
     </services>

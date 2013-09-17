@@ -7,7 +7,7 @@ use Ant\ChateaClient\Client\ApiException;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class ChateaClientController extends Controller implements AuthenticatedController
+class ChateaClientController extends Controller
 {
 
 	public function getChateaApi()
@@ -15,14 +15,13 @@ class ChateaClientController extends Controller implements AuthenticatedControll
 		return $this->container->get('antwebes_chateaclient.api');
 	}
 	
-	protected function createHttpException ($statusCode, $message = null, ApiException $previous = null, $code = 0)
+	protected function createHttpException ($statusCode, $message, ApiException $previous = null, $code = 0)
 	{
 		$headers = $previous->getHttpException()?$previous->getHttpException()->getHeaders():null;
-		$format = $this->container->getParameter('antwebes_chateaclient.http_error.format');
-		
+		$format = $this->container->getParameter('antwebes_chateaclient.http_error.format');		
 		$message = json_decode($message,true);
 		$status_text = '';
-		//TODO: FosUser error format
+		//TODO: error format
 		if(array_key_exists('error', $message)){
 			$status_text = array_key_exists('error', $message) && array_key_exists('error_description', $message)? $message['error'].': '.$message['error_description']: '';
 		}else{

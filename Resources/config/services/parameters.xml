@@ -7,6 +7,8 @@
         
         <parameter key="antwebes_chateaclient.httpclient.class">Ant\ChateaClient\Http\HttpClient</parameter>
         <parameter key="antwebes_chateaclient.client_api.class">Ant\ChateaClient\Client\Api</parameter>
+        <parameter key="antwebes_chateaclient.http_error.format">html</parameter>
+        
     </parameters>
          
 </container>  
