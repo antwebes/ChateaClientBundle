@@ -3,6 +3,7 @@ namespace Ant\Bundle\ChateaClientBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends Controller 
 {
@@ -20,8 +21,7 @@ class SecurityController extends Controller
         } else {
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
-        }
- 
+        }        
         return $this->render(
             'ChateaClientBundle:Security:login.html.twig',
             array(
@@ -31,4 +31,14 @@ class SecurityController extends Controller
             )
         );
     }
+
+    public function securityCheckAction()
+    {
+    	return new Response("securityCheckAction");
+    }
+    
+    public function logoutAction()
+    {
+		return new Response("logoutAction");
+    }    
 }
