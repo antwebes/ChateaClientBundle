@@ -23,7 +23,7 @@ class ChateaClientExtension extends Extension
 	 */
 	public function load(array $configs, ContainerBuilder $container)
 	{
-
+		
 		//TODO retirve my configs
 		$configuration = new Configuration();
 		$config = $this->processConfiguration($configuration, $configs);
@@ -40,9 +40,9 @@ class ChateaClientExtension extends Extension
         	new FileLocator(__DIR__.'/../Resources/config')
     	);
  		
- 		
- 		$loader->load('services/parameters.xml');
-        $loader->load('services/api.xml');     
-        $loader->load('services/authorize.xml');
+ 		$loader->load('services/common.xml');
+ 		$loader->load('services/authorize.xml');
+ 		$loader->load('services/api.xml');     
+        
 	}
 }

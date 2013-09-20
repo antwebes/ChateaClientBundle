@@ -7,21 +7,17 @@
         http://symfony.com/schema/dic/services/services-1.0.xsd">
         
 	<config>	
-			
-		<firewall name="secured_area" pattern="^/api">		
-			<form-login login_path="login" check_path="login_check" />
-			<logout path="/api/logout" target="/" />
-		</firewall>
+		<encoder class="Ant\Bundle\ChateaClientBundle\Security\User\User" algorithm="plaintext" />	
+		<provider name="antwebs_provider" id="antwebs_user_provider" />
 		
-		<encoder class="Ant\Bundle\ChateaClientBundle\Security\User\ChateaUser" algorithm="plaintext" />
-		<provider name="chatea_provider" id="antwebes_chateaclient_bundle.user_provider" />
-		<!-- 
-		<firewall name="secured_area" pattern="^/api">		
-			<chateaAuth />
-			<form-login login_path="login" check_path="login_check" />			
-			<logout path="/api/logout" target="/" />			
-		</firewall>
-		 -->			
+		<firewall name="secured_area" pattern="^/api" provider="antwebs_provider" >			
+			<ChateaClientAuth check_path="chateclient_login_check" login_path="chateclient_login_path" />
+			<logout path="/api/logout" target="/" />
+			<!--  
+			<form-login login_path="chateclient_login" check_path="chateclient_login_check" />
+			<logout path="/api/logout" target="/" />
+			-->
+		</firewall>					
 		<rule path="^/api/login" role="IS_AUTHENTICATED_ANONYMOUSLY" requires_channel="http"  ips="127.0.0.1, ::1" />
 		<rule path="^/api" role="ROLE_API_USER" requires_channel="http"  ips="127.0.0.1, ::1" />
 	</config>

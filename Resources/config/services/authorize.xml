@@ -4,82 +4,46 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-	<parameters>
-		<parameter key="antwebes_chateaclient.oauth2_client_user_credentials.class">Ant\ChateaClient\OAuth2\OAuth2ClientUserCredentials</parameter>
-		<parameter key="antwebes_chateaclient.oauth2_client_auth_code.class">Ant\ChateaClient\OAuth2\OAuth2ClientAuthCode</parameter>
-		<parameter key="antwebes_chateaclient.oauth2_client_credentials.class">Ant\ChateaClient\OAuth2\OAuth2ClientCredentials</parameter>
-
-
-		<parameter key="antwebes_chateaclient.auth_user_credentials.class">Ant\ChateaClient\Client\AuthUserCredentials</parameter>
-		<parameter key="antwebes_chateaclient.auth_auth_code.class">Ant\ChateaClient\Client\AuthAuthCode</parameter>
-		<parameter key="antwebes_chateaclient.auth_client_credentials.class">Ant\ChateaClient\Client\AuthClientCredentials</parameter>
-
-		<parameter key="antwebes_chateaclient.oauth2_client.client_id">2_63gig21vk9gc0kowgwwwgkcoo0g84kww00c4400gsc0k8oo4ks</parameter>
-		<parameter key="antwebes_chateaclient.oauth2_client.secret">202mykfu3ilckggkwosgkoo8g40w4wws0k0kooo488wo048k0w</parameter>
-		<parameter key="antwebes_chateaclient.oauth2_client.redirect_uri">http://www.chateagratis.net/</parameter>
-        <parameter key="antwebes_chateaclient.oauth2_client.code">OTgxMTIwNzIwODc4OGJhMjNmZDEyM2I4NDhiNmQyOTk4MjU3YzdkNjM5NDI5MjE0MzJiMWM2ODYxNWFjNDAzOQ</parameter>		
-		<parameter key="antwebes_chateaclient.oauth2_client.username">apiuser</parameter>
-		<parameter key="antwebes_chateaclient.oauth2_client.password">apiuser</parameter>
-
-        <parameter key="antwebes_chateaclient.auth_client.default">antwebes_chateaclient.auth_client_credentials</parameter>
-        
-	</parameters>
-
-	<services>
-		<service id="antwebes_chateaclient_bundle.logger_handler" class="Monolog\Handler\StreamHandler" public="false" >
-		    <argument type="string">%kernel.logs_dir%/chateaclient.log</argument>
-		    <argument type="string">100</argument>			
-		</service>
+		<parameters>
+		    <parameter key="antwebs_user_provider.class">Ant\Bundle\ChateaClientBundle\Security\User\ChateaUserProvider</parameter>
+		    <parameter key="antwebes_user_authentication_provider.class">Ant\Bundle\ChateaClientBundle\Security\Provider\UserAuthenticationProvider</parameter>
+		    <parameter key="antwebes_authentication.listener.class">Ant\Bundle\ChateaClientBundle\Security\Firewall\ChateaAuthenticationListener</parameter>
+		    <parameter key="antwebes_user_checker.class">Ant\Bundle\ChateaClientBundle\Security\User\UserChecker</parameter>
+		    <parameter key="antwebs.entry_point.class">Ant\Bundle\ChateaClientBundle\Security\EntryPoint\ChateaEntryPoint</parameter>
+		</parameters>
 		
-		<service id="antwebes_chateaclient_bundle.logger" class="Symfony\Bridge\Monolog\Logger">
-			<argument type="string">ChateaClientBundle</argument>
-		   	<call method="pushHandler">
-		        <argument type="service" id="antwebes_chateaclient_bundle.logger_handler" />
-		    </call>			
-		</service>
-		
-		<service id="antwebes_chateaclient_lib.http_client.auth" class="Ant\ChateaClient\Http\HttpClient" public="false">
-			<argument>http://api.chateagratis.local/app_dev.php/oauth/v2/token</argument>
-		</service>
-	    
-	    <service id="antwebes_chateaclient_user_credentials" class="Ant\ChateaClient\OAuth2\OAuth2ClientUserCredentials" public="false">
-            <argument>2_63gig21vk9gc0kowgwwwgkcoo0g84kww00c4400gsc0k8oo4ks</argument>
-            <argument>202mykfu3ilckggkwosgkoo8g40w4wws0k0kooo488wo048k0w</argument>
-            <argument>apiuser</argument>
-            <argument>apiuser</argument>            
-        </service>
-        		
-		<service id="antwebes_chateaclient_lib.authentication.service" class="Ant\ChateaClient\Client\AuthUserCredentials">
-			<argument type="service" id="antwebes_chateaclient_user_credentials" />
-			<argument type="service" id="antwebes_chateaclient_lib.http_client.auth" />
-		</service>
-	    <service id="antwebes_chateaclient_bundle.user_provider" class="Ant\Bundle\ChateaClientBundle\Security\User\ChateaUserProvider">
-	    	<argument type="service" id="antwebes_chateaclient_lib.authentication.service" />
-	    	<argument type="service" id="antwebes_chateaclient_bundle.logger" />
-	    </service>		
-	    	
-  		<service id="antwebes_chateaclient_bundle.security.authentication.provider"
-            class="Ant\Bundle\ChateaClientBundle\Security\Authentication\Provider\ChateaAuthenticationProvider" public="false">
-            <argument/> 
-            <argument type="service" id="security.user_checker" />
-            <argument type="service" id="antwebes_chateaclient_bundle.logger" />
-        </service>
-
-        <service id="antwebes_chateaclient_bundle.security.authentication.listener"
-            class="Ant\Bundle\ChateaClientBundle\Security\Firewall\ChateaListener" public="false">
-            <argument type="service" id="security.context"/>
-            <argument type="service" id="security.authentication.manager" />
-            <argument type="service" id="form.csrf_provider" />
-            
-            <argument type="service" id="antwebes_chateaclient_bundle.logger" />
-        </service>  
-	
-		<!--  
-		<service id="antwebes_chatea.auth.action_listener" class="Ant\Bundle\ChateaClientBundle\EventListener\AuthenticatedListener">
-		    <argument type="service" id="security.context" />
-		    <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
-		</service>
-	     -->   	
-      
-	</services>
+		<services>
+			<service id="antwebs_user_provider" class="%antwebs_user_provider.class%">
+				<argument type="service" id="antwebes_chateaclient_lib.http_client" />
+				<argument type="string">%antwebs_chateaclient_client_id%</argument>				
+				<argument type="string">%antwebs_chateaclient_secret%</argument>
+				<argument type="service" id="antwebes_logger" />
+			</service>
+			
+			<service id="antwebs.entry_point" class="%antwebs.entry_point.class%" public="false" abstract="true">
+				<argument type="service" id="security.http_utils"/>
+			</service>
+			
+			<service id="antwebes_user_checker" class="%antwebes_user_checker.class%"></service>
+        	                			
+			<service id="antwebes_user_authentication_provider" class="%antwebes_user_authentication_provider.class%">
+				<argument type="service" id="antwebs_user_provider" />
+				<argument type="service" id="antwebes_user_checker" /> 
+				<argument type="string">secured_area</argument>
+			</service>
+			
+			<service id="antwebes_authentication.listener" class="%antwebes_authentication.listener.class%">
+	            <argument type="service" id="security.context" />
+	            <argument type="service" id="security.authentication.manager" />
+	            <argument type="service" id="security.authentication.session_strategy" />
+	            <argument type="service" id="security.http_utils" />
+	            <argument type="string">secured_area</argument>
+	            <argument type="service" id="antwebes_authentication.success_handler" />
+	            <argument type="service" id="antwebes_authentication.failure_handler" />	            	            
+				<argument type="collection" />
+				<argument type="service" id="form.csrf_provider" />
+				<argument type="service" id="antwebes_logger" />
+				<argument type="service" id="event_dispatcher" on-invalid="null"/>					           	            	            
+			</service>			
+		</services>		
 </container>    

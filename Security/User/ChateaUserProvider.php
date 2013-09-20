@@ -1,77 +1,122 @@
 <?php
 namespace Ant\Bundle\ChateaClientBundle\Security\User;
 
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Bridge\Monolog\Logger;
 
-use Ant\ChateaClient\Client\Authentication;
+use Ant\Bundle\ChateaClientBundle\Security\User\ChateaUserProviderInterface;
+use Psr\Log\LoggerInterface;
+use Ant\ChateaClient\Http\IHttpClient;
+use Ant\ChateaClient\Client\AuthUserCredentials;
 use Ant\ChateaClient\Client\AuthenticationException;
-use Ant\ChateaClient\Client\Api;
-/**
- * Esta clase se encarga de buscar el usuario en un servicio
- * 
- * @author ant3
- *
- */
-class ChateaUserProvider  implements UserProviderInterface
+use Ant\ChateaClient\OAuth2\OAuth2ClientUserCredentials;
+use Ant\ChateaClient\OAuth2\RefreshToken;
+
+class ChateaUserProvider implements ChateaUserProviderInterface
 {
-	private $user;
-	private $logger;
-	
-	public function __construct(Authentication $authenticationService, Logger $logger)
-	{
-		$this->logger = $logger;
-		$this->authenticationService = $authenticationService;
-	}	
-	
-	public function loadUserByUsername($username)
-	{
-		$this->logger->addInfo(get_class($this).'::loadUser()::-IN-',array('user'=>$username));
-		return $this->loadUser($username);
-	}	
-	
-	protected function loadUser($user)
-	{
-		$this->logger->addInfo(get_class($this).'::loadUser()::-IN-',array('authenticationService'=>$this->authenticationService));
-		$this->logger->addDebug(get_class($this).'::loadUser()::-IN-',array('user'=>$user));
-		try {
-			$tokenResponse = $this->authenticationService->authenticate();
-		}catch (AuthenticationException $ex)
-		{
-			$this->logger->addDebug(get_class($this).'::loadUser()::-ERROR-',array('AuthenticationException'=>$ex));
+
+    private $httpClient;
+    private $logger;
+    private $client_id;
+    private $secret;
+
+    /**
+     * 
+     * @param IHttpClient $httpClient
+     * @param unknown $client_id
+     * @param unknown $secret
+     * @param LoggerInterface $logger
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(IHttpClient $httpClient, $client_id, $secret, LoggerInterface $logger)
+    {
+        if (empty($httpClient)) {
+            throw new \InvalidArgumentException('The username cannot be empty.');
+        }
+        if (empty($client_id)) {
+            throw new \InvalidArgumentException('The username cannot be empty.');
+        }
+        if (empty($secret)) {
+            throw new \InvalidArgumentException('The username cannot be empty.');
+        }                
+        $this->httpClient = $httpClient;
+        $this->logger = $logger;
+        $this->client_id = $client_id;
+        $this->secret = $secret;
+            
+    }
+
+    public function loadUser($username, $password)
+    {
+        if (empty($username)) {
+            throw new \InvalidArgumentException('The username cannot be empty.');
+        }    	
+        
+        if (empty($password)) {
+            throw new \InvalidArgumentException('The password cannot be empty.');
+        }        
+        
+        try {
+        	$user = new OAuth2ClientUserCredentials($this->client_id,$this->secret,$username,$password);
+        	$authenticator = new AuthUserCredentials($user, $this->httpClient);
+        	$tokenResponse = $authenticator->authenticate();
+        	
+        	$accessToken   = $tokenResponse->getAccessToken(true);
+        	$refreshToken  = $tokenResponse->getRefreshToken(true);
+        	$tokenType     = $tokenResponse->getTokenType(true);
+        	$expiresIn     = $tokenResponse->getExpiresIn();
+        	$scopes        = $tokenResponse->getScope();
+        	        	 	        	
+			$user = new User($username,$accessToken,$refreshToken,$tokenType,$expiresIn,$scopes);
 			
-			$newEx = new UsernameNotFoundException(sprintf('User for Access Token does not exist or is invalid.'));
+			$this->logger->info(get_class($this)."::loadUser()-OUT-", array('UserInterface'=>$user));
+			return $user;
 			
-			$this->logger->addDebug(get_class($this).'::loadUser()::-ERROR-',array('UsernameNotFoundException'=>$newEx));
-			
-			throw $newEx;			
-		}
-		if ($tokenResponse) {
-			$this->logger->addInfo(get_class($this).'::loadUser()::-OUT-',array('tokenResponse'=>$tokenResponse));
-			return new ChateaUser($tokenResponse->getAccessToken(true), $this->authenticationService->getClientId());
-		}
-		
-		$newEx = new UsernameNotFoundException(sprintf('User for Access Token "%s" does not exist or is invalid.', $access_token));
-		$this->logger->addDebug(get_class($this).'::loadUser()::-ERROR-',array('UsernameNotFoundException'=>$newEx));
-		$this->logger->addInfo(get_class($this).'::loadUser()::-OUT-',array('tokenResponse'=>$tokenResponse));
-		throw $newEx;
-		
-	}
-	
-	public function refreshUser(UserInterface $user)
-	{
-		if (!$user instanceof ChateaUser) {
-			throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
-		}
-	
-		return $this->loadUserByUsername($user->getUsername());
-	}
-	
-	public function supportsClass($class)
-	{
-		return $class === 'Ant\Bundle\ChateaClientBundle\Security\User\ChateaUser';
-	}	
+        }catch (AuthenticationException $ex )
+        {
+    		$ex = new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username),30,$ex);
+    		$this->logger->info(get_class($this)."::loadUser()-OUT-", array('UsernameNotFoundException'=>$ex));
+    		throw $ex;		  	
+        }
+    }
+
+
+    public function refreshUser(UserInterface $user)
+    {
+        if (!$user instanceof User || empty($user->getRefreshToken())) {
+            
+            $ex = new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
+            $this->logger->debug(get_class($this)."::refreshUser()-OUT-", array('UnsupportedUserException'=>$ex));
+            throw $ex;
+        }
+
+        try {
+            $user = new OAuth2ClientUserCredentials($this->client_id,$this->secret,$username,$password);
+            $authenticator = new AuthUserCredentials($user, $this->httpClient);
+            
+            $tokenResponse = $authenticator->updateToken(new RefreshToken($user->getRefreshToken()));
+             
+            $accessToken   = $tokenResponse->getAccessToken(true);
+            $refreshToken  = $tokenResponse->getRefreshToken(true);
+            $tokenType     = $tokenResponse->getTokenType(true);
+            $expiresIn     = $tokenResponse->getExpiresIn();
+            $scopes        = $tokenResponse->getScope();
+             
+            $user = new User($username,$accessToken,$refreshToken,$tokenType,$expiresIn,$scopes);
+            	
+            $this->logger->info(get_class($this)."::refreshUser()-OUT-", array('UserInterface'=>$user));
+            return $user;
+            	
+        }catch (AuthenticationException $ex )
+        {
+            $ex = new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username),30,$ex);
+            $this->logger->info(get_class($this)."::refreshUser()-OUT-", array('UsernameNotFoundException'=>$ex));
+            throw $ex;
+        }        
+    }
+
+    public function supportsClass($class)
+    {
+        return $class === ' Ant\Bundle\ChateaClientBundle\Security\User\User';
+    }
 }
