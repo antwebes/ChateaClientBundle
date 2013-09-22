@@ -74,16 +74,35 @@ class ChateaAuthenticationListener extends AbstractAuthenticationListener
         
         $this->csrfProvider = $csrfProvider;
     }
-
+    /**
+     * Whether this request requires authentication.
+     *
+     * The default implementation only processes requests to a specific path,
+     * but a subclass could change this to only authenticate requests where a
+     * certain parameters is present.
+     *
+     * @param Request $request
+     *
+     * @return Boolean
+     */
+    protected function requiresAuthentication(Request $request)
+    {
+        if ($this->options['post_only'] && ! $request->isMethod('POST')) {
+            $this->logger->info(get_class($this). "::requiresAuthentication()::INI-", array('Request' => $request));
+            return false;
+        }
+        return parent::requiresAuthentication($request);
+    }
     /**
      * Performs authentication.
      *
      * @param Request $request
      *            A Request instance
-     *            
+     *
+     * @throws \Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException
+     * @throws \Ant\Bundle\ChateaClientBundle\Security\Exception\AuthenticationException
      * @return TokenInterface Response null token, null if full authentication is not possible, or a Response
-     *        
-     * @throws AuthenticationException if the authentication fails
+     *
      */
     protected function attemptAuthentication(Request $request)
     {
@@ -98,8 +117,7 @@ class ChateaAuthenticationListener extends AbstractAuthenticationListener
         
 
         $csrfToken = $request->request->get($this->options['csrf_parameter'], null, true);
-        //
-        
+
         if (false === $this->csrfProvider->isCsrfTokenValid($this->options['intention'], $csrfToken)) {
             
             $ex = new InvalidCsrfTokenException('Invalid CSRF token.');

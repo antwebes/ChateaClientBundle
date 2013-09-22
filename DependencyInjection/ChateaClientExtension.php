@@ -39,7 +39,6 @@ class ChateaClientExtension extends Extension
         	$container,
         	new FileLocator(__DIR__.'/../Resources/config')
     	);
- 		
  		$loader->load('services/common.xml');
  		$loader->load('services/authorize.xml');
  		$loader->load('services/api.xml');     

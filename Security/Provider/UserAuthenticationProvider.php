@@ -16,33 +16,35 @@ use Ant\Bundle\ChateaClientBundle\Security\User\ChateaUserProviderInterface;
 class UserAuthenticationProvider extends sf_UserAuthenticationProvider
 {
     private $chateaUserProvider;
-	/**
-	 * Constructor.
+
+    /**
+     * Constructor.
      *
-     * @param ChateaProviderInterface  $chateaProvider               An UserProviderInterface instance
-	 * @param UserCheckerInterface     $userChecker                An UserCheckerInterface interface
-	 * @param string                   $providerKey                A provider key
-	 * @param Boolean                  $hideUserNotFoundExceptions Whether to hide user not found exception or not
-	 *
-	 * @throws \InvalidArgumentException
-	 */
-	public function __construct($chateaUserProvider, UserCheckerInterface $userChecker, $providerKey, $hideUserNotFoundExceptions = true)
+     * @param \Ant\Bundle\ChateaClientBundle\Security\User\ChateaUserProviderInterface $chateaUserProvider
+     * @param UserCheckerInterface $userChecker                An UserCheckerInterface interface
+     * @param string $providerKey                A provider key
+     * @param Boolean $hideUserNotFoundExceptions Whether to hide user not found exception or not
+     *
+     * @internal param \Ant\Bundle\ChateaClientBundle\Security\Provider\ChateaProviderInterface $chateaProvider An UserProviderInterface instance
+     */
+	public function __construct(ChateaUserProviderInterface $chateaUserProvider, UserCheckerInterface $userChecker, $providerKey, $hideUserNotFoundExceptions = true)
 	{
-        ldd($chateaUserProvider);
+
 		parent::__construct($userChecker, $providerKey, $hideUserNotFoundExceptions);
 		$this->chateaUserProvider = $chateaUserProvider;
 	}
 
-	/**
-	 * Retrieves the user from an implementation-specific location.
-	 *
-	 * @param string                $username The username to retrieve
-	 * @param UsernamePasswordToken $token    The Token
-	 *
-	 * @return UserInterface The user
-	 *
-	 * @throws AuthenticationException if the credentials could not be validated
-	 */
+    /**
+     * Retrieves the user from an implementation-specific location.
+     *
+     * @param string $username The username to retrieve
+     * @param UsernamePasswordToken $token    The Token
+     *
+     * @throws UsernameNotFoundException|\Exception
+     * @throws \Symfony\Component\Security\Core\Exception\AuthenticationServiceException
+     * @return UserInterface The user
+     *
+     */
 	protected function retrieveUser($username, UsernamePasswordToken $token)
 	{
 	    
@@ -75,7 +77,7 @@ class UserAuthenticationProvider extends sf_UserAuthenticationProvider
 	 * @param UserInterface         $user  The retrieved UserInterface instance
 	 * @param UsernamePasswordToken $token The UsernamePasswordToken token to be authenticated
 	 *
-	 * @throws AuthenticationException if the credentials could not be validated
+	 * @throws BadCredentialsException if the credentials could not be validated
 	*/
     protected function checkAuthentication(UserInterface $user, UsernamePasswordToken $token)
     {

@@ -12,7 +12,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UserChecker implements UserCheckerInterface
 {
     /**
-     * {@inheritdoc}
+     * Checks the user account before authentication.
+     *
+     * @param UserInterface $user a UserInterface instance
      */
     public function checkPreAuth(UserInterface $user)
     {
@@ -28,7 +30,9 @@ class UserChecker implements UserCheckerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Checks the user account after authentication.
+     *
+     * @param UserInterface $user a UserInterface instance
      */
     public function checkPostAuth(UserInterface $user)
     {

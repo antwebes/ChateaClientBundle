@@ -10,7 +10,7 @@
 		<encoder class="Ant\Bundle\ChateaClientBundle\Security\User\User" algorithm="plaintext" />	
 		<provider name="antwebs_provider" id="antwebs_user_provider" />
 		
-		<firewall name="secured_area" pattern="^/api" provider="antwebs_provider" >			
+		<firewall name="secured_area" pattern="^/api" provider="antwebs_provider" >
 			<ChateaClientAuth check_path="chateclient_login_check" login_path="chateclient_login_path" />
 			<logout path="/api/logout" target="/" />
 			<!--  

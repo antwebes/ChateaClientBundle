@@ -10,10 +10,10 @@ class ChateaClientBundle extends Bundle
 	public function build(ContainerBuilder $container)
 	{
 		parent::build($container);
-		$custon_id = "antwebs_secured_area";
+		$custom_id = "antwebs_secured_area";
 		$config = array();
 		$defaultEntryPoint = null;
 		$extension = $container->getExtension('security');
-		$extension->addSecurityListenerFactory(new ChateaFactory($container,$custon_id,$config,$defaultEntryPoint));
+		$extension->addSecurityListenerFactory(new ChateaFactory($container,$custom_id,$config,$defaultEntryPoint));
 	}
 }

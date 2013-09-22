@@ -34,7 +34,6 @@ class ChateaFactory extends AbstractFactory
      */
     protected function createAuthProvider(ContainerBuilder $container, $id, $config, $userProviderId) 
 	{
-		ld($id);
 		$providerId = 'antwebes_user_authentication_provider' . $id;
 		$container
 		->setDefinition($providerId,
@@ -45,9 +44,7 @@ class ChateaFactory extends AbstractFactory
 	}
 	protected function createListener($container, $id, $config, $userProvider)
 	{
-	    
-	    ld($id);
-	    
+
 	    $listenerId = $this->getListenerId();
 	    $listener = new DefinitionDecorator($listenerId);
 	    $listener->replaceArgument(4, $id);

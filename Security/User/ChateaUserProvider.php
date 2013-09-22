@@ -3,14 +3,15 @@ namespace Ant\Bundle\ChateaClientBundle\Security\User;
 
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-
-use Ant\Bundle\ChateaClientBundle\Security\User\ChateaUserProviderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Psr\Log\LoggerInterface;
 use Ant\ChateaClient\Http\IHttpClient;
 use Ant\ChateaClient\Client\AuthUserCredentials;
 use Ant\ChateaClient\Client\AuthenticationException;
 use Ant\ChateaClient\OAuth2\OAuth2ClientUserCredentials;
 use Ant\ChateaClient\OAuth2\RefreshToken;
+
 
 class ChateaUserProvider implements ChateaUserProviderInterface
 {
@@ -46,6 +47,26 @@ class ChateaUserProvider implements ChateaUserProviderInterface
             
     }
 
+    /**
+     * Loads the user for the given username.
+     *
+     * This method must throw UsernameNotFoundException if the user is not
+     * found.
+     *
+     * @param string $username The username
+     *
+     * @return UserInterface
+     *
+     * @see UsernameNotFoundException
+     *
+     * @throws UsernameNotFoundException if the user is not found
+     *
+     */
+    public function loadUserByUsername($username)
+    {
+        throw new \Exception("this method is not soported");
+    }
+
     public function loadUser($username, $password)
     {
         if (empty($username)) {
@@ -75,7 +96,7 @@ class ChateaUserProvider implements ChateaUserProviderInterface
         }catch (AuthenticationException $ex )
         {
     		$ex = new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username),30,$ex);
-    		$this->logger->info(get_class($this)."::loadUser()-OUT-", array('UsernameNotFoundException'=>$ex));
+    		$this->logger->info(get_class($this)."::loadUser()-ERROR-", array('UsernameNotFoundException'=>$ex));
     		throw $ex;		  	
         }
     }
@@ -83,7 +104,7 @@ class ChateaUserProvider implements ChateaUserProviderInterface
 
     public function refreshUser(UserInterface $user)
     {
-        if (!$user instanceof User || empty($user->getRefreshToken())) {
+        if (!$user instanceof User || !is_string($user->getRefreshToken()) || 0 >= strlen($user->getRefreshToken())){
             
             $ex = new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
             $this->logger->debug(get_class($this)."::refreshUser()-OUT-", array('UnsupportedUserException'=>$ex));
@@ -91,7 +112,11 @@ class ChateaUserProvider implements ChateaUserProviderInterface
         }
 
         try {
-            $user = new OAuth2ClientUserCredentials($this->client_id,$this->secret,$username,$password);
+            $user = new OAuth2ClientUserCredentials(
+                    $this->client_id,$this->secret,
+                    $user->getUsername(),
+                    $this->getPpassword()
+            );
             $authenticator = new AuthUserCredentials($user, $this->httpClient);
             
             $tokenResponse = $authenticator->updateToken(new RefreshToken($user->getRefreshToken()));
@@ -102,14 +127,14 @@ class ChateaUserProvider implements ChateaUserProviderInterface
             $expiresIn     = $tokenResponse->getExpiresIn();
             $scopes        = $tokenResponse->getScope();
              
-            $user = new User($username,$accessToken,$refreshToken,$tokenType,$expiresIn,$scopes);
+            $user = new User($user->getUsername(),$accessToken,$refreshToken,$tokenType,$expiresIn,$scopes);
             	
             $this->logger->info(get_class($this)."::refreshUser()-OUT-", array('UserInterface'=>$user));
             return $user;
             	
         }catch (AuthenticationException $ex )
         {
-            $ex = new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username),30,$ex);
+            $ex = new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $user->getUsername()),30,$ex);
             $this->logger->info(get_class($this)."::refreshUser()-OUT-", array('UsernameNotFoundException'=>$ex));
             throw $ex;
         }        
