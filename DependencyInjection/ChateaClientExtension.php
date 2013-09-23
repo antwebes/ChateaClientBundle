@@ -30,7 +30,7 @@ class ChateaClientExtension extends Extension
 		
 	    foreach ($config as $rootKey => $configurationSettings) {
 	    	foreach ($configurationSettings as $configKey => $configValue) {
-	    		$container->setParameter(sprintf('antwebes_chateaclient-bundle.%s.%s', $rootKey, $configKey), $configValue);
+	    		$container->setParameter(sprintf('antwebes_chateaclient.%s.%s', $rootKey, $configKey), $configValue);
             }
 	    	
         }

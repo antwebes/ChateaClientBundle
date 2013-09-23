@@ -5,14 +5,22 @@
 	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
 		<parameters>
+			<parameter key="antwebs_event_listener_authenticated.class">Ant\Bundle\ChateaClientBundle\EventListener\AuthenticatedListener</parameter>
+		
 		    <parameter key="antwebs_user_provider.class">Ant\Bundle\ChateaClientBundle\Security\User\ChateaUserProvider</parameter>
-		    <parameter key="antwebes_user_authentication_provider.class">Ant\Bundle\ChateaClientBundle\Security\Provider\UserAuthenticationProvider</parameter>
+		    <parameter key="antwebes_user_authentication_provider.class">Ant\Bundle\ChateaClientBundle\Security\Provider\ChateaAuthenticationProvider</parameter>
 		    <parameter key="antwebes_authentication.listener.class">Ant\Bundle\ChateaClientBundle\Security\Firewall\ChateaAuthenticationListener</parameter>
 		    <parameter key="antwebes_user_checker.class">Ant\Bundle\ChateaClientBundle\Security\User\UserChecker</parameter>
 		    <parameter key="antwebs.entry_point.class">Ant\Bundle\ChateaClientBundle\Security\EntryPoint\ChateaEntryPoint</parameter>
 		</parameters>
 		
 		<services>
+		
+			<service id="antwebs_event_listener_authenticated.action_listener" class="%antwebs_event_listener_authenticated.class%" >
+				<argument type="service" id="security.context" />
+				<argument type="service" id="antwebes_chateaclient_lib.http_client" />
+			    <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
+			</service>		
 			<service id="antwebs_user_provider" class="%antwebs_user_provider.class%">
 				<argument type="service" id="antwebes_chateaclient_lib.http_client" />
 				<argument type="string">%antwebs_chateaclient_client_id%</argument>				
@@ -21,7 +29,7 @@
 			</service>
 			
 			<service id="antwebs.entry_point" class="%antwebs.entry_point.class%" public="false" abstract="true">
-				<argument type="service" id="security.http_utils"/>
+				<argument type="service" id="security.http_utils"/>				
 			</service>
 			
 			<service id="antwebes_user_checker" class="%antwebes_user_checker.class%"></service>
@@ -30,6 +38,7 @@
 				<argument type="service" id="antwebs_user_provider" />
 				<argument type="service" id="antwebes_user_checker" /> 
 				<argument type="string">secured_area</argument>
+				<argument type="service" id="antwebes_logger" />
 			</service>
 			
 			<service id="antwebes_authentication.listener" class="%antwebes_authentication.listener.class%">

@@ -1,18 +1,11 @@
 <?php
+namespace Ant\Bundle\ChateaClientBundle\Security\Token;
+
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 class ChateaToken extends AbstractToken
 {
 	protected $accestoken;
-
-	public function __construct(array $roles = array(), $accestoken = '')
-	{
-		parent::__construct($roles);
-		$this->accestoken = $accestoken;
-		// If the user has roles, consider it authenticated
-		$this->setAuthenticated(count($roles) > 0);
-	}
-	
 	private $credentials;
 	private $providerKey;
 	
@@ -26,21 +19,22 @@ class ChateaToken extends AbstractToken
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct($user, $credentials, $providerKey, array $roles = array())
+	public function __construct($user, $credentials, $providerKey, $accestoken = '', array $roles = array())
 	{
 	    parent::__construct($roles);
-	
+	    
 	    if (empty($providerKey)) {
 	        throw new \InvalidArgumentException('$providerKey must not be empty.');
 	    }
-	
+	    
 	    $this->setUser($user);
 	    $this->credentials = $credentials;
 	    $this->providerKey = $providerKey;
-	
+	    $this->accestoken = $accestoken;
 	    parent::setAuthenticated(count($roles) > 0);
-	}
-	
+	    	    
+	}	
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -71,14 +65,18 @@ class ChateaToken extends AbstractToken
 	    parent::eraseCredentials();
 	
 	    $this->credentials = null;
+	    $this->accestoken = null;
 	}
-	
+	public function getAccesToken()
+	{
+		return $this->accestoken;
+	}
 	/**
 	 * {@inheritdoc}
 	 */
 	public function serialize()
 	{
-	    return serialize(array($this->credentials, $this->providerKey, parent::serialize()));
+	    return serialize(array($this->accestoken, $this->credentials, $this->providerKey, parent::serialize()));
 	}
 	
 	/**
@@ -86,7 +84,7 @@ class ChateaToken extends AbstractToken
 	 */
 	public function unserialize($serialized)
 	{
-	    list($this->credentials, $this->providerKey, $parentStr) = unserialize($serialized);
+	    list($this->accestoken, $this->credentials, $this->providerKey, $parentStr) = unserialize($serialized);
 	    parent::unserialize($parentStr);
 	}
 }

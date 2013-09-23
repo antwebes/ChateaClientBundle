@@ -21,17 +21,6 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('antwebes_chateaclient');
         $rootNode->children()
-        	->arrayNode('http_client')
-        	     ->addDefaultsIfNotSet()
-        		->children()
-        			->scalarNode('server_endpoint')
-        				->defaultValue(IHttpClient::SERVER_ENDPOINT)
-        				->end()
-        	   		->scalarNode('token_endpoint')	
-	        	   		->defaultValue(IHttpClient::TOKEN_ENDPOINT)
-	    	    	    ->end()
-	    	     ->end()
-	    	 ->end()  
 	    	 ->arrayNode('http_error')
 	    	 	->addDefaultsIfNotSet()
 	    	 	->children()

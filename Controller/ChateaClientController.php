@@ -7,12 +7,13 @@ use Ant\ChateaClient\Client\ApiException;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class ChateaClientController extends Controller
+class ChateaClientController extends Controller implements AuthenticatedController
 {
 
-	public function getChateaApi()
+	public function getApiChannles()
 	{		
-		return $this->container->get('antwebes_chateaclient.api');
+	    ldd($this->container->get('antwebes_channles'));
+		return $this->container->get('antwebes_channles');
 	}
 	
 	protected function createHttpException ($statusCode, $message, ApiException $previous = null, $code = 0)

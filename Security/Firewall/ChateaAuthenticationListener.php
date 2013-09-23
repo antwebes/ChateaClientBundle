@@ -2,13 +2,13 @@
 namespace Ant\Bundle\ChateaClientBundle\Security\Firewall;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener;
 
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
@@ -19,6 +19,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Ant\Bundle\ChateaClientBundle\Security\Exception\AuthenticationException;
+use Ant\Bundle\ChateaClientBundle\Security\Token\ChateaToken;
 
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider;
 
@@ -74,25 +75,7 @@ class ChateaAuthenticationListener extends AbstractAuthenticationListener
         
         $this->csrfProvider = $csrfProvider;
     }
-    /**
-     * Whether this request requires authentication.
-     *
-     * The default implementation only processes requests to a specific path,
-     * but a subclass could change this to only authenticate requests where a
-     * certain parameters is present.
-     *
-     * @param Request $request
-     *
-     * @return Boolean
-     */
-    protected function requiresAuthentication(Request $request)
-    {
-        if ($this->options['post_only'] && ! $request->isMethod('POST')) {
-            $this->logger->info(get_class($this). "::requiresAuthentication()::INI-", array('Request' => $request));
-            return false;
-        }
-        return parent::requiresAuthentication($request);
-    }
+
     /**
      * Performs authentication.
      *
@@ -133,10 +116,30 @@ class ChateaAuthenticationListener extends AbstractAuthenticationListener
         
         $request->getSession()->set(SecurityContextInterface::LAST_USERNAME, $username);
         
-        $token = $this->authenticationManager->authenticate(new UsernamePasswordToken($username, $password, $this->providerKey));
+        $token = $this->authenticationManager->authenticate(new ChateaToken($username, $password, $this->providerKey));
 
         $this->logger->info(get_class($this) . "::attemptAuthentication()::OUT-", array('TokenInterface' => $token));
         $this->logger->debug(get_class($this) . "::attemptAuthentication()::OUT-", array('Request' => $token->__toString()));
         return $token;
+    }
+    
+    /**
+     * Whether this request requires authentication.
+     *
+     * The default implementation only processes requests to a specific path,
+     * but a subclass could change this to only authenticate requests where a
+     * certain parameters is present.
+     *
+     * @param Request $request
+     *
+     * @return Boolean
+     */
+    protected function requiresAuthentication(Request $request)
+    {
+        if ($this->options['post_only'] && ! $request->isMethod('POST')) {
+            $this->logger->info(get_class($this). "::requiresAuthentication()::INI-", array('Request' => $request));
+            return false;
+        }
+        return parent::requiresAuthentication($request);
     }
 }

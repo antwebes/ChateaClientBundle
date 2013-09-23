@@ -35,10 +35,11 @@ class ChateaFactory extends AbstractFactory
     protected function createAuthProvider(ContainerBuilder $container, $id, $config, $userProviderId) 
 	{
 		$providerId = 'antwebes_user_authentication_provider' . $id;
-		$container
-		->setDefinition($providerId,
-				new DefinitionDecorator('antwebes_user_authentication_provider'));
-		
+		$provider = new DefinitionDecorator('antwebes_user_authentication_provider');
+		$container->setDefinition(
+		    $providerId,
+		    $provider
+        );		
 		return $providerId;
 
 	}

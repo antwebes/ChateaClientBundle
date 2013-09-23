@@ -5,12 +5,14 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Core\User\InMemoryUserProvider;
 use Psr\Log\LoggerInterface;
 use Ant\ChateaClient\Http\IHttpClient;
 use Ant\ChateaClient\Client\AuthUserCredentials;
 use Ant\ChateaClient\Client\AuthenticationException;
 use Ant\ChateaClient\OAuth2\OAuth2ClientUserCredentials;
 use Ant\ChateaClient\OAuth2\RefreshToken;
+use Ant\ChateaClient\Client\Authentication;
 
 
 class ChateaUserProvider implements ChateaUserProviderInterface
@@ -20,7 +22,7 @@ class ChateaUserProvider implements ChateaUserProviderInterface
     private $logger;
     private $client_id;
     private $secret;
-
+    private $authenticator;
     /**
      * 
      * @param IHttpClient $httpClient
@@ -44,6 +46,7 @@ class ChateaUserProvider implements ChateaUserProviderInterface
         $this->logger = $logger;
         $this->client_id = $client_id;
         $this->secret = $secret;
+        $this->authenticator = null;
             
     }
 
@@ -67,6 +70,7 @@ class ChateaUserProvider implements ChateaUserProviderInterface
         throw new \Exception("this method is not soported");
     }
 
+
     public function loadUser($username, $password)
     {
         if (empty($username)) {
@@ -79,8 +83,8 @@ class ChateaUserProvider implements ChateaUserProviderInterface
         
         try {
         	$user = new OAuth2ClientUserCredentials($this->client_id,$this->secret,$username,$password);
-        	$authenticator = new AuthUserCredentials($user, $this->httpClient);
-        	$tokenResponse = $authenticator->authenticate();
+        	$this->authenticator = new AuthUserCredentials($user, $this->httpClient);
+        	$tokenResponse = $this->authenticator->authenticate();
         	
         	$accessToken   = $tokenResponse->getAccessToken(true);
         	$refreshToken  = $tokenResponse->getRefreshToken(true);
@@ -95,13 +99,25 @@ class ChateaUserProvider implements ChateaUserProviderInterface
 			
         }catch (AuthenticationException $ex )
         {
-    		$ex = new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username),30,$ex);
+    		$ex = new UsernameNotFoundException(sprintf('Incorrect username or password for %s ', $username),30,$ex);
     		$this->logger->info(get_class($this)."::loadUser()-ERROR-", array('UsernameNotFoundException'=>$ex));
-    		throw $ex;		  	
+    		throw $ex;	  	
         }
     }
 
-
+    /**
+     * Refreshes the user for the account interface.
+     *
+     * It is up to the implementation to decide if the user data should be
+     * totally reloaded (e.g. from the database), or if the UserInterface
+     * object can just be merged into some internal array of users / identity
+     * map.
+     * @param UserInterface $user
+     *
+     * @return UserInterface
+     *
+     * @throws UnsupportedUserException if the account is not supported
+     */
     public function refreshUser(UserInterface $user)
     {
         if (!$user instanceof User || !is_string($user->getRefreshToken()) || 0 >= strlen($user->getRefreshToken())){
@@ -112,25 +128,29 @@ class ChateaUserProvider implements ChateaUserProviderInterface
         }
 
         try {
-            $user = new OAuth2ClientUserCredentials(
-                    $this->client_id,$this->secret,
-                    $user->getUsername(),
-                    $this->getPpassword()
-            );
-            $authenticator = new AuthUserCredentials($user, $this->httpClient);
             
-            $tokenResponse = $authenticator->updateToken(new RefreshToken($user->getRefreshToken()));
-             
-            $accessToken   = $tokenResponse->getAccessToken(true);
-            $refreshToken  = $tokenResponse->getRefreshToken(true);
-            $tokenType     = $tokenResponse->getTokenType(true);
-            $expiresIn     = $tokenResponse->getExpiresIn();
-            $scopes        = $tokenResponse->getScope();
-             
-            $user = new User($user->getUsername(),$accessToken,$refreshToken,$tokenType,$expiresIn,$scopes);
-            	
-            $this->logger->info(get_class($this)."::refreshUser()-OUT-", array('UserInterface'=>$user));
-            return $user;
+            $tokenResponse = Authentication::updateWithRefreshToken(
+                    $this->httpClient, 
+                    $this->client_id, 
+                    $this->secret, 
+                    $user->getRefreshToken()
+            );
+            if ( $tokenResponse ){                                 
+                $accessToken   = $tokenResponse->getAccessToken(true);
+                $refreshToken  = $tokenResponse->getRefreshToken(true);
+                $tokenType     = $tokenResponse->getTokenType(true);
+                $expiresIn     = $tokenResponse->getExpiresIn();
+                $scopes        = $tokenResponse->getScope();
+                 
+                $user = new User($user->getUsername(),$accessToken,$refreshToken,$tokenType,$expiresIn,$scopes);
+                	
+                $this->logger->info(get_class($this)."::refreshUser()-OUT-", array('UserInterface'=>$user));
+                return $user;
+            }
+            
+            $exception = new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
+            $this->logger->info(get_class($this)."::refreshUser()-OUT-", array('UsernameNotFoundException'=>$exception));
+            throw $exception;                 
             	
         }catch (AuthenticationException $ex )
         {
@@ -142,6 +162,7 @@ class ChateaUserProvider implements ChateaUserProviderInterface
 
     public function supportsClass($class)
     {
+        $this->logger->info(get_class($this)."::supportsClass()-OUT-", array('class'=>$class));
         return $class === ' Ant\Bundle\ChateaClientBundle\Security\User\User';
     }
 }

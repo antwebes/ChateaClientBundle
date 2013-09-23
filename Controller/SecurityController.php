@@ -50,31 +50,5 @@ class SecurityController extends Controller
             	'csrf_token'	       =>$token
             )
         );
-    }
-
-    public function securityCheckAction()
-    {
-    	
-        $logger = $this->container->get('antwebes_logger');
-    	
-    	if($logger == null)
-    	{
-    		$logger = $this->get('logger');	
-    	}
-    	$logger->addInfo(get_class($this)."::securityCheckAction()-IN-OUT");
-    	return new Response("securityCheckAction");
-    }
-    
-    public function logoutAction()
-    {
-    	$logger = $this->container->get('antwebes_logger');
-    	 
-    	if($logger == null)
-    	{
-    		$logger = $this->get('logger');
-    	}
-    	$logger->addInfo(get_class($this)."::logoutAction()-IN-OUT");
-    	    	
-		return new Response("logoutAction");
-    }    
+    }   
 }

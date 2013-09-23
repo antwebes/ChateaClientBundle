@@ -9,12 +9,8 @@ class User implements AdvancedUserInterface
     private $accessToken;
     private $refreshToken;
     private $tokenType;
-    private $expiresIn;    
-    private $scopes;
 	private $enabled;
-	private $created_at;
-	private $accountNonExpired;
-	private $credentialsNonExpired;
+	private $expired_at;
 	private $accountNonLocked;
 	private $roles;
 	
@@ -30,18 +26,20 @@ class User implements AdvancedUserInterface
 		$this->accessToken = $accessToken;
 		$this->refreshToken = $refreshToken;
 		$this->tokenType = $tokenType;
-		$this->expiresIn = $expiresIn;
-		$this->created_at = time();
+		
+		
+		$this->expired_at = $expiresIn > 0 ? time() + $expiresIn : 0;
+		
 		$this->enabled = true;
-		$this->accountNonLocked = true;		
-		$this->accountNonExpired = ($expiresIn == 0 );
-		$this->credentialsNonExpired = ($expiresIn == 0 );		
+		$this->accountNonLocked = true;						
+
+		
 		$this->roles = array();
 		$this->scopes = $scopes;
 		foreach ($scopes as $scope) {
-		    $this->roles[] = 'ROLE_' . strtoupper($scope);
+		    array_push($this->roles, 'ROLE_' . strtoupper($scope));
 		}
-		
+		array_push($this->roles, 'ROLE_API_USER');
 	}
 	
 	/**
@@ -57,7 +55,7 @@ class User implements AdvancedUserInterface
 	 */
 	public function getPassword()
 	{
-	    return $this->accessToken;
+	    return null;
 	}	
 	/**
 	 * {@inheritdoc}
@@ -70,7 +68,10 @@ class User implements AdvancedUserInterface
 	{
 		return $this->refreshToken;
 	}
-	
+	public function getTokenType()
+	{
+		return $this->tokenType;
+	}
 	/**
 	 * {@inheritdoc}
 	 */
@@ -87,33 +88,60 @@ class User implements AdvancedUserInterface
 		return $this->username;
 	}
 	
-	/**
-	 * {@inheritdoc}
-	 */
+    /**
+     * Checks whether the user's account has expired.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw an AccountExpiredException and prevent login.
+     *
+     * @return Boolean true if the user's account is non expired, false otherwise
+     *
+     * @see AccountExpiredException
+     */
 	public function isAccountNonExpired()
 	{
-		return $this->accountNonExpired;
+		return true;
 	}
 	
 	/**
-	 * {@inheritdoc}
+	 * Checks whether the user is locked.
+	 *
+	 * Internally, if this method returns false, the authentication system
+	 * will throw a LockedException and prevent login.
+	 *
+	 * @return Boolean true if the user is not locked, false otherwise
+	 *
+	 * @see LockedException
 	 */
 	public function isAccountNonLocked()
 	{
 		return $this->accountNonLocked;
 	}
-	
 	/**
-	 * {@inheritdoc}
+	 * Checks whether the user's credentials (token) has expired.
+	 *
+	 * Internally, if this method returns false, the authentication system
+	 * will throw a CredentialsExpiredException and prevent login.
+	 *
+	 * @return Boolean true if the user's credentials are non expired, false otherwise
+	 *
+	 * @see CredentialsExpiredException
 	 */
 	public function isCredentialsNonExpired()
 	{
-		return $this->credentialsNonExpired;
+		return $this->expired_at > time() ;
 	}
 	
-	/**
-	 * {@inheritdoc}
-	 */
+    /**
+     * Checks whether the user is enabled.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a DisabledException and prevent login.
+     *
+     * @return Boolean true if the user is enabled, false otherwise
+     *
+     * @see DisabledException
+     */
 	public function isEnabled()
 	{
 		return $this->enabled;
@@ -124,6 +152,5 @@ class User implements AdvancedUserInterface
 	 */
 	public function eraseCredentials()
 	{
-	    $this->accessToken = null;
 	}	
 }
