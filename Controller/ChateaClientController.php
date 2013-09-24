@@ -5,21 +5,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Ant\ChateaClient\Client\ApiException;
 use Symfony\Component\HttpFoundation\Response;
+use Ant\ChateaClient\Http\IHttpClient;
+use Ant\ChateaClient\OAuth2\AccessToken;
 
 
 class ChateaClientController extends Controller implements AuthenticatedController
 {
 
-	public function getApiChannles()
+	public function getApiChannels()
 	{		
-	    ldd($this->container->get('antwebes_channles'));
-		return $this->container->get('antwebes_channles');
+	    $tokenValue = "YjJkMzA0M2RmODc4MDk4N2FkMjllNjFmNDM5MTg4Yjk3ZGRkZjU5ODY2NWYwNGZlZGNkMmUxZGRiZjRiMTU5NA";
+	    $this->container->get('chatea_client.http_client')->addAccesToken(new AccessToken($tokenValue));
+		return $this->container->get('antwebes_channels');
 	}
 	
 	protected function createHttpException ($statusCode, $message, ApiException $previous = null, $code = 0)
 	{
 		$headers = $previous->getHttpException()?$previous->getHttpException()->getHeaders():null;
-		$format = $this->container->getParameter('antwebes_chateaclient.http_error.format');		
+		$format = $this->container->getParameter('chatea_client.http_error.format');		
 		$message = json_decode($message,true);
 		$status_text = '';
 		//TODO: error format

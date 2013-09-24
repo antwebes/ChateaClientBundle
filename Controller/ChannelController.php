@@ -10,9 +10,9 @@ class ChannelController extends ChateaClientController
 {
 
     public function showAllAction(Request $request)
-    {
+    {        
         try {
-            $channels = $this->getApiChannles()->show();
+            $channels = $this->getApiChannels()->show();
         } catch (ApiException $ex) {
             return $this->createHttpException($ex->getStatusCode(), $ex->getServerError(), $ex, $ex->getStatusCode());
         }

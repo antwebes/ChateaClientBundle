@@ -3,42 +3,44 @@
 <container xmlns="http://symfony.com/schema/dic/services"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-		<parameters>
-		    <parameter key="antwebes_chateaclient_lib.http_client.auth.class">Ant\ChateaClient\Http\HttpClient</parameter>
-		    <parameter key="antwebs_chateaclient_client_id">2_63gig21vk9gc0kowgwwwgkcoo0g84kww00c4400gsc0k8oo4ks</parameter>
-		    <parameter key="antwebs_chateaclient_secret">202mykfu3ilckggkwosgkoo8g40w4wws0k0kooo488wo048k0w</parameter>
-		</parameters>
+	<parameters>
+		<parameter key="chatea_client.http_client.class">Ant\ChateaClient\Http\HttpClient</parameter>
+		<parameter key="chatea_client.auth.client_id">2_63gig21vk9gc0kowgwwwgkcoo0g84kww00c4400gsc0k8oo4ks</parameter>
+		<parameter key="chatea_client.auth.secret">202mykfu3ilckggkwosgkoo8g40w4wws0k0kooo488wo048k0w</parameter>
+		<parameter key="chatea_client.authentication.success_handler.class">Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler</parameter>
+		<parameter key="chatea_client.authentication.failure_handler.class">Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler</parameter>
+	</parameters>
+	
 	<services>
-        <service id="antwebes_chateaclient_lib.http_client" class="%antwebes_chateaclient_lib.http_client.auth.class%" public="false" />
-        
-		<service id="antwebes_chateaclient_bundle.logger_handler" class="Monolog\Handler\StreamHandler" public="false" >
-		    <argument type="string">%kernel.logs_dir%/chateaclient.log</argument>
-		    <argument type="string">100</argument>			
+		<service id="chatea_client.http_client" class="%chatea_client.http_client.class%" />
+
+		<service id="antwebes_chateaclient_bundle.logger_handler"
+			class="Monolog\Handler\StreamHandler" public="false">
+			<argument type="string">%kernel.logs_dir%/chateaclient.log</argument>
+			<argument type="string">100</argument>
 		</service>
 
-		<service id="antwebes_chateaclient_bundle.logger" class="Symfony\Bridge\Monolog\Logger" >
+		<service id="antwebes_chateaclient_bundle.logger" class="Symfony\Bridge\Monolog\Logger">
 			<argument type="string">ChateaClientBundle</argument>
-		   	<call method="pushHandler">
-		        <argument type="service" id="antwebes_chateaclient_bundle.logger_handler" />
-		    </call>			
+			<call method="pushHandler">
+				<argument type="service"
+					id="antwebes_chateaclient_bundle.logger_handler" />
+			</call>
 		</service>
-		<service id="antwebes_logger" alias="antwebes_chateaclient_bundle.logger" synthetic="true"  />
+
+		<service id="antwebes_logger" alias="antwebes_chateaclient_bundle.logger" synthetic="true" />
 		
-	        <service id="antwebes_authentication.success_handler" class="%security.authentication.success_handler.class%" public="false">
-	            <argument type="service" id="security.http_utils" />
-	            <argument type="collection" /> <!-- Options -->
-	        </service>
-        			
-	        <service id="antwebes_authentication.success_handler" class="%security.authentication.success_handler.class%" public="false">
-	            <argument type="service" id="security.http_utils" />
-	            <argument type="collection" /> <!-- Options -->
-	        </service>
-	        <service id="antwebes_authentication.failure_handler" class="%security.authentication.failure_handler.class%" public="false">
-	            <tag name="monolog.logger" channel="security" />
-	            <argument type="service" id="http_kernel" />
-	            <argument type="service" id="security.http_utils" />
-	            <argument type="collection" /> <!-- Options -->
-	            <argument type="service" id="logger" on-invalid="null" />
-	        </service>		
+		
+		 <service id="antwebes_authentication.success_handler" class="%chatea_client.authentication.success_handler.class%" public="false"> 
+		 		<argument type="service" id="security.http_utils" /> 
+		 		<argument type="collection" /> 
+		 </service> 
+		 <service id="antwebes_authentication.failure_handler" class="%chatea_client.authentication.failure_handler.class%" public="false"> 
+				<tag name="monolog.logger" channel="security" /> 
+				<argument type="service" id="http_kernel" /> 
+				<argument type="service" id="security.http_utils" /> 
+				<argument type="collection" /> 
+				<argument type="service" id="logger" on-invalid="null" /> 
+		</service> 
 	</services>
 </container>    

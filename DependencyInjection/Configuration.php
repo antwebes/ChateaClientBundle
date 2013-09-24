@@ -19,17 +19,15 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('antwebes_chateaclient');
-        $rootNode->children()
-	    	 ->arrayNode('http_error')
-	    	 	->addDefaultsIfNotSet()
-	    	 	->children()
-			    	 ->scalarNode('format')
-			    	 ->defaultValue('html')
-			    	 ->end()	    	 
-	    	 	->end()
-	    	 ->end()	    	 
-	     ->end(); 
+         $rootNode = $treeBuilder->root('chatea_client');         
+         $rootNode->children()
+ 	    	 ->arrayNode('http_error')
+ 	    	 	->addDefaultsIfNotSet()
+ 	    	 	->children()
+ 			    	 ->scalarNode('format')->defaultValue("html")->end()	    	 
+ 	    	 	->end()
+ 	    	 ->end()	    	 
+ 	     ->end();  	     
         return $treeBuilder;
     }
 }

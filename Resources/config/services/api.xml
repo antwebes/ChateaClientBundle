@@ -8,10 +8,11 @@
     	<parameter key="antwebes_chateaclient_bundle.api.channles.class">Ant\Bundle\ChateaClientBundle\Services\Api\Channels</parameter>
     </parameters>
     <services>
-        <service id="antwebes_chateaclient_lib.api" class="%antwebes_chateaclient_lib.api.class%" public="false">           
-            <argument type="service" id="antwebes_chateaclient_lib.http_client" />
+          
+        <service id="antwebes_chateaclient_lib.api" class="%antwebes_chateaclient_lib.api.class%" public="true">           
+            <argument type="service" id="chatea_client.http_client" />
         </service>
-                
+		 
         <service id="antwebes_chateaclient_lib.api.abstract" public="false"  abstract="true" >
         	<argument type="service" id="antwebes_chateaclient_lib.api" />
         </service>
@@ -22,7 +23,7 @@
         		 <argument type="service" id="antwebes_chateaclient_lib.api" />
         </service>
         
+        <service id="antwebes_channels" alias="antwebes_chateaclient_lib.api.channels" synthetic="true"  />
         
-        <service id="antwebes_channles" alias="antwebes_chateaclient_lib.api.channels" synthetic="true"  />
     </services>
 </container> 

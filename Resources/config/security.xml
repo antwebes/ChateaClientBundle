@@ -8,12 +8,27 @@
         
 	<config>	
 		<encoder class="Ant\Bundle\ChateaClientBundle\Security\User\User" algorithm="plaintext" />	
+		<!--
 		<provider name="antwebs_provider" id="antwebs_user_provider" />
+		-->		
+        <provider name="in_memory">
+            <memory>
+                <user name="ryan" password="ryanpass" roles="ROLE_USER" />
+                <user name="admin" password="kitten" roles="ROLE_ADMIN" />
+            </memory>
+        </provider>		 
+
 		
-		<firewall name="secured_area" pattern="^/api" >
+        <firewall name="api_secured_area" pattern="^/api" >	
+            <anonymous />
+            <http-basic realm="Secured Demo Area" />
+        </firewall>
+		<!--
+		<firewall name="api_secured_area" pattern="^/api" >			  
 			<ChateaClientAuth check_path="chateclient_login_check" login_path="chateclient_login_path" />
 			<logout path="/api/logout" target="/" />
-		</firewall>					
+		</firewall>
+		-->					
 		<rule path="^/api/login" role="IS_AUTHENTICATED_ANONYMOUSLY" requires_channel="http"  ips="127.0.0.1, ::1" />
 		<rule path="^/api" role="ROLE_API_USER" requires_channel="http"  ips="127.0.0.1, ::1" />
 	</config>

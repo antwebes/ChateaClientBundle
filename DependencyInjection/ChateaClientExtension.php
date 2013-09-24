@@ -24,16 +24,18 @@ class ChateaClientExtension extends Extension
 	public function load(array $configs, ContainerBuilder $container)
 	{
 		
-		//TODO retirve my configs
-		$configuration = new Configuration();
-		$config = $this->processConfiguration($configuration, $configs);
+// 		//TODO retirve my configs
+ 		$configuration = new Configuration();
+ 		$config = $this->processConfiguration($configuration, $configs);
 		
-	    foreach ($config as $rootKey => $configurationSettings) {
-	    	foreach ($configurationSettings as $configKey => $configValue) {
-	    		$container->setParameter(sprintf('antwebes_chateaclient.%s.%s', $rootKey, $configKey), $configValue);
-            }
+ 	    foreach ($config as $rootKey => $configurationSettings) {
+ 	    	foreach ($configurationSettings as $configKey => $configValue) {
+ 	    	    
+ 	    	    $key = sprintf('chatea_client.%s.%s', $rootKey, $configKey);
+ 	    		$container->setParameter($key, $configValue); 	    		
+             }
 	    	
-        }
+         }
         		
  		$loader = new XmlFileLoader(
         	$container,
