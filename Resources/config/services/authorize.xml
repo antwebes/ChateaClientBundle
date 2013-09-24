@@ -32,7 +32,7 @@
 			<service id="antwebes_user_authentication_provider" class="%antwebes_user_authentication_provider.class%">
 				<argument type="service" id="antwebs_user_provider" />
 				<argument type="service" id="antwebes_user_checker" /> 
-                                <argument type="string">antwebs_api_secured_area</argument>
+                                <argument type="string" >antwebs_api_secured_area</argument>
 				<argument type="service" id="antwebes_logger" />
                                 <argument type="collection" />
 			</service>
@@ -42,13 +42,13 @@
                             <argument type="service" id="security.authentication.manager" />
                             <argument type="service" id="security.authentication.session_strategy" />
                             <argument type="service" id="security.http_utils" />
-                            <argument type="string">antwebs_api_secured_area</argument>
+                            <argument type="string"/>
                             <argument type="service" id="antwebes_authentication.success_handler" />
-                            <argument type="service" id="antwebes_authentication.failure_handler" />	            	            
-                            <argument type="service" id="form.csrf_provider" />
-                            <argument type="service" id="antwebes_logger" />
+                            <argument type="service" id="antwebes_authentication.failure_handler" />	            	                                                                    
                             <argument type="collection" />
+                            <argument type="service" id="antwebes_logger" />
                             <argument type="service" id="event_dispatcher" on-invalid="null"/>					           	            	            
+                            <argument type="service" id="form.csrf_provider" />
 			</service>		
 			
 			<service id="antwebs_event_listener_authenticated.action_listener" class="%antwebs_event_listener_authenticated.class%" >

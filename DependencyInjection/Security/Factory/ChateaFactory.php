@@ -17,7 +17,7 @@ class ChateaFactory extends AbstractFactory
 
     public function getKey()
     {
-        return 'ChateaClientAuth';
+        return 'ChateaClient';
     }
 
     /**
@@ -33,37 +33,11 @@ class ChateaFactory extends AbstractFactory
      */
     protected function createAuthProvider(ContainerBuilder $container, $id, $config, $userProviderId)
     {
+        
         $providerId = 'antwebes_user_authentication_provider_' . $id;
         $provider = new DefinitionDecorator('antwebes_user_authentication_provider');
         $container->setDefinition($providerId, $provider);        
         return $providerId;
-    }
-
-/*
-    protected function createListener($container, $id, $config, $userProvider)
-    {
-        $listenerId = $this->getListenerId();
-        $listener = new DefinitionDecorator($listenerId);
-        $listener->replaceArgument(4, $id);
-        $listener->replaceArgument(5, new Reference($this->createAuthenticationSuccessHandler($container, $id, $config)));
-        $listener->replaceArgument(6, new Reference($this->createAuthenticationFailureHandler($container, $id, $config)));
-        $listener->replaceArgument(7, array_intersect_key($config, $this->options));
-
-        $listenerId .= '.'.$id;
-        $container->setDefinition($listenerId, $listener);
-
-        return $listenerId;
-    }
-
-
- */    
-    protected function createListener($container, $id, $config, $userProvider)
-    {
-        $listenerId = $this->getListenerId();
-        $listener = new DefinitionDecorator($listenerId);
-        $container->setDefinition($listenerId, $listener);
-
-        return $listenerId;
     }
 
     protected function getListenerId()
@@ -80,5 +54,5 @@ class ChateaFactory extends AbstractFactory
                 ->addArgument($config['login_path']);
         return $entryPointId;
     }
-
+   
 }

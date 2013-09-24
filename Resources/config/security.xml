@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<srv:container 
-	xmlns="http://symfony.com/schema/dic/security"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:srv="http://symfony.com/schema/dic/services"
-	xsi:schemaLocation="http://symfony.com/schema/dic/services
-        http://symfony.com/schema/dic/services/services-1.0.xsd">
+<srv:container
+    xmlns="http://symfony.com/schema/dic/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:srv="http://symfony.com/schema/dic/services"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+http://symfony.com/schema/dic/services/services-1.0.xsd">
         
-	<config>		
-             <encoder class="Ant\Bundle\ChateaClientBundle\Security\User\User" algorithm="plaintext" />
-             <provider name="antwebs_provider" id="antwebs_user_provider" />
+    <config>	
+        <encoder class="Ant\Bundle\ChateaClientBundle\Security\User\User" algorithm="plaintext" />	
+        <provider name="antwebs_provider" id="antwebs_user_provider" />
 
-		<firewall name="antwebs_secured_area" pattern="^/api" >			  
-			<ChateaClientAuth check_path="chateclient_login_check" login_path="chateclient_login_path" />
-			<logout path="/api/logout" target="/" />
-		</firewall>
+        <firewall name="antwebs_api_secured_area" pattern="^/api" >
+            <ChateaClient check_path="/api/login_check" login_path="/auth/login"/>
+            <logout path="/api/logout" target="/" />
 
-		<rule path="^/api/login" role="IS_AUTHENTICATED_ANONYMOUSLY" requires_channel="http"  ips="127.0.0.1, ::1" />
-		<rule path="^/api" role="ROLE_API_USER" requires_channel="http"  ips="127.0.0.1, ::1" />
-	</config>
+        </firewall>	
+        <rule path="^/api/login" role="IS_AUTHENTICATED_ANONYMOUSLY" requires_channel="http" />
+        <rule path="^/api" role="ROLE_API_USER" requires_channel="http" />
+    </config>
 </srv:container>
-
 
 

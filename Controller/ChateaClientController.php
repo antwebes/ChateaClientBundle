@@ -5,13 +5,11 @@ namespace Ant\Bundle\ChateaClientBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Ant\ChateaClient\Client\ApiException;
 
-class ChateaClientController extends Controller
+class ChateaClientController extends Controller implements AuthenticatedController
 {
 
     public function getApiChannels()
     {
-//	    $tokenValue = "YjJkMzA0M2RmODc4MDk4N2FkMjllNjFmNDM5MTg4Yjk3ZGRkZjU5ODY2NWYwNGZlZGNkMmUxZGRiZjRiMTU5NA";
-//	    $this->container->get('chatea_client.http_client')->addAccesToken(new \Ant\ChateaClient\OAuth2\AccessToken\AccessToken($tokenValue));
         return $this->container->get('antwebes_channels');
     }
 

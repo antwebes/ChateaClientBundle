@@ -3,6 +3,7 @@ namespace Ant\Bundle\ChateaClientBundle\Security\Firewall;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener;
+use Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
@@ -52,11 +53,11 @@ class ChateaAuthenticationListener extends AbstractAuthenticationListener
             HttpUtils $httpUtils, 
             $providerKey, 
             AuthenticationSuccessHandlerInterface $successHandler, 
-            AuthenticationFailureHandlerInterface $failureHandler, 
-            CsrfProviderInterface $csrfProvider, 
-            LoggerInterface $logger, 
+            AuthenticationFailureHandlerInterface $failureHandler,             
             array $options = array(), 
-            EventDispatcherInterface $dispatcher = null
+            LoggerInterface $logger,             
+            EventDispatcherInterface $dispatcher = null,
+            CsrfProviderInterface $csrfProvider
         ){
         parent::__construct($securityContext, $authenticationManager, $sessionStrategy, $httpUtils, $providerKey, $successHandler, $failureHandler, array_merge(array(
             'username_parameter' => '_username',
@@ -65,7 +66,18 @@ class ChateaAuthenticationListener extends AbstractAuthenticationListener
             'intention' => 'authenticate',
             'post_only' => true
         ), $options), $logger, $dispatcher);
-
+        $this->logger->info(get_class($this)."construct()-INI-",array('ChateaAuthenticationListener'=>$this));
+        $this->logger->debug(get_class($this)."construct()-CHECK-",array('SecurityContextInterface'=>$securityContext));
+        $this->logger->debug(get_class($this)."construct()-CHECK-",array('AuthenticationManagerInterface'=>$authenticationManager));
+        $this->logger->debug(get_class($this)."construct()-CHECK-",array('SessionAuthenticationStrategyInterface'=>$httpUtils));
+        $this->logger->debug(get_class($this)."construct()-CHECK-",array('providerKey'=>$providerKey));
+        $this->logger->debug(get_class($this)."construct()-CHECK-",array('AuthenticationSuccessHandlerInterface'=>$successHandler));
+        $this->logger->debug(get_class($this)."construct()-CHECK-",array('AuthenticationFailureHandlerInterface'=>$failureHandler));
+        $this->logger->debug(get_class($this)."construct()-CHECK-",array('CsrfProviderInterface'=>$csrfProvider));
+        $this->logger->debug(get_class($this)."construct()-CHECK-",array('LoggerInterface'=>$logger));        
+        $this->logger->debug(get_class($this)."construct()-CHECK-",array('options'=>  implode($options,';')));
+       
+        
         $this->csrfProvider = $csrfProvider;
     }
 
@@ -85,7 +97,7 @@ class ChateaAuthenticationListener extends AbstractAuthenticationListener
         $this->logger->info(get_class($this) . "::attemptAuthentication()::INI-", array('Request' => $request));
         $this->logger->debug(get_class($this) . "::attemptAuthentication()::INI-", array('Request' => $request->__toString()));
         
-        if ($this->options['post_only'] && ! $request->isMethod('POST')) {
+        if ($this->options['post_only'] && !$request->isMethod('POST')) {
             $ex = new AuthenticationException('Invalid HTTP Method use POST.');
             $this->logger->debug(get_class($this) . "::attemptAuthentication()::INI-", array('AuthenticationException' => $ex));
             throw $ex;
@@ -129,8 +141,9 @@ class ChateaAuthenticationListener extends AbstractAuthenticationListener
      */
     protected function requiresAuthentication(Request $request)
     {
-        if ($this->options['post_only'] && ! $request->isMethod('POST')) {
-            $this->logger->info(get_class($this). "::requiresAuthentication()::INI-", array('Request' => $request));
+        
+        if ($this->options['post_only'] && !$request->isMethod('POST')) {
+            $this->logger->info(get_class($this). "::requiresAuthentication()::OUT-", array('Request' => $request));
             return false;
         }
         return parent::requiresAuthentication($request);
