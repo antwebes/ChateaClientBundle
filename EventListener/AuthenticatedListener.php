@@ -34,7 +34,7 @@ class AuthenticatedListener
 		}
 		
 		if ($controller[0] instanceof AuthenticatedController) {
-			
+
 			if (false === $this->security_context->isGranted('ROLE_API_USER')) {
 				throw new AccessDeniedException('This action needs a valid user');
 			}

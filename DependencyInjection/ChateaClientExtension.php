@@ -24,7 +24,7 @@ class ChateaClientExtension extends Extension
 	public function load(array $configs, ContainerBuilder $container)
 	{
 		
-// 		//TODO retirve my configs
+ 		//TODO retirve my configs
  		$configuration = new Configuration();
  		$config = $this->processConfiguration($configuration, $configs);
 		

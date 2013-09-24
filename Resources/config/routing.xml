@@ -14,7 +14,7 @@
     	<default key="_controller">ChateaClientBundle:Security:logout</default>
     </route>
     <route id="chateclient_login_check" pattern="/api/login_check" >
-    	<default key="_controller">ChateaClientBundle:Security:securityCheck</default>
+    	<default key="_controller">ChateaClientBundle:Security:loginCheck</default>
     </route>
 
     <route id="antwebes_chateaclient_doc" pattern="/doc" methods="GET" schemes="HTTP">

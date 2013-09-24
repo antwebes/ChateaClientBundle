@@ -1,8 +1,6 @@
 <?php
 namespace Ant\Bundle\ChateaClientBundle\Security\Provider;
 
-use Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider;
-
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -10,7 +8,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationServiceException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
-use Ant\Bundle\ChateaClientBundle\Security\User\User as ChateaUser;
 use Ant\Bundle\ChateaClientBundle\Security\User\ChateaUserProviderInterface;
 use Ant\Bundle\ChateaClientBundle\Security\Token\ChateaToken;
 use Psr\Log\LoggerInterface;
@@ -22,6 +19,7 @@ class ChateaAuthenticationProvider implements AuthenticationProviderInterface
     private $userChecker;
     private $providerKey;
     private $logger;
+    private $options;
     /**
      * Constructor.
      * 
@@ -32,9 +30,15 @@ class ChateaAuthenticationProvider implements AuthenticationProviderInterface
      *
      * @throws \InvalidArgumentException
      */    
-    public function __construct(ChateaUserProviderInterface $chateaUserProvider, UserCheckerInterface $userChecker, $providerKey, LoggerInterface $logger, $hideUserNotFoundExceptions = true)
+    public function __construct(
+            ChateaUserProviderInterface $chateaUserProvider, 
+            UserCheckerInterface $userChecker, 
+            $providerKey = null, 
+            LoggerInterface $logger = null, 
+            $hideUserNotFoundExceptions = true,
+            array $options = array()
+            )
     {
-    
         if (empty($providerKey)) {
             throw new \InvalidArgumentException('$providerKey must not be empty.');
         }
@@ -43,7 +47,8 @@ class ChateaAuthenticationProvider implements AuthenticationProviderInterface
         $this->providerKey = $providerKey;
         $this->hideUserNotFoundExceptions = $hideUserNotFoundExceptions;        
         $this->chateaUserProvider = $chateaUserProvider;
-        $this->logger =$logger;
+        $this->logger = $logger;
+        $this->options = $options;
     }
         
     /**

@@ -2,15 +2,9 @@
 namespace Ant\Bundle\ChateaClientBundle\Security\Firewall;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener;
-use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener;
-
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
-use Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
@@ -21,8 +15,6 @@ use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Ant\Bundle\ChateaClientBundle\Security\Exception\AuthenticationException;
 use Ant\Bundle\ChateaClientBundle\Security\Token\ChateaToken;
-
-use Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider;
 
 class ChateaAuthenticationListener extends AbstractAuthenticationListener
 {
@@ -54,18 +46,18 @@ class ChateaAuthenticationListener extends AbstractAuthenticationListener
      * @throws \InvalidArgumentException
      */
     public function __construct(
-        SecurityContextInterface $securityContext, 
-        AuthenticationManagerInterface $authenticationManager, 
-        SessionAuthenticationStrategyInterface $sessionStrategy, 
-        HttpUtils $httpUtils, $providerKey, 
-        AuthenticationSuccessHandlerInterface $successHandler, 
-        AuthenticationFailureHandlerInterface $failureHandler,
-        array $options = array(),
-        $csrfProvider,                
-        LoggerInterface $logger,               
-        EventDispatcherInterface $dispatcher = null         
-        )
-    {
+            SecurityContextInterface $securityContext, 
+            AuthenticationManagerInterface $authenticationManager, 
+            SessionAuthenticationStrategyInterface $sessionStrategy, 
+            HttpUtils $httpUtils, 
+            $providerKey, 
+            AuthenticationSuccessHandlerInterface $successHandler, 
+            AuthenticationFailureHandlerInterface $failureHandler, 
+            CsrfProviderInterface $csrfProvider, 
+            LoggerInterface $logger, 
+            array $options = array(), 
+            EventDispatcherInterface $dispatcher = null
+        ){
         parent::__construct($securityContext, $authenticationManager, $sessionStrategy, $httpUtils, $providerKey, $successHandler, $failureHandler, array_merge(array(
             'username_parameter' => '_username',
             'password_parameter' => '_password',
@@ -73,7 +65,7 @@ class ChateaAuthenticationListener extends AbstractAuthenticationListener
             'intention' => 'authenticate',
             'post_only' => true
         ), $options), $logger, $dispatcher);
-        
+
         $this->csrfProvider = $csrfProvider;
     }
 
