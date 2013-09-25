@@ -1,7 +1,6 @@
 {
 	"name" : "antwebes/chatea-client-bundle",
 	"description" : "Symfony2 bundle for ChateaClient library, It makes it easy to use API of api.chatea.net",
-	"version" : "0.1.0",
 	"type" : "symfony-bundle",
 	"authors" : [{
 			"name" : "Xabier Fernández Rodríguez AS jjbier",
