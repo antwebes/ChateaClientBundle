@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>API - Channels</title>
-    </head>
-    <body>
-        <h1>API - Channels</h1>
-        {{ channels }}
-    </body>
-</html>
+{% extends "ChateaClientBundle::layout.html.twig" %}
+{% block body %}
+
+<ul>
+    <li>
+        <a href="{{ path('antwebes_chateaclient_channel_add') }}">
+        new channel
+        </a>
+    </li>
+</ul>
+<table border="1" >
+      <thead>
+          <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>action</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for channel in channels %}
+            <tr>
+               <td style="width: 50%">
+                   {{ channel.name }}
+               </td>
+                <td style="width: 30%">
+                    {{ channel.type  }}
+                </td>
+                <td>
+                    <ul style="list-style-type:none; margin:0; padding:0">
+                        <li style="display:inline;">[<a href="{{ channel.url }}" title="{{ channel.title }}">irc</a>]</li>
+                        <li style="display:inline;">[<a href="{{ path('antwebes_chateaclient_channel_show', {'channel_id': channel.id}) }}" title="{{ channel.title }}">show</a>]</li>
+                        <li style="display:inline;">[<a href="{{ path('antwebes_chateaclient_channel_edit', {'channel_id': channel.id}) }}" title="{{ channel.title }}">edit</a>]</li>
+                        <li style="display:inline;">[<a href="{{ path('antwebes_chateaclient_channel_delete', {'channel_id': channel.id}) }}" title="{{ channel.title }}">delete</a>]</li>
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+      </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "ChateaClientBundle::layout.html.twig" %}
+{% block body %}
+    <h3>
+        Name: {{  user.username }}
+    </h3>
+    <ul>
+        <li>
+            Username: {{  user.username }}
+        </li>
+        <li>
+            Email: {{  user.email }}
+        </li>
+        <li>
+            Enabled: {{  user.enabled ? 'true': 'false' }}
+        </li>
+        <li>
+            Last Login {{ user.lastLogin | date }}
+        </li>
+
+    </ul>
+    <ul >
+        <li>
+            <h4>Profile</h4>
+            {% set profile = user.profile %}
+            <ul>
+                <li>
+                   About:
+                    <p>
+                        {{ profile.about }}
+                    </p>
+                </li>
+                <li>
+                    Birthday:
+                    <p>
+                    {{ profile.birthday }}
+                    </p>
+                </li>
+                <li>
+                    Visits:
+                    <p>
+                        {{ profile.countVisits }}
+                    </p>
+                </li>
+                <li>
+                    Gender:
+                    <p>
+                        {{ profile.gender }}
+                    </p>
+                </li>
+                <li>
+                    You Want:
+                    <p>
+                        {{ profile.youWant }}
+                    </p>
+                </li>
+                <li>
+                    Update at:
+                    <p>
+                        {{ profile.updatedAt | date}}
+                    </p>
+                </li>
+                <li>
+                    Publicated at:
+                    <p>
+                        {{ profile.publicatedAt }}
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            [<a href="{{ path('antwebes_chateaclient_user_show', {'user_id': user.id}) }}" title="Show {{ user.username }}">show</a>]
+        </li>
+        <li>
+            [<a href="{{ path('antwebes_chateaclient_user_edit', {'user_id': user.id}) }}" title=" Edit {{  user.username }}">edit</a>]
+        </li>
+        <li>
+            [<a href="{{ path('antwebes_chateaclient_user_delete', {'user_id': user.id}) }}" title="Delete {{  user.username }}"> delete </a>]
+        </li>
+        <li>
+            <h6>
+                <a href="{{ path('antwebes_chateaclient_user_show_all') }}" title="Show all list">
+                    << GOTO List
+                </a>
+            </h6>
+        </li>
+    </ul>
+{% endblock %}

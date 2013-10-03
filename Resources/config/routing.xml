@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
- <routes xmlns="http://symfony.com/schema/routing"
+
+<routes xmlns="http://symfony.com/schema/routing"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/routing
-        http://symfony.com/schema/routing/routing-1.0.xsd">
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="login_auth" pattern="/auth">
-        <default key="_controller">ChateaClientBundle:Security:login</default>
+    <route id="antwebes_chateaclient_api" pattern="/api" methods="GET" schemes="HTTP">
+        <default key="_controller">ChateaClientBundle:Default:index</default>
     </route>
-    <route id="chateclient_login_path" pattern="/auth/login">
-        <default key="_controller">ChateaClientBundle:Security:login</default>
+    <route id="antwebes_chateaclient_api_doc" pattern="/api/doc" methods="GET" schemes="HTTP">
+        <default key="_controller">ChateaClientBundle:Default:index</default>
     </route>
-    <route id="chateclient_logout" pattern="/api/logout" >
-    	<default key="_controller">ChateaClientBundle:Security:logout</default>
+    <route id="antwebes_chateaclient_api_error" pattern="/api/error" methods="GET" schemes="HTTP">
+        <default key="_controller">ChateaClientBundle:Default:error</default>
     </route>
-    <route id="chateclient_login_check" pattern="/api/login_check" >
-    	<default key="_controller">ChateaClientBundle:Security:loginCheck</default>
-    </route>
-
-    <route id="antwebes_chateaclient_doc" pattern="/doc" methods="GET" schemes="HTTP">
-        <default key="_controller">ChateaClientBundle:Api:index</default>
-    </route>
-    <route id="antwebes_chateaclient_doc2" pattern="/doc/" methods="GET" schemes="HTTP">
-        <default key="_controller">ChateaClientBundle:Api:index</default>
-    </route>
-
-	<import resource="@ChateaClientBundle/Resources/config/routing/api.xml" prefix="/api" />
+    <import resource="@ChateaClientBundle/Resources/config/routing/channels.xml" prefix="/api"/>
+    <import resource="@ChateaClientBundle/Resources/config/routing/user.xml" prefix="/api"/>
+    <import resource="@ChateaClientBundle/Resources/config/routing/friendship.xml" prefix="/api"/>
 </routes>

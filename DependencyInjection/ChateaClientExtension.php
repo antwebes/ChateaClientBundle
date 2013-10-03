@@ -1,12 +1,12 @@
 <?php
+
 namespace Ant\Bundle\ChateaClientBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Routing\CompiledRoute;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader;
+
 /**
  * This is the class that loads and manages your bundle configuration
  *
@@ -14,36 +14,19 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
  */
 class ChateaClientExtension extends Extension
 {
-	
-	/**
-	 * Load the bundle extension.
-	 *
-	 * @param array            $configs   The config parameters
-	 * @param ContainerBuilder $container The DI container
-	 */
-	public function load(array $configs, ContainerBuilder $container)
-	{
-		
- 		//TODO retirve my configs
- 		$configuration = new Configuration();
- 		$config = $this->processConfiguration($configuration, $configs);
-		
- 	    foreach ($config as $rootKey => $configurationSettings) {
- 	    	foreach ($configurationSettings as $configKey => $configValue) {
- 	    	    
- 	    	    $key = sprintf('chatea_client.%s.%s', $rootKey, $configKey);
- 	    		$container->setParameter($key, $configValue); 	    		
-             }
-	    	
-         }
-        		
- 		$loader = new XmlFileLoader(
-        	$container,
-        	new FileLocator(__DIR__.'/../Resources/config')
-    	);
- 		$loader->load('services/common.xml');
- 		$loader->load('services/authorize.xml');
- 		$loader->load('services/api.xml');     
-        
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function load(array $configs, ContainerBuilder $container)
+    {
+
+
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
+        $loader->load('common.xml');
+        $loader->load('api.xml');
+
+
+        $config = $this->processConfiguration(new Configuration(), $configs);
+        //chateaclientbundle:channel
+    }
 }
