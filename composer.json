@@ -21,16 +21,15 @@
 	],
 	"require" : {
 		"php" : ">=5.3.2",
-		"symfony/framework-bundle" : "~2.3",
-		"antwebes/chatea-client-lib" : "dev-master"
+		"antwebes/chatea-client-lib": "0.2.*@dev",
+		"symfony/framework-bundle" : "~2.3"
 	},
-	"autoload" : {
-		"psr-0" : {
-			"Ant\\Bundle\\ChateaClientBundle" : ""
-		}
-	},
-	"target-dir" : "Ant/Bundle/ChateaClientBundle",
 	"replace" : {
 		"antwebes/ChateaClientBundle" : "dev-master"
-	}
+	},
+	"autoload" : {
+		"psr-0" : { "Ant\\Bundle\\ChateaClientBundle" : "" }
+	},
+	"target-dir" : "Ant/Bundle/ChateaClientBundle"
+	
 }
