@@ -2,7 +2,7 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Repositories;
 
-use Ant\Bundle\ChateaClientBundle\Api\Repository\ApiRepository;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
 use Ant\Bundle\ChateaClientBundle\Model\UserProfile;
 
 class UserProfileRepository extends  ApiRepository

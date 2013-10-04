@@ -1,8 +1,7 @@
 <?php
 namespace Ant\Bundle\ChateaClientBundle\Model;
 
-use Ant\Bundle\ChateaClientBundle\Api\Repository\ApiRepository;
-use Ant\Bundle\ChateaClientBundle\Model\BaseModel;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
 
 class UserProfile implements BaseModel
 {

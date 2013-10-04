@@ -1,7 +1,8 @@
 <?php
-namespace Ant\Bundle\ChateaClientBundle\Repositories;
 
-class Filter
+namespace Ant\Bundle\ChateaClientBundle\Api\Query\Filter;
+
+class ApiFilter
 {
     protected  $filed;
     protected $value;

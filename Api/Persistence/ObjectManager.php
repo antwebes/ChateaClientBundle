@@ -1,7 +1,6 @@
 <?php
 
-namespace Ant\Bundle\ChateaClientBundle\Api\Manager;
-
+namespace Ant\Bundle\ChateaClientBundle\Api\Persistence;
 
 interface ObjectManager
 {

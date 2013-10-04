@@ -5,12 +5,17 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
 
-    <route id="antwebes_chateaclient_channel_show_all" pattern="/channels" methods="GET"  schemes="HTTP">
+    <route id="antwebes_chateaclient_channel_show_all" pattern="/channels/{page}" methods="GET,POST"  schemes="HTTP">
         <default key="_controller">ChateaClientBundle:Channel:index</default>
+        <default key="page">1</default>
+        <requirement key="page">\d+</requirement>
     </route>
-    <route id="antwebes_chateaclient_channel_show_all_s" pattern="/channel" methods="GET"  schemes="HTTP">
+    <route id="antwebes_chateaclient_channel_show_all_s" pattern="/channels/{page}" methods="GET,POST"  schemes="HTTP">
         <default key="_controller">ChateaClientBundle:Channel:index</default>
+        <default key="page">1</default>
+        <requirement key="page">\d+</requirement>
     </route>
+
     <route id="antwebes_chateaclient_channel_add" pattern="/channel/add" methods="GET" >
         <default key="_controller">ChateaClientBundle:Channel:new</default>
     </route>

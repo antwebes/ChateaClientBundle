@@ -1,14 +1,6 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: ant3
- * Date: 30/09/13
- * Time: 18:13
- * To change this template use File | Settings | File Templates.
- */
 
-namespace Ant\Bundle\ChateaClientBundle\Model;
-
+namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
 class Error
 {

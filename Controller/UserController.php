@@ -1,11 +1,12 @@
 <?php
 namespace Ant\Bundle\ChateaClientBundle\Controller;
 
-use Ant\Bundle\ChateaClientBundle\Model\User;
 use Ant\ChateaClient\Client\ApiException;
+use Ant\Bundle\ChateaClientBundle\Api\Model\User;
+use Ant\Bundle\ChateaClientBundle\Model\Registration;
 use Ant\Bundle\ChateaClientBundle\Form\RegistrationType;
 use Ant\Bundle\ChateaClientBundle\Form\UserFormType;
-use Ant\Bundle\ChateaClientBundle\Model\Registration;
+
 /**
  * Channel controller.
  *

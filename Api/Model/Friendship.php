@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace Ant\Bundle\ChateaClientBundle\Model;
+namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
 
 class Friendship {

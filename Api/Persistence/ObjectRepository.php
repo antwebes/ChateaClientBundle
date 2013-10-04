@@ -1,7 +1,8 @@
 <?php
 
-namespace Ant\Bundle\ChateaClientBundle\Api\Repository;
+namespace Ant\Bundle\ChateaClientBundle\Api\Persistence;
 
+use Ant\Bundle\ChateaClientBundle\Api\Query\Filter\ApiFilter;
 
 interface ObjectRepository
 {
@@ -21,16 +22,31 @@ interface ObjectRepository
      */
     public function find($id);
 
+
     /**
      * Finds all objects in the repository.
-     *
-     * @param int $limit
-     * @param int $offset
-     * @return \Ant\Common\Collections\Collection
+     * @param int $page
+     * @return mixed
      */
-    public function findAll($limit =0, $offset = 30);
+    public function findAll($page = 1);
 
-
+    /**
+     * Enable filter for finds all Queries
+     *
+     * @param string $filterName
+     * @param mixed $value
+     *
+     * @return void
+     */
+    public function enableFilter($filterName, $value);
+    /**
+     * Disable filter for finds all Queries
+     *
+     * @param string $filterName
+     *
+     * @return void
+     */
+    public function disableFilter($filterName);
     /**
      * Tells the ObjectManager to make an instance managed and persistent.
      *

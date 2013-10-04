@@ -1,13 +1,11 @@
 <?php
 
-namespace Ant\Bundle\ChateaClientBundle\Api\Manager;
+namespace Ant\Bundle\ChateaClientBundle\Api\Persistence;
 
 use Ant\ChateaClient\Http\IHttpClient;
 
 class ApiManager implements  ObjectManager
 {
-
-
 
     /**
      * The ApiRepository instances.

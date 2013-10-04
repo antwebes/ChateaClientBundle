@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: ant3
- * Date: 26/09/13
- * Time: 11:16
- * To change this template use File | Settings | File Templates.
- */
+namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
-namespace Ant\Bundle\ChateaClientBundle\Model;
-use Ant\Bundle\ChateaClientBundle\Api\Repository\ApiRepository;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Email;

@@ -1,23 +1,17 @@
 <?php
 
-namespace Ant\Bundle\ChateaClientBundle\Api\Repository;
+namespace Ant\Bundle\ChateaClientBundle\Api\Persistence;
 
-use Ant\Bundle\ChateaClientBundle\Model\Channel;
 use Ant\ChateaClient\Client\Api;
-use Ant\Bundle\ChateaClientBundle\Api\Manager\ApiManager;
-
+use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 
 abstract class ApiRepository extends Api implements ObjectRepository
 {
 
-
      protected $_entityName;
-
-
      protected $_manager;
-
-
      protected $_class;
+     private $pager;
 
     public function __construct(ApiManager $manager, $className)
     {
@@ -49,10 +43,17 @@ abstract class ApiRepository extends Api implements ObjectRepository
      *
      */
     protected function getClass()
-     {
+    {
         return $this->_class;
-     }
+    }
 
+    public function getChannelPager()
+    {
+        if (null === $this->pager) {
+            $this->pager = new Pager($this);
+        }
+        return $this->pager;
+    }
     public abstract function hydrate(array $item);
 
     /**
@@ -89,4 +90,28 @@ abstract class ApiRepository extends Api implements ObjectRepository
      * @return void
      */
     public abstract function delete($object_id);
+
+    /**
+     * Enable filter for finds all Queries
+     *
+     * @param string $filterName
+     * @param mixed $value
+     *
+     * @return void
+     */
+    public function enableFilter($filterName, $value)
+    {
+
+    }
+    /**
+     * Disable filter for finds all Queries
+     *
+     * @param string $filterName
+     *
+     * @return void
+     */
+    public function disableFilter($filterName)
+    {
+
+    }
 }

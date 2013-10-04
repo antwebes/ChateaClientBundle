@@ -1,8 +1,8 @@
 <?php
 
-namespace Ant\Bundle\ChateaClientBundle\Model;
+namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
-use Ant\Bundle\ChateaClientBundle\Api\Repository\ApiRepository;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
 
 interface BaseModel
 {

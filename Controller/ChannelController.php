@@ -2,7 +2,10 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Controller;
 
-use Ant\Bundle\ChateaClientBundle\Model\Channel;
+use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
+use Ant\Bundle\ChateaClientBundle\Api\Model\ChannelFilter;
+use Ant\Bundle\ChateaClientBundle\Api\Model\ChannelType;
+use Ant\Bundle\ChateaClientBundle\Form\ChannelFiltersFromType;
 use Ant\Bundle\ChateaClientBundle\Form\ChannelFormType;
 use Ant\ChateaClient\Client\ApiException;
 
@@ -17,14 +20,52 @@ class ChannelController extends BaseController
      * Lists all Channels entities.
      *
      */
-    public function indexAction()
+    public function indexAction($page=1)
     {
-        $channels = $this->getChannelRepository()->findAll();
+        $channelTypes = $this->getChannelTypeRepository()->findAll();
+        $entity = new ChannelFilter();
+        $form = $this->createForm(new ChannelFiltersFromType($channelTypes),$entity);
+        $session = $this->getRequest()->getSession();
+        $channelRepository = $this->getChannelRepository();
+
+        $form->handleRequest($this->getRequest());
+
+        if ($form->isValid()) {
+            $entity = $form->getData();
+            foreach($entity->toArray()  as  $key=>$value)
+            {
+                if(!empty($value)){
+                    $this->getChannelRepository()->enableFilter($key,$value);
+                    $session->set($key,$value);
+                }else
+                {
+                    $this->getChannelRepository()->disableFilter($key);
+                }
+
+
+            }
+        }else
+        {
+            //update enty
+            $entity->setChannelType($session->get('Ant\Bundle\ChateaClientBundle\Api\Query\Filter\FilterChannelType'));
+            $form->setData($entity);
+        }
+        $channelPager = $channelRepository->getChannelPager();
+        $channelPager->setPage($page);
+
+
         return $this->render('ChateaClientBundle:Channel:index.html.twig', array(
-                    'channels' => $channels
+                    'channelPager' => $channelPager,
+                    'filter_from' => $form->createView()
                 )
         );
     }
+    public function resetFilterAction($name)
+    {
+        $this->getChannelRepository()->disableFilter($name);
+        return $this->redirect($this->generateUrl('antwebes_chateaclient_channel_show_all'));
+    }
+
     /**
      * Finds and displays a Channel entity.
      *
@@ -205,19 +246,6 @@ class ChannelController extends BaseController
         $types = $this->getChannelTypeRepository()->findAll();
         return $this->render('ChateaClientBundle:Channel:showTypes.html.twig', array(
                 'types' => $types
-            )
-        );
-    }
-
-    /**
-     * Lists all Channels entities with filter.
-     *
-     */
-    public function filterAction($channelType, $limit = 0)
-    {
-        $channels = $this->getChannelRepository()->findAll($channelType,$limit);
-        return $this->render('ChateaClientBundle:Channel:index.html.twig', array(
-                'channels' => $channels
             )
         );
     }

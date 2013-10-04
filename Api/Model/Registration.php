@@ -1,23 +1,15 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: ant3
- * Date: 1/10/13
- * Time: 18:12
- * To change this template use File | Settings | File Templates.
- */
-
-namespace Ant\Bundle\ChateaClientBundle\Model;
+namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
 use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\True;
-use Symfony\Component\Validator\Constraints\Valid;
 
 class Registration
 {
     /**
-     * @Type(type="Ant\Bundle\ChateaClientBundle\Model\User")
+     * @Type(type="Ant\Bundle\ChateaClientBundle\Api\Model\User")
      * @Valid()
      */
     protected $user;

@@ -2,10 +2,14 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Controller;
 
+use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
+use Ant\Bundle\ChateaClientBundle\Api\Model\ChannelType;
+use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 use Ant\Bundle\ChateaClientBundle\Model\Error;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Ant\ChateaClient\Client\ApiException;
+
 
 class BaseController extends Controller 
 {
@@ -13,21 +17,21 @@ class BaseController extends Controller
 
     protected function getChannelRepository()
     {
+        $repository = $this->getApi()->getRepository(get_class(new Channel()));
+        $repository->setFileterCollection(
+            $this->container->get('antwebes_api_filter_channel')
+        );
 
-        $className = 'Ant\\Bundle\\ChateaClientBundle\\Model\\Channel';
-        return $this->getApi()->getRepository($className);
+        return $repository;
     }
 
     protected function  getUserRepository()
     {
-        $className = 'Ant\\Bundle\\ChateaClientBundle\\Model\\User';
-
-        return $this->getApi()->getRepository($className);
+        return $this->getApi()->getRepository(get_class(new User()));
     }
     protected function getChannelTypeRepository()
     {
-        $className = 'Ant\\Bundle\\ChateaClientBundle\\Model\\ChannelType';
-        return $this->getApi()->getRepository($className);
+        return $this->getApi()->getRepository(get_class(new ChannelType()));
     }
     protected function getApi()
     {
@@ -37,7 +41,6 @@ class BaseController extends Controller
 
         return $this->container->get('antwebes_api');
     }
-
 
     protected function parseApiException(ApiException $exception)
     {

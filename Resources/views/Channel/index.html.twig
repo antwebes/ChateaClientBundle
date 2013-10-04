@@ -8,6 +8,12 @@
         </a>
     </li>
 </ul>
+    <form action="{{ path('antwebes_chateaclient_channel_show_all') }}" method="post" >
+            {{ form_widget(filter_from) }}
+        <p>
+            <button class="boton" type="submit">Filter Channel</button>
+        </p>
+    </form>
 <table border="1" >
       <thead>
           <tr>
@@ -17,7 +23,9 @@
           </tr>
       </thead>
       <tbody>
-        {% for channel in channels %}
+        Total: {{ channelPager.size }} elemnts of: {{ channelPager.count }}
+        <p> Total Pages: {{ channelPager.totalPages }}</p>
+        {% for channel in channelPager.results %}
             <tr>
                <td style="width: 50%">
                    {{ channel.name }}
@@ -35,6 +43,48 @@
                 </td>
             </tr>
             {% endfor %}
+      </tbody>
+</table>
+<table>
+      <tbody>
+        <tr>
+            <td>
+                [
+            {% set firstPage = channelPager.firstPage %}
+                <a href="{{ path('antwebes_chateaclient_channel_show_all',{'page': firstPage}) }}" title="firstPage">First Page</a>
+                ]
+            </td>
+            <td>
+                [
+                {% set link_prev = channelPager.prev %}
+                {% if link_prev %}
+                <a href="{{ path('antwebes_chateaclient_channel_show_all',{'page': link_prev}) }}" title="Previous page">Previous</a>
+                {% endif %}
+                ]
+             </td>
+            {% set links = channelPager.links %}
+            <td>
+                [
+                {% for link in links %}
+                <a href="{{ path('antwebes_chateaclient_channel_show_all',{'page': link}) }}" title="Next page">{{ link }}</a> |
+                {% endfor %}
+                ]
+            </td>
+            <td>
+                [
+                {% set link_next = channelPager.next %}
+                {% if link_next %}
+                    <a href="{{ path('antwebes_chateaclient_channel_show_all',{'page': link_next}) }}" title="Next page">Next</a>
+                {% endif %}
+                ]
+            </td>
+            <td>
+                [
+                {% set lastPage = channelPager.lastPage %}
+                <a href="{{ path('antwebes_chateaclient_channel_show_all',{'page': lastPage}) }}" title="lastPage">Last Page</a>
+                ]
+            </td>
+        </tr>
       </tbody>
 </table>
 {% endblock %}

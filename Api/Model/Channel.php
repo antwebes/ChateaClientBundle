@@ -1,10 +1,10 @@
 <?php
 
-namespace Ant\Bundle\ChateaClientBundle\Model;
+namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
 use Ant\Common\Collections\ArrayCollection;
 use Ant\Common\Collections\Collection;
-use Ant\Bundle\ChateaClientBundle\Api\Repository\ApiRepository;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
 
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;

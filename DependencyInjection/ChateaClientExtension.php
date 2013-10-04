@@ -23,7 +23,7 @@ class ChateaClientExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
         $loader->load('common.xml');
-        $loader->load('api.xml');
+        $loader->load('filters.xml');
 
 
         $config = $this->processConfiguration(new Configuration(), $configs);

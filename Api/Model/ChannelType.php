@@ -1,8 +1,8 @@
 <?php
-namespace Ant\Bundle\ChateaClientBundle\Model;
+namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
-use Ant\Bundle\ChateaClientBundle\Api\Repository\ApiRepository;
-
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
+use Symfony\Component\Validator\Constraints\NotBlank;
 class ChannelType implements BaseModel
 {
     static $repository;
@@ -21,6 +21,10 @@ class ChannelType implements BaseModel
      */
     const REPOSITORY_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Repositories\\ChannelTypeRepository';
 
+    /**
+     * @var string
+     * @NotBlank()
+     */
     private $name;
     private $id;
 

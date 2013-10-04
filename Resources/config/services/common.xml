@@ -7,10 +7,8 @@
     <parameters>
         <parameter key="antwebes_chateaclient_lib.client.class">Ant\ChateaClient\Http\HttpClient</parameter>
         <parameter key="antwebes_chateaclient_lib.api.class">Ant\ChateaClient\Client\Api</parameter>
-        <parameter key="antwebes_chateaclient_bundle.api_manager.class">Ant\Bundle\ChateaClientBundle\Api\Manager\ApiManager</parameter>
-        <parameter key="antwebes_chateaclient_bundle.api_filter.class">Ant\Bundle\ChateaClientBundle\Repositories\FilterCollection</parameter>
-        <parameter key="antwebes_chateaclient_bundle.api_filter_channeltype.class">Ant\Bundle\ChateaClientBundle\Repositories\FilterChannelType</parameter>
-        <parameter key="antwebes_chateaclient_bundle.api_filter_page.class">Ant\Bundle\ChateaClientBundle\Repositories\FilterPage</parameter>
+        <parameter key="antwebes_chateaclient_bundle.api_manager.class">Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager</parameter>
+
     </parameters>
     <services>
 
@@ -23,16 +21,10 @@
             <argument type="service" id="antwebes_chateaclient_lib.client" />
         </service>
         <!-- API FILTERS -->
-        <service id="antwebes_chateaclient_bundle.api_filter_channel_type" public="false" class="antwebes_chateaclient_bundle.api_filter_channeltype.class" />
-
         <service id="antwebes_chateaclient_bundle.api_filter" class="antwebes_chateaclient_bundle.api_filter.class" public="false">
-            <call method="add">
-                <argument type="service" id="antwebes_chateaclient_bundle.api_filter_channel_type" />
-            </call>
-            <call method="add">
-                <argument type="service" id="antwebes_chateaclient_bundle.api_filter_channel_type" />
-            </call>
+            <call method="add"><argument type="service" id="antwebes_chateaclient_bundle.api_filter_channel_type" /></call>
         </service>
+
         <service id="antwebes_client" alias="antwebes_chateaclient_lib.client" synthetic="true" />
         <service id="antwebes_api"    alias="antwebes_chateaclient_bundle.api_manager"    synthetic="true" />
     </services>

@@ -3,14 +3,37 @@
 namespace Ant\Bundle\ChateaClientBundle\Repositories;
 
 
-use Ant\Bundle\ChateaClientBundle\Api\Repository\ApiRepository;
-use Ant\Bundle\ChateaClientBundle\Model\Channel;
-use Ant\Common\Collections\ArrayCollection;
-use Ant\Bundle\ChateaClientBundle\Model\User;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
+use Ant\Bundle\ChateaClientBundle\Api\Collection\ApiCollection;
+use Ant\Bundle\ChateaClientBundle\Api\Query\Filter\ApiFilter;
+use Ant\Bundle\ChateaClientBundle\Api\Query\Filter\FilterCollection;
+use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
+use Ant\Bundle\ChateaClientBundle\Api\Model\User;
+
+
 
 class ChannelRepository extends  ApiRepository
 {
+    /**
+     * @var FilterCollection
+     */
+    private $fileterCollecion = null;
 
+    public function setFileterCollection(FilterCollection $collection)
+    {
+        $this->fileterCollecion = $collection;
+    }
+    public function enableFilter($filterName, $value)
+    {
+        if($this->fileterCollecion === null){
+            throw new \InvalidArgumentException("Not defined a collecion of filters");
+        }
+        $this->fileterCollecion->enable($filterName, $value);
+    }
+    public function disableFilter($filterName)
+    {
+        $this->fileterCollecion->disable($filterName);
+    }
     /**
      * Returns the class name of the object managed by the repository.
      *
@@ -45,17 +68,18 @@ class ChannelRepository extends  ApiRepository
         return $channel;
     }
 
-    /**
-     * @param int $limit
-     * @param int $offset
-     * @return array
-     */
-    public function findAll($limit =0, $offset = 30)
+    public function findAll($page = 1)
     {
-
-        $json_decode = json_decode($this->showChannels(),true);
+        $filter = '';
+        if($this->fileterCollecion !== null)
+        {
+            $filter = $this->fileterCollecion->getHash();
+        }
+        $json_decode = json_decode($this->showChannels($page,$filter),true);
         $data = array_key_exists('resources',$json_decode)?$json_decode['resources']: array();
-        $collection = new ArrayCollection();
+        $total = array_key_exists('total',$json_decode)?$json_decode['total']: 0;
+        $collection = new ApiCollection();
+        $collection->setTotal($total);
         foreach($data as $item )
         {
             $channel = $this->hydrate($item);
@@ -71,7 +95,8 @@ class ChannelRepository extends  ApiRepository
 
         return $user;
     }
-    public function findFans($channel_id, $limit =0, $offset = 30)
+
+    public function findFans($channel_id)
     {
 
         if ($channel_id === null || $channel_id === 0 || !$channel_id)
@@ -82,7 +107,9 @@ class ChannelRepository extends  ApiRepository
         $json_decode = json_decode($this->showChannelFans($channel_id),true);
 
         $data = array_key_exists('resources',$json_decode)?$json_decode['resources']: array();
-        $collection = new ArrayCollection();
+        $total = array_key_exists('total',$json_decode)?$json_decode['total']: 0;
+        $collection = new ApiCollection();
+        $collection->setTotal($total);
         foreach($data as $item )
         {
             $user = $userRepository->hydrate($item);
