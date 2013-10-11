@@ -2,10 +2,10 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Repositories;
 use Ant\Common\Collections\ArrayCollection;
-use Ant\Bundle\ChateaClientBundle\Api\Repository\ApiRepository;
-use Ant\Bundle\ChateaClientBundle\Model\Channel;
-use Ant\Bundle\ChateaClientBundle\Model\UserProfile;
-use Ant\Bundle\ChateaClientBundle\Model\User;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
+use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
+use Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile;
+use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 
 class UserRepository  extends  ApiRepository
 {
@@ -33,9 +33,8 @@ class UserRepository  extends  ApiRepository
             return null;
         }
 
-        $json_decode = json_decode($this->showUser($id),true);
-
-        $user = $this->hydrate($json_decode);
+        $data = $this->showUser($id);
+        $user = $this->hydrate($data);
         return $user;
     }
     public function whoami()
@@ -88,8 +87,11 @@ class UserRepository  extends  ApiRepository
     }
 
 
-    public function hydrate(array $item)
+    public function hydrate(array $item = null)
     {
+        if($item == null){
+            return new User();
+        }
         $id             = array_key_exists('id',$item)?$item['id']:0;
         $username       = array_key_exists('username',$item)?$item['username']:'not-username';
         $email          = array_key_exists('email',$item)?$item['email']:true;

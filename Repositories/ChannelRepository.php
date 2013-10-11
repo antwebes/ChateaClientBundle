@@ -5,7 +5,6 @@ namespace Ant\Bundle\ChateaClientBundle\Repositories;
 
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
 use Ant\Bundle\ChateaClientBundle\Api\Collection\ApiCollection;
-use Ant\Bundle\ChateaClientBundle\Api\Query\Filter\ApiFilter;
 use Ant\Bundle\ChateaClientBundle\Api\Query\Filter\FilterCollection;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
@@ -63,7 +62,8 @@ class ChannelRepository extends  ApiRepository
             return null;
         }
 
-        $json_decode = json_decode($this->showChannel($channel_id),true);
+        $json_decode = $this->showChannel($channel_id)->toArray();
+        ld($json_decode);
         $channel = $this->hydrate($json_decode);
         return $channel;
     }
@@ -75,7 +75,7 @@ class ChannelRepository extends  ApiRepository
         {
             $filter = $this->fileterCollecion->getHash();
         }
-        $json_decode = json_decode($this->showChannels($page,$filter),true);
+        $json_decode = $this->showChannels($page,$filter)->toArray();
         $data = array_key_exists('resources',$json_decode)?$json_decode['resources']: array();
         $total = array_key_exists('total',$json_decode)?$json_decode['total']: 0;
         $collection = new ApiCollection();
@@ -104,7 +104,7 @@ class ChannelRepository extends  ApiRepository
             return null;
         }
         $userRepository = $this->_manager->getRepository(get_class(new User()));
-        $json_decode = json_decode($this->showChannelFans($channel_id),true);
+        $json_decode = $this->showChannelFans($channel_id);
 
         $data = array_key_exists('resources',$json_decode)?$json_decode['resources']: array();
         $total = array_key_exists('total',$json_decode)?$json_decode['total']: 0;
@@ -155,8 +155,12 @@ class ChannelRepository extends  ApiRepository
     {
         $this->delChannel($object_id);
     }
-    public function hydrate(array $item)
+    public function hydrate(array $item = null)
     {
+
+        if($item == null){
+            return null;
+        }
 
         $id             = array_key_exists('id',$item)?$item['id']:0;
         $name           = array_key_exists('name',$item)?$item['name']:'not-name';

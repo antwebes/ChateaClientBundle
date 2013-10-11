@@ -2,7 +2,7 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Api\Persistence;
 
-use Ant\ChateaClient\Http\IHttpClient;
+use Ant\ChateaClient\Service\Client\ChateaGratisClient;
 
 class ApiManager implements  ObjectManager
 {
@@ -15,7 +15,7 @@ class ApiManager implements  ObjectManager
     private $repositories = array();
     private $client = null;
 
-    function __construct(IHttpClient $client)
+    function __construct(ChateaGratisClient $client)
     {
         $this->client = $client;
     }

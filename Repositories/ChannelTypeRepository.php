@@ -41,7 +41,8 @@ class ChannelTypeRepository  extends  ApiRepository
 
     public function findAll($page = 1)
     {
-        $json_decode = json_decode($this->showChannelsTypes(),true);
+        $json_decode = $this->showChannelsTypes()->toArray();
+
         $data = array_key_exists('resources',$json_decode)?$json_decode['resources']: array();
         $collection = new ApiCollection();
         foreach($data as $item )

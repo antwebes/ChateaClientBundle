@@ -5,21 +5,29 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="antwebes_chateaclient_lib.client.class">Ant\ChateaClient\Http\HttpClient</parameter>
+        <parameter key="antwebes_chateaclient_lib.client.class">Guzzle\Service\Client</parameter>
+        <parameter key="antwebes_chateaclient_lib.factory_client.class">Ant\ChateaClient\Service\Client\ChateaGratisClient</parameter>
         <parameter key="antwebes_chateaclient_lib.api.class">Ant\ChateaClient\Client\Api</parameter>
         <parameter key="antwebes_chateaclient_bundle.api_manager.class">Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager</parameter>
 
     </parameters>
     <services>
 
-        <service id="antwebes_chateaclient_lib.client" class="%antwebes_chateaclient_lib.client.class%" public="false">
-            <argument type="string" />
-            <argument type="string">OTk5MmI0MDk3NGFiMTM4NTBlMzk5OWZlYWM4N2Q5NTlhYTZlOTgwNzUzYmVjYzcxOTI5OGZmZTM2MTQ1MDI4OQ</argument>
+        <service id="antwebes_chateaclient_lib.client"
+                 class="%antwebes_chateaclient_lib.client.class%"
+                 factory-class="%antwebes_chateaclient_lib.factory_client.class%"
+                 factory-method="factory"
+                 public="false">
+            <argument type="collection">
+                <argument key="access_token">access-token-demo</argument>
+                <argument key="environment">dev</argument>
+            </argument>
         </service>
 
         <service id="antwebes_chateaclient_bundle.api_manager" class="%antwebes_chateaclient_bundle.api_manager.class%" public="false">
             <argument type="service" id="antwebes_chateaclient_lib.client" />
         </service>
+
         <!-- API FILTERS -->
         <service id="antwebes_chateaclient_bundle.api_filter" class="antwebes_chateaclient_bundle.api_filter.class" public="false">
             <call method="add"><argument type="service" id="antwebes_chateaclient_bundle.api_filter_channel_type" /></call>
