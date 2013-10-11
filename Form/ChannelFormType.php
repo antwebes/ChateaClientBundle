@@ -25,7 +25,7 @@ class ChannelFormType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-                'data_class' => 'Ant\Bundle\ChateaClientBundle\Model\Channel'
+                'data_class' => 'Ant\Bundle\ChateaClientBundle\Api\Model\Channel'
             ));
     }
 

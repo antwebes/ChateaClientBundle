@@ -157,8 +157,7 @@ class ChannelController extends BaseController
 
         try{
             $entity = $this->getChannelRepository()->findById($channel_id);
-
-        }catch (ApiException $ex)
+        }catch (\Exception $ex)
         {
             $errors = $this->parseApiException($ex);
 
@@ -199,7 +198,6 @@ class ChannelController extends BaseController
             if ($editForm->isValid()) {
 
                 $this->getChannelRepository()->update($entity);
-
                 return $this->redirect($this->generateUrl('antwebes_chateaclient_channel_show', array('channel_id' => $entity->getId())));
             }
             return $this->render('ChateaClientBundle:Channel:edit.html.twig', array(
@@ -207,7 +205,7 @@ class ChannelController extends BaseController
                     'edit_form' => $editForm->createView(),
                 ));
 
-        }catch (ApiException $ex)
+        }catch (\Exception $ex)
         {
             $errors = $this->parseApiException($ex);
 

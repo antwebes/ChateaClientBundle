@@ -63,7 +63,6 @@ class ChannelRepository extends  ApiRepository
         }
 
         $json_decode = $this->showChannel($channel_id)->toArray();
-        ld($json_decode);
         $channel = $this->hydrate($json_decode);
         return $channel;
     }
@@ -124,10 +123,10 @@ class ChannelRepository extends  ApiRepository
         if(!($object instanceof Channel)){
             throw new \InvalidArgumentException('The parameter have been of type Channel');
         }
-        $newChannel = $this->addChanel($object->getName(),$object->getTitle(),$object->getDescription());
-        $json_decode = json_decode($newChannel,true);
 
-        $object = $this->hydrate($json_decode);
+        $newChannel = $this->addChanel($object->getName(),$object->getTitle(),$object->getDescription());
+
+        $object = $this->hydrate($newChannel->toArray());
 
     }
 
@@ -137,9 +136,8 @@ class ChannelRepository extends  ApiRepository
             throw new \InvalidArgumentException('The parameter have been of type Channel');
         }
         $updateChannel = $this->updateChannel($object->getId(),$object->getName(),$object->getTitle(),$object->getDescription());
-        $json_decode = json_decode($updateChannel,true);
 
-        $object = $this->hydrate($json_decode);
+        $object = $this->hydrate($updateChannel->toArray());
     }
 
     /**
@@ -155,6 +153,7 @@ class ChannelRepository extends  ApiRepository
     {
         $this->delChannel($object_id);
     }
+
     public function hydrate(array $item = null)
     {
 

@@ -5,7 +5,7 @@ namespace Ant\Bundle\ChateaClientBundle\Controller;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChannelType;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
-use Ant\Bundle\ChateaClientBundle\Model\Error;
+use Ant\Bundle\ChateaClientBundle\Api\Model\Error;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Ant\ChateaClient\Client\ApiException;
@@ -42,9 +42,10 @@ class BaseController extends Controller
         return $this->container->get('antwebes_api');
     }
 
-    protected function parseApiException(ApiException $exception)
+    protected function parseApiException(\Exception $exception)
     {
 
+        ld($exception);
         $json_decode = json_decode($exception->getServerError(), true);
 
         if(!$json_decode)
