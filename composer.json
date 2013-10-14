@@ -33,4 +33,5 @@
 	"replace" : {
 		"antwebes/ChateaClientBundle" : "dev-master"
 	}
+	
 }
