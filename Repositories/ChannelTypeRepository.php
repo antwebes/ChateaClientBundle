@@ -33,7 +33,7 @@ class ChannelTypeRepository  extends  ApiRepository
     }
 
 
-    public function find($id)
+    public function findById($id)
     {
         throw new \Exception("This method do not supported yet");
     }
@@ -41,10 +41,9 @@ class ChannelTypeRepository  extends  ApiRepository
 
     public function findAll($page = 1)
     {
-        $json_decode = $this->showChannelsTypes()->toArray();
-
-        $data = array_key_exists('resources',$json_decode)?$json_decode['resources']: array();
-        $collection = new ApiCollection();
+        $array_data = $this->showChannelsTypes();
+        $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();
+        $collection = new ApiCollection($array_data['total'],$array_data['page'],$array_data['limit']);
         foreach($data as $item )
         {
             $channelType = $this->hydrate($item);

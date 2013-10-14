@@ -20,7 +20,7 @@ interface ObjectRepository
      *
      * @return object The object.
      */
-    public function find($id);
+    public function findById($id);
 
 
     /**

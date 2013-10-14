@@ -18,7 +18,7 @@ class Pager implements  IteratorAggregate, Countable
         $nbResults = 0,
         $repository = null,
         $results = null,
-        $filter = '';
+        $filter = null;
 
     function __construct(ObjectRepository $repository)
     {
@@ -42,7 +42,7 @@ class Pager implements  IteratorAggregate, Countable
     {
         $this->filter = '';
     }
-    public function setFilter($filter = '')
+    public function setFilter(array $filter = null)
     {
         $this->filter = $filter;
     }

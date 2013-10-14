@@ -41,40 +41,17 @@ class ChannelRepository extends  ApiRepository
         {
             return null;
         }
-
-        $json_decode = $this->showChannel($channel_id)->toArray();
-        ld($this->showChannel($channel_id));
-        $channel = $this->hydrate($json_decode);
+        $channel = $this->hydrate($this->showChannel($channel_id));
         return $channel;
     }
 
     public function findAll($page = 1, array $filters = null)
     {
-        $filter = '';
+        $array_data = $this->showChannels((int)$page,$filters);
 
-        if($filters !== null)
-        {
-            $filterHash = '';
-            foreach ($filters as $key=>$value) {
+        $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();
+        $collection = new ApiCollection($array_data['total'],$array_data['page'],$array_data['limit']);
 
-                $filterHash .= $key .'='. $value;
-
-                if($filters[$key] != end($filter))
-                {
-                    $filterHash .= '';
-                }
-            }
-
-            $filter = 'filter='.$filterHash;
-        }
-        $json_decode = json_decode($this->showChannels($page,$filter),true);
-
-        ld($this->showChannels($page, $filter));
-
-        $data = array_key_exists('resources',$json_decode)?$json_decode['resources']: array();
-        $total = array_key_exists('total',$json_decode)?$json_decode['total']: 0;
-        $collection = new ApiCollection();
-        $collection->setTotal($total);
         foreach($data as $item )
         {
             $channel = $this->hydrate($item);
@@ -99,12 +76,13 @@ class ChannelRepository extends  ApiRepository
             return null;
         }
         $userRepository = $this->_manager->getRepository(get_class(new User()));
-        $json_decode = $this->showChannelFans($channel_id);
 
-        $data = array_key_exists('resources',$json_decode)?$json_decode['resources']: array();
-        $total = array_key_exists('total',$json_decode)?$json_decode['total']: 0;
-        $collection = new ApiCollection();
-        $collection->setTotal($total);
+        $array_data = $this->showChannelFans($channel_id);
+
+        $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();
+
+        $collection = new ApiCollection($array_data['total'],$array_data['page'],$array_data['limit']);
+
         foreach($data as $item )
         {
             $user = $userRepository->hydrate($item);
@@ -156,11 +134,10 @@ class ChannelRepository extends  ApiRepository
         if($item == null){
             return null;
         }
-
         $id             = array_key_exists('id',$item)?$item['id']:0;
         $name           = array_key_exists('name',$item)?$item['name']:'not-name';
         $url            = array_key_exists('url',$item)?$item['url']:'not-url';
-        $channel_type   = array_key_exists('channel_type',$item)?$item['channel_type']['name']:'not-channel-type';;
+        $channel_type   = array_key_exists('channel_type',$item)?$item['channel_type']['name']:'not-channel-type';
         $title          = array_key_exists('title',$item)?$item['title']:'';
         $description    = array_key_exists('description',$item)?$item['description']:'';
         $creator_id     = array_key_exists('_links',$item) && array_key_exists('creator',$item['_links'])?substr($item['_links']['creator']['href'],strlen($item['_links']['creator']['href'])-1):null;

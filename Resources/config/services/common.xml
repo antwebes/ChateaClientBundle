@@ -24,7 +24,7 @@
             </argument>
         </service>
 
-        <service id="antwebes_chateaclient_bundle.api_manager" class="%antwebes_chateaclient_bundle.api_manager.class%" >
+        <service id="antwebes_chateaclient_bundle.api_manager" class="%antwebes_chateaclient_bundle.api_manager.class%"  public="false">
             <argument type="service" id="antwebes_chateaclient_lib.client" />
         </service>
 

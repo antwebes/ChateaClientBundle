@@ -8,7 +8,7 @@ use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChannelFilter;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChannelType;
 use Ant\Bundle\ChateaClientBundle\Form\ChannelFormType;
-
+use Ant\Bundle\ChateaClientBundle\Form\ChannelFiltersFromType;
 
 /**
  * Channel controller.
@@ -17,31 +17,32 @@ use Ant\Bundle\ChateaClientBundle\Form\ChannelFormType;
 class ChannelController extends Controller
 {
 
+    private function getChannelRepository()
+    {
+        return $this->get('api_channels');
+    }
     /**
      * Lists all Channels entities.
      *
      */
-    public function indexAction($page=1, $filer)
+    public function indexAction()
     {
 
-        $channelPager = array();
-        $form = $this->createFormBuilder();
+        $filter = $this->getRequest()->get('filter');
+        $page = $this->getRequest()->get('page');
 
-        $re = new \Ant\Bundle\ChateaClientBundle\Repositories\ChannelRepository($this->get('antwebes_chateaclient_bundle.api_manager'),"Ant\\Bundle\\ChateaClientBundle\\Api\\Model\\Channel");
-
-        ld($re);
-       /* $channelTypes = $this->getChannelTypeRepository()->findAll();
+        $channelTypes = $this->get('api_channels_types')->findAll();
         $entity = new ChannelFilter();
         $form = $this->createForm(new ChannelFiltersFromType($channelTypes),$entity);
+        $cleanFiler = null;
 
-        $channelRepository = $this->get('api_channel_repository');
+        $channelRepository = $this->getChannelRepository();
 
-        $channelPager = $channelRepository->getChannelPager();
+        $channelPager = $channelRepository->getPager();
         $channelPager->setPage($page);
-        $cleanFiler =  $filer;
+
 
         $channelPager->setFilter($cleanFiler);
-*/
         return $this->render('ChateaClientBundle:Channel:index.html.twig', array(
                 'channelPager' => $channelPager,
                 'filter_from' => $form->createView()
@@ -49,46 +50,7 @@ class ChannelController extends Controller
         );
 
     }
-    public function indexActiondemos($page=1)
-    {
-        $channelTypes = $this->getChannelTypeRepository()->findAll();
-        $entity = new ChannelFilter();
-        $form = $this->createForm(new ChannelFiltersFromType($channelTypes),$entity);
-        $session = $this->getRequest()->getSession();
-        $channelRepository = $this->getChannelRepository();
 
-        $form->handleRequest($this->getRequest());
-
-        if ($form->isValid()) {
-            $entity = $form->getData();
-            foreach($entity->toArray()  as  $key=>$value)
-            {
-                if(!empty($value)){
-                    $this->getChannelRepository()->enableFilter($key,$value);
-                    $session->set($key,$value);
-                }else
-                {
-                    $this->getChannelRepository()->disableFilter($key);
-                }
-
-
-            }
-        }else
-        {
-            //update enty
-            $entity->setChannelType($session->get('Ant\Bundle\ChateaClientBundle\Api\Query\Filter\FilterChannelType'));
-            $form->setData($entity);
-        }
-        $channelPager = $channelRepository->getChannelPager();
-        $channelPager->setPage($page);
-
-
-        return $this->render('ChateaClientBundle:Channel:index.html.twig', array(
-                    'channelPager' => $channelPager,
-                    'filter_from' => $form->createView()
-                )
-        );
-    }
     public function resetFilterAction($name)
     {
         $this->getChannelRepository()->disableFilter($name);
