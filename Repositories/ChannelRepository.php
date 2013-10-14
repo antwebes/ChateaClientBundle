@@ -63,7 +63,9 @@ class ChannelRepository extends  ApiRepository
         }
 
         $json_decode = $this->showChannel($channel_id)->toArray();
+
         ld($this->showChannel($channel_id));
+
         $channel = $this->hydrate($json_decode);
         return $channel;
     }
@@ -77,7 +79,9 @@ class ChannelRepository extends  ApiRepository
         }
         $json_decode = $this->showChannels($page,$filter)->toArray();
 
+
         ld($this->showChannels($page,$filter));
+
 
         $data = array_key_exists('resources',$json_decode)?$json_decode['resources']: array();
         $total = array_key_exists('total',$json_decode)?$json_decode['total']: 0;
