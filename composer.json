@@ -21,7 +21,7 @@
 	],
 	"require" : {
 		"php" : ">=5.3.2",
-		"antwebes/chatea-client-lib": "0.2.x-dev"
+		"antwebes/chatea-client-lib": "dev-master"
 	},
 	"autoload" : {
 		"psr-0" : {
