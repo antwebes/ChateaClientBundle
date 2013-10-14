@@ -14,6 +14,7 @@
 	"license" : "MIT",
 	"require" : {
         "symfony/framework-bundle": "~2.3",
+        "antwebes/chatea-common": "dev-master",
 		"antwebes/chatea-client-lib" : "dev-master"
 	},
     "require-dev": {

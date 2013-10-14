@@ -8,7 +8,6 @@ use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Error;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Ant\ChateaClient\Client\ApiException;
 
 
 class BaseController extends Controller 

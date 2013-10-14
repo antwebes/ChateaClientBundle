@@ -24,16 +24,10 @@
             </argument>
         </service>
 
-        <service id="antwebes_chateaclient_bundle.api_manager" class="%antwebes_chateaclient_bundle.api_manager.class%" public="false">
+        <service id="antwebes_chateaclient_bundle.api_manager" class="%antwebes_chateaclient_bundle.api_manager.class%" >
             <argument type="service" id="antwebes_chateaclient_lib.client" />
         </service>
 
-        <!-- API FILTERS -->
-        <service id="antwebes_chateaclient_bundle.api_filter" class="antwebes_chateaclient_bundle.api_filter.class" public="false">
-            <call method="add"><argument type="service" id="antwebes_chateaclient_bundle.api_filter_channel_type" /></call>
-        </service>
-
         <service id="antwebes_client" alias="antwebes_chateaclient_lib.client" synthetic="true" />
-        <service id="antwebes_api"    alias="antwebes_chateaclient_bundle.api_manager"    synthetic="true" />
     </services>
 </container>

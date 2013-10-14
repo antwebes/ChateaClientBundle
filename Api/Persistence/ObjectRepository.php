@@ -29,24 +29,6 @@ interface ObjectRepository
      * @return mixed
      */
     public function findAll($page = 1);
-
-    /**
-     * Enable filter for finds all Queries
-     *
-     * @param string $filterName
-     * @param mixed $value
-     *
-     * @return void
-     */
-    public function enableFilter($filterName, $value);
-    /**
-     * Disable filter for finds all Queries
-     *
-     * @param string $filterName
-     *
-     * @return void
-     */
-    public function disableFilter($filterName);
     /**
      * Tells the ObjectManager to make an instance managed and persistent.
      *

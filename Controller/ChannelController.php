@@ -2,18 +2,19 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChannelFilter;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChannelType;
-use Ant\Bundle\ChateaClientBundle\Form\ChannelFiltersFromType;
 use Ant\Bundle\ChateaClientBundle\Form\ChannelFormType;
-use Ant\ChateaClient\Client\ApiException;
+
 
 /**
  * Channel controller.
  *
  */
-class ChannelController extends BaseController
+class ChannelController extends Controller
 {
 
     /**
@@ -22,7 +23,14 @@ class ChannelController extends BaseController
      */
     public function indexAction($page=1, $filer)
     {
-        $channelTypes = $this->getChannelTypeRepository()->findAll();
+
+        $channelPager = array();
+        $form = $this->createFormBuilder();
+
+        $re = new \Ant\Bundle\ChateaClientBundle\Repositories\ChannelRepository($this->get('antwebes_chateaclient_bundle.api_manager'),"Ant\\Bundle\\ChateaClientBundle\\Api\\Model\\Channel");
+
+        ld($re);
+       /* $channelTypes = $this->getChannelTypeRepository()->findAll();
         $entity = new ChannelFilter();
         $form = $this->createForm(new ChannelFiltersFromType($channelTypes),$entity);
 
@@ -33,7 +41,7 @@ class ChannelController extends BaseController
         $cleanFiler =  $filer;
 
         $channelPager->setFilter($cleanFiler);
-
+*/
         return $this->render('ChateaClientBundle:Channel:index.html.twig', array(
                 'channelPager' => $channelPager,
                 'filter_from' => $form->createView()

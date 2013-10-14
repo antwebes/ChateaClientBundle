@@ -10,12 +10,19 @@
         <parameter key="antwebes_chateaclient_bundle.api_model_channel.class">Ant\Bundle\ChateaClientBundle\Api\Model\Channel</parameter>
         <parameter key="antwebes_chateaclient_bundle.api_model_user.class">Ant\Bundle\ChateaClientBundle\Api\Model\User</parameter>
     </parameters>
+<!--
         <services>
-            <service id="antwebes_chateaclient_bundle.api_repository_channel" class="%antwebes_chateaclient_bundle.api_repository_channel.class%" public="false">
+
+            <service id="antwebes_chateaclient_bundle.api_repository_channel"
+                     class="%antwebes_chateaclient_bundle.api_repository_channel.class%"
+                     public="false"
+                     parent="antwebes_chateaclient_bundle.api_manager">
+                <argument type="service" id="antwebes_chateaclient_bundle.api_manager"></argument>
                 <argument>%antwebes_chateaclient_bundle.api_model_channel.class%</argument>
             </service>
 
-
             <service id="antwebes_chateaclient_bundle.api_repository_channel"  alias="api_channel_repository"  synthetic="true" />
+
         </services>
+        -->
 </container>

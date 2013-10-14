@@ -5,7 +5,6 @@ namespace Ant\Bundle\ChateaClientBundle\Repositories;
 
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
 use Ant\Bundle\ChateaClientBundle\Api\Collection\ApiCollection;
-use Ant\Bundle\ChateaClientBundle\Api\Query\Filter\FilterCollection;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 
@@ -13,26 +12,7 @@ use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 
 class ChannelRepository extends  ApiRepository
 {
-    /**
-     * @var FilterCollection
-     */
-    private $fileterCollecion = null;
 
-    public function setFileterCollection(FilterCollection $collection)
-    {
-        $this->fileterCollecion = $collection;
-    }
-    public function enableFilter($filterName, $value)
-    {
-        if($this->fileterCollecion === null){
-            throw new \InvalidArgumentException("Not defined a collecion of filters");
-        }
-        $this->fileterCollecion->enable($filterName, $value);
-    }
-    public function disableFilter($filterName)
-    {
-        $this->fileterCollecion->disable($filterName);
-    }
     /**
      * Returns the class name of the object managed by the repository.
      *
