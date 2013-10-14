@@ -68,16 +68,28 @@ class ChannelRepository extends  ApiRepository
         return $channel;
     }
 
-    public function findAll($page = 1)
+    public function findAll($page = 1, array $filters = null)
     {
         $filter = '';
-        if($this->fileterCollecion !== null)
-        {
-            $filter = $this->fileterCollecion->getHash();
-        }
-        $json_decode = $this->showChannels($page,$filter)->toArray();
 
-        ld($this->showChannels($page,$filter));
+        if($filters !== null)
+        {
+            $filterHash = '';
+            foreach ($filters as $key=>$value) {
+
+                $filterHash .= $key .'='. $value;
+
+                if($filters[$key] != end($filter))
+                {
+                    $filterHash .= '';
+                }
+            }
+
+            $filter = 'filter='.$filterHash;
+        }
+        $json_decode = json_decode($this->showChannels($page,$filter),true);
+
+        ld($this->showChannels($page, $filter));
 
         $data = array_key_exists('resources',$json_decode)?$json_decode['resources']: array();
         $total = array_key_exists('total',$json_decode)?$json_decode['total']: 0;

@@ -20,7 +20,28 @@ class ChannelController extends BaseController
      * Lists all Channels entities.
      *
      */
-    public function indexAction($page=1)
+    public function indexAction($page=1, $filer)
+    {
+        $channelTypes = $this->getChannelTypeRepository()->findAll();
+        $entity = new ChannelFilter();
+        $form = $this->createForm(new ChannelFiltersFromType($channelTypes),$entity);
+
+        $channelRepository = $this->get('api_channel_repository');
+
+        $channelPager = $channelRepository->getChannelPager();
+        $channelPager->setPage($page);
+        $cleanFiler =  $filer;
+
+        $channelPager->setFilter($cleanFiler);
+
+        return $this->render('ChateaClientBundle:Channel:index.html.twig', array(
+                'channelPager' => $channelPager,
+                'filter_from' => $form->createView()
+            )
+        );
+
+    }
+    public function indexActiondemos($page=1)
     {
         $channelTypes = $this->getChannelTypeRepository()->findAll();
         $entity = new ChannelFilter();

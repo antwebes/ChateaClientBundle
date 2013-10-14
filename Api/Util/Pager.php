@@ -16,9 +16,9 @@ class Pager implements  IteratorAggregate, Countable
         $size = 0,
         $maxPerPage,
         $nbResults = 0,
-        $repository,
-        $results;
-
+        $repository = null,
+        $results = null,
+        $filter = '';
 
     function __construct(ObjectRepository $repository)
     {
@@ -38,6 +38,14 @@ class Pager implements  IteratorAggregate, Countable
     {
         return $this->repository;
     }
+    public function cleanFilter()
+    {
+        $this->filter = '';
+    }
+    public function setFilter($filter = '')
+    {
+        $this->filter = $filter;
+    }
     /**
      * Get the collection of results in the page
      *
@@ -47,8 +55,8 @@ class Pager implements  IteratorAggregate, Countable
     {
         if (null === $this->results) {
             $this->results = $this->getRepository()
-                ->findAll($this->page);
-            $this->size       = $this->results->count();
+                ->findAll($this->page,$this->filter);
+            $this->size    = $this->results->count();
 
         }
         return $this->results;
