@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="antwebes_chateaclient_api" pattern="/api" methods="GET" schemes="HTTP">
+        <default key="_controller">ChateaClientBundle:Default:index</default>
+    </route>
+    <route id="antwebes_chateaclient_api_doc" pattern="/api/doc" methods="GET" schemes="HTTP">
+        <default key="_controller">ChateaClientBundle:Default:index</default>
+    </route>
+    <route id="antwebes_chateaclient_api_error" pattern="/api/error" methods="GET" schemes="HTTP">
+        <default key="_controller">ChateaClientBundle:Default:error</default>
+    </route>
+    <import resource="@ChateaClientBundle/Resources/config/routing/channels.xml" prefix="/api"/>
+    <import resource="@ChateaClientBundle/Resources/config/routing/user.xml" prefix="/api"/>
+    <import resource="@ChateaClientBundle/Resources/config/routing/friendship.xml" prefix="/api"/>
+</routes>

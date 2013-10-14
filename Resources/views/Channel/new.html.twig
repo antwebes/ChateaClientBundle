@@ -1,0 +1,9 @@
+{% extends "ChateaClientBundle::layout.html.twig" %}
+{% block body %}
+    <form action="{{ path('antwebes_chateaclient_channel_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button class="boton" type="submit">Añadir Channel</button>
+        </p>
+    </form>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "ChateaClientBundle::layout.html.twig" %}
+{% block body %}
+<h3>
+    Name: {{ channel.name }} - {{ channel.type  }}
+</h3>
+<ul>
+    <li>[<a href="{{ channel.url }}" title="{{ channel.title }}">irc</a>]</li>
+    <li>[<a href="{{ path('antwebes_chateaclient_channel_show', {'channel_id': channel.id}) }}" title="{{ channel.title }}">show</a>]</li>
+    <li>[<a href="{{ path('antwebes_chateaclient_channel_edit', {'channel_id': channel.id}) }}" title="{{ channel.title }}">edit</a>]</li>
+    <li>[<a href="{{ path('antwebes_chateaclient_channel_delete', {'channel_id': channel.id}) }}" title="{{ channel.title }}">delete</a>]</li>
+
+    <li>
+        <a href="{{ path('antwebes_chateaclient_user_show', {'user_id': channel.creator.id}) }}" title="Creator of {{ channel }}">
+            Creator: [ {{ channel.creator }} ]
+        </a>
+    </li>
+    {% if channel.parent %}
+        <li>
+            <a href="{{ path('antwebes_chateaclient_channel_show', {'channel_id': channel.parent.id}) }}" title="Prent of {{ channel }}">
+                Parent:  [ {{ channel.parent }} ]
+            </a>
+        </li>
+    {% endif %}
+    <li>
+        <h4>Channel Fans</h4>
+        <ul>
+            {% for fan in channel.fans %}
+                <li>
+                    <a href="{{ path('antwebes_chateaclient_user_show', {'user_id': fan.id}) }}">
+                        [ {{ fan }} ]
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+</ul>
+<h6>
+    <a href="{{ path('antwebes_chateaclient_channel_show_all') }}" title="Show all list">
+        << GOTO List
+    </a>
+</h6>
+{% endblock %}

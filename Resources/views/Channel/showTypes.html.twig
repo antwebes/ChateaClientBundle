@@ -1,0 +1,10 @@
+{% extends "ChateaClientBundle::layout.html.twig" %}
+{% block body %}
+    <ul>
+        {% for type in types %}
+            <li>
+                {{ type }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

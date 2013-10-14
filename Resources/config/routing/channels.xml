@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+
+    <route id="antwebes_chateaclient_channel_show_all" pattern="/channels/{page}" methods="GET,POST"  schemes="HTTP">
+        <default key="_controller">ChateaClientBundle:Channel:index</default>
+        <default key="page">1</default>
+        <requirement key="page">\d+</requirement>
+    </route>
+    <route id="antwebes_chateaclient_channel_show_all_s" pattern="/channels/{page}" methods="GET,POST"  schemes="HTTP">
+        <default key="_controller">ChateaClientBundle:Channel:index</default>
+        <default key="page">1</default>
+        <requirement key="page">\d+</requirement>
+    </route>
+
+    <route id="antwebes_chateaclient_channel_add" pattern="/channel/add" methods="GET" >
+        <default key="_controller">ChateaClientBundle:Channel:new</default>
+    </route>
+    <route id="antwebes_chateaclient_channel_create" pattern="/channel/create" methods="POST" >
+        <default key="_controller">ChateaClientBundle:Channel:create</default>
+    </route>
+    <route id="antwebes_chateaclient_channel_edit" pattern="/channel/edit/{channel_id}" methods="GET">
+        <default key="_controller">ChateaClientBundle:Channel:edit</default>
+    </route>
+    <route id="antwebes_chateaclient_channel_update" pattern="/channel/update/{channel_id}" methods="PATCH">
+        <default key="_controller">ChateaClientBundle:Channel:update</default>
+    </route>
+    <route id="antwebes_chateaclient_channel_delete" pattern="/channel/delete/{channel_id}" methods="GET">
+        <default key="_controller">ChateaClientBundle:Channel:delete</default>
+        <requirement key="channel_id">\d+</requirement>
+    </route>
+    <route id="antwebes_chateaclient_channel_show" pattern="/channel/show/{channel_id}" methods="GET">
+        <default key="_controller">ChateaClientBundle:Channel:show</default>
+        <requirement key="channel_id">\d+</requirement>
+    </route>
+    <route id="antwebes_chateaclient_channel_show_fans" pattern="/channel/show/{channel_id}/fans" methods="GET">
+        <default key="_controller">ChateaClientBundle:Channel:showFans</default>
+        <requirement key="channel_id">\d+</requirement>
+    </route>
+    <route id="antwebes_chateaclient_channelstypes_show" pattern="/channels/types" methods="GET">
+        <default key="_controller">ChateaClientBundle:Channel:showTypes</default>
+        <requirement key="user_id">\d+</requirement>
+    </route>
+
+
+    <route id="antwebes_chateaclient_channel_show_channels" pattern="/users/{user_id}/channel" methods="GET">
+        <default key="_controller">ChateaClientBundle:Channel:showChannels</default>
+        <requirement key="user_id">\d+</requirement>
+    </route>
+    <route id="antwebes_chateaclient_channel_show_channles_fans" pattern="/users/{user_id}/channel/fan" methods="GET">
+        <default key="_controller">ChateaClientBundle:Channel:showChannelsFan</default>
+        <requirement key="user_id">\d+</requirement>
+    </route>
+    <route id="antwebes_chateaclient_channel_add_channel_fan" pattern="/users/{user_id}/channel{channel_id}/fan" methods="POST">
+        <default key="_controller">ChateaClientBundle:Channel:addFan</default>
+        <requirement key="user_id">\d+</requirement>
+        <requirement key="channel_id">\d+</requirement>
+    </route>
+    <route id="antwebes_chateaclient_channel_delete_channel_fan" pattern="/users/{user_id}/channel{channel_id}/fan" methods="DELETE">
+        <default key="_controller">ChateaClientBundle:Channel:deleteFan</default>
+        <requirement key="user_id">\d+</requirement>
+        <requirement key="channel_id">\d+</requirement>
+    </route>
+
+
+
+
+</routes>
