@@ -19,7 +19,7 @@
 
         <service id="antwebs_chateaclient_authentication" class="%antwebs_chateaclient_authentication.class%">
             <argument type="service" id="antwebes_chateaclient_lib.client_auth" />
-            <argument type="string">1rqwnvdprfq8c0socws0ogco4c08goko0o80cocko0kkos84co</argument>
+            <argument type="string">1_1rqwnvdprfq8c0socws0ogco4c08goko0o80cocko0kkos84co</argument>
             <argument type="string">4cvsrxs9s12ccs804wgk8k84ocoog4g4ooswwwkk8c4go0g4go</argument>
         </service>
 
@@ -27,7 +27,7 @@
             <argument type="service" id="antwebs_chateaclient_authentication" />
         </service>
 
-        <service id="security.authentication_provider.antwebs_chateaclient" class="%security.authentication.provider.acme_service.class%" abstract="true" public="false">
+        <service id="security.authentication_provider.antwebs_chateaclient" class="%antwebs_chateaclient_authentication_provider.class%" abstract="true" public="false">
           <argument /> <!-- User Provider -->
           <argument type="service" id="security.user_checker" />
           <argument /> <!-- Provider-shared Key -->

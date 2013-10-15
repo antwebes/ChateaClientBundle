@@ -27,8 +27,8 @@ class UserProvider implements ChateaUserProviderInterface
         }
 
         try {
-            $json = $this->authentication->withUserCredentials($username, $password);
-            return $this->mapJsonToUser($json, $username);
+            $data = $this->authentication->withUserCredentials($username, $password);
+            return $this->mapJsonToUser($data, $username);
         } catch (AuthenticationException $e) {
             throw new UsernameNotFoundException(sprintf('Incorrect username or password for %s ', $username),30,$e);
         }
@@ -69,7 +69,23 @@ class UserProvider implements ChateaUserProviderInterface
      */
     public function refreshUser(UserInterface $user)
     {
-        // TODO: Implement refreshUser() method.
+        if (!$user instanceof User || !is_string($user->getRefreshToken()) || 0 >= strlen($user->getRefreshToken())){
+            
+            $ex = new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
+            $this->logger->debug(get_class($this)."::refreshUser()-OUT-", array('UnsupportedUserException'=>$ex));
+            throw $ex;
+        }
+
+        if($user->isCredentialsNonExpired()){
+            return $user;
+        }
+
+        try {
+            $data = $this->authentication->withRefreshToken($user->getRefreshToken());
+            return $this->mapJsonToUser($data, $user->getUsername());
+        } catch (AuthenticationException $e) {
+            throw new UsernameNotFoundException(sprintf('Incorrect username or password for %s ', $username),30,$e);
+        }
     }
 
     /**
@@ -84,17 +100,15 @@ class UserProvider implements ChateaUserProviderInterface
         return $class === ' Ant\Bundle\ChateaClientBundle\Security\User\User';
     }
 
-    protected function mapJsonToUser($json, $username)
+    protected function mapJsonToUser($data, $username)
     {
-        $object = json_decode($json);
-
         return new User(
             $username,
-            $object->access_token,
-            $object->refresh_token,
-            $object->token_type,
-            $object->expires_in,
-            $object->scope
+            $data['access_token'],
+            $data['refresh_token'],
+            $data['token_type'],
+            $data['expires_in'],
+            explode(',', $data['scope'])
         );
     }
 }

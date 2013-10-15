@@ -3,7 +3,8 @@
 namespace Ant\Bundle\ChateaClientBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Ant\ChateaClientBundle\DependencyInjection\Factory\SecurityFactory;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Ant\Bundle\ChateaClientBundle\DependencyInjection\Factory\SecurityFactory;
 
 class ChateaClientBundle extends Bundle
 {

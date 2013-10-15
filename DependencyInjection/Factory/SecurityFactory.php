@@ -1,5 +1,5 @@
 <?php 
-namespace Ant\ChateaClientBundle\DependencyInjection\Factory;
+namespace Ant\Bundle\ChateaClientBundle\DependencyInjection\Factory;
  
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
@@ -11,7 +11,7 @@ class SecurityFactory extends FormLoginFactory
 {
     public function getKey()
     {
-        return 'webservice-login';
+        return 'antwebs_chateaclient_login';
     }
  
     protected function getListenerId()
@@ -23,7 +23,7 @@ class SecurityFactory extends FormLoginFactory
     {
         $provider = 'ecurity.authentication_provider.antwebs_chateaclient.'.$id;
         $container
-            ->setDefinition($provider, new DefinitionDecorator('ecurity.authentication_provider.antwebs_chateaclient'))
+            ->setDefinition($provider, new DefinitionDecorator('security.authentication_provider.antwebs_chateaclient'))
             ->replaceArgument(0, new Reference($userProviderId))
             ->replaceArgument(2, $id)
         ;

@@ -72,20 +72,60 @@ class UserProviderTest extends \PHPUnit_Framework_TestCase
         $this->userProvider->loadUser('username', 'password');
     }
 
-    private function getResponseToken()
+    public function testRefreshUser()
     {
-        return '{
-                    "access_token": "321IUKKL",
-                    "expires_in": "3600",
-                    "token_type": "password",
-                    "scope": ["role_1"],
-                    "refresh_token": "12HHIIK"
-                }';
+        $this->authenticator
+            ->expects($this->never())
+            ->method('withRefreshToken');
+
+        $user = $this->getExpectedMockedUser();
+
+        $this->assertEquals($user, $this->userProvider->refreshUser($user));
     }
 
-    private function getExpectedUser()
+    public function testRefreshUserWithExpiredAccessToken()
+    {
+        $responseToken = $this->getResponseToken();
+        $this->authenticator
+            ->expects($this->once())
+            ->method('withRefreshToken')
+            ->with("12HHIIK")
+            ->will($this->returnValue($responseToken));
+
+        $user = $this->getExpectedMockedUser(false);
+
+        $this->assertEquals($this->getExpectedUser(), $this->userProvider->refreshUser($user));
+    }
+
+    private function getResponseToken()
+    {
+        return array(
+                    "access_token" => "321IUKKL",
+                    "expires_in" => "3600",
+                    "token_type" => "password",
+                    "scope" => "role_1",
+                    "refresh_token" => "12HHIIK"
+                );
+    }
+
+    private function getExpectedUser($isCredentialsNonExpired = true)
     {
         return new User('username', '321IUKKL', '12HHIIK', 'password', '3600', array('role_1'));
+    }
+
+    private function getExpectedMockedUser($isCredentialsNonExpired = true)
+    {
+        $user = $this->getMock(
+            'Ant\Bundle\ChateaClientBundle\Security\User\User', 
+            array('isCredentialsNonExpired'),
+            array('username', '321IUKKL', '12HHIIK', 'password', '3600', array('role_1'))
+            );
+
+        $user->expects($this->any())
+            ->method('isCredentialsNonExpired')
+            ->will($this->returnValue($isCredentialsNonExpired));
+        
+        return $user;
     }
 
     private function getBadResponseException()
