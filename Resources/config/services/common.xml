@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="antwebes_chateaclient_lib.client.class">Guzzle\Service\Client</parameter>
         <parameter key="antwebes_chateaclient_lib.factory_client.class">Ant\ChateaClient\Service\Client\ChateaGratisClient</parameter>
+        <parameter key="antwebes_chateaclient_lib.factory_client_auth.class">Ant\ChateaClient\Service\Client\ChateaOAuth2Client</parameter>
         <parameter key="antwebes_chateaclient_lib.api.class">Ant\ChateaClient\Client\Api</parameter>
         <parameter key="antwebes_chateaclient_bundle.api_manager.class">Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager</parameter>
 
@@ -20,6 +21,16 @@
                  public="false">
             <argument type="collection">
                 <argument key="access_token">access-token-demo</argument>
+                <argument key="environment">dev</argument>
+            </argument>
+        </service>
+
+        <service id="antwebes_chateaclient_lib.client_auth"
+                 class="%antwebes_chateaclient_lib.client.class%"
+                 factory-class="%antwebes_chateaclient_lib.factory_client_auth.class%"
+                 factory-method="factory"
+                 public="false">
+            <argument type="collection">
                 <argument key="environment">dev</argument>
             </argument>
         </service>

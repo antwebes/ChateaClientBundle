@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="antwebs_chateaclient_user_provider.class">Ant\Bundle\ChateaClientBundle\Security\User\UserProvider</parameter>
+        <parameter key="antwebs_chateaclient_authentication_provider.class">Ant\Bundle\ChateaClientBundle\Security\Authentication\AuthenticationProvider</parameter>
+        <parameter key="antwebs_chateaclient_authentication.class">Ant\ChateaClient\Client\Authentication</parameter>
+        <parameter key="antwebes_chateaclient_lib.client.class">Guzzle\Service\Client</parameter>
+        <parameter key="antwebes_chateaclient_lib.factory_client.class">Ant\ChateaClient\Service\Client\ChateaGratisClient</parameter>
+        <parameter key="antwebes_chateaclient_lib.api.class">Ant\ChateaClient\Client\Api</parameter>
+        <parameter key="antwebes_chateaclient_bundle.api_manager.class">Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager</parameter>
+
+    </parameters>
+
+    <services>
+
+        <service id="antwebs_chateaclient_authentication" class="%antwebs_chateaclient_authentication.class%">
+            <argument type="service" id="antwebes_chateaclient_lib.client_auth" />
+            <argument type="string">1rqwnvdprfq8c0socws0ogco4c08goko0o80cocko0kkos84co</argument>
+            <argument type="string">4cvsrxs9s12ccs804wgk8k84ocoog4g4ooswwwkk8c4go0g4go</argument>
+        </service>
+
+        <service id="antwebs_chateaclient_user_provider" class="%antwebs_chateaclient_user_provider.class%" >
+            <argument type="service" id="antwebs_chateaclient_authentication" />
+        </service>
+
+        <service id="security.authentication_provider.antwebs_chateaclient" class="%security.authentication.provider.acme_service.class%" abstract="true" public="false">
+          <argument /> <!-- User Provider -->
+          <argument type="service" id="security.user_checker" />
+          <argument /> <!-- Provider-shared Key -->
+          <argument type="service" id="security.encoder_factory" />
+          <argument>%security.authentication.hide_user_not_found%</argument>
+        </service>
+    </services>
+</container>
