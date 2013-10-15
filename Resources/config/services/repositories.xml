@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="antwebes_chateaclient_bundle.api_repository_channel.class">Ant\Bundle\ChateaClientBundle\Repositories\ChannelRepository</parameter>
+        <parameter key="antwebes_chateaclient_bundle.api_repository_channel_type.class">Ant\Bundle\ChateaClientBundle\Repositories\ChannelTypeRepository</parameter>
+        <parameter key="antwebes_chateaclient_bundle.api_repository_user.class">Ant\Bundle\ChateaClientBundle\Repositories\UserRepository</parameter>
+        <parameter key="antwebes_chateaclient_bundle.api_model_channel.class">Ant\Bundle\ChateaClientBundle\Api\Model\Channel</parameter>
+        <parameter key="antwebes_chateaclient_bundle.api_model_channel_type.class">Ant\Bundle\ChateaClientBundle\Api\Model\ChannelType</parameter>
+        <parameter key="antwebes_chateaclient_bundle.api_model_user.class">Ant\Bundle\ChateaClientBundle\Api\Model\User</parameter>
+    </parameters>
+
+        <services>
+
+            <service id="antwebes_chateaclient_bundle.api_repository_channel"
+                     class="%antwebes_chateaclient_bundle.api_repository_channel.class%"
+                     public="false">
+                <argument type="service" id="antwebes_chateaclient_bundle.api_manager"/>
+                <argument>%antwebes_chateaclient_bundle.api_model_channel.class%</argument>
+            </service>
+
+            <service id="antwebes_chateaclient_bundle.api_repository_channel_type"
+                     class="%antwebes_chateaclient_bundle.api_repository_channel_type.class%"
+                     public="false">
+                <argument type="service" id="antwebes_chateaclient_bundle.api_manager"/>
+                <argument>%antwebes_chateaclient_bundle.api_model_channel_type.class%</argument>
+            </service>
+
+            <service id="antwebes_chateaclient_bundle.api_repository_user"
+                     class="%antwebes_chateaclient_bundle.api_repository_user.class%"
+                     public="false">
+                <argument type="service" id="antwebes_chateaclient_bundle.api_manager"/>
+                <argument>%antwebes_chateaclient_bundle.api_model_user.class%</argument>
+            </service>
+
+            <service id="api_channels" alias="antwebes_chateaclient_bundle.api_repository_channel" synthetic="true" />
+            <service id="api_channels_types" alias="antwebes_chateaclient_bundle.api_repository_channel_type" synthetic="true" />
+            <service id="api_users" alias="antwebes_chateaclient_bundle.api_repository_user" synthetic="true" />
+        </services>
+</container>

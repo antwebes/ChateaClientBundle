@@ -206,11 +206,11 @@ class Channel implements BaseModel
 
 
     /**
-     * Get the [channel_type_id] column value.
+     * Get the [channel_type] column value.
      *
      * @return int
      */
-    public function getType()
+    public function getChannelType()
     {
         return $this->oChannelType;
     }
@@ -221,7 +221,7 @@ class Channel implements BaseModel
      * @param ChannelType $v new value
      * @return Channel The current object (for fluent API support)
      */
-    public function setType(ChannelType $v)
+    public function setChannelType(ChannelType $v)
     {
 
         $this->oChannelType = $v;

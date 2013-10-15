@@ -47,7 +47,7 @@ abstract class ApiRepository extends Api implements ObjectRepository
         return $this->_class;
     }
 
-    public function getChannelPager()
+    public function getPager()
     {
         if (null === $this->pager) {
             $this->pager = new Pager($this);
@@ -91,27 +91,4 @@ abstract class ApiRepository extends Api implements ObjectRepository
      */
     public abstract function delete($object_id);
 
-    /**
-     * Enable filter for finds all Queries
-     *
-     * @param string $filterName
-     * @param mixed $value
-     *
-     * @return void
-     */
-    public function enableFilter($filterName, $value)
-    {
-
-    }
-    /**
-     * Disable filter for finds all Queries
-     *
-     * @param string $filterName
-     *
-     * @return void
-     */
-    public function disableFilter($filterName)
-    {
-
-    }
 }

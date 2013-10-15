@@ -16,7 +16,7 @@ class ChannelFiltersFromType extends AbstractType
     {
         foreach ($channelTypes as $channelType)
         {
-            $this->choices[$channelType->getId()] = $channelType->getName();
+            $this->choices[$channelType->getName()] = $channelType->getName();
         }
     }
 
@@ -41,6 +41,6 @@ class ChannelFiltersFromType extends AbstractType
      */
     public function getName()
     {
-        return "channels_filters";
+        return "filter";
     }
 }

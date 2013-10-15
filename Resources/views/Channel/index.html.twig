@@ -8,7 +8,7 @@
         </a>
     </li>
 </ul>
-    <form action="{{ path('antwebes_chateaclient_channel_show_all') }}" method="post" >
+    <form action="{{ path('antwebes_chateaclient_channel_show_all') }}" method="get" >
             {{ form_widget(filter_from) }}
         <p>
             <button class="boton" type="submit">Filter Channel</button>
@@ -25,13 +25,13 @@
       <tbody>
         Total: {{ channelPager.size }} elemnts of: {{ channelPager.count }}
         <p> Total Pages: {{ channelPager.totalPages }}</p>
-        {% for channel in channelPager.results %}
+          {% for channel in channelPager.results %}
             <tr>
                <td style="width: 50%">
                    {{ channel.name }}
                </td>
                 <td style="width: 30%">
-                    {{ channel.type  }}
+                     {{  channel.channelType }}
                 </td>
                 <td>
                     <ul style="list-style-type:none; margin:0; padding:0">

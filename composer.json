@@ -14,6 +14,7 @@
 	"license" : "MIT",
 	"require" : {
         "symfony/framework-bundle": "~2.3",
+        "antwebes/chatea-common": "dev-master",
 		"antwebes/chatea-client-lib" : "dev-master"
 	},
     "require-dev": {
@@ -22,5 +23,11 @@
     "autoload": {
         "psr-0": { "Ant\\Bundle\\ChateaClientBundle": "" }
     },
+    "extra":{
+        "branch-alias": {
+            "dev-master": "0.2.1.x-dev"
+        }
+    },
     "target-dir": "Ant/Bundle/ChateaClientBundle"
+
 }

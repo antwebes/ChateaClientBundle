@@ -2,64 +2,55 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChannelFilter;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChannelType;
-use Ant\Bundle\ChateaClientBundle\Form\ChannelFiltersFromType;
 use Ant\Bundle\ChateaClientBundle\Form\ChannelFormType;
-use Ant\ChateaClient\Client\ApiException;
+use Ant\Bundle\ChateaClientBundle\Form\ChannelFiltersFromType;
 
 /**
  * Channel controller.
  *
  */
-class ChannelController extends BaseController
+class ChannelController extends Controller
 {
 
+    private function getChannelRepository()
+    {
+        return $this->get('api_channels');
+    }
     /**
      * Lists all Channels entities.
      *
      */
-    public function indexAction($page=1)
+    public function indexAction()
     {
-        $channelTypes = $this->getChannelTypeRepository()->findAll();
+
+        $filter = $this->getRequest()->get('filter');
+        $page = $this->getRequest()->get('page');
+
+        $channelTypes = $this->get('api_channels_types')->findAll();
         $entity = new ChannelFilter();
         $form = $this->createForm(new ChannelFiltersFromType($channelTypes),$entity);
-        $session = $this->getRequest()->getSession();
+        $cleanFiler = null;
+
         $channelRepository = $this->getChannelRepository();
 
-        $form->handleRequest($this->getRequest());
-
-        if ($form->isValid()) {
-            $entity = $form->getData();
-            foreach($entity->toArray()  as  $key=>$value)
-            {
-                if(!empty($value)){
-                    $this->getChannelRepository()->enableFilter($key,$value);
-                    $session->set($key,$value);
-                }else
-                {
-                    $this->getChannelRepository()->disableFilter($key);
-                }
-
-
-            }
-        }else
-        {
-            //update enty
-            $entity->setChannelType($session->get('Ant\Bundle\ChateaClientBundle\Api\Query\Filter\FilterChannelType'));
-            $form->setData($entity);
-        }
-        $channelPager = $channelRepository->getChannelPager();
+        $channelPager = $channelRepository->getPager();
         $channelPager->setPage($page);
 
 
+        $channelPager->setFilter($cleanFiler);
         return $this->render('ChateaClientBundle:Channel:index.html.twig', array(
-                    'channelPager' => $channelPager,
-                    'filter_from' => $form->createView()
-                )
+                'channelPager' => $channelPager,
+                'filter_from' => $form->createView()
+            )
         );
+
     }
+
     public function resetFilterAction($name)
     {
         $this->getChannelRepository()->disableFilter($name);
