@@ -12,10 +12,11 @@ class ApiCollection extends  ArrayCollection
 
     function __construct($total, $page, $limit)
     {
-        parent::__construct();
         $this->total = $total;
         $this->limit = $limit;
         $this->page = $page;
+
+        parent::__construct();
     }
 
 

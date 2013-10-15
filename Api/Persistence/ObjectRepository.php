@@ -2,7 +2,6 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Api\Persistence;
 
-use Ant\Bundle\ChateaClientBundle\Api\Query\Filter\ApiFilter;
 
 interface ObjectRepository
 {

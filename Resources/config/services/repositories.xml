@@ -29,7 +29,15 @@
                 <argument>%antwebes_chateaclient_bundle.api_model_channel_type.class%</argument>
             </service>
 
+            <service id="antwebes_chateaclient_bundle.api_repository_user"
+                     class="%antwebes_chateaclient_bundle.api_repository_user.class%"
+                     public="false">
+                <argument type="service" id="antwebes_chateaclient_bundle.api_manager"/>
+                <argument>%antwebes_chateaclient_bundle.api_model_user.class%</argument>
+            </service>
+
             <service id="api_channels" alias="antwebes_chateaclient_bundle.api_repository_channel" synthetic="true" />
             <service id="api_channels_types" alias="antwebes_chateaclient_bundle.api_repository_channel_type" synthetic="true" />
+            <service id="api_users" alias="antwebes_chateaclient_bundle.api_repository_user" synthetic="true" />
         </services>
 </container>
