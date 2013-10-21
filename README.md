@@ -11,4 +11,7 @@ Install
 
 antwebes_chateclient:
     resource: '@ChateaClientBundle/Resources/config/routing.xml'
-    prefix:   /   
+    prefix:   /  
+    
+    
+    first commit 
