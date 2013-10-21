@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class BaseController extends Controller 
 {
 
-    private function getChannelRepository()
+    protected  function getChannelRepository()
     {
         return $this->get('api_channels');
     }
