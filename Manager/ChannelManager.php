@@ -2,6 +2,7 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 
+use Ant\Bundle\ChateaClientBundle\Api\Util\ChateaApiAdapter;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
@@ -36,24 +37,16 @@ class ChannelManager extends BaseManager implements ManagerInterface
             return null;
         }
 
-        return $this->hydrate($this->getManager()->showChannel($channel_id));;
+        return $this->hydrate($this->getManager()->showChannel($channel_id));
     }
 
-    public function findAll($limit=1 , $offset=0, array $filters = null)
+    public function findAll($page = 1, array $filters = null)
     {
-    	
-        $array_data = $this->getManager()->showChannels($limit,$offset, $filters);
-//         $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();
-        ld($array_data);
-        $pager = new Pager($this->getManager(), $array_data);
-        ld($pager->getResources());
-        ldd($pager);
-//         $array_data['total'],$array_data['page'],$array_data['limit']);
 
-        foreach($data as $item ){
-            $collection->add($this->hydrate($item));
-        }
-        return $collection;
+        $limit=5; //nunha config
+
+        return  new Pager($this->getManager(),'showChannels', $page, $limit, $filters);
+
     }
 
     public function save(&$object)

@@ -4,13 +4,11 @@ namespace Ant\Bundle\ChateaClientBundle\Api\Util;
 
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 
-use IteratorAggregate;
 use Countable;
-use Ant\Bundle\ChateaClientBundle\Manager\ManagerInterface;
 use Ant\Bundle\ChateaClientBundle\Api\Collection\ApiCollection;
 
 
-class Pager implements  IteratorAggregate, Countable
+class Pager implements  Countable
 {
     protected
     	$total,
@@ -20,46 +18,29 @@ class Pager implements  IteratorAggregate, Countable
     	$resources,
         $page = 1,
         $lastPage = 1,
-        $size = 0,
-        $maxPerPage,
-        $nbResults = 0,
-        $manager = null,
-        $results = null,
-        $filter = null;
+        $filters;
 
-    function __construct(ApiManager $manager, array $array_data)
+    function __construct($manager, $method, $page = 1, $limit=1, array $filters = null)
     {
-        $this->manager = $manager;
+        if($page < 1){
+            $page = 1;
+        }
+
+        $offset = ($limit * ($page -1));
+        $array_data = call_user_func_array(array($manager,$method),array($limit,$offset,$filters));
         $this->total = $array_data['total'];
         $this->limit = $array_data['limit'];
         $this->offset = $array_data['offset'];
         $this->_links = $array_data['_links'];
         $this->resources = $array_data['resources'];
-//         $this->nbResults  = $this->results->getTotal();
-//último elemento limit + offset
-//páginas totales total % limit
-//
-        $this->lastPage   = ($this->resources % $this->size == 0 )? $this->nbResults / $this->size: ( (int)($this->nbResults / $this->size )  +1 );
+        if($page > 1 && empty($this->resources)){
+            throw new \InvalidArgumentException("The page field is incorrect");
+        }
+
+        $this->lastPage   = ($this->resources % $this->limit == 0 )? $this->total / $this->limit: ( (int)($this->total / $this->limit )  +1 );
+        $this->page = $page;
     }
 
-
-    public function setManager($manager)
-    {
-        $this->manager = $manager;
-    }
-
-    public function getManager()
-    {
-        return $this->manager;
-    }
-    public function cleanFilter()
-    {
-        $this->filter = '';
-    }
-    public function setFilter(array $filter = null)
-    {
-        $this->filter = $filter;
-    }
     /**
      * Get the collection of results in the page
      *
@@ -68,21 +49,6 @@ class Pager implements  IteratorAggregate, Countable
     public function getResources()
     {
     	return $this->resources;
-    }
-    /**
-     * Get the collection of results in the page
-     *
-     * @return ApiCollection A collection of results
-     */
-    public function getResults()
-    {
-        if (null === $this->results) {
-            $this->results = $this->getManager()
-                ->findAll($this->limit, $this->offset, $this->filter);
-            $this->size    = $this->results->count();
-
-        }
-        return $this->results;
     }
 
     public function getTotalPages()
@@ -96,10 +62,8 @@ class Pager implements  IteratorAggregate, Countable
      */
     public function getSize()
     {
-        if($this->size == 0){
-            $this->size = $this->getResults()->count();
-        }
-        return $this->size;
+
+        return $this->limit;
     }
     /**
      * Count elements in all pages
@@ -111,10 +75,7 @@ class Pager implements  IteratorAggregate, Countable
      */
     public function count()
     {
-        if($this->nbResults == 0){
-            $this->nbResults =  $this->getResults()->getTotal();
-        }
-        return $this->nbResults;
+        return $this->total;
     }
 
     /**
@@ -124,29 +85,8 @@ class Pager implements  IteratorAggregate, Countable
      */
     public function getPage()
     {
+
         return $this->page;
-    }
-    /**
-     * Set the current page number (First page is 1).
-     *
-     * @param int $page
-     *
-     * @return void
-     */
-    public function setPage($page)
-    {
-        $this->results = null;
-        $this->size = 0;
-        if( $page == 0)
-        {
-          $this->page = 1;
-
-        }else if($page > $this->getLastPage()){
-            $this->page = $this->getLastPage();
-        }else{
-            $this->page = $page;
-        }
-
     }
 
     /**
@@ -217,16 +157,5 @@ class Pager implements  IteratorAggregate, Countable
             $links[] = $i++;
         }
         return $links;
-    }
-    /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Retrieve an external iterator
-     * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
-     * @return Traversable An instance of an object implementing <b>Iterator</b> or
-     * <b>Traversable</b>
-     */
-    public function getIterator()
-    {
-        return $this->getResult()->getIterator();
     }
 }

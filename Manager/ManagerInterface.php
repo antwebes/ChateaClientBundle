@@ -8,7 +8,7 @@ interface ManagerInterface
 	
 	public function findById($id);
 	
-	public function findAll($limit=1 , $offset=0, array $filters = null);
+	public function findAll($page = 1, array $filters = null);
 	
 	public function save(&$object);
 	
