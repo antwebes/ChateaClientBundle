@@ -3,7 +3,7 @@
 namespace Ant\Bundle\ChateaClientBundle\Api\Persistence;
 
 use Ant\ChateaClient\Client\Api;
-use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
+use Ant\Bundle\ChateaClientBundle\Api\Util\CommandInterface;
 
 class ApiManager extends Api
 {
@@ -34,14 +34,11 @@ class ApiManager extends Api
      }
 
 
-    public function getPager()
+    public function execute(CommandInterface $command)
     {
-        if (null === $this->pager) {
-            $this->pager = new Pager($this);
-        }
-        return $this->pager;
+
+        return call_user_func_array(array($this,$command->getName()),$command->getParams());
     }
-    
     /**
      * @param string $entityName
      *

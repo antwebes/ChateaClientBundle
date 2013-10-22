@@ -1,56 +1,13 @@
 <?php
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
-
+use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 use Ant\Bundle\ChateaClientBundle\Model\UserProfile;
 
 class UserProfileManager extends  BaseManager implements ManagerInterface
 {
 
-    public function findById($profile_id)
-    {
-        throw new \Exception("This metod not soported in server yet");
-    }
-    public function findByUserId($user_id)
-    {
-        if($user_id === null || $user_id === 0 && !$user_id)
-        {
-            return null;
-        }
-
-        $json_decode = json_decode($this->getManager()->showUserProfile($user_id),true);
-
-        $user_profile = $this->hydrate($json_decode);
-
-        return $user_profile;
-    }
-    public function find($id)
-    {
-        throw new \Exception("This metod not soported in server yet");
-    }
-
-    public function findAll($limit =0, $offset = 30)
-    {
-        throw new \Exception("This metod not  implemented yet");
-    }
-
-    public function save(&$object)
-    {
-        throw new \Exception("This metod not  implemented yet");
-    }
-
-    public function update(&$object)
-    {
-        throw new \Exception("This metod not  implemented yet");
-    }
-
-    public function delete($object)
-    {
-        throw new \Exception("This metod not  implemented yet");
-    }
-
-
-    static public function hydrate(array $item)
+    static public function hydrate(array $item = null)
     {
 
         $id                     = array_key_exists('id',$item)?$item['id']:0;
@@ -64,5 +21,48 @@ class UserProfileManager extends  BaseManager implements ManagerInterface
         $publicated_at          = array_key_exists('publicated_at',$item)?$item['publicated_at']: new \DateTime('now');
 
         return new UserProfile($id, $about, $birthday,$count_visits,$gender,$sexual_orientation,$you_want,$updatedAt,$publicated_at);
+    }
+
+    /**
+     * List all users
+     *
+     * @param int $page
+     * @param array $filters
+     * @param null $limit
+     * @return Pager
+     */
+    public function findAll($page = 1, array $filters = null, $limit= null)
+    {
+        if($limit == null){
+            $limit = 1;
+        }
+        return  new Pager($this->getManager(),'who', $page, $limit, $filters);
+    }
+
+    /**
+     * Find User by ID
+     *
+     * @param $profile_id
+     * @throws \Exception
+     */
+    public function findById($profile_id)
+    {
+        throw new \Exception("This metod not soported in server yet");
+    }
+
+
+    public function save(&$object)
+    {
+        throw new \Exception("This metod not soported in server yet");
+    }
+
+    public function update(&$object)
+    {
+        throw new \Exception("This metod not soported in server yet");
+    }
+
+    public function delete($object)
+    {
+        throw new \Exception("This metod not soported in server yet");
     }
 }

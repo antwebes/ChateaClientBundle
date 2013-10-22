@@ -20,14 +20,18 @@ class Pager implements  Countable
         $lastPage = 1,
         $filters;
 
-    function __construct($manager, $method, $page = 1, $limit=1, array $filters = null)
+    function __construct(ApiManager $manager, CommandInterface $command, $page = 1, $limit= null)
     {
         if($page < 1){
             $page = 1;
         }
+        $command->addParam('limit',$limit);
 
         $offset = ($limit * ($page -1));
-        $array_data = call_user_func_array(array($manager,$method),array($limit,$offset,$filters));
+        $command->addParam('offset',$offset);
+
+        $array_data = $manager->execute($command);
+
         $this->total = $array_data['total'];
         $this->limit = $array_data['limit'];
         $this->offset = $array_data['offset'];

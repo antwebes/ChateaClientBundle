@@ -187,9 +187,9 @@ class User implements BaseModel
 
     public function setProfile(UserProfile $v = null)
     {
-        $this->oProfile = $v;
 
-        return $this;
+        $this->oProfile = self::getManager()->updateProfile($v);
+
     }
 
     public  function getChannels()

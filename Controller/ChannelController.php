@@ -25,8 +25,8 @@ class ChannelController extends Controller
     public function indexAction($page = 2)
     {
 
-        $pager = $this->get('api_channels')->findAll(32);
-        ldd($pager);
+        //$pager = $this->get('api_channels')->findAll(32);
+        //ldd($pager);
     }
     /**
      * Lists all Channels entities.

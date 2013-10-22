@@ -1,18 +1,24 @@
 <?php
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
-use Ant\Common\Collections\ArrayCollection;
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
+use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
+use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 
 class UserManager extends BaseManager implements ManagerInterface
 {
+    private $limit;
+    private $meUser;
 
-    public function __construct(ApiManager $apiManager, $limmit)
+    public function __construct(ApiManager $apiManager, $limit)
     {
-        parrent:__construct($apiManager);
+        parent::__construct($apiManager);
+        User::setManager($this);
+        $this->limit = $limit;
+        $this->meUser  = $this->hydrate($this->getManager()->whoami());
     }
 
 	static public function hydrate(array $item = null)
@@ -41,32 +47,100 @@ class UserManager extends BaseManager implements ManagerInterface
 
     public function findAll($page = 1, array $filters = null, $limit= null)
     {
-        $array_data = $this->getManager()->who();
-
-        $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();
-        $collection = new ApiCollection($array_data['total'],$array_data['page'],$array_data['limit']);
-
-        foreach($data as $item ){
-
-            $collection->add($this->hydrate($item));
+        if($limit == null){
+            $limit = $this->limit;
         }
-        return $collection;
+        $commnad = new Command('who',array('filters'=>$filters));
+        return  new Pager($this->getManager(),$commnad, $page, $limit, $filters);
+
+    }
+    public function findBlockedUsers($user_id,$page = 1, $limit= null)
+    {
+        if($limit == null){
+            $limit = $this->limit;
+        }
+        $commnad = new Command('showUsersBlocked',array('user'=>$user_id));
+
+        return  new Pager($this->getManager(),$commnad ,$page, $limit);
+    }
+    public function findMeBlocked($page = 1, $limit= null)
+    {
+        return  $this->findBlockedUsers($this->meUser->getId(),$page,$limit);
+    }
+
+    public function bockedUser(User $user_blocked)
+    {
+
+        return $this->getManager()->addUserBlocked($this->meUser->getId(),$user_blocked->getId());
     }
 
     public function findMeUser()
     {
-
-        return $this->hydrate($this->getManager()->whoami());
+        return $this->meUser;
     }
+
     public function findProfile($user_id)
     {
-        $userProfileRepository = $this->getManager()->_manager->getRepository(get_class(new UserProfile()));
-
-        return $userProfileRepository->findByUserId($user_id);
+        $profile = $this->getManager()->showUserProfile($user_id);
+        UserProfileManager::hydrate($profile);
     }
+
+    public function findMeProfile()
+    {
+        return $this->findProfile($this->meUser->getId());
+    }
+
+    public function updateProfile(UserProfile $profile)
+    {
+        $profile = $this->getManager()->updateUserProfile($this->meUser->getId(),$profile->getAbout(),$profile->getSexualOrientation());
+        return UserProfileManager::hydrate($profile);
+    }
+    public function findChannlesCreatedByUserId($user_id)
+    {
+        $commnad = new Command('showUsersBshowUserChannelslocked',array('user_id'=>$user_id));
+        return  new Pager($this->getManager(),$commnad ,1, $this->limit);
+
+    }
+    public function finChannelsCreatedByMe()
+    {
+        return $this->findChannlesCreatedByUserId($this->meUser->getId());
+    }
+
+    public function findPhotos($user_id, $page= 1, $limit = null)
+    {
+        if($limit == null){
+            $limit = $this->limit;
+        }
+
+        $commnad = new Command('showPhotos',array('user_id'=>$user_id));
+        return  new Pager($this->getManager(),$commnad ,$page, $limit);
+
+
+    }
+    public function findVisit($user_id)
+    {
+        throw new \Exception("Sen implementar");
+    }
+    public function findFriends($user_id, $page= 1, $limit = null)
+    {
+        if($limit == null){
+            $limit = $this->limit;
+        }
+
+        $commnad = new Command('showFriends',array('user_id'=>$user_id));
+        return  new Pager($this->getManager(),$commnad ,$page, $limit);
+    }
+    public function findMeFriends($page= 1, $limit = null)
+    {
+        return $this->findFriends($this->meUser->getId(),$page,$limit);
+    }
+    /**
+     * @param \Ant\Bundle\ChateaClientBundle\Api\Model\User $object
+     * @return array
+     */
     public function save(&$object)
     {
-        throw new \Exception("this method is not avaliable");
+        return $this->getManager()->register($object->getUsername(),$object->getEmail(),$object->getPassword(),$object->getPassword(),"webchatea.local");
     }
 
     public function update(&$object)
@@ -78,8 +152,21 @@ class UserManager extends BaseManager implements ManagerInterface
         $this->getManager()->updateUser($object->getUsername(), $object->getEmail(),$object->getPassword());
     }
 
+    /**
+     * @param \Ant\Bundle\ChateaClientBundle\Api\Model\User $object
+     * @throws \InvalidArgumentException
+     */
     public function delete($object)
     {
-        throw new \Exception("this method is not avaliable");
+        if($object->getId() != $this->meUser->getId()){
+            throw new \InvalidArgumentException("You only can delete your user");
+        }
+
+        $this->getManager()->delMe();
+    }
+
+    public function deleteMeUser()
+    {
+        $this->getManager()->delMe();
     }
 }

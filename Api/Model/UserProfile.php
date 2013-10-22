@@ -1,5 +1,5 @@
 <?php
-namespace Ant\Bundle\ChateaClientBundle\Model;
+namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 

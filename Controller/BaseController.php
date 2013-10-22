@@ -20,7 +20,7 @@ class BaseController extends Controller
         return $this->get('api_channels_types');
     }
 
-    protected function  getUserRepository()
+    protected function  getUserManager()
     {
         return $this->get('api_users');
     }
