@@ -2,41 +2,55 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Api\Util;
 
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
+
 use IteratorAggregate;
 use Countable;
-use Ant\Bundle\ChateaClientBundle\Api\Persistence\ObjectRepository;
+use Ant\Bundle\ChateaClientBundle\Manager\ManagerInterface;
 use Ant\Bundle\ChateaClientBundle\Api\Collection\ApiCollection;
 
 
 class Pager implements  IteratorAggregate, Countable
 {
     protected
+    	$total,
+    	$limit,
+    	$offset,
+    	$_links,
+    	$resources,
         $page = 1,
         $lastPage = 1,
         $size = 0,
         $maxPerPage,
         $nbResults = 0,
-        $repository = null,
+        $manager = null,
         $results = null,
         $filter = null;
 
-    function __construct(ObjectRepository $repository)
+    function __construct(ApiManager $manager, array $array_data)
     {
-        $this->repository = $repository;
-        $this->results    = $this->getResults();
-        $this->nbResults  = $this->results->getTotal();
-        $this->lastPage   = ($this->nbResults % $this->size == 0 )? $this->nbResults / $this->size: ( (int)($this->nbResults / $this->size )  +1 );
+        $this->manager = $manager;
+        $this->total = $array_data['total'];
+        $this->limit = $array_data['limit'];
+        $this->offset = $array_data['offset'];
+        $this->_links = $array_data['_links'];
+        $this->resources = $array_data['resources'];
+//         $this->nbResults  = $this->results->getTotal();
+//último elemento limit + offset
+//páginas totales total % limit
+//
+        $this->lastPage   = ($this->resources % $this->size == 0 )? $this->nbResults / $this->size: ( (int)($this->nbResults / $this->size )  +1 );
     }
 
 
-    public function setRepository($repository)
+    public function setManager($manager)
     {
-        $this->repository = $repository;
+        $this->manager = $manager;
     }
 
-    public function getRepository()
+    public function getManager()
     {
-        return $this->repository;
+        return $this->manager;
     }
     public function cleanFilter()
     {
@@ -51,11 +65,20 @@ class Pager implements  IteratorAggregate, Countable
      *
      * @return ApiCollection A collection of results
      */
+    public function getResources()
+    {
+    	return $this->resources;
+    }
+    /**
+     * Get the collection of results in the page
+     *
+     * @return ApiCollection A collection of results
+     */
     public function getResults()
     {
         if (null === $this->results) {
-            $this->results = $this->getRepository()
-                ->findAll($this->page,$this->filter);
+            $this->results = $this->getManager()
+                ->findAll($this->limit, $this->offset, $this->filter);
             $this->size    = $this->results->count();
 
         }
