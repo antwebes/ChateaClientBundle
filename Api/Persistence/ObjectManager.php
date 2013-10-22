@@ -6,11 +6,11 @@ interface ObjectManager
 {
 
     /**
-     * Gets the repository for a class.
+     * Gets the manager for a class.
      *
      * @param string $entityName
      *
      * @return ObjectRepository
      */
-    public function getRepository($entityName);
+    public function getManager($entityName);
 }

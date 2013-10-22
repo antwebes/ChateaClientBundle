@@ -24,10 +24,13 @@ class ChateaClientExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
         $loader->load('common.xml');
         $loader->load('security.xml');
-        $loader->load('repositories.xml');
+        $loader->load('manager.xml');
 
 
         $config = $this->processConfiguration(new Configuration(), $configs);
-        //chateaclientbundle:channel
+
+        $container->setParameter('chatea_client.limits.channel_manager', $config['limits']['channel_manager']);
+        $container->setParameter('chatea_client.limits.user_manager', $config['limits']['user_manager']);
+
     }
 }

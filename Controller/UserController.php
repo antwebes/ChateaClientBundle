@@ -20,10 +20,16 @@ class UserController extends  BaseController
         return $this->render("ChateaClientBundle:User:whoami.html.twig",array('user'=>$user));
     }
 
+    public function indexAction($page = 1){
+
+        $users = $this->get('api_users')->findMeBlocked();
+
+        ldd($users);
+    }
     /**
      * Lists all Channels entities.
      *
-     */
+
     public function indexAction()
     {
 
@@ -43,7 +49,7 @@ class UserController extends  BaseController
         }
 
     }
-
+*/
     /**
      * Finds and displays a Channel entity.
      *

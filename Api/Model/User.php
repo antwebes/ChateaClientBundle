@@ -1,7 +1,7 @@
 <?php
 namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
-use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Email;
@@ -10,19 +10,19 @@ class User implements BaseModel
 {
 
     /**
-     * Repository class name
+     * Manager class name
      */
-    const REPOSITORY_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Repositories\\UserRepository';
+    const MANAGER_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Manager\\UserManager';
 
-    static $repository;
+    static $manager;
 
-    public static function  setRepository(ApiRepository $repository)
+    public static function  setManager($manager)
     {
-        self::$repository = $repository;
+        self::$manager = $manager;
     }
-    public static function  getRepository()
+    public static function  getManager()
     {
-        return self::$repository;
+        return self::$manager;
     }
 
     /**
@@ -180,43 +180,43 @@ class User implements BaseModel
     public function getProfile()
     {
         if($this->oProfile === null && ($this->id !== null)){
-            $this->setProfile(self::getRepository()->findProfile($this->id));
+            $this->setProfile(self::getManager()->findProfile($this->id));
         }
         return $this->oProfile;
     }
 
     public function setProfile(UserProfile $v = null)
     {
-        $this->oProfile = $v;
 
-        return $this;
+        $this->oProfile = self::getManager()->updateProfile($v);
+
     }
 
     public  function getChannels()
     {
-        return self::getRepository()->findChannlesCreated($this->id);
+        return self::getManager()->findChannlesCreated($this->id);
     }
 
     public  function getChannelsFan()
     {
-        return self::getRepository()->findChannlesFan($this->id);
+        return self::getManager()->findChannlesFan($this->id);
     }
 
     public function getBlockedUsers()
     {
-        return self::getRepository()->findBlockedUsers($this->id);
+        return self::getManager()->findBlockedUsers($this->id);
     }
     public function getPhotos()
     {
-        return self::getRepository()->findPhotos($this->id);
+        return self::getManager()->findPhotos($this->id);
     }
     public function getVisit()
     {
-        return self::getRepository()->findVisit($this->id);
+        return self::getManager()->findVisit($this->id);
     }
     public function getFriends()
     {
-        return self::getRepository()->findFriends($this->id);
+        return self::getManager()->findFriends($this->id);
     }
 
     public function __toString()
