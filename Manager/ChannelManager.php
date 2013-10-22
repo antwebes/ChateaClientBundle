@@ -55,16 +55,7 @@ class ChannelManager extends BaseManager implements ManagerInterface
         }
         return $collection;
     }
-    /**
-     * Tells the ObjectManager to make an instance managed and persistent.
-     *
-     * The object will be entered into the server.
-     *
-     *
-     * @param object $object The instance to make managed and persistent.
-     *
-     * @return void
-     */
+
     public function save(&$object)
     {
         if(!($object instanceof Channel)){
