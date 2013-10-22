@@ -35,6 +35,17 @@
                 <argument type="string">%chatea_client.limits.user_manager%</argument>
             </service>
 
+            <service id="api_manager" class="Ant\Bundle\ChateaClientBundle\Manager\ApiModel">
+                <call method="addMannager">
+                    <argument type="service" id="antwebes_chateaclient_bundle.manager.channel_manager" />
+                </call>
+                <call method="addMannager">
+                    <argument type="service" id="antwebes_chateaclient_bundle.manager.user_manager" />
+                </call>
+                <call method="addMannager">
+                    <argument type="service" id="antwebes_chateaclient_bundle.manager.channel_type_manager" />
+                </call>
+            </service>
             <service id="api_channels" alias="antwebes_chateaclient_bundle.manager.channel_manager" synthetic="true" />
             <service id="api_channels_types" alias="antwebes_chateaclient_bundle.manager.channel_type_manager" synthetic="true" />
             <service id="api_users" alias="antwebes_chateaclient_bundle.manager.user_manager" synthetic="true" />

@@ -36,7 +36,16 @@ class ApiManager extends Api
 
     public function execute(CommandInterface $command)
     {
+        $reflection = new \ReflectionMethod($this,$command->getName());
 
+        $paramters = $reflection->getParameters();
+        foreach($paramters as $parameter)
+        {
+            if(!array_key_exists($parameter->getName(),$command->getParam()) ){
+                $command->addParam($parameter->getName(),$parameter->getDefaultValue());
+            }
+
+        }
         return call_user_func_array(array($this,$command->getName()),$command->getParams());
     }
     /**
