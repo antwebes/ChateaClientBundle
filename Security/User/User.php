@@ -60,7 +60,7 @@ class User implements AdvancedUserInterface
     /**
      * {@inheritdoc}
      */
-    public function getAccesToken()
+    public function getAccessToken()
     {
         return $this->accessToken;
     }
