@@ -9,8 +9,8 @@
         <parameter key="antwebes_chateaclient_lib.factory_client.class">Ant\ChateaClient\Service\Client\ChateaGratisClient</parameter>
         <parameter key="antwebes_chateaclient_lib.factory_client_auth.class">Ant\ChateaClient\Service\Client\ChateaOAuth2Client</parameter>
         <parameter key="antwebes_chateaclient_lib.api.class">Ant\ChateaClient\Client\Api</parameter>
-        <parameter key="antwebes_chateaclient_bundle.api_manager.class">Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager</parameter>
-
+        <parameter key="antwebes_chateaclient_bundle.api.persistence.api_connection.class">Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiConnection</parameter>
+        <parameter key="antwebes_chateaclient_bundle.api.persistence.api_manager.class">Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager</parameter>
     </parameters>
     <services>
 
@@ -35,10 +35,16 @@
             </argument>
         </service>
 
-        <service id="antwebes_chateaclient_bundle.api_manager" class="%antwebes_chateaclient_bundle.api_manager.class%" public="false">
+        <service id="antwebes_chateaclient_bundle.api.persistence.api_connection" class="%antwebes_chateaclient_bundle.api.persistence.api_connection.class%" public="false">
             <argument type="service" id="antwebes_chateaclient_lib.client" />
         </service>
 
+		<service id="antwebes_chateaclient_bundle.api.persistence.api_manager" 
+				class="%antwebes_chateaclient_bundle.api.persistence.api_manager.class%"
+				public="false">
+            <argument type="service" id="antwebes_chateaclient_bundle.api.persistence.api_connection" />
+        </service>
+        
         <service id="antwebes_client" alias="antwebes_chateaclient_lib.client" synthetic="true" />
     </services>
 </container>

@@ -1,7 +1,7 @@
 <?php
 namespace Ant\Bundle\ChateaClientBundle\Model;
 
-use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 
 class UserProfile implements BaseModel
 {
@@ -12,21 +12,21 @@ class UserProfile implements BaseModel
     const GENDER_WOMAN      = 'woman';
     const GENDER_OTHER      = 'other';
 
-    static $repository;
+    static $manager;
 
-    public static function  setRepository(ApiRepository $repository)
+    public static function  setManager($manager)
     {
-        self::$repository = $repository;
+        self::$manager = $manager;
     }
-    public static function  getRepository()
+    public static function  getManager()
     {
-        return self::$repository;
+        return self::$manager;
     }
 
     /**
-     * Repository class name
+     * Manager class name
      */
-    const REPOSITORY_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Repositories\\UserProfileRepository';
+    const MANAGER_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Manager\\UserProfileManager';
 
 
 

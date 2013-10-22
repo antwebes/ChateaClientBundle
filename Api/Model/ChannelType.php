@@ -1,25 +1,26 @@
 <?php
 namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
-use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 use Symfony\Component\Validator\Constraints\NotBlank;
+
 class ChannelType implements BaseModel
 {
-    static $repository;
+    static $manager;
 
-    public static function  setRepository(ApiRepository $repository)
+    public static function  setManager($manager)
     {
-        self::$repository = $repository;
+        self::$manager = $manager;
     }
-    public static function  getRepository()
+    public static function  getManager()
     {
-        return self::$repository;
+        return self::$manager;
     }
 
     /**
-     * Repository class name
+     * Manager class name
      */
-    const REPOSITORY_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Repositories\\ChannelTypeRepository';
+    const MANAGER_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Manager\\ChannelTypeManager';
 
     /**
      * @var string

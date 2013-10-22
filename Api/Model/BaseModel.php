@@ -2,12 +2,9 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
-use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
-
 interface BaseModel
 {
-
-    static function  setRepository(ApiRepository $repository);
-    static function  getRepository();
+    static function  setManager($repository);
+    static function  getManager();
     public function __toString();
 }

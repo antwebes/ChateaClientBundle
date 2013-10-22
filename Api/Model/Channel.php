@@ -2,9 +2,10 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
+use Ant\Bundle\ChateaClientBundle\Manager\ChannelManager;
+
 use Ant\Common\Collections\ArrayCollection;
 use Ant\Common\Collections\Collection;
-use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiRepository;
 
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
@@ -16,22 +17,24 @@ use Symfony\Component\Validator\Constraints\Length;
  */
 class Channel implements BaseModel
 {
+	/**
+	 * Manager class name
+	 */
+	const MANAGER_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Manager\\ChannelManager';
+	
+    static $manager;
 
-    static $repository;
-
-    public static function  setRepository(ApiRepository $repository)
+    public static function  setManager($manager)
     {
-        self::$repository = $repository;
+    	if ($manager instanceof ChannelManager){
+    		self::$manager = $manager;
+    	}else throw new \Exception("Channel need a manager instanceof ChannelManager");
     }
-    public static function  getRepository()
+    
+    public static function  getManager()
     {
-        return self::$repository;
+        return self::$manager;
     }
-
-    /**
-     * Repository class name
-     */
-    const REPOSITORY_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Repositories\\ChannelRepository';
 
     /**
      * The value for the id field.
@@ -308,7 +311,7 @@ class Channel implements BaseModel
 
         if ($this->creator_id !== null) {
 
-            $this->oCreator = self::getRepository()->findUser($this->creator_id);
+            $this->oCreator = self::getManager()->findUser($this->creator_id);
         }
 
         return $this;
@@ -340,7 +343,7 @@ class Channel implements BaseModel
 
         if ($this->parent_id !== null) {
 
-            $this->oParent = self::getRepository()->findById($this->parent_id);
+            $this->oParent = self::getManager()->findById($this->parent_id);
         }
 
         return $this;
@@ -353,7 +356,7 @@ class Channel implements BaseModel
     {
 
         if ($this->oCreator === null && ($this->creator_id !== null && $this->creator_id)) {
-            $this->setCreator(self::getRepository()->findUser($this->creator_id));
+            $this->setCreator(self::getManager()->findUser($this->creator_id));
         }
         return $this->oCreator;
     }
@@ -382,7 +385,7 @@ class Channel implements BaseModel
 
 
         if ($this->oParent === null && ($this->parent_id !== null && $this->parent_id)) {
-            $this->setParent(self::getRepository()->findById($this->parent_id));
+            $this->setParent(self::getManager()->findById($this->parent_id));
         }
 
         return $this->oParent;
@@ -415,7 +418,7 @@ class Channel implements BaseModel
      */
     public function getFans()
     {
-        return self::getRepository()->findFans($this->id);
+        return self::getManager()->findFans($this->id);
     }
 
     public function __toString()
