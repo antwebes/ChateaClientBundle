@@ -7,8 +7,8 @@ interface ManagerInterface
 	static public function hydrate(array $item = null);
 	
 	public function findById($id);
-	
-	public function findAll($page = 1, array $filters = null);
+
+    public function findAll($page = 1, array $filters = null, $limit= null);
 	
 	public function save(&$object);
 	

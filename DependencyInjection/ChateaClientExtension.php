@@ -28,6 +28,9 @@ class ChateaClientExtension extends Extension
 
 
         $config = $this->processConfiguration(new Configuration(), $configs);
-        //chateaclientbundle:channel
+
+        $container->setParameter('chatea_client.limits.channel_manager', $config['limits']['channel_manager']);
+        $container->setParameter('chatea_client.limits.user_manager', $config['limits']['user_manager']);
+
     }
 }

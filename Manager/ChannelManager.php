@@ -2,10 +2,7 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 
-use Ant\Bundle\ChateaClientBundle\Api\Util\ChateaApiAdapter;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
-
-use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 use Ant\Bundle\ChateaClientBundle\Api\Collection\ApiCollection;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
@@ -60,16 +57,7 @@ class ChannelManager extends BaseManager implements ManagerInterface
         $object = $this->hydrate($newChannel->toArray());
 
     }
-    /**
-     * Tells the ObjectManager to make an instance managed and updated.
-     *
-     * The object will be entered into the server.
-     *
-     *
-     * @param object $object The instance to make managed and persistent.
-     *
-     * @return void
-     */
+
     public function update(&$object)
     {
         if(!($object instanceof Channel)){
@@ -95,8 +83,6 @@ class ChannelManager extends BaseManager implements ManagerInterface
 
     public function findUser($user_id)
     {
-
-//         $userRepository = $this->getManager(get_class(new User()));
 
         $user = $this->getManager()->showUser($user_id);
         

@@ -9,7 +9,12 @@ use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 
 class UserManager extends BaseManager implements ManagerInterface
 {
-	
+
+    public function __construct(ApiManager $apiManager, $limmit)
+    {
+        parrent:__construct($apiManager);
+    }
+
 	static public function hydrate(array $item = null)
     {
         if($item == null){
@@ -34,7 +39,7 @@ class UserManager extends BaseManager implements ManagerInterface
         return $this->hydrate($this->getManager()->showUser($id));
     }
 
-    public function findAll($limit =0, $offset = 30)
+    public function findAll($page = 1, array $filters = null, $limit= null)
     {
         $array_data = $this->getManager()->who();
 
