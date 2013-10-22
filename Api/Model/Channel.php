@@ -2,6 +2,8 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
+
 use Ant\Bundle\ChateaClientBundle\Manager\ChannelManager;
 
 use Ant\Common\Collections\ArrayCollection;

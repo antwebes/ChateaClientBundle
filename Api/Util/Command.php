@@ -8,7 +8,11 @@ class Command  implements CommandInterface
     private $name;
     private $params;
 
-
+	/**
+	 * 
+	 * @param string $name
+	 * @param array $params
+	 */
     function __construct($name, $params)
     {
         $this->params = $params;
@@ -46,6 +50,11 @@ class Command  implements CommandInterface
     public function getParams()
     {
         return $this->params;
+    }
+    
+    public function getParam($key)
+    {
+    	return $this->params[$key];
     }
 
 

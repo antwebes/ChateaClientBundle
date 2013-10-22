@@ -20,6 +20,7 @@
                      class="%antwebes_chateaclient_bundle.manager.channel_manager.class%"
                      public="false">
                 <argument type="service" id="antwebes_chateaclient_bundle.api.persistence.api_manager"/>
+                <argument type="string">%chatea_client.limits.channel_manager%</argument>
             </service>
 
             <service id="antwebes_chateaclient_bundle.manager.channel_type_manager"

@@ -2,6 +2,8 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
+use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 use Ant\Bundle\ChateaClientBundle\Api\Collection\ApiCollection;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
@@ -9,6 +11,14 @@ use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 
 class ChannelManager extends BaseManager implements ManagerInterface
 {
+	protected $limit;
+	
+	public function __construct(ApiManager $apiManager, $limit)
+	{
+		$this->limit = $limit;
+		parent::__construct($apiManager);
+		Channel::setManager($this);
+	}
 
     static public function hydrate(array $item = null)
     {
@@ -33,16 +43,16 @@ class ChannelManager extends BaseManager implements ManagerInterface
         {
             return null;
         }
-
+		
         return $this->hydrate($this->getManager()->showChannel($channel_id));
     }
 
-    public function findAll($page = 1, array $filters = null)
+    public function findAll($page = 1, array $filters = null, $limit = null)
     {
-
-        $limit=5; //nunha config
-
-        return  new Pager($this->getManager(),'showChannels', $page, $limit, $filters);
+		if (!$limit) $limit = $this->limit;
+		
+		$command = new Command('showChannels',array('filter'=>$filters));
+		return new Pager($this->getManager(),$command, $page, $limit);
 
     }
 
@@ -85,20 +95,19 @@ class ChannelManager extends BaseManager implements ManagerInterface
     {
 
         $user = $this->getManager()->showUser($user_id);
-        
+        UserManager::hydrate($user);   
         return $user;
     }
 
     public function findFans($channel_id)
     {
-
         if ($channel_id === null || $channel_id === 0 || !$channel_id)
         {
             return null;
         }
 
         $array_data = $this->getManager()->showChannelFans($channel_id);
-
+	
         $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();
 
         $total = array_key_exists('total',$array_data)?$array_data['total']:0;
