@@ -33,6 +33,8 @@
                  public="false">
             <argument type="collection">
                 <argument key="environment">dev</argument>
+                <argument key="client_id">%chatea_client.app_auth.client_id%</argument>
+                <argument key="secret">%chatea_client.app_auth.secret%</argument>
             </argument>
         </service>
 
