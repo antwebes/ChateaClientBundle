@@ -4,7 +4,7 @@ namespace Ant\Bundle\ChateaClientBundle\Manager;
 
 interface ManagerInterface
 {
-	static public function hydrate(array $item = null);
+	public function hydrate(array $item = null);
 	
 	public function findById($id);
 
@@ -15,5 +15,7 @@ interface ManagerInterface
 	public function update(&$object);
 	
 	public function delete($object_id);
+	
+	public function getModel();
 	
 }

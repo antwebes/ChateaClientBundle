@@ -13,14 +13,17 @@ class ChannelManager extends BaseManager implements ManagerInterface
 {
 	protected $limit;
 	
-	public function __construct(ApiManager $apiManager, $limit)
+	public function __construct(ApiManager $apiManager)
 	{
-		$this->limit = $limit;
 		parent::__construct($apiManager);
-		Channel::setManager($this);
 	}
 
-    static public function hydrate(array $item = null)
+	public function setLimit($limit)
+	{
+		$this->limit = $limit;
+	}
+	
+    public function hydrate(array $item = null)
     {
 
         if($item == null){
@@ -37,6 +40,11 @@ class ChannelManager extends BaseManager implements ManagerInterface
         return new Channel($id,$name,$url,$channel_type,$title,$description,$creator_id,$parent_id);
     }
 
+    public function getModel()
+    {
+    	return 'Ant\Bundle\ChateaClientBundle\Api\Model\Channel';
+    }
+    
     public function findById($channel_id)
     {
         if ($channel_id === null || $channel_id === 0 || !$channel_id)
@@ -93,8 +101,7 @@ class ChannelManager extends BaseManager implements ManagerInterface
 
     public function findUser($user_id)
     {
-
-        $user = $this->getManager()->showUser($user_id);
+        $user = $userManager->showUser($user_id);
         UserManager::hydrate($user);   
         return $user;
     }
@@ -105,7 +112,7 @@ class ChannelManager extends BaseManager implements ManagerInterface
         {
             return null;
         }
-
+        
         $array_data = $this->getManager()->showChannelFans($channel_id);
 	
         $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();
@@ -118,7 +125,8 @@ class ChannelManager extends BaseManager implements ManagerInterface
 
         foreach($data as $item )
         {
-            $user = UserManager::hydrate($item);
+        	$userManager = $this->get('UserManager', 25);
+            $user = $userManager->hydrate($item);
             $collection->add($user);
         }
         return $collection;

@@ -20,7 +20,9 @@
                      class="%antwebes_chateaclient_bundle.manager.channel_manager.class%"
                      public="false">
                 <argument type="service" id="antwebes_chateaclient_bundle.api.persistence.api_manager"/>
-                <argument type="string">%chatea_client.limits.channel_manager%</argument>
+                <call method="setLimit">
+					<argument type="string">%chatea_client.limits.channel_manager%</argument>	                	
+                </call>                
             </service>
 
             <service id="antwebes_chateaclient_bundle.manager.channel_type_manager"
@@ -33,7 +35,10 @@
                      class="%antwebes_chateaclient_bundle.manager.user_manager.class%"
                      public="false">
                 <argument type="service" id="antwebes_chateaclient_bundle.api.persistence.api_manager"/>
-                <argument type="string">%chatea_client.limits.user_manager%</argument>
+                <call method="setLimit">
+					<argument type="string">%chatea_client.limits.user_manager%</argument>	                	
+                </call>
+                
             </service>
 
             <service id="api_manager" class="Ant\Bundle\ChateaClientBundle\Manager\ApiModel">

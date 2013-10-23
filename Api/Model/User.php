@@ -199,7 +199,7 @@ class User implements BaseModel
 
     public  function getChannelsFan()
     {
-        return self::getManager()->findChannlesFan($this->id);
+        return self::getManager()->findChannelsFan($this->id);
     }
 
     public function getBlockedUsers()

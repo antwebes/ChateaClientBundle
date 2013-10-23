@@ -13,15 +13,16 @@ class UserManager extends BaseManager implements ManagerInterface
     private $limit;
     private $meUser;
 
-    public function __construct(ApiManager $apiManager, $limit)
+    public function __construct(ApiManager $apiManager)
     {
         parent::__construct($apiManager);
-        User::setManager($this);
-        $this->limit = $limit;
-        $this->meUser  = $this->hydrate($this->getManager()->whoami());
+//         $this->meUser  = $this->hydrate($this->getManager()->whoami());
     }
-
-	static public function hydrate(array $item = null)
+	public function setLimit($limit)
+	{
+		$this->limit = $limit;
+	}
+	public function hydrate(array $item = null)
     {
         if($item == null){
             return new User();
@@ -34,7 +35,12 @@ class UserManager extends BaseManager implements ManagerInterface
 
         return new User($id,$username,$email,$last_login,$enabled);
     }
-
+    
+	public function getModel()
+	{
+		return 'Ant\Bundle\ChateaClientBundle\Api\Model\User';	
+	}
+	
     public function findById($id)
     {
         if($id === null || $id === 0 && !$id)
@@ -168,5 +174,10 @@ class UserManager extends BaseManager implements ManagerInterface
     public function deleteMeUser()
     {
         $this->getManager()->delMe();
+    }
+    
+    public function findChannelsFan()
+    {
+    	return 'aaaaaaaaaaaaaaaaaaaaaaaaa';
     }
 }
