@@ -20,8 +20,8 @@
 
         <service id="antwebs_chateaclient_authentication" class="%antwebs_chateaclient_authentication.class%">
             <argument type="service" id="antwebes_chateaclient_lib.client_auth" />
-            <argument type="string">1_1rqwnvdprfq8c0socws0ogco4c08goko0o80cocko0kkos84co</argument>
-            <argument type="string">4cvsrxs9s12ccs804wgk8k84ocoog4g4ooswwwkk8c4go0g4go</argument>
+            <argument type="string">%chatea_client.app_auth.client_id%</argument>
+            <argument type="string">%chatea_client.app_auth.secret%</argument>
         </service>
 
         <service id="antwebs_chateaclient_user_provider" class="%antwebs_chateaclient_user_provider.class%" >

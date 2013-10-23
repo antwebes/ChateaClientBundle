@@ -27,6 +27,12 @@ class Configuration implements ConfigurationInterface
                     ->integerNode('channel_manager')->min(1)->defaultValue(10)->end()
                     ->integerNode('user_manager')->min(1)->defaultValue(10)->end()
                 ->end()
+            ->end()
+            ->arrayNode('app_auth')
+                ->children()
+                    ->scalarNode('client_id')->end()
+                    ->scalarNode('secret')->end()
+                ->end()
         ->end();
 
         return $treeBuilder;
