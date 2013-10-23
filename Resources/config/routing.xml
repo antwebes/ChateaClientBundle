@@ -13,6 +13,7 @@
     <route id="antwebes_chateaclient_api_error" pattern="/api/error" methods="GET" schemes="HTTP">
         <default key="_controller">ChateaClientBundle:Default:error</default>
     </route>
+    <import resource="@ChateaClientBundle/Controller/SecuredController.php" prefix="/auth" type="annotation" />
     <import resource="@ChateaClientBundle/Resources/config/routing/channels.xml" prefix="/api"/>
     <import resource="@ChateaClientBundle/Resources/config/routing/user.xml" prefix="/api"/>
     <import resource="@ChateaClientBundle/Resources/config/routing/friendship.xml" prefix="/api"/>
