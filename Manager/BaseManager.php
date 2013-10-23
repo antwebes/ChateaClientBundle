@@ -8,7 +8,9 @@ abstract class BaseManager
 {
 	private $apiManager;
 	private $arrayManagers = array();
-	
+    private $managerMap = array('ChannelManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\ChannelManager',
+                                'UserManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserManager'
+                                );
 	public function __construct(ApiManager $apiManager)
 	{
 		$this->apiManager = $apiManager;
@@ -23,16 +25,20 @@ abstract class BaseManager
 	 */
 	public function get($name, $limit)
 	{
-		if (array_key_exists($name, $this->arrayManagers)) {
-			$this->arrayManagers[$name];
-		}
-		$namespace = '\Ant\Bundle\ChateaClientBundle\Manager\\'.$name;
-		$manager = new $namespace($this->apiManager, 25);
-		$this->arrayManagers[$name] = $manager;
-		
-		$model = $manager->getModel();
-		$model::setManager($manager);
-		return $manager;
+        $className = $this->managerMap['$name'];
+        return self::factory($this, $className, $limit);
 	}
+
+    public static function factory(ApiManager $apiManager, $manager_class_name, $limit= 10)
+    {
+        if(array_key_exists($manager_class_name,self::$arrayManagers)){
+            return self::$arrayManagers[$manager_class_name];
+        }
+        $manager = new $manager_class_name($apiManager,$limit);
+        self::$arrayManagers[$manager_class_name] = $manager;
+        $model = $manager->getModel();
+        $model::setManager($manager);
+        return $manager;
+    }
 	
 }

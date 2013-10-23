@@ -15,7 +15,7 @@ class ApiManager extends Api
       *
       * @var array
       */
-     private $repositories = array();
+     private static $repositories = array();
      
     public function __construct(ApiConnection $apiConnection)
     {
@@ -58,17 +58,16 @@ class ApiManager extends Api
     public function getManager($entityName)
     {
     	$entityName = ltrim($entityName, '\\');
-    
+
     	if (isset($this->repositories[$entityName])) {
     		return $this->repositories[$entityName];
     	}
     	$repositoryClassName = ltrim($entityName::MANAGER_CLASS_NAME, '\\');
-    
+
     	$repository = new $repositoryClassName($this,$entityName);
-    
+
     	$this->repositories[$entityName] = $repository;
-    
+
     	return $repository;
     }
-
 }
