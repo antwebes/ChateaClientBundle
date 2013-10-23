@@ -17,7 +17,7 @@ class AuthTokenUpdaterListenerTest extends \PHPUnit_Framework_TestCase
     {
         $this->annotationReader = new AnnotationReader();
         $this->securityContext = $this->getMockForAbstractClass('Symfony\Component\Security\Core\SecurityContextInterface');
-        $this->client = $this->getMockBuilder('Ant\ChateaClient\Service\Client\ChateaGratisClient')
+        $this->client = $this->getMockBuilder('Ant\ChateaClient\Service\Client\ChateaGratisAppClient')
             ->disableOriginalConstructor()
             ->getMock();
         $this->authTokenUpdaterListener = new AuthTokenUpdaterListener($this->annotationReader, $this->securityContext, $this->client);

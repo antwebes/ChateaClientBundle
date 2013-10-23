@@ -5,7 +5,7 @@ use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Ant\ChateaClient\Service\Client\ChateaGratisClient;
+use Ant\ChateaClient\Service\Client\ChateaGratisAppClient;
 use Ant\Bundle\ChateaClientBundle\Security\User\User;
 
 class AuthTokenUpdaterListener
@@ -15,7 +15,7 @@ class AuthTokenUpdaterListener
     private $client;
     private $annotationClass = 'Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser';
 
-    function __construct(Reader $annotationReader, SecurityContextInterface $securityContext, ChateaGratisClient $client)
+    function __construct(Reader $annotationReader, SecurityContextInterface $securityContext, ChateaGratisAppClient $client)
     {
         $this->annotationReader = $annotationReader;
         $this->securityContext = $securityContext;
