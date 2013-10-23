@@ -78,7 +78,8 @@ class UserManager extends BaseManager implements ManagerInterface
 
     public function findMeUser()
     {
-        return $this->meUser;
+        return $this->hydrate($this->getManager()->whoami());
+
     }
 
     public function findProfile($user_id)

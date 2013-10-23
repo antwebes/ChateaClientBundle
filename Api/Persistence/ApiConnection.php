@@ -2,7 +2,7 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Api\Persistence;
 
-use Ant\ChateaClient\Service\Client\ChateaGratisClient;
+use Ant\ChateaClient\Service\Client\ChateaGratisAppClient;
 
 class ApiConnection
 {
@@ -10,7 +10,7 @@ class ApiConnection
 
     private $client = null;
 
-    function __construct(ChateaGratisClient $client)
+    function __construct(ChateaGratisAppClient $client)
     {
         $this->client = $client;
     }
