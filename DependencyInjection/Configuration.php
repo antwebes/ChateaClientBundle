@@ -22,9 +22,10 @@ class Configuration implements ConfigurationInterface
 
         $rootNode->children()
             ->arrayNode('limits')
+                ->addDefaultsIfNotSet()
                 ->children()
-                    ->integerNode('channel_manager')->min(1)->defaultValue('10')->end()
-                    ->integerNode('user_manager')->min(1)->defaultValue('10')->end()
+                    ->integerNode('channel_manager')->min(1)->defaultValue(10)->end()
+                    ->integerNode('user_manager')->min(1)->defaultValue(10)->end()
                 ->end()
         ->end();
 
