@@ -13,11 +13,6 @@ class ChannelManager extends BaseManager implements ManagerInterface
 {
 	protected $limit;
 	
-	public function __construct(ApiManager $apiManager)
-	{
-		parent::__construct($apiManager);
-	}
-
 	public function setLimit($limit)
 	{
 		$this->limit = $limit;

@@ -13,15 +13,11 @@ class UserManager extends BaseManager implements ManagerInterface
     private $limit;
     private $meUser;
 
-    public function __construct(ApiManager $apiManager)
-    {
-        parent::__construct($apiManager);
-//         $this->meUser  = $this->hydrate($this->getManager()->whoami());
-    }
 	public function setLimit($limit)
 	{
 		$this->limit = $limit;
 	}
+	
 	public function hydrate(array $item = null)
     {
         if($item == null){
