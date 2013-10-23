@@ -41,7 +41,7 @@ class Pager implements  Countable
             throw new \InvalidArgumentException("The page field is incorrect");
         }
 
-        $this->lastPage   = ($this->resources % $this->limit == 0 )? $this->total / $this->limit: ( (int)($this->total / $this->limit )  +1 );
+        $this->lastPage   = ($this->total % $this->limit == 0 )? $this->total / $this->limit: ( (int)($this->total / $this->limit )  +1 );
         $this->page = $page;
     }
 
