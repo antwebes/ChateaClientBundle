@@ -11,20 +11,23 @@ Install
     
 2) Añadir no ficheiro de configuracion  ou no routing.yml
 
+```
 antwebes_chateclient:
     resource: '@ChateaClientBundle/Resources/config/routing.xml'
     prefix:   /  
-    
+``` 
     
 3) Configurar client_id y secret de la aplicación en app/config/config.yml:
 
+```
 chatea_client:
     app_auth:
         client_id: id_del_cliente
         secret: secret_del_cliente
+```
 
 4) Configurar el firewall en app/config/security.yml:
-
+```
 security:
     providers:
         antwebs_chateaclient_provider:
@@ -52,6 +55,7 @@ security:
                 path:   _antwebes_chateaclient_logout
                 target: nombre_ruta_a_derigir_tras_logout
                 handlers: [antwewebs_revoke_access_on_logout_handler]
+```
 
 Autenticación
 -------------
@@ -62,7 +66,7 @@ Si desea realizar una llamada a apichatea que requiere un usuario logueado use l
 Dicha anotación averiguará si el usuario está autenticado y en caso de ser así realizara las llamadas 
 a apichatea con el usuario logueado. Ejemplo:
 
-`
+```
 namespace Acme\MiBundel\Controller;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
 
@@ -77,11 +81,12 @@ class UsuarioController
         //código
     }
 }
-`
+```
 
 Si todos los médodos de un controlador requieren un usuario logueado puede poner la anotación en la clase. Ejemplo:
 
-`
+
+```
 namespace Acme\MiBundel\Controller;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
 
@@ -101,4 +106,4 @@ class AreaRestringidaController
         //código
     }
 }
-`
+```
