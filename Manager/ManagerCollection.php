@@ -5,6 +5,8 @@ namespace Ant\Bundle\ChateaClientBundle\Manager;
 use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
+use ArrayCollection;
+use ArrayIterator;
 
 class ManagerCollection implements Countable, IteratorAggregate
 {

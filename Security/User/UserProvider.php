@@ -84,7 +84,7 @@ class UserProvider implements ChateaUserProviderInterface
             $data = $this->authentication->withRefreshToken($user->getRefreshToken());
             return $this->mapJsonToUser($data, $user->getUsername());
         } catch (AuthenticationException $e) {
-            throw new UsernameNotFoundException(sprintf('Incorrect username or password for %s ', $username),30,$e);
+            throw new UsernameNotFoundException(sprintf('Incorrect username or password for %s ', $user->getUsername()),30,$e);
         }
     }
 
