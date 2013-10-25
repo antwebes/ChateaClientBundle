@@ -5,9 +5,7 @@ namespace Ant\Bundle\ChateaClientBundle\Api\Util;
 use Ant\Bundle\ChateaClientBundle\Manager\BaseManager;
 use Ant\Bundle\ChateaClientBundle\Manager\ManagerCollection;
 use Countable;
-use ArrayIterator;
 use IteratorAggregate;
-use Ant\Common\Collections\ArrayCollection;
 
 
 class Pager implements  Countable, IteratorAggregate

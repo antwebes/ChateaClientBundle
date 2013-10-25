@@ -108,30 +108,27 @@ class UserManager extends BaseManager implements ManagerInterface
 
     public function findPhotos($user_id, $page= 1, $limit = null)
     {
-        if($limit == null){
-            $limit = $this->limit;
-        }
-
-        $commnad = new Command('showPhotos',array('user_id'=>$user_id));
-        return  new Pager($this->getManager(),$commnad ,$page, $limit);
-
+        $limit  = $limit == null ? $this->limit : $limit ;
+        return  new Pager($this,new Command('showPhotos',array('user_id'=>$user_id)) ,$page, $limit);
 
     }
     public function findVisit($user_id)
     {
         throw new \Exception("Sen implementar");
     }
-    public function findFriends($user_id)
+    public function findFriends($user_id, $page =1, $limit = null)
     {
+        $limit  = $limit == null ? $this->limit : $limit ;
 
-        $array_data = $this->getManager()->showFriends($user_id);
-
-
-        return  null;
+        return  new Pager($this,new Command('showFriends',array('user_id'=>$user_id)) ,$page, $limit);
     }
     public function findMeFriends($page= 1, $limit = null)
     {
         return $this->findFriends($this->meUser->getId(),$page,$limit);
+    }
+    public function findChannelsFan()
+    {
+        return 'aaaaaaaaaaaaaaaaaaaaaaaaa';
     }
     /**
      * @param \Ant\Bundle\ChateaClientBundle\Api\Model\User $object
@@ -168,9 +165,5 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         $this->getManager()->delMe();
     }
-    
-    public function findChannelsFan()
-    {
-    	return 'aaaaaaaaaaaaaaaaaaaaaaaaa';
-    }
+
 }
