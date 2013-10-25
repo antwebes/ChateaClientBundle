@@ -197,9 +197,9 @@ class User implements BaseModel
         return self::getManager()->findChannlesCreated($this->id);
     }
 
-    public  function getChannelsFan()
+    public  function getFavoriteChannels()
     {
-        return self::getManager()->findChannelsFan($this->id);
+        return self::getManager()->findFavoriteChannels($this->id);
     }
 
     public function getBlockedUsers()

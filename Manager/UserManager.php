@@ -95,17 +95,6 @@ class UserManager extends BaseManager implements ManagerInterface
         */
 
     }
-    public function findChannlesCreatedByUserId($user_id)
-    {
-        $commnad = new Command('showUsersBshowUserChannelslocked',array('user_id'=>$user_id));
-        return  new Pager($this->getManager(),$commnad ,1, $this->limit);
-
-    }
-    public function finChannelsCreatedByMe()
-    {
-        return $this->findChannlesCreatedByUserId($this->meUser->getId());
-    }
-
     public function findPhotos($user_id, $page= 1, $limit = null)
     {
         $limit  = $limit == null ? $this->limit : $limit ;
@@ -126,10 +115,29 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         return $this->findFriends($this->meUser->getId(),$page,$limit);
     }
-    public function findChannelsFan()
+    public function findFavoriteChannels($user_id, $page =1, $limit = null)
     {
-        return 'aaaaaaaaaaaaaaaaaaaaaaaaa';
+        $channelManger = $this->get('ChannelManager');
+        $limit  = $limit == null ? $this->limit : $limit ;
+
+        return  new Pager($channelManger,new Command('showUserChannelsFan',array('user_id'=>$user_id)) ,$page, $limit);
+
     }
+    public function findChannlesCreated($user_id, $page =1, $limit = null)
+    {
+        $channelManger = $this->get('ChannelManager');
+        $limit  = $limit == null ? $this->limit : $limit ;
+
+        $command = new Command('showUserChannels',array('user_id'=>$user_id));
+
+        return  new Pager($channelManger,$command ,$page, $limit);
+
+    }
+    public function finChannelsCreatedByMe()
+    {
+        return $this->findChannlesCreated($this->meUser->getId());
+    }
+
     /**
      * @param \Ant\Bundle\ChateaClientBundle\Api\Model\User $object
      * @return array
