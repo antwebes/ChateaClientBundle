@@ -1,9 +1,9 @@
 <?php
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
-use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
+use Ant\Bundle\ChateaClientBundle\Api\Util\Paginator;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
@@ -61,7 +61,7 @@ class UserManager extends BaseManager implements ManagerInterface
         if($limit == null){
             $limit = $this->limit;
         }
-        $commnad = new Command('showUsersBlocked',array('user'=>$user_id));
+        $commnad = new Command('showUsersBlocked',array('user_id'=>$user_id));
 
         return  new Pager($this->getManager(),$commnad ,$page, $limit);
     }
@@ -84,19 +84,16 @@ class UserManager extends BaseManager implements ManagerInterface
 
     public function findProfile($user_id)
     {
-        $profile = $this->getManager()->showUserProfile($user_id);
-        UserProfileManager::hydrate($profile);
-    }
-
-    public function findMeProfile()
-    {
-        return $this->findProfile($this->meUser->getId());
+        return $this->get('UserProfileManager')->findById($user_id);
     }
 
     public function updateProfile(UserProfile $profile)
     {
+        /*
         $profile = $this->getManager()->updateUserProfile($this->meUser->getId(),$profile->getAbout(),$profile->getSexualOrientation());
         return UserProfileManager::hydrate($profile);
+        */
+
     }
     public function findChannlesCreatedByUserId($user_id)
     {
@@ -124,14 +121,13 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         throw new \Exception("Sen implementar");
     }
-    public function findFriends($user_id, $page= 1, $limit = null)
+    public function findFriends($user_id)
     {
-        if($limit == null){
-            $limit = $this->limit;
-        }
 
-        $commnad = new Command('showFriends',array('user_id'=>$user_id));
-        return  new Pager($this->getManager(),$commnad ,$page, $limit);
+        $array_data = $this->getManager()->showFriends($user_id);
+
+
+        return  null;
     }
     public function findMeFriends($page= 1, $limit = null)
     {

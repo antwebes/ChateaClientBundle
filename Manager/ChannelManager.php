@@ -2,14 +2,13 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 
-use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 use Ant\Bundle\ChateaClientBundle\Api\Collection\ApiCollection;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 
-class ChannelManager extends BaseManager implements ManagerInterface
+class ChannelManager extends BaseManager
 {
 	protected $limit;
 	

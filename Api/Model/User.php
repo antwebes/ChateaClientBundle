@@ -188,7 +188,7 @@ class User implements BaseModel
     public function setProfile(UserProfile $v = null)
     {
 
-        $this->oProfile = self::getManager()->updateProfile($v);
+        $this->oProfile = $v;
 
     }
 
