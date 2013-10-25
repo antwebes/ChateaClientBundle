@@ -8,11 +8,27 @@ use Ant\Bundle\ChateaClientBundle\Api\Query\Filter\ApiFilter;
 
 class ChannelTypeManager extends BaseManager implements ManagerInterface 
 {
-    static public function hydrate(array $item)
+    protected $limit;
+
+    public function setLimit($limit)
+    {
+        $this->limit = $limit;
+    }
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    public function hydrate(array $item = null)
     {
         $name   = array_key_exists('name',$item)?$item['name']:'not-name';
         $id     = array_key_exists('_links',$item) && array_key_exists('channelsType',$item['_links'])?substr($item['_links']['channelsType']['href'],strlen($item['_links']['channelsType']['href'])-1):null;
         return new ChannelType($name, $id);
+    }
+
+    public function getModel()
+    {
+        return 'Ant\Bundle\ChateaClientBundle\Api\Model\ChannelType';
     }
 
     public function findById($id)
@@ -21,7 +37,7 @@ class ChannelTypeManager extends BaseManager implements ManagerInterface
     }
 
 
-    public function findAll($page = 1)
+    public function findAll($page = 1, array $filters = null, $limit= null)
     {
         $array_data = $this->getManager()->showChannelsTypes();
         $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();

@@ -17,7 +17,10 @@ class UserManager extends BaseManager implements ManagerInterface
 	{
 		$this->limit = $limit;
 	}
-	
+	public function getLimit()
+    {
+        return $this->limit;
+    }
 	public function hydrate(array $item = null)
     {
         if($item == null){
@@ -49,21 +52,17 @@ class UserManager extends BaseManager implements ManagerInterface
 
     public function findAll($page = 1, array $filters = null, $limit= null)
     {
-        if($limit == null){
-            $limit = $this->limit;
-        }
-        $commnad = new Command('who',array('filters'=>$filters));
-        return  new Pager($this,$commnad, $page, $limit, $filters);
+        $limit  = $limit == null ? $this->limit : $limit ;
+
+        return  new Pager($this,new Command('who',array('filters'=>$filters)) ,$page, $limit);
 
     }
     public function findBlockedUsers($user_id,$page = 1, $limit= null)
     {
-        if($limit == null){
-            $limit = $this->limit;
-        }
-        $commnad = new Command('showUsersBlocked',array('user_id'=>$user_id));
+        $limit  = $limit == null ? $this->limit : $limit ;
 
-        return  new Pager($this->getManager(),$commnad ,$page, $limit);
+        return  new Pager($this,new Command('showUsersBlocked',array('user_id'=>$user_id)) ,$page, $limit);
+
     }
     public function findMeBlocked($page = 1, $limit= null)
     {
@@ -123,7 +122,7 @@ class UserManager extends BaseManager implements ManagerInterface
         return  new Pager($channelManger,new Command('showUserChannelsFan',array('user_id'=>$user_id)) ,$page, $limit);
 
     }
-    public function findChannlesCreated($user_id, $page =1, $limit = null)
+    public function findChannelsCreated($user_id, $page =1, $limit = null)
     {
         $channelManger = $this->get('ChannelManager');
         $limit  = $limit == null ? $this->limit : $limit ;

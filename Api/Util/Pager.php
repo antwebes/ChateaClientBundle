@@ -20,23 +20,22 @@ class Pager implements  Countable, IteratorAggregate
         $lastPage = 1,
         $filters;
 
-    function __construct(BaseManager $manager, CommandInterface $command, $page = 1, $limit = null)
+    function __construct(BaseManager $manager, CommandInterface $command, $page = 1)
     {
         $page = $page < 1 ? 1: $page;
-        $limit = $limit !== null ? $limit : 1;
-        $offset = ($limit * ($page -1));
+        $this->limit    = $manager->getLimit();
+        $this->offset   = ($this->limit * ($page -1));
 
-        $command->addParam('limit',$limit);
-        $command->addParam('offset',$offset);
+        $command->addParam('limit',$this->limit);
+        $command->addParam('offset',$this->offset);
 
         $array_data = $manager->getManager()->execute($command);
 
-        $this->total = $array_data['total'];
-        $this->limit = $array_data['limit'];
-        $this->offset = $array_data['offset'];
-        $this->_links = $array_data['_links'];
+        $this->total        = $array_data['total'];
+        $this->offset       = $array_data['offset'];
+        $this->_links       = $array_data['_links'];
+        $this->resources    = new ManagerCollection($manager, $array_data['resources']);
 
-        $this->resources = new ManagerCollection($manager, $array_data['resources']);
 
         if(empty($this->resources))
         {
@@ -44,11 +43,8 @@ class Pager implements  Countable, IteratorAggregate
             $this->page = 1;
 
         }else{
-            if($page > 1){
-                throw new \InvalidArgumentException("The page field is incorrect");
-            }
             $this->lastPage   = ($this->total % $this->limit == 0 )? $this->total / $this->limit: ( (int)($this->total / $this->limit )  +1 );
-            $this->page = $page;
+            $this->page =  $this->page > $this->lastPage ? $this->lastPage : $page;
         }
     }
 

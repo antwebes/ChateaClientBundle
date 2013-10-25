@@ -16,7 +16,10 @@ class ChannelManager extends BaseManager
 	{
 		$this->limit = $limit;
 	}
-	
+	public function getLimit()
+    {
+        return $this->limit;
+    }
     public function hydrate(array $item = null)
     {
 
