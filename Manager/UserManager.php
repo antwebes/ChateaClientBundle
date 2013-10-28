@@ -1,9 +1,9 @@
 <?php
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
-use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
+use Ant\Bundle\ChateaClientBundle\Api\Util\Paginator;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
@@ -17,7 +17,10 @@ class UserManager extends BaseManager implements ManagerInterface
 	{
 		$this->limit = $limit;
 	}
-	
+	public function getLimit()
+    {
+        return $this->limit;
+    }
 	public function hydrate(array $item = null)
     {
         if($item == null){
@@ -49,21 +52,17 @@ class UserManager extends BaseManager implements ManagerInterface
 
     public function findAll($page = 1, array $filters = null, $limit= null)
     {
-        if($limit == null){
-            $limit = $this->limit;
-        }
-        $commnad = new Command('who',array('filters'=>$filters));
-        return  new Pager($this->getManager(),$commnad, $page, $limit, $filters);
+        $limit  = $limit == null ? $this->limit : $limit ;
+
+        return  new Pager($this,new Command('who',array('filters'=>$filters)) ,$page, $limit);
 
     }
     public function findBlockedUsers($user_id,$page = 1, $limit= null)
     {
-        if($limit == null){
-            $limit = $this->limit;
-        }
-        $commnad = new Command('showUsersBlocked',array('user'=>$user_id));
+        $limit  = $limit == null ? $this->limit : $limit ;
 
-        return  new Pager($this->getManager(),$commnad ,$page, $limit);
+        return  new Pager($this,new Command('showUsersBlocked',array('user_id'=>$user_id)) ,$page, $limit);
+
     }
     public function findMeBlocked($page = 1, $limit= null)
     {
@@ -84,59 +83,60 @@ class UserManager extends BaseManager implements ManagerInterface
 
     public function findProfile($user_id)
     {
-        $profile = $this->getManager()->showUserProfile($user_id);
-        UserProfileManager::hydrate($profile);
-    }
-
-    public function findMeProfile()
-    {
-        return $this->findProfile($this->meUser->getId());
+        return $this->get('UserProfileManager')->findById($user_id);
     }
 
     public function updateProfile(UserProfile $profile)
     {
+        /*
         $profile = $this->getManager()->updateUserProfile($this->meUser->getId(),$profile->getAbout(),$profile->getSexualOrientation());
         return UserProfileManager::hydrate($profile);
-    }
-    public function findChannlesCreatedByUserId($user_id)
-    {
-        $commnad = new Command('showUsersBshowUserChannelslocked',array('user_id'=>$user_id));
-        return  new Pager($this->getManager(),$commnad ,1, $this->limit);
+        */
 
     }
-    public function finChannelsCreatedByMe()
-    {
-        return $this->findChannlesCreatedByUserId($this->meUser->getId());
-    }
-
     public function findPhotos($user_id, $page= 1, $limit = null)
     {
-        if($limit == null){
-            $limit = $this->limit;
-        }
-
-        $commnad = new Command('showPhotos',array('user_id'=>$user_id));
-        return  new Pager($this->getManager(),$commnad ,$page, $limit);
-
+        $limit  = $limit == null ? $this->limit : $limit ;
+        return  new Pager($this,new Command('showPhotos',array('user_id'=>$user_id)) ,$page, $limit);
 
     }
     public function findVisit($user_id)
     {
         throw new \Exception("Sen implementar");
     }
-    public function findFriends($user_id, $page= 1, $limit = null)
+    public function findFriends($user_id, $page =1, $limit = null)
     {
-        if($limit == null){
-            $limit = $this->limit;
-        }
+        $limit  = $limit == null ? $this->limit : $limit ;
 
-        $commnad = new Command('showFriends',array('user_id'=>$user_id));
-        return  new Pager($this->getManager(),$commnad ,$page, $limit);
+        return  new Pager($this,new Command('showFriends',array('user_id'=>$user_id)) ,$page, $limit);
     }
     public function findMeFriends($page= 1, $limit = null)
     {
         return $this->findFriends($this->meUser->getId(),$page,$limit);
     }
+    public function findFavoriteChannels($user_id, $page =1, $limit = null)
+    {
+        $channelManger = $this->get('ChannelManager');
+        $limit  = $limit == null ? $this->limit : $limit ;
+
+        return  new Pager($channelManger,new Command('showUserChannelsFan',array('user_id'=>$user_id)) ,$page, $limit);
+
+    }
+    public function findChannelsCreated($user_id, $page =1, $limit = null)
+    {
+        $channelManger = $this->get('ChannelManager');
+        $limit  = $limit == null ? $this->limit : $limit ;
+
+        $command = new Command('showUserChannels',array('user_id'=>$user_id));
+
+        return  new Pager($channelManger,$command ,$page, $limit);
+
+    }
+    public function finChannelsCreatedByMe()
+    {
+        return $this->findChannlesCreated($this->meUser->getId());
+    }
+
     /**
      * @param \Ant\Bundle\ChateaClientBundle\Api\Model\User $object
      * @return array
@@ -172,9 +172,5 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         $this->getManager()->delMe();
     }
-    
-    public function findChannelsFan()
-    {
-    	return 'aaaaaaaaaaaaaaaaaaaaaaaaa';
-    }
+
 }

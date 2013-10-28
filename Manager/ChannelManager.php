@@ -2,14 +2,13 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 
-use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 use Ant\Bundle\ChateaClientBundle\Api\Collection\ApiCollection;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 
-class ChannelManager extends BaseManager implements ManagerInterface
+class ChannelManager extends BaseManager
 {
 	protected $limit;
 	
@@ -17,7 +16,10 @@ class ChannelManager extends BaseManager implements ManagerInterface
 	{
 		$this->limit = $limit;
 	}
-	
+	public function getLimit()
+    {
+        return $this->limit;
+    }
     public function hydrate(array $item = null)
     {
 
@@ -26,13 +28,13 @@ class ChannelManager extends BaseManager implements ManagerInterface
         }
         $id             = array_key_exists('id',$item)?$item['id']:0;
         $name           = array_key_exists('name',$item)?$item['name']:'not-name';
-        $url            = array_key_exists('url',$item)?$item['url']:'not-url';
+        $slug            = array_key_exists('slug',$item)?$item['slug']:'not-slug';
         $channel_type   = array_key_exists('channel_type',$item)?$item['channel_type']['name']:'not-channel-type';
         $title          = array_key_exists('title',$item)?$item['title']:'';
         $description    = array_key_exists('description',$item)?$item['description']:'';
         $creator_id     = array_key_exists('_links',$item) && array_key_exists('creator',$item['_links'])?substr($item['_links']['creator']['href'],strlen($item['_links']['creator']['href'])-1):null;
         $parent_id      = array_key_exists('_links',$item) && array_key_exists('parent',$item['_links'])?substr($item['_links']['parent']['href'],strlen($item['_links']['parent']['href'])-1):null;
-        return new Channel($id,$name,$url,$channel_type,$title,$description,$creator_id,$parent_id);
+        return new Channel($id,$name,$slug,$channel_type,$title,$description,$creator_id,$parent_id);
     }
 
     public function getModel()
@@ -55,7 +57,7 @@ class ChannelManager extends BaseManager implements ManagerInterface
 		if (!$limit) $limit = $this->limit;
 		
 		$command = new Command('showChannels',array('filter'=>$filters));
-		return new Pager($this->getManager(),$command, $page, $limit);
+		return new Pager($this,$command, $page, $limit);
 
     }
 

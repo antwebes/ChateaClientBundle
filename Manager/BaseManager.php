@@ -4,7 +4,7 @@ namespace Ant\Bundle\ChateaClientBundle\Manager;
 
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 
-abstract class BaseManager
+abstract class BaseManager implements ManagerInterface
 {
 	private $apiManager;
 	
@@ -23,9 +23,9 @@ abstract class BaseManager
 	/**
 	 * get or create other manager
 	 */
-	public function get($name, $limit)
+	public function get($name)
 	{
-		return FactoryManager::get($this->apiManager, $name, $limit);
+		return FactoryManager::get($this->apiManager, $name);
 	}
 	
 }

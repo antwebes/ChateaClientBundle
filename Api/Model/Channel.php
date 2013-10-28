@@ -56,10 +56,10 @@ class Channel implements BaseModel
     protected $name = '';
 
     /**
-     * The value for the url field.
+     * The value for the slug field.
      * @var        string
      */
-    protected $url = '';
+    protected $slug = '';
 
     /**
      * The value for the title field.
@@ -108,7 +108,7 @@ class Channel implements BaseModel
     function __construct(
         $id = 0,
         $name = '',
-        $url = '',
+        $slug = '',
         $channel_type = '',
         $title = '',
         $description = '',
@@ -118,7 +118,7 @@ class Channel implements BaseModel
 
         $this->id = $id;
         $this->name = $name;
-        $this->url = $url;
+        $this->slug = $slug;
         $this->title = $title;
         $this->description = $description;
         $this->oChannelType = new ChannelType($channel_type);
@@ -183,31 +183,31 @@ class Channel implements BaseModel
     } // setName()
 
     /**
-     * Get the [url] column value.
+     * Get the [slug] column value.
      *
      * @return string
      */
-    public function getUrl()
+    public function getSlug()
     {
-        return $this->url;
+        return $this->slug;
     }
 
     /**
-     * Set the value of [url] column.
+     * Set the value of [slug] column.
      *
      * @param string $v new value
      * @return Channel The current object (for fluent API support)
      */
-    public function setUrl($v)
+    public function setSlug($v)
     {
         if ($v !== null && is_string($v)) {
             $v = (string) $v;
         }
 
-        $this->url = $v;
+        $this->slug = $v;
 
         return $this;
-    } // setUrl()
+    } // setSlug()
 
 
     /**

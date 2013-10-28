@@ -187,24 +187,17 @@ class User implements BaseModel
 
     public function setProfile(UserProfile $v = null)
     {
-
-        $this->oProfile = self::getManager()->updateProfile($v);
-
+        $this->oProfile = $v;
     }
 
     public  function getChannels()
     {
-        return self::getManager()->findChannlesCreated($this->id);
+        return self::getManager()->findChannelsCreated($this->id);
     }
 
-    public  function getChannelsFan()
+    public  function getFavoriteChannels()
     {
-        return self::getManager()->findChannelsFan($this->id);
-    }
-
-    public function getBlockedUsers()
-    {
-        return self::getManager()->findBlockedUsers($this->id);
+        return self::getManager()->findFavoriteChannels($this->id);
     }
     public function getPhotos()
     {
@@ -217,6 +210,11 @@ class User implements BaseModel
     public function getFriends()
     {
         return self::getManager()->findFriends($this->id);
+    }
+
+    public function getBlockedUsers()
+    {
+        return self::getManager()->findBlockedUsers($this->id);
     }
 
     public function __toString()

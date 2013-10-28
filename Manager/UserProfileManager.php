@@ -2,12 +2,13 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
-use Ant\Bundle\ChateaClientBundle\Model\UserProfile;
+use Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile;
+use Ant\ChateaClient\Client\ApiException;
 
 class UserProfileManager extends  BaseManager implements ManagerInterface
 {
 
-    static public function hydrate(array $item = null)
+    public function hydrate(array $item = null)
     {
 
         $id                     = array_key_exists('id',$item)?$item['id']:0;
@@ -22,38 +23,38 @@ class UserProfileManager extends  BaseManager implements ManagerInterface
 
         return new UserProfile($id, $about, $birthday,$count_visits,$gender,$sexual_orientation,$you_want,$updatedAt,$publicated_at);
     }
-
-    /**
-     * List all users
-     *
-     * @param int $page
-     * @param array $filters
-     * @param null $limit
-     * @return Pager
-     */
-    public function findAll($page = 1, array $filters = null, $limit= null)
+    public function getModel()
     {
-        if($limit == null){
-            $limit = 1;
-        }
-        return  new Pager($this->getManager(),'who', $page, $limit, $filters);
+        return 'Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile';
     }
 
-    /**
-     * Find User by ID
-     *
-     * @param $profile_id
-     * @throws \Exception
-     */
-    public function findById($profile_id)
+    public function findAll($page = 1, array $filters = null, $limit= null)
     {
         throw new \Exception("This metod not soported in server yet");
     }
 
+    public function findById($id)
+    {
+        if($id === null || $id === 0 && !$id)
+        {
+            return null;
+        }
+        $profile = new UserProfile();
+        try{
+            $profile = $this->hydrate($this->getManager()->showUserProfile($id));
+        }catch (ApiException $ex){
+        }
+
+        return $profile;
+    }
 
     public function save(&$object)
     {
-        throw new \Exception("This metod not soported in server yet");
+
+        if(!($object instanceof UserProfile)){
+            throw new \InvalidArgumentException("The object has been of type ");
+        }
+        return $this->getManager()->addUserProfile($object->getId(),$object->getAbout(),$object->getSexualOrientation());
     }
 
     public function update(&$object)

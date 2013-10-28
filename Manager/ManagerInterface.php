@@ -5,6 +5,8 @@ namespace Ant\Bundle\ChateaClientBundle\Manager;
 interface ManagerInterface
 {
 	public function hydrate(array $item = null);
+
+    public function getLimit();
 	
 	public function findById($id);
 
