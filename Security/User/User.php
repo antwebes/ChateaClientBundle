@@ -28,7 +28,7 @@ class User implements AdvancedUserInterface
         $this->tokenType = $tokenType;
 
 
-        $this->expired_at = $expiresIn > 0 ? time() + $expiresIn : 0;
+        $this->setExpiresIn($expiresIn);
 
         $this->enabled = true;
         $this->accountNonLocked = true;
@@ -152,5 +152,32 @@ class User implements AdvancedUserInterface
      */
     public function eraseCredentials()
     {
+    }
+
+    /**
+     * Sets the access token
+     * @param string $accessToken
+     */
+    public function setAccessToken($accessToken)
+    {
+        $this->accessToken = $accessToken;
+    }
+
+    /**
+     * Sets the number of seconds from now when the access token expires
+     * @param int expiresIn
+     */
+    public function setExpiresIn($expiresIn)
+    {
+        $this->expired_at = $expiresIn > 0 ? time() + $expiresIn : 0;
+    }
+
+    /**
+     * Sets the refresh token
+     * @param string $refreshToken
+     */
+    public function setRefreshToken($refreshToken)
+    {
+        $this->refreshToken = $refreshToken;
     }
 }

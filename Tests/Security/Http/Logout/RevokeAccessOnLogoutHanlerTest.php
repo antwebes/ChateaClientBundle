@@ -34,8 +34,7 @@ class RevokeAccessOnLogoutHanlerTest extends \PHPUnit_Framework_TestCase
             ->with($this->accessToken);
         $this->client
             ->expects($this->once())
-            ->method('__call')
-            ->with('revokeToken');
+            ->method('revokeToken');
 
         $user = $this->getAuthenticatedUser();
         $this->configureSecurityToken($user);

@@ -77,15 +77,21 @@ class UserProvider implements ChateaUserProviderInterface
         }
 
         if($user->isCredentialsNonExpired()){
-            return $user;
+            
         }
 
-        try {
-            $data = $this->authentication->withRefreshToken($user->getRefreshToken());
-            return $this->mapJsonToUser($data, $user->getUsername());
-        } catch (AuthenticationException $e) {
-            throw new UsernameNotFoundException(sprintf('Incorrect username or password for %s ', $user->getUsername()),30,$e);
+        if(!$user->isCredentialsNonExpired()){
+            try {
+                $data = $this->authentication->withRefreshToken($user->getRefreshToken());
+                $user->setAccessToken($data['access_token']);
+                $user->setRefreshToken($data['refresh_token']);
+                $user->setExpiresIn($data['expires_in']);
+            } catch (AuthenticationException $e) {
+                throw new UsernameNotFoundException(sprintf('Incorrect username or password for %s ', $user->getUsername()),30,$e);
+            }
         }
+
+        return $user;
     }
 
     /**

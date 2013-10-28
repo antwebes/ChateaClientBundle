@@ -1,5 +1,5 @@
 <?php
-namespace Ant\Bundle\ChateaClientBundle\Tests\Security\User;
+namespace Ant\Bundle\ChateaClientBundle\Security\User;
 
 use Ant\Bundle\ChateaClientBundle\Security\User\UserProvider;
 use Ant\Bundle\ChateaClientBundle\Security\User\User;
@@ -59,9 +59,9 @@ class UserProviderTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Symfony\Component\Security\Core\Exception\UsernameNotFoundException
      */
-    public function testLoadUserWhenAuthenticatorThrowsBadResponsException()
+    public function testLoadUserWhenAuthenticatorThrowsUsernameNotFoundException()
     {
-        $exception = $this->getBadResponseException();
+        $exception = $this->getUsernameNotFoundException();
 
         $this->authenticator
             ->expects($this->once())
@@ -94,14 +94,15 @@ class UserProviderTest extends \PHPUnit_Framework_TestCase
 
         $user = $this->getExpectedMockedUser(false);
 
-        $this->assertEquals($this->getExpectedUser(), $this->userProvider->refreshUser($user));
+        $this->assertEquals($user, $this->userProvider->refreshUser($user));
+        $this->assertTrue($user->isCredentialsNonExpired());
     }
 
     private function getResponseToken()
     {
         return array(
                     "access_token" => "321IUKKL",
-                    "expires_in" => "3600",
+                    "expires_in" => 3600,
                     "token_type" => "password",
                     "scope" => "role_1",
                     "refresh_token" => "12HHIIK"
@@ -110,28 +111,44 @@ class UserProviderTest extends \PHPUnit_Framework_TestCase
 
     private function getExpectedUser($isCredentialsNonExpired = true)
     {
-        return new User('username', '321IUKKL', '12HHIIK', 'password', '3600', array('role_1'));
+        return new User('username', '321IUKKL', '12HHIIK', 'password', 3600, array('role_1'));
     }
 
     private function getExpectedMockedUser($isCredentialsNonExpired = true)
     {
-        $user = $this->getMock(
-            'Ant\Bundle\ChateaClientBundle\Security\User\User', 
-            array('isCredentialsNonExpired'),
-            array('username', '321IUKKL', '12HHIIK', 'password', '3600', array('role_1'))
-            );
+        $now = time();
+        TimeHelper::$time = $now;
+        $user = new User('username', '321IUKKL', '12HHIIK', 'password', 3600, array('role_1'));
 
-        $user->expects($this->any())
-            ->method('isCredentialsNonExpired')
-            ->will($this->returnValue($isCredentialsNonExpired));
+        if($isCredentialsNonExpired){
+            TimeHelper::$time = $now + 1000;
+        }else{
+            TimeHelper::$time = $now + 3700;
+        }
         
         return $user;
     }
 
-    private function getBadResponseException()
+    private function getUsernameNotFoundException()
     {
-        return $this->getMockBuilder('Ant\ChateaClient\Client\AuthenticationException')
+        return $this->getMockBuilder('Symfony\Component\Security\Core\Exception\UsernameNotFoundException')
             ->disableOriginalConstructor()
             ->getMock();
     }
+}
+
+if(!function_exists('Ant\Bundle\ChateaClientBundle\Security\User\time')) {
+    function time()
+    {
+        if(TimeHelper::$time != null){
+            return TimeHelper::$time;
+        }else{
+            return \time();
+        }
+    }
+}
+
+class TimeHelper
+{
+    public static $time = null;
 }
