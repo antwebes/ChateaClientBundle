@@ -45,8 +45,12 @@ class RevokeAccessOnLogoutHanler implements LogoutHandlerInterface
 
     private function revokeAccessToken($token)
     {
-        $user = $token->getUser();
-        $this->client->updateAccessToken($user->getAccessToken());
-        $this->client->revokeToken();
+        try {
+            $user = $token->getUser();
+            $this->client->updateAccessToken($user->getAccessToken());
+            $this->client->revokeToken();
+        }catch(\Exception $e){
+
+        }
     }
 }
