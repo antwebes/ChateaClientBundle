@@ -103,30 +103,38 @@ class ChannelManager extends BaseManager
         return $user;
     }
 
-    public function findFans($channel_id)
+    public function findFans($channel_id, $page=1, array $filters = null, $limit= null)
     {
-        if ($channel_id === null || $channel_id === 0 || !$channel_id)
-        {
-            return null;
-        }
+    	if (!$channel_id)
+    	{
+    		return null;
+    	}
+    	
+    	$limit  = $limit == null ? $this->limit : $limit;
+    	
+    	$userManager = $this->get('UserManager');
+    	
+    	return new Pager($userManager,new Command('showChannelFans',array('channel_id'=>$channel_id, 'filters'=>$filters)),$page, $limit);
+    	
         
-        $array_data = $this->getManager()->showChannelFans($channel_id);
+        
+//         $array_data = $this->getManager()->showChannelFans($channel_id);
 	
-        $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();
+//         $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();
 
-        $total = array_key_exists('total',$array_data)?$array_data['total']:0;
-        $page = array_key_exists('page',$array_data)?$array_data['page']:1;
-        $limit = array_key_exists('limit',$array_data)?$array_data['limit']:30;
+//         $total = array_key_exists('total',$array_data)?$array_data['total']:0;
+//         $page = array_key_exists('page',$array_data)?$array_data['page']:1;
+//         $limit = array_key_exists('limit',$array_data)?$array_data['limit']:30;
 
-        $collection = new ApiCollection($total,$page,$limit);
+//         $collection = new ApiCollection($total,$page,$limit);
 
-        foreach($data as $item )
-        {
-        	$userManager = $this->get('UserManager', 25);
-            $user = $userManager->hydrate($item);
-            $collection->add($user);
-        }
-        return $collection;
+//         foreach($data as $item )
+//         {
+//         	$userManager = $this->get('UserManager', 25);
+//             $user = $userManager->hydrate($item);
+//             $collection->add($user);
+//         }
+//         return $collection;
 
     }
 }

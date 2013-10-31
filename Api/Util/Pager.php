@@ -20,10 +20,10 @@ class Pager implements  Countable, IteratorAggregate
         $lastPage = 1,
         $filters;
 
-    function __construct(BaseManager $manager, CommandInterface $command, $page = 1)
+    function __construct(BaseManager $manager, CommandInterface $command, $page = 1, $limit)
     {
         $page = $page < 1 ? 1: $page;
-        $this->limit    = $manager->getLimit();
+        $this->limit    = $limit != null ? $limit : $manager->getLimit();
         $this->offset   = ($this->limit * ($page -1));
 
         $command->addParam('limit',$this->limit);
