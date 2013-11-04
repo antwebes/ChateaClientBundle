@@ -116,25 +116,25 @@ class UserManager extends BaseManager implements ManagerInterface
     }
     public function findFavoriteChannels($user_id, $page =1, $limit = null)
     {
-        $channelManger = $this->get('ChannelManager');
+        $channelManager = $this->get('ChannelManager');
         $limit  = $limit == null ? $this->limit : $limit ;
 
-        return  new Pager($channelManger,new Command('showUserChannelsFan',array('user_id'=>$user_id)) ,$page, $limit);
+        return  new Pager($channelManager,new Command('showUserChannelsFan',array('user_id'=>$user_id)) ,$page, $limit);
 
     }
     public function findChannelsCreated($user_id, $page =1, $limit = null)
     {
-        $channelManger = $this->get('ChannelManager');
+        $channelManager = $this->get('ChannelManager');
         $limit  = $limit == null ? $this->limit : $limit ;
 
         $command = new Command('showUserChannels',array('user_id'=>$user_id));
 
-        return  new Pager($channelManger,$command ,$page, $limit);
+        return  new Pager($channelManager,$command ,$page, $limit);
 
     }
     public function finChannelsCreatedByMe()
     {
-        return $this->findChannlesCreated($this->meUser->getId());
+        return $this->findChannelsCreated($this->meUser->getId());
     }
 
     /**

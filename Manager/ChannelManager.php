@@ -98,8 +98,10 @@ class ChannelManager extends BaseManager
 
     public function findUser($user_id)
     {
-        $user = $userManager->showUser($user_id);
-        UserManager::hydrate($user);   
+    	$userManager = $this->get('UserManager');
+    	
+        $user = $userManager->findById($user_id);
+        UserManager::hydrate($user);
         return $user;
     }
 
