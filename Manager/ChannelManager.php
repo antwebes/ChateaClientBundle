@@ -32,7 +32,7 @@ class ChannelManager extends BaseManager
         $channel_type   = array_key_exists('channel_type',$item)?$item['channel_type']['name']:'not-channel-type';
         $title          = array_key_exists('title',$item)?$item['title']:'';
         $description    = array_key_exists('description',$item)?$item['description']:'';
-        $creator_id     = array_key_exists('_links',$item) && array_key_exists('creator',$item['_links'])?substr($item['_links']['creator']['href'],strlen($item['_links']['creator']['href'])-1):null;
+        $creator_id     = array_key_exists('_links',$item) && array_key_exists('owner',$item['_links'])?substr($item['_links']['owner']['href'],strlen($item['_links']['owner']['href'])-1):null;
         $parent_id      = array_key_exists('_links',$item) && array_key_exists('parent',$item['_links'])?substr($item['_links']['parent']['href'],strlen($item['_links']['parent']['href'])-1):null;
         return new Channel($id,$name,$slug,$channel_type,$title,$description,$creator_id,$parent_id);
     }
@@ -99,9 +99,8 @@ class ChannelManager extends BaseManager
     public function findUser($user_id)
     {
     	$userManager = $this->get('UserManager');
-    	
-        $user = $userManager->findById($user_id);
-        UserManager::hydrate($user);
+    	$user = $userManager->findById($user_id);
+
         return $user;
     }
 
