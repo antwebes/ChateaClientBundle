@@ -66,4 +66,9 @@ class UserProfileManager extends  BaseManager implements ManagerInterface
     {
         throw new \Exception("This metod not soported in server yet");
     }
+
+    public function getLimit()
+    {
+        return $this->limit;
+    }
 }
