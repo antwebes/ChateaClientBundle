@@ -52,11 +52,11 @@ class ChannelManager extends BaseManager
         return $this->hydrate($this->getManager()->showChannel($channel_id));
     }
 
-    public function findAll($page = 1, array $filters = null, $limit = null)
+    public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)
     {
 		if (!$limit) $limit = $this->limit;
 		
-		$command = new Command('showChannels',array('filter'=>$filters));
+		$command = new Command('showChannels',array('filter' => $filters, 'order' => $order));
 		return new Pager($this,$command, $page, $limit);
 
     }

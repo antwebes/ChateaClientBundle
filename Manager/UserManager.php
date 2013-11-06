@@ -50,7 +50,7 @@ class UserManager extends BaseManager implements ManagerInterface
         return $this->hydrate($this->getManager()->showUser($id));
     }
 
-    public function findAll($page = 1, array $filters = null, $limit= null)
+    public function findAll($page = 1, array $filters = null, $limit= null, array $order = null)
     {
         $limit  = $limit == null ? $this->limit : $limit ;
 
