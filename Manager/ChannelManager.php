@@ -28,13 +28,18 @@ class ChannelManager extends BaseManager
         }
         $id             = array_key_exists('id',$item)?$item['id']:0;
         $name           = array_key_exists('name',$item)?$item['name']:'not-name';
-        $slug            = array_key_exists('slug',$item)?$item['slug']:'not-slug';
+        $slug           = array_key_exists('slug',$item)?$item['slug']:'not-slug';
         $channel_type   = array_key_exists('channel_type',$item)?$item['channel_type']['name']:'not-channel-type';
         $title          = array_key_exists('title',$item)?$item['title']:'';
         $description    = array_key_exists('description',$item)?$item['description']:'';
-        $creator_id     = array_key_exists('_links',$item) && array_key_exists('owner',$item['_links'])?substr($item['_links']['owner']['href'],strlen($item['_links']['owner']['href'])-1):null;
-        $parent_id      = array_key_exists('_links',$item) && array_key_exists('parent',$item['_links'])?substr($item['_links']['parent']['href'],strlen($item['_links']['parent']['href'])-1):null;
-        return new Channel($id,$name,$slug,$channel_type,$title,$description,$creator_id,$parent_id);
+        $owner_id     = array_key_exists('owner',$item)?$item['owner']['id']: null;
+        $parent_id      = null;
+        $channel = new Channel($id,$name,$slug,$channel_type,$title,$description,$creator_id,$parent_id);
+        //auto-hydrate
+        if($owner_id){
+            $channel->setCreator($this->findUser($owner_id));
+        }
+        return $channel;
     }
 
     public function getModel()
