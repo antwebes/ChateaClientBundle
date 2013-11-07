@@ -80,12 +80,14 @@ class Channel implements BaseModel
      * @var        int
      */
     protected $owner_id= null;
+    protected $owner_name = null;
 
     /**
      * The value for the parent_id field.
      * @var        int
      */
     protected $parent_id = null;
+
 
 
     /**
@@ -113,6 +115,7 @@ class Channel implements BaseModel
         $title = '',
         $description = '',
         $owner_id = null,
+        $owner_name = '',
         $parent_id = null
     ) {
 
@@ -126,6 +129,7 @@ class Channel implements BaseModel
         $this->oParent = null;
         $this->collFansChannels = new ArrayCollection();
         $this->owner_id = $owner_id;
+        $this->owner_name = $owner_name;
         $this->parent_id = $parent_id;
 
     }
@@ -297,6 +301,10 @@ class Channel implements BaseModel
     {
         return $this->owner_id;
     }
+    public function getOwnerName()
+    {
+        return $this->owner_name;
+    }
 
     /**
      * Set the value of [user_id] column.
@@ -314,11 +322,16 @@ class Channel implements BaseModel
         if ($this->owner_id !== null) {
 
             $this->oOwner = self::getManager()->findUser($this->owner_id);
+            $this->owner_name = $this->oOwner->getName();
         }
 
         return $this;
     } // setUserId()
+    public function setOwnerName($v)
+    {
+        $this->owner_name = $v;
 
+    }
     /**
      * Get the [parent_id] column value.
      *
@@ -358,7 +371,7 @@ class Channel implements BaseModel
     {
 
         if ($this->oOwner === null && ($this->owner_id !== null && $this->owner_id)) {
-            $this->setCreator(self::getManager()->findUser($this->owner_id));
+            $this->setOwner(self::getManager()->findUser($this->owner_id));
         }
         return $this->oOwner;
     }
@@ -378,7 +391,7 @@ class Channel implements BaseModel
         }
 
         $this->oOwner = $v;
-
+        $this->owner_name = $this->oOwner->getName();
         return $this;
     }
 
