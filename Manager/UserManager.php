@@ -155,6 +155,11 @@ class UserManager extends BaseManager implements ManagerInterface
         $this->getManager()->updateUser($object->getUsername(), $object->getEmail(),$object->getPassword());
     }
 
+    public function forgotPassword($usernameOrEmail)
+    {
+        $this->getManager()->forgotPassword($usernameOrEmail);
+    }
+
     /**
      * @param \Ant\Bundle\ChateaClientBundle\Api\Model\User $object
      * @throws \InvalidArgumentException
