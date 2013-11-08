@@ -76,10 +76,10 @@ class Channel implements BaseModel
     protected $description = '';
 
     /**
-     * The value for the user_id field.
+     * The value for the owner_id field.
      * @var        int
      */
-    protected $creator_id = null;
+    protected $owner_id= null;
 
     /**
      * The value for the parent_id field.
@@ -102,7 +102,7 @@ class Channel implements BaseModel
      * @var        User
      * FetchType(fetch=FetchType.EAGER)
      */
-    protected $oCreator = null;
+    protected $oOwner = null;
 
 
     function __construct(
@@ -112,7 +112,7 @@ class Channel implements BaseModel
         $channel_type = '',
         $title = '',
         $description = '',
-        $creator_id = null,
+        $owner_id = null,
         $parent_id = null
     ) {
 
@@ -122,10 +122,10 @@ class Channel implements BaseModel
         $this->title = $title;
         $this->description = $description;
         $this->oChannelType = new ChannelType($channel_type);
-        $this->oCreator = null;
+        $this->oOwner = null;
         $this->oParent = null;
         $this->collFansChannels = new ArrayCollection();
-        $this->creator_id = $creator_id;
+        $this->owner_id = $owner_id;
         $this->parent_id = $parent_id;
 
     }
@@ -289,13 +289,13 @@ class Channel implements BaseModel
     } // setDescription()
 
     /**
-     * Get the [creator_id] column value.
+     * Get the [owner_id] column value.
      *
      * @return int
      */
-    public function getCreatorId()
+    public function getOwnerId()
     {
-        return $this->creator_id;
+        return $this->owner_id;
     }
 
     /**
@@ -304,16 +304,16 @@ class Channel implements BaseModel
      * @param int $v new value
      * @return Channel The current object (for fluent API support)
      */
-    public function setCreatorId($v)
+    public function setOwnerId($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
-        $this->creator_id = $v;
+        $this->owner_id = $v;
 
-        if ($this->creator_id !== null) {
+        if ($this->owner_id !== null) {
 
-            $this->oCreator = self::getManager()->findUser($this->creator_id);
+            $this->oOwner = self::getManager()->findUser($this->owner_id);
         }
 
         return $this;
@@ -354,13 +354,13 @@ class Channel implements BaseModel
     /**
      * @return User|null
      */
-    public function getCreator()
+    public function getOwner()
     {
 
-        if ($this->oCreator === null && ($this->creator_id !== null && $this->creator_id)) {
-            $this->setCreator(self::getManager()->findUser($this->creator_id));
+        if ($this->oOwner === null && ($this->owner_id !== null && $this->owner_id)) {
+            $this->setCreator(self::getManager()->findUser($this->owner_id));
         }
-        return $this->oCreator;
+        return $this->oOwner;
     }
 
     /**
@@ -369,15 +369,15 @@ class Channel implements BaseModel
      * @param  User $v
      * @return Channel The current object (for fluent API support)
      */
-    public function setCreator(User $v = null)
+    public function setOwner(User $v = null)
     {
         if ($v === null) {
-            $this->setCreatorId(NULL);
+            $this->setOwnerId(NULL);
         } else {
-            $this->setCreatorId($v->getId());
+            $this->setOwnerId($v->getId());
         }
 
-        $this->oCreator = $v;
+        $this->oOwner = $v;
 
         return $this;
     }
