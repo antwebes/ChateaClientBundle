@@ -322,7 +322,7 @@ class Channel implements BaseModel
         if ($this->owner_id !== null) {
 
             $this->oOwner = self::getManager()->findUser($this->owner_id);
-            $this->owner_name = $this->oOwner->getName();
+            $this->owner_name = $this->oOwner->getUserName();
         }
 
         return $this;
@@ -391,7 +391,7 @@ class Channel implements BaseModel
         }
 
         $this->oOwner = $v;
-        $this->owner_name = $this->oOwner->getName();
+        $this->owner_name = $this->oOwner->getUserName();
         return $this;
     }
 
