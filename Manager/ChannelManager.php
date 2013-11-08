@@ -33,7 +33,7 @@ class ChannelManager extends BaseManager
         $title          = array_key_exists('title',$item)?$item['title']:'';
         $description    = array_key_exists('description',$item)?$item['description']:'';
         $owner_id       = array_key_exists('owner',$item)?$item['owner']['id']: null;
-        $owner_name     = array_key_exists('owner',$item)?$item['owner']['name']: null;
+        $owner_name     = array_key_exists('owner',$item)?$item['owner']['username']: null;
         $parent_id      = null;
         $channel = new Channel($id,$name,$slug,$channel_type,$title,$description,$owner_id,$owner_name,$parent_id);
 
