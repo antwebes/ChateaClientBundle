@@ -28,7 +28,7 @@ class UserProfileManager extends  BaseManager implements ManagerInterface
         return 'Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile';
     }
 
-    public function findAll($page = 1, array $filters = null, $limit= null)
+    public function findAll($page = 1, array $filters = NULL, $limit = NULL, array $order = NULL)
     {
         throw new \Exception("This metod not soported in server yet");
     }
