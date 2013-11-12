@@ -3,6 +3,7 @@ namespace Ant\Bundle\ChateaClientBundle\Security\User;
 
 use Ant\ChateaClient\Client\Authentication;
 use Ant\ChateaClient\Service\Client\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\AuthenticationException as SymfonyAuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -70,9 +71,8 @@ class UserProvider implements ChateaUserProviderInterface
     public function refreshUser(UserInterface $user)
     {
         if (!$user instanceof User || !is_string($user->getRefreshToken()) || 0 >= strlen($user->getRefreshToken())){
-            
             $ex = new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
-            $this->logger->debug(get_class($this)."::refreshUser()-OUT-", array('UnsupportedUserException'=>$ex));
+            
             throw $ex;
         }
 

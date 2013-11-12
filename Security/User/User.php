@@ -16,12 +16,6 @@ class User implements AdvancedUserInterface
 
     public function __construct($username, $accessToken, $refreshToken, $tokenType = 'Bearer', $expiresIn = 0, array $scopes = array() )
     {
-        //array $roles = array(), $enabled = true, $userNonExpired = true, $credentialsNonExpired = true, $userNonLocked = true
-
-        if (empty($username)) {
-            throw new \InvalidArgumentException('The username cannot be empty.');
-        }
-
         $this->username = $username;
         $this->accessToken = $accessToken;
         $this->refreshToken = $refreshToken;
@@ -86,6 +80,16 @@ class User implements AdvancedUserInterface
     public function getUsername()
     {
         return $this->username;
+    }
+
+    public function getExpiresAt()
+    {
+        return $this->expired_at;
+    }
+
+    public function getScopes()
+    {
+        return $this->scopes;
     }
 
     /**
