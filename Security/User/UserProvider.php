@@ -70,19 +70,21 @@ class UserProvider implements ChateaUserProviderInterface
      */
     public function refreshUser(UserInterface $user)
     {
-        if (!$user instanceof User || !is_string($user->getRefreshToken()) || 0 >= strlen($user->getRefreshToken())){
+        if (!$user instanceof User){
             $ex = new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
             
             throw $ex;
         }
 
-        if($user->isCredentialsNonExpired()){
-            
-        }
-
         if(!$user->isCredentialsNonExpired()){
+            $refresToken = $user->getRefreshToken();
+            
+            if(empty($refresToken)){
+                throw new UsernameNotFoundException(sprintf('Incorrect username or password for %s ', $user->getUsername()),30,null);
+            }
+
             try {
-                $data = $this->authentication->withRefreshToken($user->getRefreshToken());
+                $data = $this->authentication->withRefreshToken($refresToken);
                 $user->setAccessToken($data['access_token']);
                 $user->setRefreshToken($data['refresh_token']);
                 $user->setExpiresIn($data['expires_in']);
