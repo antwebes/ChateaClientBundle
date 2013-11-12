@@ -32,13 +32,11 @@ class ChannelManager extends BaseManager
         $channel_type   = array_key_exists('channel_type',$item)?$item['channel_type']['name']:'not-channel-type';
         $title          = array_key_exists('title',$item)?$item['title']:'';
         $description    = array_key_exists('description',$item)?$item['description']:'';
-        $owner_id     = array_key_exists('owner',$item)?$item['owner']['id']: null;
+        $owner_id       = array_key_exists('owner',$item)?$item['owner']['id']: null;
+        $owner_name     = array_key_exists('owner',$item)?$item['owner']['username']: null;
         $parent_id      = null;
-        $channel = new Channel($id,$name,$slug,$channel_type,$title,$description,$creator_id,$parent_id);
-        //auto-hydrate
-        if($owner_id){
-            $channel->setCreator($this->findUser($owner_id));
-        }
+        $channel = new Channel($id,$name,$slug,$channel_type,$title,$description,$owner_id,$owner_name,$parent_id);
+
         return $channel;
     }
 
@@ -121,26 +119,6 @@ class ChannelManager extends BaseManager
     	$userManager = $this->get('UserManager');
     	
     	return new Pager($userManager,new Command('showChannelFans',array('channel_id'=>$channel_id, 'filters'=>$filters)),$page, $limit);
-    	
-        
-        
-//         $array_data = $this->getManager()->showChannelFans($channel_id);
-	
-//         $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();
-
-//         $total = array_key_exists('total',$array_data)?$array_data['total']:0;
-//         $page = array_key_exists('page',$array_data)?$array_data['page']:1;
-//         $limit = array_key_exists('limit',$array_data)?$array_data['limit']:30;
-
-//         $collection = new ApiCollection($total,$page,$limit);
-
-//         foreach($data as $item )
-//         {
-//         	$userManager = $this->get('UserManager', 25);
-//             $user = $userManager->hydrate($item);
-//             $collection->add($user);
-//         }
-//         return $collection;
 
     }
 }
