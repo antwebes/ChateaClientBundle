@@ -26,13 +26,21 @@ class UserManager extends BaseManager implements ManagerInterface
         if($item == null){
             return new User();
         }
+
         $id             = array_key_exists('id',$item)?$item['id']:0;
         $username       = array_key_exists('username',$item)?$item['username']:'not-username';
         $email          = array_key_exists('email',$item)?$item['email']:true;
         $enabled        = array_key_exists('enabled',$item)?$item['enabled']:true;
         $last_login     = array_key_exists('last_login',$item)?$item['last_login']: new \DateTime('now');
 
-        return new User($id,$username,$email,$last_login,$enabled);
+        $user = new User($id,$username,$email,$last_login,$enabled);
+
+        if(isset($item['profile'])){
+            $userProfile = $this->get('UserProfileManager')->hydrate($item['profile']);
+            $user->setProfile($userProfile);
+        }
+
+        return $user;
     }
     
 	public function getModel()
