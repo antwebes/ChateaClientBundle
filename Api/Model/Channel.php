@@ -319,11 +319,11 @@ class Channel implements BaseModel
         }
         $this->owner_id = $v;
 
-        if ($this->owner_id !== null) {
+        /*if ($this->owner_id !== null) {
 
             $this->oOwner = self::getManager()->findUser($this->owner_id);
             $this->owner_name = $this->oOwner->getUserName();
-        }
+        }*/
 
         return $this;
     } // setUserId()
@@ -373,6 +373,7 @@ class Channel implements BaseModel
         if ($this->oOwner === null && ($this->owner_id !== null && $this->owner_id)) {
             $this->setOwner(self::getManager()->findUser($this->owner_id));
         }
+
         return $this->oOwner;
     }
 
