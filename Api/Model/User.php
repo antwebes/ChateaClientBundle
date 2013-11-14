@@ -39,6 +39,36 @@ class User implements BaseModel
     private $oProfile = NULL;
 
     /**
+     * The value for channels
+     */
+    private $oChannels = NULL;
+
+    /**
+     * The value for favorite channels
+     */
+    private $oFavoriteChannels = NULL;
+
+    /**
+     * The value for blocked users
+     */
+    private $oBlockedUsers = NULL;
+
+    /**
+     * The value for photos
+     */
+    private $oPhotos = NULL;
+
+    /**
+     * The value for visit
+     */
+    private $oVisit = NULL;
+
+    /**
+     * The value for friends
+     */
+    private $oFriends = NULL;
+
+    /**
      * The value for the username field.
      *
      * @var string
@@ -192,29 +222,56 @@ class User implements BaseModel
 
     public  function getChannels()
     {
-        return self::getManager()->findChannelsCreated($this->id);
+        if($this->oChannels === null){
+            $this->oChannels = self::getManager()->findChannelsCreated($this->id);
+        }
+
+        return $this->oChannels;
     }
 
     public  function getFavoriteChannels()
     {
-        return self::getManager()->findFavoriteChannels($this->id);
+        if($this->oFavoriteChannels === null){
+            $this->oFavoriteChannels = self::getManager()->findFavoriteChannels($this->id);
+        }
+
+        return $this->oFavoriteChannels;
     }
+
     public function getPhotos()
     {
-        return self::getManager()->findPhotos($this->id);
+        if($this->oPhotos === null){
+            $this->oPhotos = self::getManager()->findPhotos($this->id);
+        }
+
+        return $this->oPhotos;
     }
+
     public function getVisit()
     {
-        return self::getManager()->findVisit($this->id);
+        if($this->oVisit === null){
+            $this->oVisit = self::getManager()->findVisit($this->id);
+        }
+
+        return $this->oVisit;
     }
+
     public function getFriends()
     {
-        return self::getManager()->findFriends($this->id);
+        if($this->oFriends === null){
+            $this->oFriends = self::getManager()->findFriends($this->id);
+        }
+
+        return $this->oFriends;
     }
 
     public function getBlockedUsers()
     {
-        return self::getManager()->findBlockedUsers($this->id);
+        if($this->oBlockedUsers === null){
+            $this->oBlockedUsers = self::getManager()->findBlockedUsers($this->id);
+        }
+
+        return $this->oBlockedUsers;
     }
 
     public function __toString()
