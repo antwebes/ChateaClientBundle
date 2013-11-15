@@ -37,6 +37,11 @@ class ChannelManager extends BaseManager
         $parent_id      = null;
         $channel = new Channel($id,$name,$slug,$channel_type,$title,$description,$owner_id,$owner_name,$parent_id);
 
+        if(isset($item['owner']) && isset($item['owner']['email'])){
+            $owner = $this->get('UserManager')->hydrate($item['owner']);
+            $channel->setOwner($owner);
+        }
+
         return $channel;
     }
 
