@@ -42,7 +42,28 @@ class ChannelManager extends BaseManager
             $channel->setOwner($owner);
         }
 
+        if(isset($item['fans'])){
+            $fans = $this->mapUsers($item['fans']);
+            $channel->setFans($fans);
+        }
+
+        if(isset($item['moderators'])){
+            $moderators = $this->mapUsers($item['moderators']);
+            $channel->setModerators($moderators);
+        }
+
         return $channel;
+    }
+
+    private function mapUsers($usersMap)
+    {
+        $userManager = $this->get('UserManager');
+
+        $userMapper = function($map) use ($userManager){
+            return $userManager->hydrate($map);
+        };
+
+        return array_map($userMapper, $usersMap);
     }
 
     public function getModel()
