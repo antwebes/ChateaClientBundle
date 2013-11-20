@@ -106,6 +106,15 @@ class Channel implements BaseModel
      */
     protected $oOwner = null;
 
+    /**
+     * @var array
+     */
+    protected $oFans = null;
+
+    /**
+     * @var array
+     */
+    protected $oModerators = null;
 
     function __construct(
         $id = 0,
@@ -426,7 +435,6 @@ class Channel implements BaseModel
         return $this;
     }
 
-
     /**
      * FetchType(fetch=FetchType.LAZY)
      *
@@ -434,7 +442,31 @@ class Channel implements BaseModel
      */
     public function getFans()
     {
-        return self::getManager()->findFans($this->id);
+        if($this->oFans == null){
+            $this->setFans(self::getManager()->findFans($this->id));
+        }
+
+        return $this->oFans;
+    }
+
+    public function setFans($oFans)
+    {
+        $this->oFans = $oFans;
+    }
+
+    /**
+     * FetchType(fetch=FetchType.LAZY)
+     *
+     * @return Collection|Users[] Collection to store aggregation of User objects.
+     */
+    public function getModerators()
+    {
+        return $this->oModerators;
+    }
+
+    public function setModerators($oModerators)
+    {
+        $this->oModerators = $oModerators;
     }
 
     public function __toString()
