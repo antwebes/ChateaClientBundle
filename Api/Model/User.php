@@ -49,6 +49,11 @@ class User implements BaseModel
     private $oFavoriteChannels = NULL;
 
     /**
+     * The value for channels moderated
+     */
+    private $oChannelsModerated = array();
+
+    /**
      * The value for blocked users
      */
     private $oBlockedUsers = NULL;
@@ -229,6 +234,14 @@ class User implements BaseModel
         return $this->oChannels;
     }
 
+    public function setChannels($oChannels)
+    {
+        $this->oChannels = $oChannels;
+    }
+
+    /**
+     * @deprecated
+     */
     public  function getFavoriteChannels()
     {
         if($this->oFavoriteChannels === null){
@@ -236,6 +249,30 @@ class User implements BaseModel
         }
 
         return $this->oFavoriteChannels;
+    }
+
+    public  function getChannelsFan()
+    {
+        if($this->oFavoriteChannels === null){
+            $this->oFavoriteChannels = self::getManager()->findFavoriteChannels($this->id);
+        }
+
+        return $this->oFavoriteChannels;
+    }
+
+    public function setChannelsFan($oFavoriteChannels)
+    {
+        $this->oFavoriteChannels = $oFavoriteChannels;
+    }
+
+    public function getChannelsModerated()
+    {
+        return $this->oChannelsModerated;
+    }
+
+    public function setChannelsModerated($oChannelsModerated)
+    {
+        $this->oChannelsModerated = $oChannelsModerated;
     }
 
     public function getPhotos()
