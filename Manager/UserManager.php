@@ -40,7 +40,30 @@ class UserManager extends BaseManager implements ManagerInterface
             $user->setProfile($userProfile);
         }
 
+        if(isset($item['channels'])){
+            $user->setChannels($this->mapChannels($item['channels']));
+        }
+
+        if(isset($item['channels_fan'])){
+            $user->setChannelsFan($this->mapChannels($item['channels_fan']));
+        }
+
+        if(isset($item['channels_moderated'])){
+            $user->setChannelsModerated($this->mapChannels($item['channels_moderated']));
+        }
+
         return $user;
+    }
+
+    private function mapChannels($channelsMap)
+    {
+        $channelManager = $this->get('ChannelManager');
+
+        $channelMapper = function($map) use ($channelManager){
+            return $channelManager->hydrate($map);
+        };
+
+        return array_map($channelMapper, $channelsMap);
     }
     
 	public function getModel()
