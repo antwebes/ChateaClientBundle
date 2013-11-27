@@ -8,8 +8,9 @@ class FactoryManager
 {
 	static private $arrayManagers = array();
     static private $managerMap = array('ChannelManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\ChannelManager',
-                                        'UserManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserManager',
-                                        'UserProfileManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserProfileManager'
+                                       'PhotoManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoManager',
+                                       'UserManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserManager',
+                                       'UserProfileManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserProfileManager'
                                 );
 	
 	/**
