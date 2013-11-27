@@ -104,6 +104,11 @@ class Photo
         $this->path = $path;
     }
 
+    public function getPath()
+    {
+        return $this->getPath();
+    }
+
     private function _getPath($size)
     {
         if($this->path == null){
