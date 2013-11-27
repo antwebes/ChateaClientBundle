@@ -34,7 +34,7 @@ class UserManager extends BaseManager implements ManagerInterface
         $last_login     = array_key_exists('last_login',$item)?$item['last_login']: new \DateTime('now');
 
         $user = new User($id,$username,$email,$last_login,$enabled);
-ldd($item);
+
         if(isset($item['profile'])){
             $userProfile = $this->get('UserProfileManager')->hydrate($item['profile']);
             $user->setProfile($userProfile);
