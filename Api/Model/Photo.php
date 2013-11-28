@@ -106,7 +106,7 @@ class Photo
 
     public function getPath()
     {
-        return $this->getPath();
+        return $this->path;
     }
 
     private function _getPath($size)
