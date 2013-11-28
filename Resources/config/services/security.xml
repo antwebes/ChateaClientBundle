@@ -5,8 +5,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="antwebs_chateaclient_user_provider.class">Ant\Bundle\ChateaClientBundle\Security\User\UserProvider</parameter>
-        <parameter key="antwebs_chateaclient_authentication_provider.class">Ant\Bundle\ChateaClientBundle\Security\Authentication\AuthenticationProvider</parameter>
         <parameter key="antwebs_chateaclient_authentication.class">Ant\ChateaClient\Client\Authentication</parameter>
         <parameter key="antwebes_chateaclient_lib.client.class">Guzzle\Service\Client</parameter>
         <parameter key="antwebes_chateaclient_lib.factory_client.class">Ant\ChateaClient\Service\Client\ChateaGratisClient</parameter>
@@ -14,7 +12,6 @@
         <parameter key="antwebes_chateaclient_bundle.api_manager.class">Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager</parameter>
         <parameter key="antwewebs_event_listerner_auth_token_updater_listener.class">Ant\Bundle\ChateaClientBundle\EventListener\AuthTokenUpdaterListener</parameter>
         <parameter key="antwewebs_event_listerner_auth_exception_listener.class">Ant\Bundle\ChateaClientBundle\EventListener\AuthExceptionListener</parameter>
-        <parameter key="antwewebs_revoke_access_on_logout_handler.class">Ant\Bundle\ChateaClientBundle\Security\Http\Logout\RevokeAccessOnLogoutHanler</parameter>
         <parameter key="annotation_reader.class">Doctrine\Common\Annotations\AnnotationReader</parameter>
     </parameters>
 
@@ -24,18 +21,6 @@
             <argument type="service" id="antwebes_chateaclient_lib.client_auth" />
             <argument type="string">%chatea_client.app_auth.client_id%</argument>
             <argument type="string">%chatea_client.app_auth.secret%</argument>
-        </service>
-
-        <service id="antwebs_chateaclient_user_provider" class="%antwebs_chateaclient_user_provider.class%" >
-            <argument type="service" id="antwebs_chateaclient_authentication" />
-        </service>
-
-        <service id="security.authentication_provider.antwebs_chateaclient" class="%antwebs_chateaclient_authentication_provider.class%" abstract="true" public="false">
-          <argument /> <!-- User Provider -->
-          <argument type="service" id="security.user_checker" />
-          <argument /> <!-- Provider-shared Key -->
-          <argument type="service" id="security.encoder_factory" />
-          <argument>%security.authentication.hide_user_not_found%</argument>
         </service>
 
         <service id="annotation_reader" class="%annotation_reader.class%" />
@@ -54,9 +39,6 @@
           <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
         </service>
 
-        <service id="antwewebs_revoke_access_on_logout_handler" class="%antwewebs_revoke_access_on_logout_handler.class%">
-          <argument type="service" id="security.context" />
-          <argument type="service" id="antwebes_chateaclient_lib.client" />
-        </service>
+        
     </services>
 </container>
