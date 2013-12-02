@@ -21,6 +21,10 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('chatea_client');
 
         $rootNode->children()
+            ->arrayNode('api_persistence')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->scalarNode("api_manager")->defaultValue("Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager")->end()
             ->arrayNode('limits')
                 ->addDefaultsIfNotSet()
                 ->children()

@@ -41,13 +41,13 @@
         <service id="antwebes_chateaclient_bundle.api.persistence.api_connection" class="%antwebes_chateaclient_bundle.api.persistence.api_connection.class%" public="false">
             <argument type="service" id="antwebes_chateaclient_lib.client" />
         </service>
-
+        <!--
 		<service id="antwebes_chateaclient_bundle.api.persistence.api_manager" 
 				class="%antwebes_chateaclient_bundle.api.persistence.api_manager.class%"
 				public="false">
             <argument type="service" id="antwebes_chateaclient_bundle.api.persistence.api_connection" />
         </service>
-        
+        -->
         <service id="antwebes_client" alias="antwebes_chateaclient_lib.client" synthetic="true" />
     </services>
 </container>
