@@ -13,7 +13,6 @@ class ApiManager extends Api implements ObjectManager
 {
 
      public $apiConnection;
-     private $pager;
      /**
       * The ApiRepository instances.
       *
