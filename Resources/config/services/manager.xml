@@ -21,7 +21,7 @@
                      factory-class="Ant\Bundle\ChateaClientBundle\Manager\FactoryManager"
                      factory-method="factory"
                      public="false">
-                <argument type="service" id="antwebes_chateaclient_bundle.api.persistence.api_manager" />
+                <argument type="service" id="antwebes_chateaclient_manager" />
                 <argument type="string">%antwebes_chateaclient_bundle.manager.channel_manager.class%</argument>
 				<call method="setLimit">
 					<argument type="string">%chatea_client.limits.channel_manager%</argument>	                	
@@ -33,7 +33,7 @@
                      factory-class="Ant\Bundle\ChateaClientBundle\Manager\FactoryManager"
                      factory-method="factory"
                      public="false">
-                <argument type="service" id="antwebes_chateaclient_bundle.api.persistence.api_manager" />
+                <argument type="service" id="antwebes_chateaclient_manager" />
                 <argument type="string">%antwebes_chateaclient_bundle.manager.user_manager.class%</argument>
 				<call method="setLimit">
 					<argument type="string">%chatea_client.limits.user_manager%</argument>	                	
@@ -45,7 +45,7 @@
                      factory-class="Ant\Bundle\ChateaClientBundle\Manager\FactoryManager"
                      factory-method="factory"
                      public="false">
-                <argument type="service" id="antwebes_chateaclient_bundle.api.persistence.api_manager" />
+                <argument type="service" id="antwebes_chateaclient_manager" />
                 <argument type="string">%antwebes_chateaclient_bundle.manager.channel_type_manager.class%</argument>
             </service>
 

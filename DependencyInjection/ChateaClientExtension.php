@@ -35,7 +35,6 @@ class ChateaClientExtension extends Extension
         $container->setParameter('chatea_client.app_auth.client_id', $config['app_auth']['client_id']);
         $container->setParameter('chatea_client.app_auth.secret', $config['app_auth']['secret']);
 
-
         //add manager class
         if (isset($config['api_persistence']['api_manager']) && !empty($config['api_persistence']['api_manager'])) {
             $container->setParameter('antwebes_chateaclient_bundle.api.persistence.api_manager.class', $config['api_persistence']['api_manager']);
@@ -49,7 +48,9 @@ class ChateaClientExtension extends Extension
         $manager->setPublic(false);
 
         //register public manage
-        $container->setDefinition('antwebes_chateaclient_lib.client',"antwebes_chateaclient_bundle.api.persistence.api_manager");
+        $container->setDefinition('antwebes_chateaclient_manager',$manager);
+
+
 
     }
 }

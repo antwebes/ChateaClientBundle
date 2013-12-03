@@ -51,7 +51,8 @@ class ApiManager extends Api implements ObjectManager
             	array_push($arguments,$command->getParam($parameterWhoRequest->getName()));
             }
         };
-        return call_user_func_array(array($this,$command->getName()),$arguments);
+        $responseBody = call_user_func_array(array($this,$command->getName()),$arguments);
+        return $responseBody;
     }
     /**
      * @param string $entityName

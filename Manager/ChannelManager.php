@@ -55,7 +55,7 @@ class ChannelManager extends BaseManager
         return $channel;
     }
 
-    private function mapUsers($usersMap)
+    protected function mapUsers($usersMap)
     {
         $userManager = $this->get('UserManager');
 
@@ -86,6 +86,7 @@ class ChannelManager extends BaseManager
 		if (!$limit) $limit = $this->limit;
 		
 		$command = new Command('showChannels',array('filter' => $filters, 'order' => $order));
+
 		return new Pager($this,$command, $page, $limit);
 
     }
