@@ -41,13 +41,15 @@ class ChateaClientExtension extends Extension
         }
 
         //register internal manager
+
         $manager = new Definition(
-            '%antwebes_chateaclient_bundle.api.persistence.api_manager%',
+            $container->getParameter('antwebes_chateaclient_bundle.api.persistence.api_manager.class'),
                 array(new Reference('antwebes_chateaclient_bundle.api.persistence.api_connection'))
         );
         $manager->setPublic(false);
 
         //register public manage
+        $container->setDefinition('antwebes_chateaclient_bundle.api.persistence.api_manager',$manager);
         $container->setDefinition('antwebes_chateaclient_manager',$manager);
 
 
