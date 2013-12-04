@@ -14,9 +14,8 @@
 	"license" : "MIT",
 	"require" : {
         "symfony/framework-bundle": "~2.3",
-        "pagerfanta/pagerfanta": "1.0.*@dev",
         "antwebes/chatea-common": "dev-master",
-		"antwebes/chatea-client-lib" : "dev-master"
+        "antwebes/chatea-client-lib": "dev-develop"
 	},
     "require-dev": {
         "raulfraile/ladybug": "~1.0"
