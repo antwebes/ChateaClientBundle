@@ -23,6 +23,7 @@
     "autoload": {
         "psr-0": { "Ant\\Bundle\\ChateaClientBundle": "" }
     },
-    "target-dir": "Ant/Bundle/ChateaClientBundle"
+    "target-dir": "Ant/Bundle/ChateaClientBundle",
+    "minimum-stability": "dev"
 
 }
