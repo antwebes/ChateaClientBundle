@@ -3,6 +3,7 @@
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ObjectManager;
 
 class FactoryManager
 {
@@ -25,7 +26,7 @@ class FactoryManager
         return self::factory($apiManager, $className);
 	}
 
-    static public function factory(ApiManager $apiManager, $manager_class_name)
+    static public function factory(ObjectManager $apiManager, $manager_class_name)
     {
         if(array_key_exists($manager_class_name,self::$arrayManagers)){
             return self::$arrayManagers[$manager_class_name];
@@ -36,5 +37,8 @@ class FactoryManager
         $model::setManager($manager);
         return $manager;
     }
-	
+
+    static public function setObjectManagerInMap($key,$value){
+        self::$arrayManagers[$key]=$value;
+    }
 }

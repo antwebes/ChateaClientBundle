@@ -3,12 +3,13 @@
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ObjectManager;
 
 abstract class BaseManager implements ManagerInterface
 {
 	private $apiManager;
 	
-	public function __construct(ApiManager $apiManager)
+	public function __construct(ObjectManager $apiManager)
 	{
 		$this->apiManager = $apiManager;
 	}
