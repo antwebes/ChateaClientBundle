@@ -80,6 +80,11 @@ class User implements BaseModel
     private $oFriends = NULL;
 
     /**
+     * The value for city
+     */
+    private $oCity = NULL;
+
+    /**
      * The value for the username field.
      *
      * @var string
@@ -289,6 +294,16 @@ class User implements BaseModel
     public function setChannelsModerated($oChannelsModerated)
     {
         $this->oChannelsModerated = $oChannelsModerated;
+    }
+
+    public function getCity()
+    {
+        return $this->oCity;
+    }
+
+    public function setCity($oCity)
+    {
+        $this->oCity = $oCity;
     }
 
     public function getPhotos()

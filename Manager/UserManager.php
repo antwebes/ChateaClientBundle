@@ -7,6 +7,7 @@ use Ant\Bundle\ChateaClientBundle\Api\Util\Paginator;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
+use Ant\Bundle\ChateaClientBundle\Api\Model\City;
 
 class UserManager extends BaseManager implements ManagerInterface
 {
@@ -55,6 +56,13 @@ class UserManager extends BaseManager implements ManagerInterface
 
         if(isset($item['channels_moderated'])){
             $user->setChannelsModerated($this->mapChannels($item['channels_moderated']));
+        }
+
+        if(isset($item['city']) && isset($item['city']['name'])){
+            $city = new City();
+
+            $city->setName($item['city']['name']);
+            $user->setCity($city);
         }
 
         return $user;
