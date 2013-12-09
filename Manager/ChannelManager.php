@@ -109,7 +109,7 @@ class ChannelManager extends BaseManager
 
         $newChannel = $this->getManager()->addChanel($object->getName(),$object->getTitle(),$object->getDescription());
 
-        $object = $this->hydrate($newChannel->toArray());
+        $object = $this->hydrate($newChannel);
 
     }
 
@@ -118,10 +118,18 @@ class ChannelManager extends BaseManager
         if(!($object instanceof Channel)){
             throw new \InvalidArgumentException('The parameter have been of type Channel');
         }
-        $updateChannel = $this->getManager()->updateChannel($object->getId(),$object->getName(),$object->getTitle(),$object->getDescription(),$object->getChannelType());
 
+        $updateChannel = $this->getManager()->updateChannel(
+            $object->getId(),
+            $object->getName(),
+            $object->getSlug(),
+            $object->getIrcChannel(),
+            $object->getTitle(),
+            $object->getDescription(),
+            $object->getChannelType()->getName()
+        );
 
-        $object = $this->hydrate($updateChannel->toArray());
+        $object = $this->hydrate($updateChannel);
     }
     /**
      * Removes an object instance.

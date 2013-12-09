@@ -52,16 +52,15 @@ class Channel implements BaseModel
      *
      * @NotBlank
      * @Length(min=4)
-     *
      * @var        string
      */
-    protected $name = '';
+    protected $name;
 
     /**
      * The value for the slug field.
      * @var        string
      */
-    protected $slug = '';
+    protected $slug;
 
     /**
      * @var
@@ -79,7 +78,7 @@ class Channel implements BaseModel
     /**
      * The value for the description field.
      * @var        string
-     * @Length(min=4)
+     * Length(min=4)
      */
     protected $description = '';
     /**
@@ -93,6 +92,10 @@ class Channel implements BaseModel
      */
     protected $oOwner = null;
 
+    /**
+     * @var Channel
+     */
+    private  $oParent;
     /**
      * @var array
      */
@@ -287,6 +290,21 @@ class Channel implements BaseModel
     }
 
     /**
+     * @return Channel
+     */
+    public function getParent()
+    {
+        return $this->oParent;
+    }
+
+    /**
+     * @param Channel $v
+     */
+    public function setParent(Channel $v = null)
+    {
+        $this->oParent = $v;
+    }
+    /**
      * FetchType(fetch=FetchType.LAZY)
      *
      * @return Collection|Users[] Collection to store aggregation of User objects.
@@ -346,7 +364,7 @@ class Channel implements BaseModel
     /**
      * @return boolean
      */
-    public function getEnabled()
+    public function isEnabled()
     {
         return $this->enabled;
     }

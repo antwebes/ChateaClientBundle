@@ -2,9 +2,9 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 
-use Ant\Bundle\ChateaClientBundle\Api\Collection\ApiCollection;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChannelType;
-use Ant\Bundle\ChateaClientBundle\Api\Query\Filter\ApiFilter;
+use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
+use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 
 class ChannelTypeManager extends BaseManager implements ManagerInterface 
 {
@@ -37,17 +37,17 @@ class ChannelTypeManager extends BaseManager implements ManagerInterface
     }
 
 
-    public function findAll($page = 1, array $filters = null, $limit= null, array $order = null)
+    public function findAll($page = null, array $filters = null, $limit= null, array $order = null)
     {
-        $array_data = $this->getManager()->showChannelsTypes();
-        $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();
-        $collection = new ApiCollection($array_data['total'],$array_data['page'],$array_data['limit']);
-        foreach($data as $item )
-        {
-            $channelType = $this->hydrate($item);
-            $collection->add($channelType);
+
+        $command = new Command('showChannelsTypes',array());
+        $array_data = $this->getManager()->execute($command);
+        $array_data = array_key_exists('resources',$array_data)? $array_data['resources'] : array();
+        $data = array();
+        foreach($array_data as $item){
+            array_push($data,$this->hydrate($item));
         }
-        return $collection;
+        return $data;
     }
 
     public function save(&$object)
