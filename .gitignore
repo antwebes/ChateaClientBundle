@@ -10,9 +10,9 @@ web/bundles/*
 web/css/*
 web/js/*
 web/uploads/*
+
 # -- Composer -----------------------------------------
 composer.phar
-composer.lock
 
 # -- PHPUnit ------------------------------------------
 app/phpunit.xml  
@@ -43,6 +43,27 @@ local.properties
 *.launch
 .buildpath
 
+# phpstorm
+.idea
+.idea/
+
+# textmate
+*.tmproj
+*.tmproject
+tmtags
+
+# sublimetext
+/*.sublime-project
+*.sublime-workspace
+
+# netbeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
 
 # -- Sistemas Operativos ------------------------------
 # Windows
@@ -54,6 +75,7 @@ $RECYCLE.BIN/
 # Linux
 .*
 !.gitignore
+!.htaccess
 *~
 
 # Mac OS X

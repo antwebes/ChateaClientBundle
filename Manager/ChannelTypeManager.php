@@ -37,7 +37,7 @@ class ChannelTypeManager extends BaseManager implements ManagerInterface
     }
 
 
-    public function findAll($page = 1, array $filters = null, $limit= null)
+    public function findAll($page = 1, array $filters = null, $limit= null, array $order = null)
     {
         $array_data = $this->getManager()->showChannelsTypes();
         $data = array_key_exists('resources',$array_data)?$array_data['resources']: array();

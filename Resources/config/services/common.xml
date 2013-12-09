@@ -5,7 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="antwebes_chateaclient_lib.client.class">Guzzle\Service\Client</parameter>
+        <parameter key="antwebes_chateaclient_lib.client.class">Ant\ChateaClient\Service\Client\ChateaGratisClient</parameter>
         <parameter key="antwebes_chateaclient_lib.factory_client_app.class">Ant\ChateaClient\Service\Client\ChateaGratisAppClient</parameter>
         <parameter key="antwebes_chateaclient_lib.factory_client_auth.class">Ant\ChateaClient\Service\Client\ChateaOAuth2Client</parameter>
         <parameter key="antwebes_chateaclient_lib.api.class">Ant\ChateaClient\Client\Api</parameter>
@@ -41,13 +41,13 @@
         <service id="antwebes_chateaclient_bundle.api.persistence.api_connection" class="%antwebes_chateaclient_bundle.api.persistence.api_connection.class%" public="false">
             <argument type="service" id="antwebes_chateaclient_lib.client" />
         </service>
-
+        <!--
 		<service id="antwebes_chateaclient_bundle.api.persistence.api_manager" 
 				class="%antwebes_chateaclient_bundle.api.persistence.api_manager.class%"
 				public="false">
             <argument type="service" id="antwebes_chateaclient_bundle.api.persistence.api_connection" />
         </service>
-        
+        -->
         <service id="antwebes_client" alias="antwebes_chateaclient_lib.client" synthetic="true" />
     </services>
 </container>

@@ -12,9 +12,13 @@ class ManagerCollection implements Countable, IteratorAggregate
 {
     private $elements = array();
     private $manager = null;
-    function __construct(BaseManager $manager, array $elements = array())
+    function __construct(BaseManager $manager, array $elements = null)
     {
         $this->manager = $manager;
+
+        if($elements == null){
+            return;
+        }
 
         foreach($elements as $item){
             array_push($this->elements,$this->manager->hydrate($item));
