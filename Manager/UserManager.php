@@ -22,12 +22,16 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         return $this->limit;
     }
-	public function hydrate(array $item = null)
+	public function hydrate(array $item = null, User $user = null)
     {
         if($item == null){
             return new User();
         }
-        $user = new User();
+
+        if($user == null){
+            $user = new User();
+        }
+        
         $user->setId(array_key_exists('id',$item)?$item['id']:0);
         $user->setUsername(array_key_exists('username',$item)?$item['username']:'not-username');
         $user->setEmail(array_key_exists('email',$item)?$item['email']:'not-email');

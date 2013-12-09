@@ -16,6 +16,10 @@ class ManagerCollection implements Countable, IteratorAggregate
     {
         $this->manager = $manager;
 
+        if($elements == null){
+            return;
+        }
+
         foreach($elements as $item){
             array_push($this->elements,$this->manager->hydrate($item));
         }
