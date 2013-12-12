@@ -11,7 +11,8 @@ class FactoryManager
     static private $managerMap = array('ChannelManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\ChannelManager',
                                        'PhotoManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoManager',
                                        'UserManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserManager',
-                                       'UserProfileManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserProfileManager'
+                                       'UserProfileManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserProfileManager',
+                                       'AffiliateManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\AffiliateManager'
                                 );
 	
 	/**

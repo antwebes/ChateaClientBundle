@@ -11,6 +11,7 @@ use Ant\Common\Collections\Collection;
 
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
 
 /**
  * Class Channel
@@ -25,6 +26,7 @@ class Channel implements BaseModel
 	const MANAGER_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Manager\\ChannelManager';
 	
     static $manager;
+
 
     public static function  setManager($manager)
     {
@@ -50,17 +52,22 @@ class Channel implements BaseModel
      *
      * @NotBlank
      * @Length(min=4)
-     *
      * @var        string
      */
-    protected $name = '';
+    protected $name;
 
     /**
      * The value for the slug field.
      * @var        string
      */
-    protected $slug = '';
+    protected $slug;
 
+    /**
+     * @var
+     * Regex(pattern="/([#&]w+)/", message = "Irc_Channel is not valid.");
+     */
+    //TODO REGEX this
+    protected $irc_channel;
     /**
      * The value for the title field.
      * @var        string
@@ -71,34 +78,13 @@ class Channel implements BaseModel
     /**
      * The value for the description field.
      * @var        string
-     * @Length(min=4)
+     * Length(min=4)
      */
     protected $description = '';
-
     /**
-     * The value for the owner_id field.
-     * @var        int
+     * @var bool
      */
-    protected $owner_id= null;
-    protected $owner_name = null;
-
-    /**
-     * The value for the parent_id field.
-     * @var        int
-     */
-    protected $parent_id = null;
-
-
-
-    /**
-     * @var ChannelType
-     */
-    protected $oChannelType = null;
-
-    /**
-     * @var        Channel
-     */
-    protected $oParent = null;
+    private $enabled;
 
     /**
      * @var        User
@@ -107,41 +93,26 @@ class Channel implements BaseModel
     protected $oOwner = null;
 
     /**
+     * @var Channel
+     */
+    private  $oParent;
+    /**
      * @var array
      */
     protected $oFans = null;
+
+    /**
+     * @var ChannelType
+     */
+    protected $oChannelType = null;
 
     /**
      * @var array
      */
     protected $oModerators = null;
 
-    function __construct(
-        $id = 0,
-        $name = '',
-        $slug = '',
-        $channel_type = '',
-        $title = '',
-        $description = '',
-        $owner_id = null,
-        $owner_name = '',
-        $parent_id = null
-    ) {
 
-        $this->id = $id;
-        $this->name = $name;
-        $this->slug = $slug;
-        $this->title = $title;
-        $this->description = $description;
-        $this->oChannelType = new ChannelType($channel_type);
-        $this->oOwner = null;
-        $this->oParent = null;
-        $this->collFansChannels = new ArrayCollection();
-        $this->owner_id = $owner_id;
-        $this->owner_name = $owner_name;
-        $this->parent_id = $parent_id;
-
-    }
+    protected $oCity = null;
 
     /**
      * Get the [id] column value.
@@ -230,6 +201,7 @@ class Channel implements BaseModel
      */
     public function getChannelType()
     {
+
         return $this->oChannelType;
     }
 
@@ -241,10 +213,8 @@ class Channel implements BaseModel
      */
     public function setChannelType(ChannelType $v)
     {
-
         $this->oChannelType = $v;
 
-        return $this;
     } // setChannelType()
 
     /**
@@ -265,13 +235,12 @@ class Channel implements BaseModel
      */
     public function setTitle($v)
     {
-        if ($v !== null && is_numeric($v)) {
+        if ($v !== null && is_string($v)) {
             $v = (string) $v;
         }
 
         $this->title = $v;
 
-        return $this;
     } // setTitle()
 
     /**
@@ -292,7 +261,7 @@ class Channel implements BaseModel
      */
     public function setDescription($v)
     {
-        if ($v !== null && is_numeric($v)) {
+        if ($v !== null && is_string($v)) {
             $v = (string) $v;
         }
 
@@ -302,87 +271,10 @@ class Channel implements BaseModel
     } // setDescription()
 
     /**
-     * Get the [owner_id] column value.
-     *
-     * @return int
-     */
-    public function getOwnerId()
-    {
-        return $this->owner_id;
-    }
-    public function getOwnerName()
-    {
-        return $this->owner_name;
-    }
-
-    /**
-     * Set the value of [user_id] column.
-     *
-     * @param int $v new value
-     * @return Channel The current object (for fluent API support)
-     */
-    public function setOwnerId($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
-        }
-        $this->owner_id = $v;
-
-        /*if ($this->owner_id !== null) {
-
-            $this->oOwner = self::getManager()->findUser($this->owner_id);
-            $this->owner_name = $this->oOwner->getUserName();
-        }*/
-
-        return $this;
-    } // setUserId()
-    public function setOwnerName($v)
-    {
-        $this->owner_name = $v;
-
-    }
-    /**
-     * Get the [parent_id] column value.
-     *
-     * @return int
-     */
-    public function getParentId()
-    {
-        return $this->parent_id;
-    }
-
-    /**
-     * Set the value of [parent_id] column.
-     *
-     * @param int $v new value
-     * @return Channel The current object (for fluent API support)
-     */
-    public function setParentId($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
-        }
-
-        $this->parent_id = $v;
-
-        if ($this->parent_id !== null) {
-
-            $this->oParent = self::getManager()->findById($this->parent_id);
-        }
-
-        return $this;
-    } // setParentId()
-
-    /**
      * @return User|null
      */
     public function getOwner()
     {
-
-        if ($this->oOwner === null && ($this->owner_id !== null && $this->owner_id)) {
-            $this->setOwner(self::getManager()->findUser($this->owner_id));
-        }
-
         return $this->oOwner;
     }
 
@@ -394,47 +286,24 @@ class Channel implements BaseModel
      */
     public function setOwner(User $v = null)
     {
-        if ($v === null) {
-            $this->setOwnerId(NULL);
-        } else {
-            $this->setOwnerId($v->getId());
-        }
-
         $this->oOwner = $v;
-        $this->owner_name = $this->oOwner->getUserName();
-        return $this;
     }
 
-    public function  getParent()
+    /**
+     * @return Channel
+     */
+    public function getParent()
     {
-
-
-        if ($this->oParent === null && ($this->parent_id !== null && $this->parent_id)) {
-            $this->setParent(self::getManager()->findById($this->parent_id));
-        }
-
         return $this->oParent;
     }
 
     /**
-     * Declares an association between this object and a User object.
-     *
-     * @param  Channel $v
-     * @return Channel The current object (for fluent API support)
+     * @param Channel $v
      */
     public function setParent(Channel $v = null)
     {
-        if ($v === null) {
-            $this->setParentId(NULL);
-        } else {
-            $this->setParentId($v->getId());
-        }
-
         $this->oParent = $v;
-
-        return $this;
     }
-
     /**
      * FetchType(fetch=FetchType.LAZY)
      *
@@ -469,6 +338,45 @@ class Channel implements BaseModel
         $this->oModerators = $oModerators;
     }
 
+    /**
+     * @param mixed $irc_channel
+     */
+    public function setIrcChannel($irc_channel)
+    {
+        $this->irc_channel = $irc_channel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIrcChannel()
+    {
+        return $this->irc_channel;
+    }
+    /**
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    public function getCity()
+    {
+        return $this->oCity;
+    }
+    public function setCity(City $v)
+    {
+        $this->oCity = $v;
+    }
     public function __toString()
     {
         return $this->name;

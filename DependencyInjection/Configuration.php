@@ -31,6 +31,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->integerNode('channel_manager')->min(1)->defaultValue(10)->end()
                         ->integerNode('user_manager')->min(1)->defaultValue(10)->end()
+                        ->integerNode('report_manager')->min(1)->defaultValue(10)->end()
                     ->end()
                 ->end()
                 ->arrayNode('app_auth')

@@ -22,40 +22,46 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         return $this->limit;
     }
-	public function hydrate(array $item = null)
+	public function hydrate(array $item = null, User $user = null)
     {
         if($item == null){
             return new User();
         }
 
-        $id             = array_key_exists('id',$item)?$item['id']:0;
-        $username       = array_key_exists('username',$item)?$item['username']:'not-username';
-        $email          = array_key_exists('email',$item)?$item['email']:true;
-        $enabled        = array_key_exists('enabled',$item)?$item['enabled']:true;
-        $last_login     = array_key_exists('last_login',$item)?$item['last_login']: new \DateTime('now');
+        if($user == null){
+            $user = new User();
+        }
+        
+        $user->setId(array_key_exists('id',$item)?$item['id']:0);
+        $user->setUsername(array_key_exists('username',$item)?$item['username']:'not-username');
+        $user->setEmail(array_key_exists('email',$item)?$item['email']:'not-email');
+        $user->setNick(array_key_exists('nick',$item)?$item['nick']:'not-nick');
 
-        $user = new User($id,$username,$email,$last_login,$enabled);
+        if(isset($item['affiliate'])){
+            $affiliate = $this->get('AffiliateManager')->hydrate($item['affiliate']);
+            $user->setAffiliate($affiliate);
+        }
+        if(isset($item['channels_fan'])){
+            $user->setChannelsFan($this->mapChannels($item['channels_fan']));
+        }
 
         if(isset($item['profile'])){
             $userProfile = $this->get('UserProfileManager')->hydrate($item['profile']);
             $user->setProfile($userProfile);
         }
 
+        if(isset($item['channels_moderated'])){
+            $user->setChannelsModerated($this->mapChannels($item['channels_moderated']));
+        }
+
         if(isset($item['profile_photo'])){
             $userProfilePhoto = $this->get('PhotoManager')->hydrate($item['profile_photo']);
             $user->setProfilePhoto($userProfilePhoto);
-        }        
-
-        if(isset($item['channels'])){
-            $user->setChannels($this->mapChannels($item['channels']));
         }
 
-        if(isset($item['channels_fan'])){
-            $user->setChannelsFan($this->mapChannels($item['channels_fan']));
-        }
-
-        if(isset($item['channels_moderated'])){
-            $user->setChannelsModerated($this->mapChannels($item['channels_moderated']));
+        if(isset($item['profile'])){
+            $userProfile = $this->get('UserProfileManager')->hydrate($item['profile']);
+            $user->setProfile($userProfile);
         }
 
         if(isset($item['city']) && isset($item['city']['name'])){
