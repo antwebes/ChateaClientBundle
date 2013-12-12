@@ -4,7 +4,6 @@ namespace Ant\Bundle\ChateaClientBundle\Manager;
 
 use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
-use Ant\Bundle\ChateaClientBundle\Api\Collection\ApiCollection;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Photo;
 
 class PhotoManager extends BaseManager
@@ -78,7 +77,7 @@ class PhotoManager extends BaseManager
         throw new \Exception('This method is not enabled');
 
 		/*if (!$limit) $limit = $this->limit;
-		
+
 		$command = new Command('showChannels',array('filter' => $filters, 'order' => $order));
 		return new Pager($this,$command, $page, $limit);*/
 
