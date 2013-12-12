@@ -53,8 +53,11 @@ class ChannelManager extends BaseManager
             $channel->setFans($fans);
         }
         if(isset($item['channel_type']) && isset($item['channel_type']['name'])){
+            $channelType = new ChannelType();
+            $channelType->setId(array_key_exists('id', $item['channel_type'])?$item['channel_type']['id']:0);
+            $channelType->setName(array_key_exists('id', $item['channel_type'])?$item['channel_type']['name']:'');
 
-            $channel->setChannelType(new ChannelType($item['channel_type']['name'], $item['channel_type']['id']));
+            $channel->setChannelType($channelType);
         }
         $channel->setEnabled(array_key_exists('enabled',$item)?$item['enabled']:false);
 
