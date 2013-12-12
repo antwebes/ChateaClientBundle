@@ -41,6 +41,11 @@ class PhotoManager extends BaseManager
             $photo->setPhotoAlbum($photoAlbum);
         }
 
+        if(isset($item['participant']) && isset($item['participant']['id'])){
+            $participant = $this->get('UserManager')->hydrate($item['participant']);
+            $photo->setParticipant($participant);
+        }
+
         if(isset($item['votes'])){
             $votes = $item['votes'];
             foreach($votes as $vote){
