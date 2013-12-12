@@ -1,87 +1,224 @@
 <?php
 
 namespace Ant\Bundle\ChateaClientBundle\Api\Model;
+use DateTime;
+use Ant\Bundle\ChateaClientBundle\Manager\PhotoManager;
+use Ant\Bundle\ChateaClientBundle\Api\Model\PhotoAlbum;
+use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 
-
-class Photo
+/**
+ * Class Photo
+ * @package Ant\Bundle\ChateaClientBundle\Api\Model
+ */
+class Photo implements BaseModel
 {
+
     /**
      * Manager class name
      */
-    const MANAGER_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Manager\\UserManager';
+    const MANAGER_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Manager\\PhotoManager';
 
-    private static $manager;
+    static $manager;
 
-    private $id;
-
-    private $title;
-
-    private $publicatedAt;
-
-    private $numberVotes = 0;
-
-    private $score = 0;
-
-    private $path;
 
     public static function  setManager($manager)
     {
-        self::$manager = $manager;
+        if ($manager instanceof PhotoManager){
+            self::$manager = $manager;
+        }else throw new \Exception("Channel need a manager instanceof PhotoManager");
     }
-
-    public static function  getManager()
+    public static function getManager()
     {
         return self::$manager;
     }
+    /**
+     * @var int the ID of photo
+     */
+    private $id;
 
-    public function getId()
-    {
-        return $this->id;
-    }
+    /**
+     * @var User
+     */
+    private $oParticipant;
 
+    /**
+     * @var \Doctrine\Common\Collections\CollectionCollection $oVotes
+     */
+    private $oVotes;
+    /**
+     * @var DateTime $publicated_at
+     */
+    private $publicated_at;
+
+    /**
+     * @var string $path
+     */
+    private $path;
+    /**
+     * @var string $title
+     */
+    private $title;
+
+    /**
+     * @var int $number_votes
+     */
+    private $number_votes = 0;
+    /**
+     * @var int $score
+     */
+    private $score = 0;
+
+    /**
+     * @var PhotoAlbum
+     */
+    private $oAlbum;
+
+    /**
+     * @param int $id
+     */
     public function setId($id)
     {
         $this->id = $id;
     }
 
-    public function getTitle()
+    /**
+     * @return int
+     */
+    public function getId()
     {
-        return $this->title;
+        return $this->id;
     }
 
-    public function setTitle($title)
+    /**
+     * @param int $number_votes
+     */
+    public function setNumberVotes($number_votes)
     {
-        $this->title = $title;
+        $this->number_votes = $number_votes;
     }
 
-    public function getPublicatedAt()
-    {
-        return $this->publicatedAt;
-    }
-
-    public function setPublicatedAt($publicatedAt)
-    {
-        $this->publicatedAt = $publicatedAt;
-    }
-
+    /**
+     * @return int
+     */
     public function getNumberVotes()
     {
-        return $this->numberVotes;
+        return $this->number_votes;
     }
 
-    public function setNumberVotes($numberVotes)
+    /**
+     * @param \Ant\Bundle\ChateaClientBundle\Api\Model\PhotoAlbum $photoAlbum
+     */
+    public function setPhotoAlbum(PhotoAlbum $photoAlbum)
     {
-        $this->numberVotes = $numberVotes;
+        $this->oAlbum = $photoAlbum;
     }
 
+    /**
+     * @return \Ant\Bundle\ChateaClientBundle\Api\Model\PhotoAlbum
+     */
+    public function getPhotoAlbum()
+    {
+        return $this->oAlbum;
+    }
+
+    /**
+     * @param User $participant
+     */
+    public function setParticipant($participant)
+    {
+        $this->oParticipant = $participant;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParticipant()
+    {
+        return $this->oParticipant;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\CollectionCollection $votes
+     */
+    public function setVotes($votes)
+    {
+        $this->oVotes = $votes;
+    }
+    public function addVote(PhotoVote $vote)
+    {
+        $this->oVotes[] = $vote;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\CollectionCollection of votes
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    /**
+     * @param string $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param \DateTime $publicated_at
+     */
+    public function setPublicatedAt($publicated_at)
+    {
+        $this->publicated_at = $publicated_at;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPublicatedAt()
+    {
+        return $this->publicated_at;
+    }
+
+    /**
+     * @param int $score
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+    }
+
+    /**
+     * @return int
+     */
     public function getScore()
     {
         return $this->score;
     }
 
-    public function setScore($score)
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
     {
-        $this->score = $score;
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     public function getPathLarge()
@@ -99,16 +236,11 @@ class Photo
         return $this->_getPath('small');
     }
 
-    public function setPath($path)
-    {
-        $this->path = $path;
-    }
 
-    public function getPath()
+    public function __toString()
     {
-        return $this->path;
+        return $this->title;
     }
-
     private function _getPath($size)
     {
         if($this->path == null){
