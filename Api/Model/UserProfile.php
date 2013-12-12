@@ -2,6 +2,7 @@
 namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
+use Symfony\Component\Validator\Constraints\Choice;
 
 class UserProfile implements BaseModel
 {
@@ -33,11 +34,11 @@ class UserProfile implements BaseModel
     private $id;
     private $about;
     /**
-     * @Assert\Choice(choices = {"straight", "homosexual", "bisexual"})
+     * @Choice(choices = {"straight", "homosexual", "bisexual"})
      */
     private $sexualOrientation;
     /**
-     * @Assert\Choice(choices = {"man", "woman", "other"})
+     * @Choice(choices = {"man", "woman", "other"})
      */
     private $gender;
     private $birthday;
