@@ -38,7 +38,7 @@ class PhotoManager extends BaseManager
         if(isset($item['album']) && isset($item['album']['id'])){
 
             $photoAlbum = $this->get('PhotoAlbumManager')->hydrate($item['album']);
-            $photo->setPhotoAlbum($photoAlbum);
+            $photo->setAlbum($photoAlbum);
         }
 
         if(isset($item['participant']) && isset($item['participant']['id'])){

@@ -108,7 +108,7 @@ class Photo implements BaseModel
     /**
      * @param \Ant\Bundle\ChateaClientBundle\Api\Model\PhotoAlbum $photoAlbum
      */
-    public function setPhotoAlbum(PhotoAlbum $photoAlbum)
+    public function setAlbum(PhotoAlbum $photoAlbum)
     {
         $this->oAlbum = $photoAlbum;
     }
@@ -116,7 +116,7 @@ class Photo implements BaseModel
     /**
      * @return \Ant\Bundle\ChateaClientBundle\Api\Model\PhotoAlbum
      */
-    public function getPhotoAlbum()
+    public function getAlbum()
     {
         return $this->oAlbum;
     }
