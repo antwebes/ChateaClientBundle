@@ -30,7 +30,7 @@ class PhotoManager extends BaseManager
 
         $photo->setId(array_key_exists('id',$item)? $item['id'] : 0);
         $photo->setTitle(array_key_exists('title',$item)?$item['title']:'');
-        $photo->setPublicatedAt(array_key_exists('publicated_at',$item)?$item['publicated_at']:null);
+        $photo->setPublicatedAt(array_key_exists('publicated_at',$item)? new \DateTime($item['publicated_at']):new \DateTime('now'));
         $photo->setNumberVotes(array_key_exists('number_votes',$item)?$item['number_votes']:0);
         $photo->setScore(array_key_exists('score',$item)?$item['score']:0);
         $photo->setPath(array_key_exists('path',$item)?$item['path']:null);
@@ -69,8 +69,7 @@ class PhotoManager extends BaseManager
         {
             return null;
         }
-
-        return $this->hydrate($this->getManager()->showPhoto($photo_id));
+        return $this->hydrate($this->getManager()->showPhoto((int)$photo_id));
     }
 
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)

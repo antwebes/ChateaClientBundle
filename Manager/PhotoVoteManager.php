@@ -49,7 +49,7 @@ class PhotoVoteManager extends BaseManager
             $photoVote = new PhotoVote();
         }
         $photoVote->setScore(array_key_exists('score',$item)?$item['score']:0);
-        $photoVote->setPublicatedAt(array_key_exists('publicated_at',$item)?$item['publicated_at']:null);
+        $photoVote->setPublicatedAt(array_key_exists('publicated_at',$item)?new \Datetime($item['publicated_at']):new \Datetime('now'));
 
         if(isset($item['participant']) && isset($item['participant']['id'])){
             $participant = $this->get('UserManager')->hydrate($item['participant']);

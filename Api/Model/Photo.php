@@ -25,7 +25,7 @@ class Photo implements BaseModel
     {
         if ($manager instanceof PhotoManager){
             self::$manager = $manager;
-        }else throw new \Exception("Channel need a manager instanceof PhotoManager");
+        }else throw new \Exception("Photo need a manager instanceof PhotoManager");
     }
     public static function getManager()
     {

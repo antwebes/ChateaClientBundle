@@ -111,7 +111,7 @@
             <service id="api_users"             alias="antwebes_chateaclient_bundle.manager.user_manager"           synthetic="true" />
             <service id="api_users_profile"     alias="antwebes_chateaclient_bundle.manager.user_profile_manager"   synthetic="true" />
             <service id="api_photos"            alias="antwebes_chateaclient_bundle.manager.photo_manager"          synthetic="true" />
-            <service id="api_photo_albums"      alias="antwebes_chateaclient_bundle.manager.photo_manager"          synthetic="true" />
-            <service id="api_photo_votes"       alias="antwebes_chateaclient_bundle.manager.photo_manager"          synthetic="true" />
+            <service id="api_photo_albums"      alias="antwebes_chateaclient_bundle.manager.photo_album_manager"          synthetic="true" />
+            <service id="api_photo_votes"       alias="antwebes_chateaclient_bundle.manager.photo_vote_manager"        synthetic="true" />
         </services>
 </container>
