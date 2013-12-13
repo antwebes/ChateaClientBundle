@@ -55,6 +55,8 @@ class User implements BaseModel
 
     private $nick = '';
 
+    private $password = '';
+
 
     /**
      * The value for the profile_id field.
@@ -305,6 +307,17 @@ class User implements BaseModel
     {
         $this->oAffiliate = $v;
     }
+
+
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+    public function setPassword($v)
+    {
+        $this->password = $v;
+    }    
 
     public function __toString()
     {
