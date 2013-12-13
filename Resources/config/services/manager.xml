@@ -53,6 +53,9 @@
                      public="false">
                 <argument type="service" id="antwebes_chateaclient_manager" />
                 <argument type="string">%antwebes_chateaclient_bundle.manager.channel_type_manager.class%</argument>
+                <call method="setLimit">
+                    <argument type="string">%chatea_client.limits.channel_type_manager%</argument>
+                </call>
             </service>
 
 
@@ -63,6 +66,9 @@
                      public="false">
                 <argument type="service" id="antwebes_chateaclient_manager" />
                 <argument type="string">%antwebes_chateaclient_bundle.manager.photo_manager.class%</argument>
+                <call method="setLimit">
+                    <argument type="string">%chatea_client.limits.photo_manager%</argument>
+                </call>
             </service>
 
             <service id="antwebes_chateaclient_bundle.manager.user_profile_manager"
@@ -82,6 +88,9 @@
                      public="false">
                 <argument type="service" id="antwebes_chateaclient_manager" />
                 <argument type="string">%antwebes_chateaclient_bundle.manager.photo_album_manager.class%</argument>
+                <call method="setLimit">
+                    <argument type="string">%chatea_client.limits.photo_album_manager%</argument>
+                </call>
             </service>
 
 
@@ -92,6 +101,9 @@
                      public="false">
                 <argument type="service" id="antwebes_chateaclient_manager" />
                 <argument type="string">%antwebes_chateaclient_bundle.manager.photo_vote_manager.class%</argument>
+                <call method="setLimit">
+                    <argument type="string">%chatea_client.limits.photo_album_manager%</argument>
+                </call>
             </service>
 
             <service id="api_channels"          alias="antwebes_chateaclient_bundle.manager.channel_manager"        synthetic="true" />

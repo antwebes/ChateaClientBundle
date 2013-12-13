@@ -32,6 +32,11 @@ class ChateaClientExtension extends Extension
 
         $container->setParameter('chatea_client.limits.channel_manager', $config['limits']['channel_manager']);
         $container->setParameter('chatea_client.limits.user_manager', $config['limits']['user_manager']);
+        $container->setParameter('chatea_client.limits.channel_type_manager', $config['limits']['channel_type_manager']);
+        $container->setParameter('chatea_client.limits.report_manager', $config['limits']['report_manager']);
+        $container->setParameter('chatea_client.limits.photo_manager', $config['limits']['photo_manager']);
+        $container->setParameter('chatea_client.limits.photo_album_manager', $config['limits']['photo_album_manager']);
+        $container->setParameter('chatea_client.limits.photo_vote_manager', $config['limits']['photo_vote_manager']);
         $container->setParameter('chatea_client.app_auth.client_id', $config['app_auth']['client_id']);
         $container->setParameter('chatea_client.app_auth.secret', $config['app_auth']['secret']);
 
