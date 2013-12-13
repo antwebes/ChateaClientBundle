@@ -42,8 +42,8 @@ class PhotoAlbumManager extends BaseManager
         }
 
         $photoAlbum->setId(array_key_exists('id',$item)?$item['id']:0);
-        $photoAlbum->setId(array_key_exists('title',$item)?$item['title']:'');
-        $photoAlbum->setId(array_key_exists('description',$item)?$item['description']:'');
+        $photoAlbum->setTitle(array_key_exists('title',$item)?$item['title']:'');
+        $photoAlbum->setDescription(array_key_exists('description',$item)?$item['description']:'');
 
         if(isset($item['participant']) && isset($item['participant']['id'])){
             $participant = $this->get('UserManager')->hydrate($item['participant']);

@@ -18,7 +18,7 @@ class PhotoManager extends BaseManager
     {
         return $this->limit;
     }
-    public function hydrate(array $item = null, Photo $photo = null)
+    public function hydrate(array $item = null, $photo = null)
     {
 
         if($item == null){
@@ -28,7 +28,7 @@ class PhotoManager extends BaseManager
             $photo = new Photo();
         }
 
-        $photo->setId(array_key_exists('id',$item)?$item['id']:0);
+        $photo->setId(array_key_exists('id',$item)? $item['id'] : 0);
         $photo->setTitle(array_key_exists('title',$item)?$item['title']:'');
         $photo->setPublicatedAt(array_key_exists('publicated_at',$item)?$item['publicated_at']:null);
         $photo->setNumberVotes(array_key_exists('number_votes',$item)?$item['number_votes']:0);
@@ -42,6 +42,7 @@ class PhotoManager extends BaseManager
         }
 
         if(isset($item['participant']) && isset($item['participant']['id'])){
+
             $participant = $this->get('UserManager')->hydrate($item['participant']);
             $photo->setParticipant($participant);
         }
@@ -53,7 +54,6 @@ class PhotoManager extends BaseManager
                 $photo->addVote($vote);
             }
         }
-
         return $photo;
     }
 

@@ -321,7 +321,7 @@ class User implements BaseModel
 
     public function __toString()
     {
-        return $this->username;
+        return $this->nick;
     }
 
 
