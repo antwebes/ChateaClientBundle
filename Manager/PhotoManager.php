@@ -36,6 +36,7 @@ class PhotoManager extends BaseManager
         $photo->setPath(array_key_exists('path',$item)?$item['path']:null);
 
         if(isset($item['album']) && isset($item['album']['id'])){
+
             $photoAlbum = $this->get('PhotoAlbumManager')->hydrate($item['album']);
             $photo->setPhotoAlbum($photoAlbum);
         }

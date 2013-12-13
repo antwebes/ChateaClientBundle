@@ -38,7 +38,7 @@ class Pager implements  Countable, IteratorAggregate
         $this->resources    = new ManagerCollection($manager, $resources);
 
 
-        if(empty($resources))
+        if(empty($resources) || $this->limit == 0 || $this->limit == null )
         {
             $this->lastPage = 1;
             $this->page = 1;

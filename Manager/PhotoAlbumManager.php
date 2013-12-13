@@ -49,7 +49,7 @@ class PhotoAlbumManager extends BaseManager
             $participant = $this->get('UserManager')->hydrate($item['participant']);
             $photoAlbum->setParticipant($participant);
         }
-
+        return $photoAlbum;
     }
     public function getModel()
     {
