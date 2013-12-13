@@ -31,7 +31,6 @@ class Pager implements  Countable, IteratorAggregate
 
         $array_data = $manager->getManager()->execute($command);
 
-
         $this->total        = $array_data['total'];
         $this->offset       = $array_data['offset'];
         $this->_links       = $array_data['_links'];
