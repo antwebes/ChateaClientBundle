@@ -107,6 +107,17 @@ class UserManager extends BaseManager implements ManagerInterface
         return  new Pager($this,new Command('showUsers',array()) ,$page, $limit);
 
     }
+    public function findAllUsers()
+    {
+        $command = new Command('showUsers',array());
+        $array_data = $this->getManager()->execute($command);
+        $array_data = array_key_exists('resources',$array_data)? $array_data['resources']: array();
+        $output = array();
+        foreach($array_data as $data){
+            $output[] = $this->hydrate($data);
+        }
+        return $output;
+    }
     public function findBlockedUsers($user_id,$page = 1, $limit= null)
     {
         $limit  = $limit == null ? $this->limit : $limit ;
