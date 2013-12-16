@@ -4,7 +4,6 @@ namespace Ant\Bundle\ChateaClientBundle\Manager;
 
 use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
-use Ant\Bundle\ChateaClientBundle\Api\Collection\ApiCollection;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Photo;
 
 class PhotoManager extends BaseManager
@@ -19,30 +18,42 @@ class PhotoManager extends BaseManager
     {
         return $this->limit;
     }
-    public function hydrate(array $item = null)
+    public function hydrate(array $item = null, $photo = null)
     {
 
         if($item == null){
             return null;
         }
-        
-        $id = array_key_exists('id',$item)?$item['id']:0;
-        $title = array_key_exists('title',$item)?$item['title']:'';
-        $publicatedAt = array_key_exists('publicatedAt',$item)?$item['publicatedAt']:new \DateTime('now');
-        $numberVotes = array_key_exists('number_votes',$item)?$item['number_votes']:0;
-        $score = array_key_exists('score',$item)?$item['score']:0;
-        $path = array_key_exists('path',$item)?$item['path']:null;
+        if($photo == null){
+            $photo = new Photo();
+        }
 
+        $photo->setId(array_key_exists('id',$item)? $item['id'] : 0);
+        $photo->setTitle(array_key_exists('title',$item)?$item['title']:'');
+        $photo->setPublicatedAt(array_key_exists('publicated_at',$item)? new \DateTime($item['publicated_at']):new \DateTime('now'));
+        $photo->setNumberVotes(array_key_exists('number_votes',$item)?$item['number_votes']:0);
+        $photo->setScore(array_key_exists('score',$item)?$item['score']:0);
+        $photo->setPath(array_key_exists('path',$item)?$item['path']:null);
 
-        $photo = new Photo();
+        if(isset($item['album']) && isset($item['album']['id'])){
 
-        $photo->setId($id);
-        $photo->setTitle($title);
-        $photo->setPublicatedAt($publicatedAt);
-        $photo->setNumberVotes($numberVotes);
-        $photo->setScore($score);
-        $photo->setPath($path);
+            $photoAlbum = $this->get('PhotoAlbumManager')->hydrate($item['album']);
+            $photo->setAlbum($photoAlbum);
+        }
 
+        if(isset($item['participant']) && isset($item['participant']['id'])){
+
+            $participant = $this->get('UserManager')->hydrate($item['participant']);
+            $photo->setParticipant($participant);
+        }
+
+        if(isset($item['votes'])){
+            $votes = $item['votes'];
+            foreach($votes as $vote){
+                $vote = $this->get('PhotoVoteManager')->hydrate($vote);
+                $photo->addVote($vote);
+            }
+        }
         return $photo;
     }
 
@@ -51,20 +62,22 @@ class PhotoManager extends BaseManager
     	return 'Ant\Bundle\ChateaClientBundle\Api\Model\Photo';
     }
     
-    public function findById($channel_id)
+    public function findById($photo_id)
     {
-        /*if ($photo_id === null || $photo_id === 0 || !$photo_id)
+
+        if ($photo_id === null || $photo_id === 0 || !$photo_id)
         {
             return null;
         }
-		
-        return $this->hydrate($this->getManager()->showChannel($channel_id));*/
+        return $this->hydrate($this->getManager()->showPhoto((int)$photo_id));
     }
 
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)
     {
+        throw new \Exception('This method is not enabled');
+
 		/*if (!$limit) $limit = $this->limit;
-		
+
 		$command = new Command('showChannels',array('filter' => $filters, 'order' => $order));
 		return new Pager($this,$command, $page, $limit);*/
 
@@ -72,24 +85,25 @@ class PhotoManager extends BaseManager
 
     public function save(&$object)
     {
-        /*if(!($object instanceof Channel)){
-            throw new \InvalidArgumentException('The parameter have been of type Channel');
+        if(!($object instanceof Photo)){
+            throw new \InvalidArgumentException('The parameter have been of type Photo');
         }
 
-        $newChannel = $this->getManager()->addChanel($object->getName(),$object->getTitle(),$object->getDescription());
+        $newChannel = $this->getManager()->addPhoto(
+            $object->getName(),$object->getTitle(),$object->getDescription()
+        );
 
-        $object = $this->hydrate($newChannel->toArray());*/
+        $object = $this->hydrate($newChannel->toArray());
 
     }
 
     public function update(&$object)
     {
-        /*if(!($object instanceof Channel)){
-            throw new \InvalidArgumentException('The parameter have been of type Channel');
+        if(!($object instanceof Photo)){
+            throw new \InvalidArgumentException('The parameter have been of type Photo');
         }
-        $updateChannel = $this->getManager()->updateChannel($object->getId(),$object->getName(),$object->getTitle(),$object->getDescription());
 
-        $object = $this->hydrate($updateChannel->toArray());*/
+        throw new \Exception();
     }
     /**
      * Removes an object instance.
@@ -102,29 +116,7 @@ class PhotoManager extends BaseManager
      */
     public function delete($object_id)
     {
-        //$this->getManager()->delChannel($object_id);
+        $this->getManager()->delPhoto($object_id);
     }
 
-    /*public function findUser($user_id)
-    {
-    	$userManager = $this->get('UserManager');
-    	$user = $userManager->findById($user_id);
-
-        return $user;
-    }
-
-    public function findFans($channel_id, $page=1, array $filters = null, $limit= null)
-    {
-    	if (!$channel_id)
-    	{
-    		return null;
-    	}
-    	
-    	$limit  = $limit == null ? $this->limit : $limit;
-    	
-    	$userManager = $this->get('UserManager');
-    	
-    	return new Pager($userManager,new Command('showChannelFans',array('channel_id'=>$channel_id, 'filters'=>$filters)),$page, $limit);
-
-    }*/
 }

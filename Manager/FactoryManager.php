@@ -3,6 +3,7 @@
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
+use Ant\Bundle\ChateaClientBundle\Api\Persistence\ObjectManager;
 
 class FactoryManager
 {
@@ -10,7 +11,11 @@ class FactoryManager
     static private $managerMap = array('ChannelManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\ChannelManager',
                                        'PhotoManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoManager',
                                        'UserManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserManager',
-                                       'UserProfileManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserProfileManager'
+                                       'UserProfileManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserProfileManager',
+                                       'AffiliateManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\AffiliateManager',
+                                       'PhotoManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoManager',
+                                       'PhotoAlbumManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoAlbumManager',
+                                       'PhotoVoteManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoVoteManager'
                                 );
 	
 	/**
@@ -19,14 +24,15 @@ class FactoryManager
 	static public function get($apiManager, $name)
 	{
 		if(!array_key_exists($name,self::$managerMap)){
-            throw new \InvalidArgumentException('this manager is not supported');
+            throw new \InvalidArgumentException('this manager ['.$name.']is not supported');
         }
         $className = self::$managerMap[$name];
         return self::factory($apiManager, $className);
 	}
 
-    static public function factory(ApiManager $apiManager, $manager_class_name)
+    static public function factory(ObjectManager $apiManager, $manager_class_name)
     {
+
         if(array_key_exists($manager_class_name,self::$arrayManagers)){
             return self::$arrayManagers[$manager_class_name];
         }
@@ -36,5 +42,8 @@ class FactoryManager
         $model::setManager($manager);
         return $manager;
     }
-	
+
+    static public function setObjectManagerInMap($key,$value){
+        self::$managerMap[$key]=$value;
+    }
 }

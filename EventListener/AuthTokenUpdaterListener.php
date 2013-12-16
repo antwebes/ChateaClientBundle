@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Ant\ChateaClient\Service\Client\ChateaGratisAppClient;
-use Ant\Bundle\ChateaClientBundle\Security\User\User;
+use Ant\Bundle\ChateaSecureBundle\Security\User\User;
 
 class AuthTokenUpdaterListener
 {

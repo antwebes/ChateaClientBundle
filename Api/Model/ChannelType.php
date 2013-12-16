@@ -3,7 +3,13 @@ namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Doctrine\ORM\Mapping\Entity;
 
+/**
+ * Class ChannelType
+ * @package Ant\Bundle\ChateaClientBundle\Api\Model
+ * @Entity
+ */
 class ChannelType implements BaseModel
 {
     static $manager;

@@ -20,21 +20,31 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('chatea_client');
 
-        $rootNode->children()
-            ->arrayNode('limits')
-                ->addDefaultsIfNotSet()
-                ->children()
-                    ->integerNode('channel_manager')->min(1)->defaultValue(10)->end()
-                    ->integerNode('user_manager')->min(1)->defaultValue(10)->end()
+        $rootNode
+            ->children()
+                ->arrayNode('api_manager')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode("api_manager")->defaultValue("Ant\Bundle\ChateaAdminBundle\Api\Persistence\ApiManager")->end()
+                    ->end()
                 ->end()
-            ->end()
-            ->arrayNode('app_auth')
-                ->children()
-                    ->scalarNode('client_id')->end()
-                    ->scalarNode('secret')->end()
+                ->arrayNode('limits')->addDefaultsIfNotSet()
+                    ->children()
+                        ->integerNode('channel_manager')->min(1)->defaultValue(10)->end()
+                        ->integerNode('channel_type_manager')->min(1)->defaultValue(10)->end()
+                        ->integerNode('user_manager')->min(1)->defaultValue(10)->end()
+                        ->integerNode('report_manager')->min(1)->defaultValue(10)->end()
+                        ->integerNode('photo_manager')->min(1)->defaultValue(10)->end()
+                        ->integerNode('photo_album_manager')->min(1)->defaultValue(10)->end()
+                        ->integerNode('photo_vote_manager')->min(1)->defaultValue(10)->end()
+                    ->end()
                 ->end()
-        ->end();
-
+                ->arrayNode('app_auth')
+                    ->children()
+                        ->scalarNode('client_id')->end()
+                        ->scalarNode('secret')->end()
+                    ->end()
+                ->end()
+            ->end();
         return $treeBuilder;
     }
 }

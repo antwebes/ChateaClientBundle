@@ -5,7 +5,12 @@ use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Email;
-
+use Doctrine\ORM\Mapping\Entity;
+/**
+ * Class User
+ * @package Ant\Bundle\ChateaClientBundle\Api\Model
+ * @Entity
+ */
 class User implements BaseModel
 {
 
@@ -31,6 +36,27 @@ class User implements BaseModel
      */
     private $id = 0;
 
+    /**
+     * The value for the username field.
+     *
+     * @var string
+     * @NotBlank()
+     * @Length(min= 4, max= 18)
+     */
+    private $username = '';
+
+    /**
+     * The value for the email field.
+     * @var  string
+     * @NotBlank()
+     * @Email()
+     */
+    private $email = '';
+
+    private $nick = '';
+
+    private $password = '';
+
 
     /**
      * The value for the profile_id field.
@@ -40,7 +66,7 @@ class User implements BaseModel
 
     /**
      * The value of the profile photo
-     * @var Ant\Bundle\ChateaClientBundle\Api\Model\Photo
+     * @var \Ant\Bundle\ChateaClientBundle\Api\Model\Photo
      */
     private $oProfilePhoto = NULL;
 
@@ -80,49 +106,14 @@ class User implements BaseModel
     private $oFriends = NULL;
 
     /**
-     * The value for the username field.
-     *
-     * @var string
-     * @NotBlank()
-     * @Length(min= 4, max= 18)
+     * The value for city
      */
-    private $username = '';
+    private $oCity = NULL;
 
     /**
-     * The value for the email field.
-     * @var  string
-     * @NotBlank()
-     * @Email()
+     * @var null
      */
-    private $email = '';
-    /**
-     * @var string
-     * @NotBlank()
-     * @Length(min= 4, max= 18)
-     */
-    protected $password;
-
-    /**
-     * The value for the enabled field.
-     * @var        boolean
-     */
-    protected $enabled = true;
-    /**
-     * The value for the last_login field.
-     * @var        string
-     */
-    protected $last_login;
-
-    function __construct($id = 0, $username = '', $email ='', $last_login = null, $enabled = true)
-    {
-        $this->id = $id;
-        $this->username = $username;
-        $this->email = $email;
-        $this->password = '';
-        $this->last_login = $last_login;
-        $this->enabled = $enabled;
-        $this->oProfile = null;
-    }
+    private $oAffiliate = null;
 
     /**
      * @return int
@@ -171,52 +162,7 @@ class User implements BaseModel
     {
         return $this->email;
     }
-    /**
-     * @param string $plainPassword
-     */
-    public function setPassword($plainPassword)
-    {
-        $this->password = $plainPassword;
-    }
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-    /**
-     * @param boolean $enabled
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
-    }
 
-    /**
-     * @return boolean
-     */
-    public function getEnabled()
-    {
-        return $this->enabled;
-    }
-
-
-    /**
-     * @param string $last_login
-     */
-    public function setLastLogin($last_login)
-    {
-        $this->last_login = $last_login;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLastLogin()
-    {
-        return $this->last_login;
-    }
 
     public function getProfile()
     {
@@ -291,6 +237,16 @@ class User implements BaseModel
         $this->oChannelsModerated = $oChannelsModerated;
     }
 
+    public function getCity()
+    {
+        return $this->oCity;
+    }
+
+    public function setCity($oCity)
+    {
+        $this->oCity = $oCity;
+    }
+
     public function getPhotos()
     {
         if($this->oPhotos === null){
@@ -327,9 +283,45 @@ class User implements BaseModel
         return $this->oBlockedUsers;
     }
 
+    /**
+     * @param string $nick
+     */
+    public function setNick($nick)
+    {
+        $this->nick = $nick;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNick()
+    {
+        return $this->nick;
+    }
+
+    public function getAffiliate()
+    {
+        return $this->oAffiliate;
+    }
+    public function setAffiliate(Affiliate $v)
+    {
+        $this->oAffiliate = $v;
+    }
+
+
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+    public function setPassword($v)
+    {
+        $this->password = $v;
+    }    
+
     public function __toString()
     {
-        return $this->username;
+        return $this->nick;
     }
 
 

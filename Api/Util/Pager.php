@@ -34,10 +34,11 @@ class Pager implements  Countable, IteratorAggregate
         $this->total        = $array_data['total'];
         $this->offset       = $array_data['offset'];
         $this->_links       = $array_data['_links'];
-        $this->resources    = new ManagerCollection($manager, $array_data['resources']);
+        $resources          = $array_data['resources']?$array_data['resources']:null;
+        $this->resources    = new ManagerCollection($manager, $resources);
 
 
-        if(empty($this->resources))
+        if(empty($resources) || $this->limit == 0 || $this->limit == null )
         {
             $this->lastPage = 1;
             $this->page = 1;

@@ -5,11 +5,14 @@ namespace Ant\Bundle\ChateaClientBundle\Api\Persistence;
 use Ant\ChateaClient\Client\Api;
 use Ant\Bundle\ChateaClientBundle\Api\Util\CommandInterface;
 
-class ApiManager extends Api
+/**
+ * Class ApiManager
+ * @package Ant\Bundle\ChateaClientBundle\Api\Persistence
+ */
+class ApiManager extends Api implements ObjectManager
 {
 
      public $apiConnection;
-     private $pager;
      /**
       * The ApiRepository instances.
       *
@@ -48,7 +51,8 @@ class ApiManager extends Api
             	array_push($arguments,$command->getParam($parameterWhoRequest->getName()));
             }
         };
-        return call_user_func_array(array($this,$command->getName()),$arguments);
+        $responseBody = call_user_func_array(array($this,$command->getName()),$arguments);
+        return $responseBody;
     }
     /**
      * @param string $entityName

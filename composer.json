@@ -14,9 +14,7 @@
 	"license" : "MIT",
 	"require" : {
         "symfony/framework-bundle": "~2.3",
-        "pagerfanta/pagerfanta": "1.0.*@dev",
-        "antwebes/chatea-common": "dev-master",
-		"antwebes/chatea-client-lib" : "dev-master"
+        "antwebes/chatea-common": "dev-master"
 	},
     "require-dev": {
         "raulfraile/ladybug": "~1.0"
@@ -24,6 +22,7 @@
     "autoload": {
         "psr-0": { "Ant\\Bundle\\ChateaClientBundle": "" }
     },
-    "target-dir": "Ant/Bundle/ChateaClientBundle"
+    "target-dir": "Ant/Bundle/ChateaClientBundle",
+    "minimum-stability": "dev"
 
 }
