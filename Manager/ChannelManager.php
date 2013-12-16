@@ -91,7 +91,7 @@ class ChannelManager extends BaseManager
             return null;
         }
 		
-        return $this->hydrate($this->getManager()->showChannel($channel_id));
+        return $this->hydrate($this->getManager()->showChannel((int)$channel_id));
     }
 
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)
