@@ -15,6 +15,7 @@
 	"require" : {
         "symfony/framework-bundle": "~2.3",
         "antwebes/chatea-common": "dev-master",
+        "antwebes/chatea-client-lib": "dev-develop",
         "antwebes/chatea-secure-bundle": "dev-master"
 	},
     "require-dev": {
