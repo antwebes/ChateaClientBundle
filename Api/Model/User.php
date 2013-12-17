@@ -5,6 +5,7 @@ use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Regex;
 use Doctrine\ORM\Mapping\Entity;
 /**
  * Class User
@@ -52,7 +53,14 @@ class User implements BaseModel
      * @Email()
      */
     private $email = '';
-
+    /**
+     * @Regex(
+     *           pattern= "/^[^a-z]|[^\w_^`\\\[\]{}]/i",
+     *           htmlPattern= "/^[^a-z]|[^\w_^`\\\[\]{}]/i",
+     *           match=   false,
+     *           message= "Provide a valid nickname"
+     *  )
+     */ 
     private $nick = '';
 
     private $password = '';
