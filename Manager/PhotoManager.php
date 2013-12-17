@@ -18,7 +18,7 @@ class PhotoManager extends BaseManager
     {
         return $this->limit;
     }
-    public function hydrate(array $item = null, Photo $photo = null)
+    public function hydrate(array $item = null, $photo = null)
     {
 
         if($item == null){
@@ -28,19 +28,21 @@ class PhotoManager extends BaseManager
             $photo = new Photo();
         }
 
-        $photo->setId(array_key_exists('id',$item)?$item['id']:0);
+        $photo->setId(array_key_exists('id',$item)? $item['id'] : 0);
         $photo->setTitle(array_key_exists('title',$item)?$item['title']:'');
-        $photo->setPublicatedAt(array_key_exists('publicated_at',$item)?$item['publicated_at']:null);
+        $photo->setPublicatedAt(array_key_exists('publicated_at',$item)? new \DateTime($item['publicated_at']):new \DateTime('now'));
         $photo->setNumberVotes(array_key_exists('number_votes',$item)?$item['number_votes']:0);
         $photo->setScore(array_key_exists('score',$item)?$item['score']:0);
         $photo->setPath(array_key_exists('path',$item)?$item['path']:null);
 
         if(isset($item['album']) && isset($item['album']['id'])){
+
             $photoAlbum = $this->get('PhotoAlbumManager')->hydrate($item['album']);
-            $photo->setPhotoAlbum($photoAlbum);
+            $photo->setAlbum($photoAlbum);
         }
 
         if(isset($item['participant']) && isset($item['participant']['id'])){
+
             $participant = $this->get('UserManager')->hydrate($item['participant']);
             $photo->setParticipant($participant);
         }
@@ -52,7 +54,6 @@ class PhotoManager extends BaseManager
                 $photo->addVote($vote);
             }
         }
-
         return $photo;
     }
 
@@ -68,8 +69,7 @@ class PhotoManager extends BaseManager
         {
             return null;
         }
-
-        return $this->hydrate($this->getManager()->showPhoto($photo_id));
+        return $this->hydrate($this->getManager()->showPhoto((int)$photo_id));
     }
 
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)
@@ -102,8 +102,7 @@ class PhotoManager extends BaseManager
         if(!($object instanceof Photo)){
             throw new \InvalidArgumentException('The parameter have been of type Photo');
         }
-
-        throw new \Exception();
+        throw new \Exception("This method do not supported yet");
     }
     /**
      * Removes an object instance.

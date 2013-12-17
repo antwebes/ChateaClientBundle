@@ -25,7 +25,7 @@ class Photo implements BaseModel
     {
         if ($manager instanceof PhotoManager){
             self::$manager = $manager;
-        }else throw new \Exception("Channel need a manager instanceof PhotoManager");
+        }else throw new \Exception("Photo need a manager instanceof PhotoManager");
     }
     public static function getManager()
     {
@@ -78,7 +78,7 @@ class Photo implements BaseModel
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->id = (int) $id;
     }
 
     /**
@@ -86,7 +86,7 @@ class Photo implements BaseModel
      */
     public function getId()
     {
-        return $this->id;
+        return (int) $this->id;
     }
 
     /**
@@ -108,7 +108,7 @@ class Photo implements BaseModel
     /**
      * @param \Ant\Bundle\ChateaClientBundle\Api\Model\PhotoAlbum $photoAlbum
      */
-    public function setPhotoAlbum(PhotoAlbum $photoAlbum)
+    public function setAlbum(PhotoAlbum $photoAlbum)
     {
         $this->oAlbum = $photoAlbum;
     }
@@ -116,7 +116,7 @@ class Photo implements BaseModel
     /**
      * @return \Ant\Bundle\ChateaClientBundle\Api\Model\PhotoAlbum
      */
-    public function getPhotoAlbum()
+    public function getAlbum()
     {
         return $this->oAlbum;
     }

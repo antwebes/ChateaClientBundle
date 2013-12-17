@@ -22,7 +22,7 @@ class PhotoAlbum implements BaseModel
     {
         if ($manager instanceof PhotoAlbumManager){
             self::$manager = $manager;
-        }else throw new \Exception("Channel need a manager instanceof PhotoAlbumManager");
+        }else throw new \Exception("PhotoAlbum need a manager instanceof PhotoAlbumManager");
     }
 
     public static function  getManager()

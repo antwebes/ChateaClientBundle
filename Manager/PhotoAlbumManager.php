@@ -12,7 +12,7 @@
  */
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
-
+use Exception;
 use Ant\Bundle\ChateaClientBundle\Api\Model\PhotoAlbum;
 
 /**
@@ -42,29 +42,31 @@ class PhotoAlbumManager extends BaseManager
         }
 
         $photoAlbum->setId(array_key_exists('id',$item)?$item['id']:0);
-        $photoAlbum->setId(array_key_exists('title',$item)?$item['title']:'');
-        $photoAlbum->setId(array_key_exists('description',$item)?$item['description']:'');
+        $photoAlbum->setTitle(array_key_exists('title',$item)?$item['title']:'');
+        $photoAlbum->setDescription(array_key_exists('description',$item)?$item['description']:'');
 
         if(isset($item['participant']) && isset($item['participant']['id'])){
             $participant = $this->get('UserManager')->hydrate($item['participant']);
             $photoAlbum->setParticipant($participant);
         }
-
+        return $photoAlbum;
     }
     public function getModel()
     {
         return 'Ant\Bundle\ChateaClientBundle\Api\Model\PhotoAlbum';
     }
 
-    public function findById($photo_album_id, $limit = null, $offset = null)
+    public function findById($album_id)
     {
 
+        throw new Exception('this method is not enabled');
+        /*
         if ($photo_album_id === null || $photo_album_id === 0 || !$photo_album_id)
         {
             return null;
         }
-
-        return $this->hydrate($this->getManager()->showPhotoAlbum($photo_album_id, $limit, $offset));
+        return $this->hydrate($this->getManager()->showPhotoAlbum((int)$photo_album_id, $limit, $offset));
+        */
     }
 
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)
