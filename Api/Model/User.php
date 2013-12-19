@@ -56,7 +56,6 @@ class User implements BaseModel
     /**
      * @Regex(
      *           pattern= "/^[^a-z]|[^\w_^`\\\[\]{}]/i",
-     *           htmlPattern= "/^[^a-z]|[^\w_^`\\\[\]{}]/i",
      *           match=   false,
      *           message= "Provide a valid nickname"
      *  )
