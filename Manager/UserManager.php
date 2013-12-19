@@ -239,4 +239,8 @@ class UserManager extends BaseManager implements ManagerInterface
         $this->getManager()->delMe();
     }
 
+    public function setUserNick($user_id, $nick)
+    {
+        $this->getManager()->setUserNick($user_id, $nick);
+    }
 }
