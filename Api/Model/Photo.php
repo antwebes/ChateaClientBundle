@@ -78,7 +78,7 @@ class Photo implements BaseModel
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->id = (int) $id;
     }
 
     /**
@@ -86,7 +86,7 @@ class Photo implements BaseModel
      */
     public function getId()
     {
-        return $this->id;
+        return (int) $this->id;
     }
 
     /**

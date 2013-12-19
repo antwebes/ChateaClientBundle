@@ -12,7 +12,7 @@
  */
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
-
+use Exception;
 use Ant\Bundle\ChateaClientBundle\Api\Model\PhotoAlbum;
 
 /**
@@ -56,15 +56,17 @@ class PhotoAlbumManager extends BaseManager
         return 'Ant\Bundle\ChateaClientBundle\Api\Model\PhotoAlbum';
     }
 
-    public function findById($photo_album_id, $limit = null, $offset = null)
+    public function findById($album_id)
     {
 
+        throw new Exception('this method is not enabled');
+        /*
         if ($photo_album_id === null || $photo_album_id === 0 || !$photo_album_id)
         {
             return null;
         }
-
-        return $this->hydrate($this->getManager()->showPhotoAlbum($photo_album_id, $limit, $offset));
+        return $this->hydrate($this->getManager()->showPhotoAlbum((int)$photo_album_id, $limit, $offset));
+        */
     }
 
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)

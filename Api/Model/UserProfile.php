@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraints\Choice;
 
 class UserProfile implements BaseModel
 {
-    const SEXUAL_ORIENTATION_STRAIGHT   = 'straight';
+    const SEXUAL_ORIENTATION_HETEROSEXUAL   = 'heterosexual';
     const SEXUAL_ORIENTATION_HOMOSEXUAL = 'homosexual';
     const SEXUAL_ORIENTATION_BISEXUAL   = 'bisexual';
     const GENDER_MAN        = 'man';
@@ -34,7 +34,7 @@ class UserProfile implements BaseModel
     private $id;
     private $about;
     /**
-     * @Choice(choices = {"straight", "homosexual", "bisexual"})
+     * @Choice(choices = {"heterosexual", "homosexual", "bisexual"})
      */
     private $sexualOrientation;
     /**

@@ -102,8 +102,7 @@ class PhotoManager extends BaseManager
         if(!($object instanceof Photo)){
             throw new \InvalidArgumentException('The parameter have been of type Photo');
         }
-
-        throw new \Exception();
+        throw new \Exception("This method do not supported yet");
     }
     /**
      * Removes an object instance.
