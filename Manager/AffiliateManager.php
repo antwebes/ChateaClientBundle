@@ -4,7 +4,7 @@
  *
  * 2013 (c) Ant-Web S.L.  
  * Created by Javier Fernández Rodríguez <jjbier@gmail.com>
- * Date: 5/12/13 - 17:29
+ * Date: 20/12/13 - 12:23
  *  
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,10 +13,13 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 
-
 use Ant\Bundle\ChateaClientBundle\Api\Model\Affiliate;
 
-class AffiliateManager  extends BaseManager
+/**
+ * Class AffiliateManager
+ * @package Ant\Bundle\ChateaClientBundle\Manager
+ */
+class AffiliateManager extends BaseManager
 {
     protected $limit;
 
@@ -24,7 +27,7 @@ class AffiliateManager  extends BaseManager
     {
         $affiliate = new Affiliate();
         $affiliate->setName(array_key_exists('name',$item)?$item['name']:'not-name');
-        $affiliate->setHost(array_key_exists('name',$item)?$item['name']:'not-name');
+        $affiliate->setHost(array_key_exists('host',$item)?$item['host']:'not-host');
         return $affiliate;
     }
 
@@ -40,31 +43,31 @@ class AffiliateManager  extends BaseManager
 
     public function findById($id)
     {
-      throw new \InvalidArgumentException("This method do not implement yet");
+        throw new \InvalidArgumentException("This method do not supported yet");
     }
 
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)
     {
-        throw new \InvalidArgumentException("This method do not implement yet");
+        //return $this->hydrate($this->getManager()->showAffiliates());
     }
 
     public function save(&$object)
     {
-        throw new \InvalidArgumentException("This method do not implement yet");
+        throw new \InvalidArgumentException("This method do not supported yet");
     }
 
     public function update(&$object)
     {
-        throw new \InvalidArgumentException("This method do not implement yet");
+        throw new \InvalidArgumentException("This method do not supported yet");
     }
 
     public function delete($object_id)
     {
-        throw new \InvalidArgumentException("This method do not implement yet");
+        throw new \InvalidArgumentException("This method do not supported yet");
     }
 
     public function getModel()
     {
-       return 'Ant\Bundle\ChateaClientBundle\Api\Model\Affiliate';
+        return 'Ant\Bundle\ChateaClientBundle\Api\Model\Affiliate';
     }
-}
+} 

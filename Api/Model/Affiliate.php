@@ -1,10 +1,10 @@
 <?php
  /*
- * This file (Affiliate.php) is part of the adminchatea project.
+ * This file (User.php) is part of the adminchatea project.
  *
  * 2013 (c) Ant-Web S.L.  
  * Created by Javier Fernández Rodríguez <jjbier@gmail.com>
- * Date: 5/12/13 - 17:28
+ * Date: 4/12/13 - 8:28
  *  
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,15 +13,15 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Api\Model;
 
-
+use Ant\Bundle\ChateaClientBundle\Api\Model\BaseModel;
 use Ant\Bundle\ChateaClientBundle\Manager\AffiliateManager;
 
-class Affiliate  implements BaseModel
+/**
+ * Class Affiliate
+ * @package Ant\Bundle\ChateaClientBundle\Api\Model
+ */
+class Affiliate implements BaseModel
 {
-
-    protected $name;
-    protected $host;
-
     /**
      * Manager class name
      */
@@ -37,31 +37,59 @@ class Affiliate  implements BaseModel
         }else throw new \Exception("Affiliate need a manager instanceof AffiliateManager");
     }
 
-    public static function  getManager()
+    static function  getManager()
     {
-        return self::$manager;
+        return static::$manager;
     }
 
-    public function getName()
-    {
-        return $this->name;
-    }
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
+    /**
+     * @var string
+     */
+    protected $name;
 
+     /**
+     * @var string
+     */
+    protected $host;
+
+    /**
+     * Get host
+     * @return string
+     */
     public function getHost()
     {
         return $this->host;
     }
+
+    /**
+     * Get name
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set host
+     * @param string $host
+     */
     public function setHost($host)
     {
         $this->host = $host;
     }
 
-   public function __toString()
-   {
-       return $this->name;
-   }
-} 
+    /**
+     * Set name
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+}
