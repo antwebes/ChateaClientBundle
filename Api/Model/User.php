@@ -63,7 +63,12 @@ class User implements BaseModel
     private $nick = '';
 
     private $password = '';
-
+    
+    /**
+     * The value for the ip field.
+     * @var        int
+     */
+    private $ip;
 
     /**
      * The value for the profile_id field.
@@ -136,6 +141,22 @@ class User implements BaseModel
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @param int $ip
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
     }
 
     /**
