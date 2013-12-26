@@ -47,6 +47,12 @@ class UserProfile implements BaseModel
     private $updated_at;
     private $publicatedAt;
 
+    /**
+     * The value of the profile photo
+     * @var \Ant\Bundle\ChateaClientBundle\Api\Model\Photo
+     */
+    private $oProfilePhoto = NULL;
+
 
     function __construct(
         $id = 0,
@@ -210,6 +216,16 @@ class UserProfile implements BaseModel
     public function getYouWant()
     {
         return $this->youWant;
+    }
+
+    public function getProfilePhoto()
+    {
+        return $this->oProfilePhoto;
+    }
+
+    public function setProfilePhoto($oProfilePhoto)
+    {
+        $this->oProfilePhoto = $oProfilePhoto;
     }
 
     public function __toString()
