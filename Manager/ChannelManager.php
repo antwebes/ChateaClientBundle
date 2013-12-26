@@ -65,6 +65,12 @@ class ChannelManager extends BaseManager
             $moderators = $this->mapUsers($item['moderators']);
             $channel->setModerators($moderators);
         }
+
+        if(isset($item['photo'])){
+            $photo = $this->get('PhotoManager')->hydrate($item['photo']);
+            $channel->setPhoto($photo);
+        }
+
         return $channel;
     }
 

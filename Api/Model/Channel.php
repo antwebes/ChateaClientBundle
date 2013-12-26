@@ -115,6 +115,12 @@ class Channel implements BaseModel
     protected $oCity = null;
 
     /**
+     * The value of the photo
+     * @var \Ant\Bundle\ChateaClientBundle\Api\Model\Photo
+     */
+    private $oPhoto = NULL;
+
+    /**
      * Get the [id] column value.
      *
      * @return int
@@ -373,10 +379,22 @@ class Channel implements BaseModel
     {
         return $this->oCity;
     }
+
     public function setCity(City $v)
     {
         $this->oCity = $v;
     }
+
+    public function getPhoto()
+    {
+        return $this->oPhoto;
+    }
+
+    public function setPhoto($oPhoto)
+    {
+        $this->oPhoto = $oPhoto;
+    }
+
     public function __toString()
     {
         return $this->name;
