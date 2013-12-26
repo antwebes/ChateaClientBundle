@@ -3,6 +3,7 @@
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 use Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile;
+use Ant\Bundle\ChateaClientBundle\Api\Model\Photo;
 use Ant\ChateaClient\Client\ApiException;
 
 class UserProfileManager extends  BaseManager implements ManagerInterface
@@ -21,7 +22,14 @@ class UserProfileManager extends  BaseManager implements ManagerInterface
         $updatedAt              = array_key_exists('updated_at',$item)?$item['updated_at']: new \DateTime('now');
         $publicated_at          = array_key_exists('publicated_at',$item)?$item['publicated_at']: new \DateTime('now');
 
-        return new UserProfile($id, $about, $birthday,$count_visits,$gender,$sexual_orientation,$you_want,$updatedAt,$publicated_at);
+        $userProfile = new UserProfile($id, $about, $birthday,$count_visits,$gender,$sexual_orientation,$you_want,$updatedAt,$publicated_at);
+
+        if(isset($item['profile_photo'])){
+            $userProfilePhoto = $this->get('PhotoManager')->hydrate($item['profile_photo']);
+            $userProfile->setProfilePhoto($userProfilePhoto);
+        }
+
+        return $userProfile;
     }
     public function getModel()
     {
