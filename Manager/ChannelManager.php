@@ -65,6 +65,12 @@ class ChannelManager extends BaseManager
             $moderators = $this->mapUsers($item['moderators']);
             $channel->setModerators($moderators);
         }
+        
+        if(isset($item['parent'])){
+        	$parent = $this->hydrate($item['parent']);
+        	$channel->setParent($parent);
+        }
+        
         return $channel;
     }
 
