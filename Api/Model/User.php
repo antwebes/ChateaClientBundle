@@ -77,12 +77,6 @@ class User implements BaseModel
     private $oProfile = NULL;
 
     /**
-     * The value of the profile photo
-     * @var \Ant\Bundle\ChateaClientBundle\Api\Model\Photo
-     */
-    private $oProfilePhoto = NULL;
-
-    /**
      * The value for channels
      */
     private $oChannels = NULL;
@@ -191,6 +185,10 @@ class User implements BaseModel
         return $this->email;
     }
 
+    public function setProfile(UserProfile $v = null)
+    {
+        $this->oProfile = $v;
+    }
 
     public function getProfile()
     {
@@ -200,19 +198,15 @@ class User implements BaseModel
         return $this->oProfile;
     }
 
-    public function setProfile(UserProfile $v = null)
-    {
-        $this->oProfile = $v;
-    }
-
     public function getProfilePhoto()
     {
-        return $this->oProfilePhoto;
-    }
+        $profile = $this->getProfile();
 
-    public function setProfilePhoto($oProfilePhoto)
-    {
-        $this->oProfilePhoto = $oProfilePhoto;
+        if($profile != null){
+            return $profile->getProfilePhoto();
+        }
+
+        return null;
     }
 
     public  function getChannels()
