@@ -55,7 +55,7 @@ class ChannelManager extends BaseManager
         if(isset($item['channel_type']) && isset($item['channel_type']['name'])){
             $channelType = new ChannelType();
             $channelType->setId(array_key_exists('id', $item['channel_type'])?$item['channel_type']['id']:0);
-            $channelType->setName(array_key_exists('id', $item['channel_type'])?$item['channel_type']['name']:'');
+            $channelType->setName(array_key_exists('name', $item['channel_type'])?$item['channel_type']['name']:'');
 
             $channel->setChannelType($channelType);
         }
