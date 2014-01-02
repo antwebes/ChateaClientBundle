@@ -124,6 +124,12 @@ class Channel implements BaseModel
      * @var \Datetime the date is crete a channel
      */
     private $publicatedAt;
+    /*
+     * The value of the photo
+     * @var \Ant\Bundle\ChateaClientBundle\Api\Model\Photo
+     */
+    private $oPhoto = NULL;
+
 
     /**
      * Get the [id] column value.
@@ -358,10 +364,12 @@ class Channel implements BaseModel
     {
         return $this->oCity;
     }
+
     public function setCity(City $v)
     {
         $this->oCity = $v;
     }
+
 
     /**
      * @param int $countVisits
@@ -393,6 +401,16 @@ class Channel implements BaseModel
     public function getNumberFans()
     {
         return $this->numberFans;
+    }
+
+    public function getPhoto()
+    {
+        return $this->oPhoto;
+    }
+
+    public function setPhoto($oPhoto)
+    {
+        $this->oPhoto = $oPhoto;
     }
 
     /**

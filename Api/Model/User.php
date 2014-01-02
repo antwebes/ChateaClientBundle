@@ -63,19 +63,18 @@ class User implements BaseModel
     private $nick = '';
 
     private $password = '';
-
+    
+    /**
+     * The value for the ip field.
+     * @var        int
+     */
+    private $ip;
 
     /**
      * The value for the profile_id field.
      * @var        int
      */
     private $oProfile = NULL;
-
-    /**
-     * The value of the profile photo
-     * @var \Ant\Bundle\ChateaClientBundle\Api\Model\Photo
-     */
-    private $oProfilePhoto = NULL;
 
     /**
      * The value for channels
@@ -139,6 +138,22 @@ class User implements BaseModel
     }
 
     /**
+     * @return int
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @param int $ip
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+    }
+
+    /**
      * @return string
      */
     public function getUsername()
@@ -170,6 +185,10 @@ class User implements BaseModel
         return $this->email;
     }
 
+    public function setProfile(UserProfile $v = null)
+    {
+        $this->oProfile = $v;
+    }
 
     public function getProfile()
     {
@@ -179,19 +198,15 @@ class User implements BaseModel
         return $this->oProfile;
     }
 
-    public function setProfile(UserProfile $v = null)
-    {
-        $this->oProfile = $v;
-    }
-
     public function getProfilePhoto()
     {
-        return $this->oProfilePhoto;
-    }
+        $profile = $this->getProfile();
 
-    public function setProfilePhoto($oProfilePhoto)
-    {
-        $this->oProfilePhoto = $oProfilePhoto;
+        if($profile != null){
+            return $profile->getProfilePhoto();
+        }
+
+        return null;
     }
 
     public  function getChannels()
