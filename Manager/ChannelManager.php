@@ -36,9 +36,9 @@ class ChannelManager extends BaseManager
         $channel->setName(array_key_exists('name',$item)?$item['name']:'not-name');
         $channel->setSlug(array_key_exists('slug',$item)?$item['slug']:'not-slug');
         $channel->setIrcChannel(array_key_exists('irc_channel',$item)?$item['irc_channel']:'not-irc-channel-name');
-        $channel->setTitle(array_key_exists('title',$item)?$item['title']:'');
         $channel->setDescription(array_key_exists('description',$item)?$item['description']:'');
-
+        $channel->setNumberFans(array_key_exists('number_fans',$item)?$item['number_fans']:0);
+        $channel->setPublicatedAt(new \DateTime(array_key_exists('publicated_at',$item)?$item['publicated_at']:'now'));
         if(isset($item['owner']) && isset($item['owner']['id'])){
             $owner = $this->get('UserManager')->hydrate($item['owner']);
             $channel->setOwner($owner);
