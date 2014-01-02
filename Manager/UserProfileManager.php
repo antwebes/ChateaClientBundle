@@ -58,11 +58,10 @@ class UserProfileManager extends  BaseManager implements ManagerInterface
 
     public function save(&$object)
     {
-
         if(!($object instanceof UserProfile)){
             throw new \InvalidArgumentException("The object has been of type ");
         }
-        return $this->getManager()->addUserProfile($object->getId(),$object->getAbout(),$object->getSexualOrientation());
+        return $this->getManager()->addUserProfile($object->getId(),$object->getAbout(),$object->getSexualOrientation(),$object->getGender(),$object->getYouWant(), $object->getBirthday());
     }
 
     public function update(&$object)

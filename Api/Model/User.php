@@ -42,7 +42,11 @@ class User implements BaseModel
      *
      * @var string
      * @NotBlank()
-     * @Length(min= 4, max= 18)
+	 * @Regex(
+     *           pattern= "/^[^a-z]|[^\w_^`\\\[\]{}]/i",
+     *           match=   false,
+     *           message= "Provide a valid username ( nickname ) "
+     *  )
      */
     private $username = '';
 
@@ -54,6 +58,7 @@ class User implements BaseModel
      */
     private $email = '';
     /**
+     * @deprecated
      * @Regex(
      *           pattern= "/^[^a-z]|[^\w_^`\\\[\]{}]/i",
      *           match=   false,
@@ -306,6 +311,7 @@ class User implements BaseModel
     }
 
     /**
+     * @deprecated
      * @param string $nick
      */
     public function setNick($nick)
@@ -314,6 +320,7 @@ class User implements BaseModel
     }
 
     /**
+     * @deprecated
      * @return string
      */
     public function getNick()
@@ -343,7 +350,7 @@ class User implements BaseModel
 
     public function __toString()
     {
-        return $this->nick;
+        return $this->username;
     }
 
 
