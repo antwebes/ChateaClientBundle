@@ -384,7 +384,7 @@ class Channel implements BaseModel
      */
     public function getCountVisits()
     {
-        return $this->countVisits;
+        return (int) $this->countVisits;
     }
 
     /**
@@ -400,7 +400,7 @@ class Channel implements BaseModel
      */
     public function getNumberFans()
     {
-        return $this->numberFans;
+        return (int) $this->numberFans;
     }
 
     public function getPhoto()
