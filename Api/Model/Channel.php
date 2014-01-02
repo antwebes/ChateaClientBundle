@@ -64,16 +64,12 @@ class Channel implements BaseModel
 
     /**
      * @var
-     * Regex(pattern="/([#&]w+)/", message = "Irc_Channel is not valid.");
+     * @Regex(pattern = "/([#&]\w+)/",
+     *               match = true,
+     *               message = "The irc channel value is not valid. view RFC-1459") RFC-1459(http://www.irchelp.org/irchelp/rfc/chapter1.html#c1_3)
      */
-    //TODO REGEX this
-    protected $irc_channel;
-    /**
-     * The value for the title field.
-     * @var        string
-     * @Length(min=4)
-     */
-    protected $title = '';
+    protected $ircChannel;
+
 
     /**
      * The value for the description field.
@@ -111,14 +107,29 @@ class Channel implements BaseModel
      */
     protected $oModerators = null;
 
-
+    /**
+     * @var City the user city
+     */
     protected $oCity = null;
 
     /**
+     * @var int the number of visit
+     */
+    private $countVisits;
+    /**
+     * @var int the numbers of fans
+     */
+    private $numberFans;
+    /**
+     * @var \Datetime the date is crete a channel
+     */
+    private $publicatedAt;
+    /*
      * The value of the photo
      * @var \Ant\Bundle\ChateaClientBundle\Api\Model\Photo
      */
     private $oPhoto = NULL;
+
 
     /**
      * Get the [id] column value.
@@ -224,32 +235,6 @@ class Channel implements BaseModel
     } // setChannelType()
 
     /**
-     * Get the [title] column value.
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set the value of [title] column.
-     *
-     * @param string $v new value
-     * @return Channel The current object (for fluent API support)
-     */
-    public function setTitle($v)
-    {
-        if ($v !== null && is_string($v)) {
-            $v = (string) $v;
-        }
-
-        $this->title = $v;
-
-    } // setTitle()
-
-    /**
      * Get the [description] column value.
      *
      * @return string
@@ -345,11 +330,11 @@ class Channel implements BaseModel
     }
 
     /**
-     * @param mixed $irc_channel
+     * @param mixed $ircChannel
      */
-    public function setIrcChannel($irc_channel)
+    public function setIrcChannel($ircChannel)
     {
-        $this->irc_channel = $irc_channel;
+        $this->ircChannel = $ircChannel;
     }
 
     /**
@@ -357,7 +342,7 @@ class Channel implements BaseModel
      */
     public function getIrcChannel()
     {
-        return $this->irc_channel;
+        return $this->ircChannel;
     }
     /**
      * @param boolean $enabled
@@ -385,6 +370,39 @@ class Channel implements BaseModel
         $this->oCity = $v;
     }
 
+
+    /**
+     * @param int $countVisits
+     */
+    public function setCountVisits($countVisits)
+    {
+        $this->countVisits = $countVisits;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCountVisits()
+    {
+        return (int) $this->countVisits;
+    }
+
+    /**
+     * @param int $numberFans
+     */
+    public function setNumberFans($numberFans)
+    {
+        $this->numberFans = $numberFans;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberFans()
+    {
+        return (int) $this->numberFans;
+    }
+
     public function getPhoto()
     {
         return $this->oPhoto;
@@ -393,6 +411,22 @@ class Channel implements BaseModel
     public function setPhoto($oPhoto)
     {
         $this->oPhoto = $oPhoto;
+    }
+
+    /**
+     * @param \Datetime $publicatedAt
+     */
+    public function setPublicatedAt($publicatedAt)
+    {
+        $this->publicatedAt = $publicatedAt;
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getPublicatedAt()
+    {
+        return $this->publicatedAt;
     }
 
     public function __toString()

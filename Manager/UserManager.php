@@ -87,11 +87,9 @@ class UserManager extends BaseManager implements ManagerInterface
 	
     public function findById($id)
     {
-        if($id === null || $id === 0 && !$id)
-        {
+        if(empty($id)){
             return null;
         }
-
         return $this->hydrate($this->getManager()->showUser($id));
     }
 
