@@ -36,6 +36,7 @@ class UserManager extends BaseManager implements ManagerInterface
         $user->setUsername(array_key_exists('username',$item)?$item['username']:'not-username');
         $user->setEmail(array_key_exists('email',$item)?$item['email']:'not-email');
         $user->setNick(array_key_exists('nick',$item)?$item['nick']:'not-nick');
+        $user->setLastLogin(array_key_exists('last_login',$item)?$item['last_login']: null);
 
         if(isset($item['affiliate'])){
             $affiliate = $this->get('AffiliateManager')->hydrate($item['affiliate']);

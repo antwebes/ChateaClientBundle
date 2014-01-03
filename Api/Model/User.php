@@ -122,6 +122,10 @@ class User implements BaseModel
     private $oAffiliate = null;
 
     /**
+     * @var \DateTime
+     */
+    private $lastLogin = null;
+    /**
      * @return int
      */
     public function getId()
@@ -346,5 +350,13 @@ class User implements BaseModel
         return $this->nick;
     }
 
+    public function getLastLogin()
+    {
+        return $this->lastLogin;
+    }
 
+    public function setLastLogin($lastLogin)
+    {
+        $this->lastLogin = $lastLogin;
+    }
 }
