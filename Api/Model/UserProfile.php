@@ -9,8 +9,8 @@ class UserProfile implements BaseModel
     const SEXUAL_ORIENTATION_HETEROSEXUAL   = 'heterosexual';
     const SEXUAL_ORIENTATION_HOMOSEXUAL = 'homosexual';
     const SEXUAL_ORIENTATION_BISEXUAL   = 'bisexual';
-    const GENDER_MAN        = 'man';
-    const GENDER_WOMAN      = 'woman';
+    const GENDER_MAN        = 'male';
+    const GENDER_WOMAN      = 'female';
     const GENDER_OTHER      = 'other';
 
     static $manager;
@@ -38,7 +38,7 @@ class UserProfile implements BaseModel
      */
     private $sexualOrientation;
     /**
-     * @Choice(choices = {"man", "woman", "other"})
+     * @Choice(choices = {"male", "female", "other"})
      */
     private $gender;
     private $birthday;
