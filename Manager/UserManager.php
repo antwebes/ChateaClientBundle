@@ -209,7 +209,8 @@ class UserManager extends BaseManager implements ManagerInterface
         return $this->getManager()->register($object->getUsername(),$object->getEmail(),$object->getPassword(),
             $object->getPassword(),
             $object->getAffiliate()->getHost(),
-            $object->getIp()
+            $object->getIp(),
+            $object->getCity()?$object->getCity()->getId():null
         );
     }
 
