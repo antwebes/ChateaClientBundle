@@ -40,7 +40,16 @@ class ChateaClientExtension extends Extension
         $container->setParameter('chatea_client.limits.affiliate_manager', $config['limits']['affiliate_manager']);
         $container->setParameter('chatea_client.app_auth.client_id', $config['app_auth']['client_id']);
         $container->setParameter('chatea_client.app_auth.secret', $config['app_auth']['secret']);
+        $container->setParameter('chatea_client.api_endpoint', $config['api_endpoint']);
 
+        if($config['filestore']['file_directory'] == 'default'){
+            $config['filestore']['file_directory'] = $container->getParameter('kernel.cache_dir');
+        }
+        $container->setParameter('chatea_client.filestore.file_directory', $config['filestore']['file_directory']);
+        if($config['filestore']['file_name'] == 'default'){
+            $config['filestore']['file_name'] = uniqid('chatea_client_',true);
+        }
+        $container->setParameter('chatea_client.filestore.file_name', $config['filestore']['file_name']);
         //add manager class
         if (isset($config['api_persistence']['api_manager']) && !empty($config['api_persistence']['api_manager'])) {
             $container->setParameter('antwebes_chateaclient_bundle.api.persistence.api_manager.class', $config['api_persistence']['api_manager']);

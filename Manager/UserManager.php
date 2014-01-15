@@ -207,7 +207,12 @@ class UserManager extends BaseManager implements ManagerInterface
      */
     public function save(&$object)
     {
-        return $this->getManager()->register($object->getUsername(),$object->getEmail(),$object->getPassword(),$object->getPassword(),"webchatea.local",$object->getIp());
+        return $this->getManager()->register($object->getUsername(),$object->getEmail(),$object->getPlainPassword(),
+            $object->getPlainPassword(),
+            $object->getAffiliate()->getHost(),
+            $object->getIp(),
+            $object->getCity()?$object->getCity()->getId():null
+        );
     }
 
     public function update(&$object)

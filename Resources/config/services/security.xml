@@ -17,12 +17,6 @@
 
     <services>
 
-        <service id="antwebs_chateaclient_authentication" class="%antwebs_chateaclient_authentication.class%">
-            <argument type="service" id="antwebes_chateaclient_lib.client_auth" />
-            <argument type="string">%chatea_client.app_auth.client_id%</argument>
-            <argument type="string">%chatea_client.app_auth.secret%</argument>
-        </service>
-
         <service id="annotation_reader" class="%annotation_reader.class%" />
 
         <service id="antwewebs_event_listerner_auth_token_updater_listener" class="%antwewebs_event_listerner_auth_token_updater_listener.class%">

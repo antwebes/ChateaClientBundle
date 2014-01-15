@@ -67,7 +67,7 @@ class User implements BaseModel
      */ 
     private $nick = '';
 
-    private $password = '';
+    private $plainPassword = '';
     
     /**
      * The value for the ip field.
@@ -343,13 +343,13 @@ class User implements BaseModel
 
 
 
-    public function getPassword()
+    public function getPlainPassword()
     {
-        return $this->password;
+        return $this->plainPassword;
     }
-    public function setPassword($v)
+    public function setPlainPassword($v)
     {
-        $this->password = $v;
+        $this->plainPassword = $v;
     }    
 
     public function __toString()

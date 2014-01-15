@@ -11,9 +11,18 @@
         <parameter key="antwebes_chateaclient_lib.api.class">Ant\ChateaClient\Client\Api</parameter>
         <parameter key="antwebes_chateaclient_bundle.api.persistence.api_connection.class">Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiConnection</parameter>
         <parameter key="antwebes_chateaclient_bundle.api.persistence.api_manager.class">Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager</parameter>
+        <parameter key="antwebes_chateaclient_lib_filestore.class">Ant\ChateaClient\Service\Client\FileStore</parameter>
+        <parameter key="chatea_client.filestore.file_directory">/tmp</parameter>
+        <parameter key="chatea_client.filestore.file_name">chatea_client_bundle</parameter>
+
     </parameters>
     <services>
-
+        <service id="antwebes_chateaclient_lib_filestore" class="%antwebes_chateaclient_lib_filestore.class%">
+            <argument type="collection">
+                <argument key="file_directory">%chatea_client.filestore.file_directory%</argument>
+                <argument key="file_name">%chatea_client.filestore.file_name%</argument>
+            </argument>
+        </service>
         <service id="antwebes_chateaclient_lib.client"
                  class="%antwebes_chateaclient_lib.client.class%"
                  factory-class="%antwebes_chateaclient_lib.factory_client_app.class%"
@@ -22,7 +31,9 @@
             <argument type="collection">
                 <argument key="client_id">%chatea_client.app_auth.client_id%</argument>
                 <argument key="secret">%chatea_client.app_auth.secret%</argument>
-                <argument key="environment">dev</argument>
+                <argument key="environment">%kernel.debug%</argument>
+                <argument key="base_url">%chatea_client.api_endpoint%</argument>
+                <argument key="store" type="service" id="antwebes_chateaclient_lib_filestore" />
             </argument>
         </service>
 
@@ -32,22 +43,16 @@
                  factory-method="factory"
                  public="false">
             <argument type="collection">
-                <argument key="environment">dev</argument>
                 <argument key="client_id">%chatea_client.app_auth.client_id%</argument>
                 <argument key="secret">%chatea_client.app_auth.secret%</argument>
+                <argument key="environment">%kernel.debug%</argument>
+                <argument key="base_url">%chatea_client.api_endpoint%</argument>
             </argument>
         </service>
 
         <service id="antwebes_chateaclient_bundle.api.persistence.api_connection" class="%antwebes_chateaclient_bundle.api.persistence.api_connection.class%" public="false">
             <argument type="service" id="antwebes_chateaclient_lib.client" />
         </service>
-        <!--
-		<service id="antwebes_chateaclient_bundle.api.persistence.api_manager" 
-				class="%antwebes_chateaclient_bundle.api.persistence.api_manager.class%"
-				public="false">
-            <argument type="service" id="antwebes_chateaclient_bundle.api.persistence.api_connection" />
-        </service>
-        -->
         <service id="antwebes_client" alias="antwebes_chateaclient_lib.client" synthetic="true" />
     </services>
 </container>

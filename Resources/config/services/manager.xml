@@ -13,12 +13,6 @@
         <parameter key="antwebes_chateaclient_bundle.manager.photo_album_manager.class">Ant\Bundle\ChateaClientBundle\Manager\PhotoAlbumManager</parameter>
         <parameter key="antwebes_chateaclient_bundle.manager.photo_vote_manager.class">Ant\Bundle\ChateaClientBundle\Manager\PhotoVoteManager</parameter>
         <parameter key="antwebes_chateaclient_bundle.manager.affiliate_manager.class">Ant\Bundle\ChateaClientBundle\Manager\AffiliateManager</parameter>
-
-        <!--
-        <parameter key="antwebes_chateaclient_bundle.api_model_channel.class">Ant\Bundle\ChateaClientBundle\Api\Model\Channel</parameter>
-        <parameter key="antwebes_chateaclient_bundle.api_model_channel_type.class">Ant\Bundle\ChateaClientBundle\Api\Model\ChannelType</parameter>
-        <parameter key="antwebes_chateaclient_bundle.api_model_user.class">Ant\Bundle\ChateaClientBundle\Api\Model\User</parameter>
-        -->
     </parameters>
 
         <services>
