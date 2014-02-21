@@ -31,6 +31,7 @@ class UserManager extends BaseManager implements ManagerInterface
         if($user == null){
             $user = new User();
         }
+
         
         $user->setId(array_key_exists('id',$item)?$item['id']:0);
         $user->setUsername(array_key_exists('username',$item)?$item['username']:'not-username');
