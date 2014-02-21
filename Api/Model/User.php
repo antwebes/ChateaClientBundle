@@ -52,6 +52,7 @@ class User implements BaseModel
     
     /**
      * @var string
+     * include to use as url
      */
     private $usernameCanonical = '';
 
