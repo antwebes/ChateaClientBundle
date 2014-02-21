@@ -32,9 +32,9 @@ class UserManager extends BaseManager implements ManagerInterface
             $user = new User();
         }
 
-        
         $user->setId(array_key_exists('id',$item)?$item['id']:0);
         $user->setUsername(array_key_exists('username',$item)?$item['username']:'not-username');
+        $user->setUsernameCanonical(array_key_exists('username_canonical',$item)?$item['username_canonical']:'not-usernameCanonical');
         $user->setEmail(array_key_exists('email',$item)?$item['email']:'not-email');
         $user->setNick(array_key_exists('nick',$item)?$item['nick']:'not-nick');
         $user->setLastLogin(array_key_exists('last_login',$item)?$item['last_login']: null);
