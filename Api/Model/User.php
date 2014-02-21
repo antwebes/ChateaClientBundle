@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
 use Doctrine\ORM\Mapping\Entity;
+use Ant\Bundle\ChateaClientBundle\Validator\Constraints\NickIrcConstraint;
 /**
  * Class User
  * @package Ant\Bundle\ChateaClientBundle\Api\Model
@@ -41,19 +42,9 @@ class User implements BaseModel
      * The value for the username field.
      *
      * @var string
-     * @NotBlank()
-	 * @Regex(
-     *           pattern= "/^[^a-z]|[^\w_^`\\\[\]{}]/i",
-     *           match=   false,
-     *           message= "Provide a valid username ( nickname ) "
-     *  )
+     * @NickIrcConstraint
      */
     private $username = '';
-    
-    /**
-     * @var string
-     */
-    private $usernameCanonical = '';
 
     /**
      * The value for the email field.
@@ -64,12 +55,7 @@ class User implements BaseModel
     private $email = '';
     /**
      * @deprecated
-     * @Regex(
-     *           pattern= "/^[^a-z]|[^\w_^`\\\[\]{}]/i",
-     *           match=   false,
-     *           message= "Provide a valid nickname"
-     *  )
-     */ 
+     */
     private $nick = '';
 
     private $plainPassword = '';
@@ -181,22 +167,6 @@ class User implements BaseModel
     public function setUsername($username)
     {
         $this->username = $username;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getUsernameCanonical()
-    {
-    	return $this->usernameCanonical;
-    }
-    
-    /**
-     * @param string $usernameCanonical
-     */
-    public function setUsernameCanonical($usernameCanonical)
-    {
-    	$this->usernameCanonical = $usernameCanonical;
     }
 
     /**
