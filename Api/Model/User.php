@@ -49,6 +49,11 @@ class User implements BaseModel
      *  )
      */
     private $username = '';
+    
+    /**
+     * @var string
+     */
+    private $usernameCanonical = '';
 
     /**
      * The value for the email field.
@@ -176,6 +181,22 @@ class User implements BaseModel
     public function setUsername($username)
     {
         $this->username = $username;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getUsernameCanonical()
+    {
+    	return $this->usernameCanonical;
+    }
+    
+    /**
+     * @param string $usernameCanonical
+     */
+    public function setUsernameCanonical($usernameCanonical)
+    {
+    	$this->usernameCanonical = $usernameCanonical;
     }
 
     /**
