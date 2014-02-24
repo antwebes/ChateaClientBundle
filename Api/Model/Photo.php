@@ -54,6 +54,27 @@ class Photo implements BaseModel
      * @var string $path
      */
     private $path;
+
+    /**
+     * @var string $pathLarge
+     */
+    private $pathLarge;
+
+    /**
+     * @var string $pathMedium
+     */
+    private $pathMedium;
+
+    /**
+     * @var string $pathSmall
+     */
+    private $pathSmall;
+
+    /**
+     * @var string $pathIcon
+     */
+    private $pathIcon;
+
     /**
      * @var string $title
      */
@@ -166,6 +187,38 @@ class Photo implements BaseModel
     }
 
     /**
+     * @param string $pathLarge
+     */
+    public function setPathLarge($pathLarge)
+    {
+        $this->pathLarge = $pathLarge;
+    }
+
+    /**
+     * @param string $pathMedium
+     */
+    public function setPathMedium($pathMedium)
+    {
+        $this->pathMedium = $pathMedium;
+    }
+
+    /**
+     * @param string $pathSmall
+     */
+    public function setPathSmall($pathSmall)
+    {
+        $this->pathSmall = $pathSmall;
+    }
+
+    /**
+     * @param string $pathIcon
+     */
+    public function setPathIcon($pathIcon)
+    {
+        $this->pathIcon = $pathIcon;
+    }
+
+    /**
      * @return string
      */
     public function getPath()
@@ -223,36 +276,26 @@ class Photo implements BaseModel
 
     public function getPathLarge()
     {
-        return $this->_getPath('large');
+        return $this->pathLarge;
     }
 
     public function getPathMedium()
     {
-        return $this->_getPath('medium');
+        return $this->pathMedium;
     }
 
     public function getPathSmall()
     {
-        return $this->_getPath('small');
+        return $this->pathSmall;
     }
 
+    public function getPathIcon()
+    {
+        return $this->pathIcon;
+    }
 
     public function __toString()
     {
         return $this->title;
-    }
-    private function _getPath($size)
-    {
-        if($this->path == null){
-            return $this->null;
-        }
-
-        //el penultimo elemento es donde añadimos el tamaño
-        $parts = explode('.', $this->path);
-        $penultimateIndex = count($parts) - 2;
-        $parts[$penultimateIndex] = sprintf("%s_%s", $parts[$penultimateIndex], $size);
-
-        //lo juntamos todo de nuevo
-        return implode('.', $parts);
     }
 }

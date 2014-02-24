@@ -34,15 +34,17 @@ class PhotoManager extends BaseManager
         $photo->setNumberVotes(array_key_exists('number_votes',$item)?$item['number_votes']:0);
         $photo->setScore(array_key_exists('score',$item)?$item['score']:0);
         $photo->setPath(array_key_exists('path',$item)?$item['path']:null);
+        $photo->setPathLarge(array_key_exists('path_large',$item)?$item['path_large']:null);
+        $photo->setPathMedium(array_key_exists('path_medium',$item)?$item['path_medium']:null);
+        $photo->setPathSmall(array_key_exists('path_small',$item)?$item['path_small']:null);
+        $photo->setPathIcon(array_key_exists('path_icon',$item)?$item['path_icon']:null);
 
         if(isset($item['album']) && isset($item['album']['id'])){
-
             $photoAlbum = $this->get('PhotoAlbumManager')->hydrate($item['album']);
             $photo->setAlbum($photoAlbum);
         }
 
         if(isset($item['participant']) && isset($item['participant']['id'])){
-
             $participant = $this->get('UserManager')->hydrate($item['participant']);
             $photo->setParticipant($participant);
         }
@@ -54,6 +56,7 @@ class PhotoManager extends BaseManager
                 $photo->addVote($vote);
             }
         }
+        
         return $photo;
     }
 
