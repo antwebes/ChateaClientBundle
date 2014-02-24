@@ -130,6 +130,10 @@ class Channel implements BaseModel
      */
     private $oPhoto = NULL;
 
+    /**
+     * @var Array of Channels
+     */
+    private $oChildren = array();
 
     /**
      * Get the [id] column value.
@@ -432,5 +436,46 @@ class Channel implements BaseModel
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function addChildren(Channel $channel)
+    {
+        if($channel == null){
+            throw new \InvalidArgumentException("The channel name do not null");
+        }
+        if($channel->id == $this->id){
+            throw new \InvalidArgumentException("The channel do not this");
+        }
+
+        if(!in_array($channel->id,$this->oChildren,true)){
+            array_push($this->oChildren,$channel);
+        }
+
+    }
+    public function removeChildren(Channel $channel){
+        if (false !== $key = array_search($channel->id, $this->oChildren, true)) {
+            unset($this->oChildren[$key]);
+            $this->oChildren = array_values($this->oChildren);
+        }
+    }
+
+    public function getChildren()
+    {
+        return $this->oChildren;
+    }
+
+    /**
+     * Set channels array
+     *
+     * @param array $channels
+     */
+    public function setChildren(array $channels = null)
+    {
+        if($channels != null){
+            foreach($channels as $channel){
+                $channelHydrated = self::$manager->hydrate($channel);
+                $this->addChildren($channelHydrated);
+            }
+        }
     }
 }
