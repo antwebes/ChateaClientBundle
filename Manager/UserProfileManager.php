@@ -13,12 +13,12 @@ class UserProfileManager extends  BaseManager implements ManagerInterface
     {
 
         $id                     = array_key_exists('id',$item)?$item['id']:0;
-        $about                  = array_key_exists('about',$item)?$item['about']:'not-about';
+        $about                  = array_key_exists('about',$item)?$item['about']:'';
         $birthday               = array_key_exists('birthday',$item)?$item['birthday']:null;
         $count_visits           = array_key_exists('count_visits',$item)?$item['count_visits']: 0;
         $sexual_orientation     = array_key_exists('sexual_orientation',$item)?$item['sexual_orientation']:null;
         $gender                 = array_key_exists('gender',$item)?$item['gender']:null;
-        $you_want               = array_key_exists('you_want',$item)?$item['you_want']: null;
+        $you_want               = array_key_exists('you_want',$item)?$item['you_want']: '';
         $updatedAt              = array_key_exists('updated_at',$item)?$item['updated_at']: new \DateTime('now');
         $publicated_at          = array_key_exists('publicated_at',$item)?$item['publicated_at']: new \DateTime('now');
 
