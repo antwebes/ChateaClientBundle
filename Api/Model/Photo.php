@@ -296,6 +296,6 @@ class Photo implements BaseModel
 
     public function __toString()
     {
-        return $this->title;
+        return $this->path;
     }
 }
