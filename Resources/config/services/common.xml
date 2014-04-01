@@ -34,6 +34,7 @@
                 <argument key="environment">%kernel.debug%</argument>
                 <argument key="base_url">%chatea_client.api_endpoint%</argument>
                 <argument key="store" type="service" id="antwebes_chateaclient_lib_filestore" />
+                <argument key="OAuth2Client" type="service" id="antwebes_chateaclient_lib.client_auth" />
             </argument>
         </service>
 
@@ -54,5 +55,6 @@
             <argument type="service" id="antwebes_chateaclient_lib.client" />
         </service>
         <service id="antwebes_client" alias="antwebes_chateaclient_lib.client" synthetic="true" />
+        <service id="antwebes_client_auth" alias="antwebes_chateaclient_lib.client_auth" synthetic="true" />
     </services>
 </container>
