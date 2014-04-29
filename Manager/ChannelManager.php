@@ -161,6 +161,18 @@ class ChannelManager extends BaseManager
         $this->getManager()->delChannel($object_id);
     }
 
+    /**
+     * Increment the visit of a channel.
+     *
+     * @param number $object_id The object instance to increment.
+     *
+     * @return void
+     */
+    public function incrementVisit($object_id)
+    {
+        $this->getManager()->incrementChannelVisits($object_id);
+    }
+
     public function findUser($user_id)
     {
     	$userManager = $this->get('UserManager');
