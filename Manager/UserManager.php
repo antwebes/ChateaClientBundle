@@ -56,10 +56,8 @@ class UserManager extends BaseManager implements ManagerInterface
             $user->setChannelsModerated($this->mapChannels($item['channels_moderated']));
         }
 
-        if(isset($item['city']) && isset($item['city']['name'])){
-            $city = new City();
-
-            $city->setName($item['city']['name']);
+        if(isset($item['city'])){
+            $city = $this->get('CityManager')->hydrate($item['city']);
             $user->setCity($city);
         }
         return $user;

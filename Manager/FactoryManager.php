@@ -8,14 +8,15 @@ use Ant\Bundle\ChateaClientBundle\Api\Persistence\ObjectManager;
 class FactoryManager
 {
 	static private $arrayManagers = array();
-    static private $managerMap = array('ChannelManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\ChannelManager',
-                                       'PhotoManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoManager',
-                                       'UserManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserManager',
-                                       'UserProfileManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\UserProfileManager',
-                                       'AffiliateManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\AffiliateManager',
-                                       'PhotoManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoManager',
-                                       'PhotoAlbumManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoAlbumManager',
-                                       'PhotoVoteManager'=>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoVoteManager'
+    static private $managerMap = array('ChannelManager'     =>'\Ant\Bundle\ChateaClientBundle\Manager\ChannelManager',
+                                       'PhotoManager'       =>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoManager',
+                                       'UserManager'        =>'\Ant\Bundle\ChateaClientBundle\Manager\UserManager',
+                                       'UserProfileManager' =>'\Ant\Bundle\ChateaClientBundle\Manager\UserProfileManager',
+                                       'AffiliateManager'   =>'\Ant\Bundle\ChateaClientBundle\Manager\AffiliateManager',
+                                       'PhotoManager'       =>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoManager',
+                                       'PhotoAlbumManager'  =>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoAlbumManager',
+                                       'PhotoVoteManager'   =>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoVoteManager',
+                                       'CityManager'        =>'\Ant\Bundle\ChateaClientBundle\Manager\CityManager'
                                 );
 	
 	/**

@@ -13,8 +13,63 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 
+use Ant\Bundle\ChateaClientBundle\Api\Model\City;
 
-class CityManager 
+class CityManager extends BaseManager
 {
+    protected $limit;
 
-} 
+    public function setLimit($limit)
+    {
+        $this->limit = $limit;
+    }
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    public function hydrate(array $item = null, City $city = null)
+    {
+        if($item == null){
+            return null;
+        }
+
+        if($city == null){
+            $city = new City();
+        }
+        $city->setId(array_key_exists('id',$item)?$item['id']:0);
+        $city->setName(array_key_exists('name',$item)?$item['name']:'not-name');
+
+        return $city;
+    }
+
+    public function findById($id)
+    {
+        // TODO: Implement findById() method.
+    }
+
+    public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)
+    {
+        // TODO: Implement findAll() method.
+    }
+
+    public function save(&$object)
+    {
+        // TODO: Implement save() method.
+    }
+
+    public function update(&$object)
+    {
+        // TODO: Implement update() method.
+    }
+
+    public function delete($object_id)
+    {
+        // TODO: Implement delete() method.
+    }
+
+    public function getModel()
+    {
+        return 'Ant\Bundle\ChateaClientBundle\Api\Model\City';
+    }
+}

@@ -13,6 +13,7 @@
         <parameter key="antwebes_chateaclient_bundle.manager.photo_album_manager.class">Ant\Bundle\ChateaClientBundle\Manager\PhotoAlbumManager</parameter>
         <parameter key="antwebes_chateaclient_bundle.manager.photo_vote_manager.class">Ant\Bundle\ChateaClientBundle\Manager\PhotoVoteManager</parameter>
         <parameter key="antwebes_chateaclient_bundle.manager.affiliate_manager.class">Ant\Bundle\ChateaClientBundle\Manager\AffiliateManager</parameter>
+        <parameter key="antwebes_chateaclient_bundle.manager.city_manager.class">Ant\Bundle\ChateaClientBundle\Manager\CityManager</parameter>
     </parameters>
 
         <services>
@@ -113,7 +114,17 @@
                 </call>
             </service>
 
-
+            <service id="antwebes_chateaclient_bundle.manager.city_manager"
+                class="%antwebes_chateaclient_bundle.manager.city_manager.class%"
+                factory-class="Ant\Bundle\ChateaClientBundle\Manager\FactoryManager"
+                factory-method="factory"
+                public="false">
+                <argument type="service" id="antwebes_chateaclient_manager" />
+                <argument type="string">%antwebes_chateaclient_bundle.manager.city_manager.class%</argument>
+                <call method="setLimit">
+                    <argument type="string">%chatea_client.limits.city_manager%</argument>
+                </call>
+            </service>
             <service id="api_channels"          alias="antwebes_chateaclient_bundle.manager.channel_manager"        synthetic="true" />
             <service id="api_channels_types"    alias="antwebes_chateaclient_bundle.manager.channel_type_manager"   synthetic="true" />
             <service id="api_users"             alias="antwebes_chateaclient_bundle.manager.user_manager"           synthetic="true" />
@@ -121,7 +132,8 @@
             <service id="api_photos"            alias="antwebes_chateaclient_bundle.manager.photo_manager"          synthetic="true" />
             <service id="api_photo_albums"      alias="antwebes_chateaclient_bundle.manager.photo_album_manager"    synthetic="true" />
             <service id="api_photo_votes"       alias="antwebes_chateaclient_bundle.manager.photo_vote_manager"     synthetic="true" />
-            <service id="api_affiliates"       alias="antwebes_chateaclient_bundle.manager.affiliate_manager" synthetic="true" />
+            <service id="api_affiliates"        alias="antwebes_chateaclient_bundle.manager.affiliate_manager"      synthetic="true" />
+            <service id="api_cities"            alias="antwebes_chateaclient_bundle.manager.city_manager"           synthetic="true" />
 
         </services>
 </container>
