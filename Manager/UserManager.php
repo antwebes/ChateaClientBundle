@@ -91,6 +91,7 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         $limit  = $limit == null ? $this->limit : $limit;
         $params = array();
+        $orders = array();
 
         if($filters != null){
             foreach($filters as $key => $value) {
@@ -98,7 +99,13 @@ class UserManager extends BaseManager implements ManagerInterface
             }
         }
 
-        $command = new Command('showUsers',array('filters' => implode(',', $params), 'order' => $order));
+        if($order != null){
+            foreach ($order as $key => $value) {
+                $orders[] = sprintf("%s=%s", $key, $value);
+            }
+        }
+
+        $command = new Command('showUsers',array('filters' => implode(',', $params), 'order' => implode(',',$orders)));
 
         return  new Pager($this,$command,$page, $limit);
 
