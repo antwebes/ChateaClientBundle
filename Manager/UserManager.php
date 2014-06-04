@@ -90,22 +90,22 @@ class UserManager extends BaseManager implements ManagerInterface
     public function findAll($page = 1, array $filters = null, $limit= null, array $order = null)
     {
         $limit  = $limit == null ? $this->limit : $limit;
-        $params = array();
-        $orders = array();
 
         if($filters != null){
             foreach($filters as $key => $value) {
                 $params[] = sprintf("%s=%s", $key, $value);
             }
+            $filters = implode(',', $params);
         }
 
         if($order != null){
             foreach ($order as $key => $value) {
                 $orders[] = sprintf("%s=%s", $key, $value);
             }
+            $order = implode(',',$orders);
         }
 
-        $command = new Command('showUsers',array('filters' => implode(',', $params), 'order' => implode(',',$orders)));
+        $command = new Command('showUsers',array('filters' => $filters, 'order' => $order));
 
         return  new Pager($this,$command,$page, $limit);
 
