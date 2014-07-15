@@ -37,14 +37,21 @@ class CityManager extends BaseManager
         if($city == null){
             $city = new City();
         }
+        
         $city->setId(array_key_exists('id',$item)?$item['id']:0);
         $city->setName(array_key_exists('name',$item)?$item['name']:'not-name');
-
+        $city->setCountry(array_key_exists('country',$item)?$item['country']['name']:'not-country');
+        
         return $city;
     }
 
     public function findById($id)
     {
+    	if ($id === null || $id === 0 || !$id)
+    	{
+    		return null;
+    	}
+    	return $this->hydrate($this->getManager()->getCity($id));
         // TODO: Implement findById() method.
     }
 

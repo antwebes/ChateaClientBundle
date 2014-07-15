@@ -103,7 +103,6 @@ class ChannelManager extends BaseManager
         {
             return null;
         }
-// 		ldd($this->getManager()->showChannel((int)$channel_id));
         return $this->hydrate($this->getManager()->showChannel($channel_id));
     }
 
