@@ -281,6 +281,16 @@ class User implements BaseModel
         $this->oChannelsModerated = $oChannelsModerated;
     }
 
+    public function getOcity()
+    {
+    	return $this->oCity;
+    }
+    
+    public function setOcity($oCity)
+    {
+    	$this->oCity = $oCity;
+    }
+    
     public function getCity()
     {
         return $this->oCity;
