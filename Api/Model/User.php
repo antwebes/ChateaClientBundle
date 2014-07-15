@@ -11,7 +11,6 @@ use Ant\Bundle\ChateaClientBundle\Validator\Constraints\NickIrcConstraint;
 /**
  * Class User
  * @package Ant\Bundle\ChateaClientBundle\Api\Model
- * @Entity
  */
 class User implements BaseModel
 {
