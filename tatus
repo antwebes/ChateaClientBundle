@@ -1,0 +1,1537 @@
+commit a4c7278f05e2dfc8cde300a94546b53ab0827600
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Apr 29 17:11:13 2014 +0200
+
+    add city in user
+
+commit 8c4c75eefb4591df684f6ad3e22e11ac836b5304
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Apr 29 10:45:39 2014 +0200
+
+    Added incrementChannelVisits method
+
+commit 7384fdbd371d5b6d195435ee31ff125d0a3df56b
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Apr 1 09:35:24 2014 +0200
+
+    Inject Chatea2OAuthClient as option
+
+commit 6cf66b381779dcffdb98ae923931eb4ac5ad22f4
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Wed Mar 19 16:02:09 2014 +0100
+
+    change toString photo to return path
+
+commit c41449295b51e5a14b3351e2382327425959a3a6
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Thu Mar 13 16:30:24 2014 +0100
+
+    refix errors
+
+commit 07a50c9eb02b241c273d2dd93f5ecf938bb3e0e1
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Feb 24 18:49:30 2014 +0100
+
+    add ChannelChildren
+
+commit a2df415a57ac221142c7a3a51e78882a5aec4b30
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Feb 24 15:18:31 2014 +0100
+
+    sizes paths of photo are now taken from the JSON
+
+commit 4dcb3f1f8c4cbab65a607fc25ecbcdf0e8fbffab
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Fri Feb 21 13:51:14 2014 +0100
+
+    include usernameCanonical in UserManager
+
+commit be516a2793c28d6c181bfa8fafc19b6ec83e5ef6
+Merge: b82aa35 1bff5c5
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Fri Feb 21 13:49:16 2014 +0100
+
+    Merge branch 'username' into develop
+
+commit 1bff5c59a7f24fa84d9e49588a3cfba0283a34d0
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Fri Feb 21 13:49:02 2014 +0100
+
+    include usernameCanonical in UserManager
+
+commit b82aa35df2d48914e5307304616e0e8b881e12ee
+Merge: a3388c5 8711d13
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Fri Feb 21 13:47:10 2014 +0100
+
+    include usernameCanonical
+
+commit 8711d13ae7bbfd09c9047df6bb9845976e8700e4
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Fri Feb 21 13:45:06 2014 +0100
+
+    include usernameCanonical again
+
+commit a3388c5588b3dc8d9c150a3d185e0c5710d31aae
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Feb 21 11:25:19 2014 +0100
+
+    remove nick and add validator
+
+commit 8457a05e4e59efe63cedf3694ab6b22baf45f7b2
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Fri Feb 21 09:16:12 2014 +0100
+
+    include usernameCanonical
+
+commit 16948b39f81b03f36bfa51b49951161e3423cbb3
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Fri Feb 7 09:54:54 2014 +0100
+
+    HOTFIX findChannelByIdOrSlug
+
+commit 098843cacbf266b3f3bbc7a0a5b7e208fe335472
+Merge: 2db260e 1bb69be
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Wed Jan 15 10:10:38 2014 +0100
+
+    Merge remote-tracking branch 'origin/master' into origin/develop
+
+commit 1bb69bebf32954337cf561160f13dc0408e239b0
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Wed Jan 15 10:08:41 2014 +0100
+
+    password -> plainPassword
+
+commit 4fb97bd4047d5974b2d916ae13671d3f031df757
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Jan 13 17:08:06 2014 +0100
+
+    add city in register
+
+commit adeabfa513a622a4c63a1feea2f78a45365d5591
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Jan 10 13:55:52 2014 +0100
+
+    update Locations
+
+commit 9f2ddc6afb8aacbf6b2866bd438035fb2a670222
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Jan 9 18:50:13 2014 +0100
+
+    add configuration api_endpoint
+
+commit 346c13c67c7d7aab80c1f2f75e5c909357d6d9ee
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Jan 9 18:04:09 2014 +0100
+
+    add parameter api_endpoint
+
+commit 127cf425d4729195f65f00413432492cd2612727
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Jan 9 13:36:17 2014 +0100
+
+    update
+
+commit b5378d1a3b08b0ee829d5eafead36b74c4afe395
+Author: root <root@ant3.ant-web.es>
+Date:   Wed Jan 8 11:26:24 2014 +0100
+
+    delete static affiliate
+
+commit 2db260e448f676d44df757d6a64768d3767ff54f
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Jan 3 08:54:29 2014 +0100
+
+    Channel update  number_fans
+
+commit b566627bfbe1c6716d7a66775b3e329a8c607a1b
+Merge: e68125d e952544
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Jan 3 08:37:08 2014 +0100
+
+    Merge branch 'develop' of git://github.com/antwebes/ChateaClientBundle into develop
+
+commit e68125db1953ae2a7d7e0d51e97f627873c8f047
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Jan 3 08:36:42 2014 +0100
+
+    User: last_login
+
+commit e952544d91e4c1421a12bf404b8159d229ebfa06
+Merge: f8047d2 cd692bc
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Thu Jan 2 17:40:10 2014 +0100
+
+    Merge branch 'develop' of git://github.com/antwebes/ChateaClientBundle into develop
+
+commit f8047d222c5260683b916c35e00dae9331e3fd16
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Thu Jan 2 17:39:48 2014 +0100
+
+    include fields to user & profile
+
+commit cd692bcf8829acd70006cbf24247d60408b2db60
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Jan 2 17:37:49 2014 +0100
+
+    countVisits
+
+commit 29e5892e8637d4feaf6aa61a150f948f0599a78f
+Merge: 86fbfab 6ed85ee
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Jan 2 13:02:28 2014 +0100
+
+    merge peligroso
+
+commit 86fbfabfb5437487af48d62fb5d3ce6f5abf9257
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Jan 2 12:58:10 2014 +0100
+
+    countvisict  cnumberFans and publicatedAt in channles
+
+commit 6ed85ee8a203ecb5fb6694d57e07ea681b850615
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Fri Dec 27 14:09:44 2013 +0100
+
+    error channelType map channel
+
+commit f8fc14ec40a26f9578b64b2b2a1e84a95a449f09
+Merge: 1fe00d6 950aff5
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Fri Dec 27 13:48:10 2013 +0100
+
+    map channel parent
+
+commit 1fe00d6c59a871ab0d3a7842dd4a09b5050f026c
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Fri Dec 27 13:38:34 2013 +0100
+
+    include map channel parent
+
+commit 950aff5f36848f8e09751c5fde8b4a2d8256bc53
+Merge: 65355b7 7cdc1e3
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Dec 26 14:09:32 2013 +0100
+
+    Merge branch 'develop'
+
+commit 7cdc1e32eb2eb0ff844135da4336f6ab644eafba
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Dec 26 14:09:13 2013 +0100
+
+    Added photo to Channel entity
+
+commit 65355b7ebead18e9f2ab37ca2cfc3f0091518ca3
+Merge: 7430346 32a892e
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Dec 26 12:35:26 2013 +0100
+
+    Merge branch 'develop'
+
+commit 32a892e3525df48da6ee5fcd7a5b199f52ba8149
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Dec 26 12:34:57 2013 +0100
+
+    Added filters parameters of users find all
+
+commit bf8b78cd2f25ca3284ba0150aab4012018fdded4
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Dec 26 10:27:53 2013 +0100
+
+    Moved profile photo from User entity to UserProfile entity
+
+commit 7430346de1e5dd1f36784b1c07c31451253fc9eb
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Dec 23 14:41:49 2013 +0100
+
+    include ip to Model User
+
+commit f0f4a5e9da92d3900bf4a2b8aea3ab78489655d6
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Dec 23 14:29:25 2013 +0100
+
+    include ip to Model User
+
+commit 9925a6ce90f1cf95ddb78538df44c28f958fb5ed
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Dec 23 14:12:08 2013 +0100
+
+    include ip to Model User
+
+commit 423802540d92b8c44021b99632e4b2bad958a9c1
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Dec 20 14:48:27 2013 +0100
+
+    add affiliate in user
+
+commit 100d29b5b909701f4187cbfdb373ae561096f357
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Dec 19 11:48:54 2013 +0100
+
+    Removed html regex for nick in User model
+
+commit b93104c5add0bfadd67d6e95b907164a7efb7afb
+Merge: f699af0 385094b
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Dec 19 10:27:05 2013 +0100
+
+    Merge branch 'master' of git://github.com/antwebes/ChateaClientBundle
+
+commit f699af01e988cc71be2986c2426e64ca7147cdd5
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Dec 19 10:26:54 2013 +0100
+
+    Added setUserNick method
+
+commit 385094b5eea8926c30ecc1f85c323cf505ad7ef9
+Merge: 66f4948 74ae51e
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Dec 17 11:13:41 2013 +0100
+
+    Merge branch 'master' into develop
+
+commit 66f4948f9f2dfd8ef13f1460649b4042daa85418
+Merge: 6962c0c d9e11af
+Author: Borja <bmp_86@hotmail.com>
+Date:   Tue Dec 17 10:25:31 2013 +0100
+
+    Merge branch 'develop' of https://github.com/antwebes/ChateaClientBundle into develop
+
+commit 6962c0cf5e103e6fb89f4701cb2fd9645d4e8d4e
+Author: Borja <bmp_86@hotmail.com>
+Date:   Tue Dec 17 10:25:14 2013 +0100
+
+    Add nick to register
+
+commit 74ae51e592722068ddb8a5204788a59a1c0bfe74
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Dec 17 10:10:52 2013 +0100
+
+    removed version from composer.json
+
+commit c14dbbed6e70ac501e70ee4f2e5377f50ba2ed33
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Dec 16 13:18:25 2013 +0100
+
+    changed all dependencies to dev-master
+
+commit c47f8cd6975010c7b7598e73fc48d606a0a8965d
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Dec 16 13:12:41 2013 +0100
+
+    removed minimum stability from composer.json
+
+commit d9e11af7b1f3eecfe3be43804ede2a35e79289a6
+Merge: e74e091 669d27d
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Dec 16 12:50:58 2013 +0100
+
+    Merge branch 'develop' of git://github.com/antwebes/ChateaClientBundle into develop
+
+commit e74e09141a25f3445968a3cf3130f124a055287e
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Dec 16 12:50:43 2013 +0100
+
+    photoAlbum add admin findbyId
+
+commit 669d27d4c33460525c326e6ce46bf3a7f2ec53e5
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Dec 16 11:18:37 2013 +0100
+
+    Added chatea-client-bundle dependency
+
+commit 202fd27897a8fe7ee968691a16121352d1693c99
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Dec 16 11:09:13 2013 +0100
+
+    Added chatea secure bundle dependency
+
+commit f6bf444bda43f6d0ad0b8786c308e1925073abce
+Merge: 5c51a6d 4324bc3
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Dec 16 10:09:06 2013 +0100
+
+    Merge branch 'master' of https://github.com/antwebes/ChateaClientBundle
+
+commit 5c51a6dde20e8a07488df1e37086fee22d5a5b70
+Merge: f7c7ea6 f0be821
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Dec 16 10:07:42 2013 +0100
+
+    Merge branch 'develop'
+
+commit f0be82119b456bbaaaa795b5859b928eb95ddbcf
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Dec 16 08:49:15 2013 +0100
+
+    add findAllUsers
+
+commit bbb7e32f1a9c8c4998c67226fce818a5161bf7e3
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Dec 13 15:13:41 2013 +0100
+
+    PhotoVote
+
+commit a8d71a29b34323907c8e2947b950e1b1e5f3107b
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Dec 13 13:47:51 2013 +0100
+
+    update photo setAlbum
+
+commit ed11335b95b49c6ccd4c652d7b0a9f9a8ac4d535
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Dec 13 11:28:00 2013 +0100
+
+    update photo manager
+
+commit 864994b5f301208114543601fc23b5e60aa8e421
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Dec 13 09:58:45 2013 +0100
+
+    add limits in photomanager
+
+commit 55da869fc78b79c947035995503ecf5317f72e7a
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Dec 13 09:36:58 2013 +0100
+
+    update pager limit 0
+
+commit a636fdb591b28302b7158e07329f3ed111134991
+Merge: 4474613 7a0cd86
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Dec 13 09:26:36 2013 +0100
+
+    Merge branch 'develop' of git://github.com/antwebes/ChateaClientBundle into develop
+
+commit 4474613f2dbe94ade707ff0e66d221257a73b84d
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Dec 13 09:24:31 2013 +0100
+
+    add PhotoVote PhotoAlbum Manager are void
+
+commit 7a0cd86b49ae5627a050d7f13f564d88f2988d43
+Author: Borja <bmp_86@hotmail.com>
+Date:   Fri Dec 13 09:18:25 2013 +0100
+
+    Getter Setter password
+
+commit 9aef0efcfad4cecd4a5674dd6bdb0aa69c72deea
+Author: Borja <bmp_86@hotmail.com>
+Date:   Thu Dec 12 18:14:10 2013 +0100
+
+    Channel ownername && hydrate
+
+commit 4324bc3836352a092fbcec52ddc02093d6729b6b
+Merge: 1ea53e6 df27972
+Author: Borja <bmp_86@hotmail.com>
+Date:   Thu Dec 12 17:21:51 2013 +0100
+
+    Merge branch 'master' of https://github.com/antwebes/ChateaClientBundle
+
+commit 1ea53e6e912b2b9da87dbdf8fc7a858ff1e804af
+Merge: 81da216 662236a
+Author: Borja <bmp_86@hotmail.com>
+Date:   Thu Dec 12 17:19:23 2013 +0100
+
+    merge with origin
+
+commit 81da2163717cafac5bc4f048348eb0e3b2d4b611
+Author: Borja <bmp_86@hotmail.com>
+Date:   Thu Dec 12 17:08:17 2013 +0100
+
+    Api User & User authentication
+
+commit 662236aad8dc064f9246313a0cd06676d3b362b1
+Merge: 8fa7112 1909d2d
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Dec 12 12:44:38 2013 +0100
+
+    Merge branch 'develop' of https://github.com/antwebes/ChateaClientBundle into develop
+
+commit 8fa711249eb8333729e57136831e3ff9251c3dd2
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Dec 12 12:44:33 2013 +0100
+
+    Added api_report config option
+
+commit 1909d2dbf051698b1a2e1ae2832f01866c06135a
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Dec 12 11:21:24 2013 +0100
+
+    add api_photo service
+
+commit d3d6f69fa2fc099ecf41444f3615fffa9c2320a7
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Dec 12 10:57:05 2013 +0100
+
+    update PhotoManager and PhotoAlbum
+
+commit 5b866e191215b82678e0c1268afaeb1077b33a35
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Dec 12 10:20:00 2013 +0100
+
+    add Photo Album Vote entity and manager
+
+commit b26636d943d8fa965f8a2f3e47c990cc4e20d9fb
+Merge: 81474d9 6ab10c7
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Dec 9 15:05:13 2013 +0100
+
+    Merge branch 'develop' of git://github.com/antwebes/ChateaClientBundle into develop
+
+commit 81474d90c2ee2ea7816b3b5f2add4e8df04eee52
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Dec 9 15:04:23 2013 +0100
+
+    update errors crud channels
+
+commit df27972dd7481313506e08217666f904563d5d0c
+Merge: f7c7ea6 6ab10c7
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Dec 9 15:00:13 2013 +0100
+
+    Merge branch 'develop'
+
+commit 6ab10c7e597b2c7270c043a70797bb7673853431
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Dec 9 14:59:54 2013 +0100
+
+    Fixed user hydrate method
+
+commit c5273b39e29acbd7621f065d2fd7ecf1d093e91c
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Dec 5 18:50:22 2013 +0100
+
+    update models
+
+commit cc4f935bd1c871b4214e489dbac4db0375c3c82b
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Wed Dec 4 16:02:51 2013 +0100
+
+    update composer
+
+commit 5673dfab1ff03dafb1ef9c3c2d114ee8ee450b9a
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Wed Dec 4 15:59:28 2013 +0100
+
+    update composer
+
+commit 50056c5565c3c93df1e81ecd8481c0e04298241e
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Wed Dec 4 15:58:37 2013 +0100
+
+    update composer
+
+commit 37f549dc1c8d3992d19f3ac000898a4999731b70
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Dec 4 12:54:27 2013 +0100
+
+    Added City entity to User entity
+
+commit c7f3f4af44e1137f7c40742ca79589cb5b407a9e
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Dec 4 12:53:59 2013 +0100
+
+    Fixed api_manager config issue
+
+commit 45b2bd7f29bab7f72b08825a0d0ed542b85cf67b
+Merge: 2d0d181 d5a01a1
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Dec 4 12:02:11 2013 +0100
+
+    Merge with origin/develop
+
+commit 2d0d1811357196e045b074377ad97a1a1b22ce7d
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Dec 4 11:58:43 2013 +0100
+
+    Changed config
+
+commit d5a01a1896e3b6dedf869e6ec1afca3ce54dccfb
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Dec 3 17:45:14 2013 +0100
+
+    gitignore put .idea
+
+commit 80582f5b005665714950a54312dcefbdec577e1d
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Dec 3 17:16:01 2013 +0100
+
+    update config files
+
+commit 98eea57780124b45a2da2dfe30ffeda36f0b538f
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Dec 3 10:02:51 2013 +0100
+
+    basic data
+
+commit 326e7d4f583f82c9a180ee840397468761507fe3
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Dec 2 14:16:57 2013 +0100
+
+    add config
+
+commit f7c7ea6a3db81af3dc868e0898dab24262cc23c8
+Merge: eeba5a2 424cf50
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Nov 28 16:05:05 2013 +0100
+
+    Merge branch 'develop'
+
+commit 424cf508b37bad0c2ad24fc549d5f6a3129d9f28
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Nov 28 16:04:48 2013 +0100
+
+    Removed Authentication provider
+
+commit eeba5a24032eb77a4aca30c59dcd8ca108b5156e
+Merge: 440c972 fabbc37
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Nov 28 08:39:27 2013 +0100
+
+    Merge branch 'develop'
+
+commit fabbc376ccd3ec20da4de1430f4099f9834d402d
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Nov 28 08:39:16 2013 +0100
+
+    Fixed Photo::getPath method
+
+commit 440c9720573a988ce3e1add87556e5af2088d5b3
+Merge: 425488a 1c17254
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Nov 27 18:33:46 2013 +0100
+
+    Merge branch 'develop'
+
+commit 1c17254b1fe9e93a01673cae54613638b71d5465
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Nov 27 18:33:33 2013 +0100
+
+    Removed an ldd
+
+commit 425488a9f5ad2b55a9b92d06ef2898c274e91d80
+Merge: 9e71d40 1044942
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Nov 27 18:23:55 2013 +0100
+
+    Merge branch 'develop'
+
+commit 1044942bba2115f0e47cf06a2e887b853b686954
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Nov 27 18:23:12 2013 +0100
+
+    Added Ant\Bundle\ChateaClientBundle\Api\Model\Photo::getPath method
+
+commit 9e71d40b58773239d8d50ee25444ccffa8a44d11
+Merge: 9fb55f0 85216e4
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Nov 27 17:20:03 2013 +0100
+
+    Merge branch 'develop'
+
+commit 85216e45889a7d546c5987b7a347d5ac40698ee4
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Nov 27 17:19:41 2013 +0100
+
+    Added Photo to user profile photo
+
+commit 9fb55f0148bf424ec21fe03984e0466c93909816
+Merge: fdca93e 466a934
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Fri Nov 22 09:06:13 2013 +0100
+
+    Merge branch 'develop'
+
+commit 466a934668967e7f29ca54916e11429e9e712938
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Fri Nov 22 09:05:42 2013 +0100
+
+    If channel data has channels, channels_fan or channels_moderated, the relations are mapped so we don't need to call the API
+
+commit fdca93e47fa02ee6da7c8bf6f5f8f79872e06d57
+Merge: 9d66187 aa7d51a
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Nov 20 13:03:11 2013 +0100
+
+    Merge branch 'develop'
+
+commit aa7d51a55e21294dfda02aab5028de02533acd7d
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Nov 20 13:02:57 2013 +0100
+
+    If moderators and fans are given in the channel json then they are mapped to user objects
+
+commit a20ebf4efefcb7bbb102a8e60114981b75aea8d0
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Fri Nov 15 13:01:03 2013 +0100
+
+    Username is also stored in the remember me cookie
+
+commit 81cd5283a4ae5d3860959e4a878b1e5a15227b21
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Fri Nov 15 11:54:55 2013 +0100
+
+    When all data from the user is given with the channel, hydratate the user object
+
+commit 9d661878476ba24139774965505bdbdfecf5a5a4
+Merge: f59c4d0 9850e4d
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Nov 14 17:45:55 2013 +0100
+
+    Merge branch 'develop'
+
+commit 9850e4dace11818be186b50081a9398f6f0c4316
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Nov 14 17:45:25 2013 +0100
+
+    if the api returns the profile data from the user, the data is hydated in the profile object
+
+commit 32e2c9307d448094f2e5d79404b88eab49a0c4f8
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Nov 14 13:38:40 2013 +0100
+
+    When setOwnerId is called the user isn't loaded from api
+
+commit cd0fa002b4eb9b30b966939f94a7fe31f278cfe9
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Nov 14 11:39:30 2013 +0100
+
+    Related objects of users are cached so the API call is made only once
+
+commit f59c4d05c2461290f68430045edb6d6d4126a4f6
+Merge: 3f55f3b 08f71c8
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Nov 12 13:26:36 2013 +0100
+
+    Merge branch 'develop'
+
+commit 08f71c8621b417ca4a7c4f56edf56962fb517741
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Nov 12 13:25:46 2013 +0100
+
+    Changed refreshUser, now only makes refreshToken call to api if it's expired and has refreshToken. If it's expired and hasn't refreshToken throws a UserNameNotFoundException
+
+commit 532c80bc54101a5420558a7bc38c247a141a47bd
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Nov 12 13:10:00 2013 +0100
+
+    added auth exception listener
+
+commit 9b9bcc2cc32fcbcae13f381897177b5fc971678e
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Nov 12 10:32:24 2013 +0100
+
+    Added remember me suport
+
+commit 3f55f3beb68fb3b7f1ac823832bcc9ca633cb2d9
+Merge: fd3d970 8cadf73
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Fri Nov 8 13:19:21 2013 +0100
+
+    Merge branch 'master' of git://github.com/antwebes/ChateaClientBundle
+
+commit acf65a1a05bd75d3a313314324b04114670786e2
+Merge: fd3d970 840c96f
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Fri Nov 8 13:18:39 2013 +0100
+
+    Merge branch 'develop' of git://github.com/antwebes/ChateaClientBundle into develop
+
+commit fd3d970a4c3970d7212b0df96b77ee8be5f78eba
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Fri Nov 8 13:13:19 2013 +0100
+
+    Fixed declaration of UserProfileManager::findAll method
+
+commit 840c96f2be4e825748a3cb029010f3eb6f8f3b86
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Nov 8 09:26:59 2013 +0100
+
+    update owner name for username in ChannelManager
+
+commit 0148dfbd8f398942c23c2aaade69781f90bf847c
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Nov 8 09:21:09 2013 +0100
+
+    update owner name for username in ChannelManager
+
+commit 20587efeb630a5b741494857e9da93d9b94f777a
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Nov 7 17:58:11 2013 +0100
+
+    add channel onwer field
+
+commit 8cadf73cc6484352e37ea4f2d83b373818f3d7d4
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Nov 7 16:45:54 2013 +0100
+
+    update Channel change creater by owner
+
+commit fcb5db2f16b4ce7021f7c8f0b185a4261520b00e
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Nov 7 12:42:34 2013 +0100
+
+    Added UserMannger::forgotPassword method
+
+commit 3ea7007d457a13a2a03a79cb7e95ff70bde307d8
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Nov 6 11:17:28 2013 +0100
+
+    Added order option to ManagerInterface::findAll
+
+commit 624a8c5a7e8a1197dcd9a4a16d35f3c78fe19659
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Nov 5 17:09:38 2013 +0100
+
+    Fixed UserProfileManager
+
+commit c67c2ec8b985c212f7bcbcce7f7ac14a800d72c3
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Nov 4 16:20:56 2013 +0100
+
+    fixed findMeUser in UserManager
+
+commit d31f763cb5607bfb3a0b1eeeea0ecbf48457a422
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Nov 4 12:18:20 2013 +0100
+
+    Fixed ChannelManager::findUser method
+
+commit e1e016ca46cc7b785994c7e4e293e74b6fc5f69b
+Merge: 3d58923 e8bbd75
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Nov 4 11:53:40 2013 +0100
+
+    Merge branch 'master' of https://github.com/antwebes/ChateaClientBundle.git
+
+commit 3d58923bb12eea0057e95a7dc2b4fa12deccdc00
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Nov 4 11:53:30 2013 +0100
+
+    refix channel & user manager
+
+commit e8bbd7537a5569c3f2250b0bccd0cc32f7ede000
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Nov 4 09:33:47 2013 +0100
+
+    Update composer.json
+    
+    goodbye alias composer
+
+commit 0ef9ec5ed325b133106ee44bd61934eef3485ccb
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Nov 4 09:27:03 2013 +0100
+
+    Update composer.json
+
+commit 08fc181b5106f17b97792661deeb55fa5b5545ef
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Nov 4 08:43:41 2013 +0100
+
+    Update composer.json
+
+commit 705189060dde0fbf2a4006755be60a5351544796
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Thu Oct 31 09:47:06 2013 +0100
+
+    modify pager limit != null
+
+commit 9966fd5df1e610796d5639a4287453264f6661ea
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Oct 28 12:52:17 2013 +0100
+
+    Fixed AuthenticationException namespace import in Ant\Bundle\ChateaClientBundle\Security\User
+
+commit c814a01ce3e8232703accc114319118cfbf38f5f
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Oct 28 12:27:39 2013 +0100
+
+    RevokeAccessOnLogoutHanler now intercepts exceptions from API calls
+
+commit 1f3d65658c0aa4443314011537161c6f078b16b1
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Oct 28 10:02:10 2013 +0100
+
+    Fixed reloadUser, now it does not return a new user, it just reloads the access and refresh token and updates the expires_at
+
+commit b2828303da89451f29331162567a36a6e0ae5d66
+Merge: 7e55d86 06c6fa3
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Oct 28 09:03:54 2013 +0100
+
+    Merge branch 'master' of git://github.com/antwebes/ChateaClientBundle
+
+commit 7e55d86f7b53729502cc3f3c4fe251cce0549145
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Oct 28 09:03:50 2013 +0100
+
+    Changed exception message in UserProvider
+
+commit 06c6fa3cfcf3eef551b57dea414d898ae7fff512
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Oct 25 19:27:59 2013 +0200
+
+    add limit an update lastpage
+
+commit 551d0234e4434bcfd4aae16c45cffdc4be1d5ada
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Oct 25 09:28:03 2013 +0200
+
+    update user profile with channels created
+
+commit 77bba7201555b23e4198498da7d72de18b44e9cd
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Oct 25 09:15:45 2013 +0200
+
+    add friennds to user
+
+commit 108dcf530f0b7aadf3612387980d6c0e4e81e4b2
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Fri Oct 25 08:42:42 2013 +0200
+
+    fix url->slug, Pager receive BaseManager
+
+commit 0e85198de0e621d8fd86c718a5c028a07dceb5fc
+Merge: 5a2e183 b06b0e1
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Oct 25 08:23:19 2013 +0200
+
+    Merge branch 'master' of git://github.com/antwebes/ChateaClientBundle
+
+commit 5a2e18399d0e5444514dd5ecf2e37ce73197caea
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Oct 25 08:22:51 2013 +0200
+
+    Update Pager
+
+commit b06b0e11518ea55c59b39f255c2f90ca6e3bdd73
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Oct 24 16:45:45 2013 +0200
+
+    Fixed format issues
+
+commit 0ddce5ab8827b2258c96607d3ad8da36ac3dfd68
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Oct 24 16:39:18 2013 +0200
+
+    Añadida documentación
+
+commit b0641534da25fbce6e750fa1a4f558b7a5a10289
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Thu Oct 24 14:21:45 2013 +0200
+
+    Added logout handler to revoke token
+
+commit e33fd5df988db697ff16a433d33e60c20bcf21ef
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Oct 24 09:03:53 2013 +0200
+
+    login
+
+commit a0675c7964d0c0f33683a31b02ecba3c97a17941
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Wed Oct 23 23:19:01 2013 +0200
+
+    update auth mode
+
+commit e18e582ece98a15de388be16ef6ff296011534f7
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Wed Oct 23 18:04:25 2013 +0200
+
+    varios
+
+commit 61b3fe33ad932321978ce78087f7faec0fb510ad
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Oct 23 17:04:18 2013 +0200
+
+    Changed Auth client of API
+
+commit 57894c9166064d913ac0f850208ebc45a9b27dbc
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Oct 23 16:25:58 2013 +0200
+
+    App auth credentials moved to config parameter
+
+commit 421aeafae8ca1ea92cb2b51ee579057d04e80840
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Wed Oct 23 13:38:00 2013 +0200
+
+    update configurator
+
+commit 574fd5e780f32fb0e307d83f82ba0e33e3bfc47f
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Wed Oct 23 13:24:50 2013 +0200
+
+    add controller secured
+
+commit b8025b03c8d9f01ca8ceef293041d49c736695f3
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Wed Oct 23 13:15:18 2013 +0200
+
+    delete repositories & controllers
+
+commit 6d45efac47c05a8592a1e1960de0a2120d57ba1a
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Wed Oct 23 13:03:02 2013 +0200
+
+    separate baseManager FactoryManager
+
+commit acc4954a1fb21f3ab9b58c7f45df25cbf08f2587
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Wed Oct 23 12:20:30 2013 +0200
+
+    update manager factory
+
+commit 3e82bbe6fbe1ecb3f35a175bcea2fde31e545c4d
+Merge: 38b738d 17acfa9
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Wed Oct 23 10:51:34 2013 +0200
+
+    Merge branch 'master' of git://github.com/antwebes/ChateaClientBundle.git
+
+commit 38b738db6c6c2e13f9af0a17c931338fa3f75cb8
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Wed Oct 23 10:51:24 2013 +0200
+
+    insert manager, & hydrate non static. KATABUMMM
+
+commit 17acfa985b75f35ea60ad81d956909e2d8ea94e8
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Wed Oct 23 10:35:34 2013 +0200
+
+    Added login controller and routes
+
+commit 256be1dd07889fa38b4b17bd1d9a3283fb508434
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Wed Oct 23 08:19:36 2013 +0200
+
+    fix error lastPage
+
+commit 3aa86a8bdbb5f92f9e0addb1275d7bb5afc913d1
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Tue Oct 22 18:49:01 2013 +0200
+
+    refix command
+
+commit ff9bd7aecbbb2d0e9af286bb6a79ecff9dcd0686
+Merge: 655a204 66b6de0
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Oct 22 18:18:00 2013 +0200
+
+    Merge branch 'master' of git://github.com/antwebes/ChateaClientBundle
+
+commit 655a204c4d7c25cf674a19b820cecb521802225c
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Oct 22 18:17:40 2013 +0200
+
+    update command
+
+commit 66b6de0e6c9487b8c6078970d272a14517ffca05
+Merge: 5a3bcf8 7d7160a
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Oct 22 18:11:26 2013 +0200
+
+    Merge branch 'master' of git://github.com/antwebes/ChateaClientBundle
+
+commit 5a3bcf8af3ba401ae1634703ed1fa65a69655049
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Oct 22 18:11:20 2013 +0200
+
+    Added EventListener to set the user auth token to the API client
+
+commit 7d7160a97129a1a8c9821072c34698bbcad1005c
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Oct 22 17:06:03 2013 +0200
+
+    add methods in UserManager
+
+commit 603cea144004491d6967c057f853392ab52f6f28
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Oct 22 13:10:08 2013 +0200
+
+    add config limits
+
+commit c9c6c2fa5ff8973f03606160ae4f846d2ebe8f3f
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Oct 22 12:18:07 2013 +0200
+
+    add pager
+
+commit 59bcf283860d865e319a804a11c7c08fc70b433a
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Oct 22 08:44:47 2013 +0200
+
+    add pagerfanta
+
+commit 5b738cdc2ffcd9d9987130536b6ae1f655a62737
+Merge: f46226f e110877
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Oct 22 08:26:00 2013 +0200
+
+    	Merge branch 'master' of git://github.com/antwebes/ChateaClientBundle
+
+commit e1108778a5313888d6b0bd55dbefa57ed86ff374
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Tue Oct 22 08:23:40 2013 +0200
+
+    repository -> manager
+
+commit f46226f6101170c8d90cd66d33d88adde7b53181
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Oct 21 17:28:43 2013 +0200
+
+    merge peligroso
+
+commit fa19a7731cbfc8680dc9d26d89e0c2ab53a1f7af
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Oct 21 09:05:06 2013 +0200
+
+    first commit
+
+commit 54e855712e2a9d85a8a84055eca2013e0dd8f1cf
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Oct 15 17:23:41 2013 +0200
+
+    Finished form auth integration
+
+commit 56ea6b0f0e7a59e5b874c76cb85a5b4b6bad2f9d
+Merge: c0c1bc4 f056ec1
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Oct 15 14:42:22 2013 +0200
+
+    Merge
+
+commit c0c1bc43991fabe76f30531b98fc79fe1eb2b403
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Tue Oct 15 12:11:58 2013 +0200
+
+    Auth form integration I
+
+commit f056ec131bcdce544993fde38e90121e099d5c76
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Oct 15 09:48:22 2013 +0200
+
+    update composr.json
+
+commit 6704e9029f4011f2dfb65ad5b8ff50fba4327061
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Oct 15 09:24:54 2013 +0200
+
+    update composer
+
+commit 907425794d3d3cc23919f6e75cc108c41f5c266f
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Oct 14 22:23:20 2013 +0200
+
+    update Service Channel
+
+commit e37cd3f382fe69eca4dcdd59becbe5fa936508e2
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Oct 14 19:45:54 2013 +0200
+
+    update composer
+
+commit cd5088efe8fa68815256873fe25f683f8ad7347e
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Oct 14 17:56:08 2013 +0200
+
+    update repository
+
+commit 2c1d6abc30ecb21d6ce3fa014ea2cf5bdd76aae6
+Merge: ca88de2 3605a8e
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Oct 14 17:19:09 2013 +0200
+
+    Merge
+
+commit 3605a8e88c4bf5543c0236f2065c6c8d14783a7d
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Oct 14 17:10:26 2013 +0200
+
+    Added user provider for api chatea
+
+commit bdd1468d9587e9fdb44a17e3dba9164804d4daf7
+Author: jdeveloper <jdeveloper.inxenio@gmail.com>
+Date:   Mon Oct 14 13:37:04 2013 +0200
+
+    Implemented authenticator for api chatea
+
+commit ca88de24420ef220f5367f5b9dea816db72fdcb5
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Oct 14 11:46:04 2013 +0200
+
+    add files
+
+commit 17acdb7fd67003b32ec8295a9906c189dc204861
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Oct 14 11:44:03 2013 +0200
+
+    remove all
+
+commit 6e2e01c7754182860b2cee07520a62b55cc64537
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Oct 14 11:15:07 2013 +0200
+
+    Update composer.json
+    
+    version dev-master lib
+
+commit e88e4f4ef17f27d9a1bba3856b526ab5357fb6d7
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Oct 14 10:50:31 2013 +0200
+
+    Update composer.json
+
+commit 831856940c81b46a286dec318804deef1b580ec3
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Oct 14 10:50:16 2013 +0200
+
+    Update composer.json
+    
+    without version symfony2
+
+commit 8c7b2fa0942870502a5714bf27d1960326bfa16b
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Oct 14 10:48:24 2013 +0200
+
+    Update composer.json
+    
+    version packagist
+
+commit 6a30d1ab38972ea99dfe9ac4b40dfd82eb6a338b
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Oct 14 10:38:08 2013 +0200
+
+    Update composer.json
+    
+    version chateaLib packagist
+
+commit 4250acc79a1b4330a492df7f4e14020f143c258f
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Oct 14 10:36:29 2013 +0200
+
+    Update composer.json
+    
+    refix composer
+
+commit a795e05338980f073c88a38da535dc0b543c8901
+Author: Chrysweel <pablitoen05@hotmail.com>
+Date:   Mon Oct 14 10:28:37 2013 +0200
+
+    Update composer.json
+
+commit 9ad1c076c4404327ae00e5ab0386f9320517a584
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Oct 11 15:21:54 2013 +0200
+
+    update Repositories
+
+commit bbb31543d8635f4a827fa43481750162a67232be
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Oct 11 14:19:28 2013 +0200
+
+    update composer.json
+
+commit f05d923da3cb8ddaec6aa1b03700d65d99a575c5
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Oct 11 14:04:51 2013 +0200
+
+    update service respository
+
+commit e85fb6b4c2e2dd1c4beb5b5a710f4ca3eddb007b
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Oct 4 15:21:45 2013 +0200
+
+    update all repositories
+
+commit 2541f8d5fab899b47854ee00bfe83128ab18d613
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Oct 3 13:50:45 2013 +0200
+
+    commit init v0.2
+
+commit a0dac74ee6de6a88638b1a23eb4e939a89c26546
+Author: Javier <jjbier@gmail.com>
+Date:   Thu Oct 3 12:00:58 2013 +0200
+
+    Update composer.json
+
+commit 987e225bdc76da2753c8b4c6a775dfd2cb9b790a
+Author: Javier <jjbier@gmail.com>
+Date:   Thu Oct 3 11:55:27 2013 +0200
+
+    Update composer.json
+    
+    add "antwebes/chatea-common": "dev-master"
+
+commit 1628b1e280895ad0bb540c5a14be0e0c8e48f4dd
+Author: Javier <jjbier@gmail.com>
+Date:   Thu Oct 3 11:00:22 2013 +0200
+
+    Update composer.json
+
+commit 48433f3f7bf0abadac7d0501e8a3c3f4cb6fa6c3
+Author: Javier <jjbier@gmail.com>
+Date:   Thu Oct 3 10:58:36 2013 +0200
+
+    Update composer.json
+
+commit 6e8f4e4413c0896cb78cf82a3ecb7f40d40c0066
+Author: Javier <jjbier@gmail.com>
+Date:   Thu Oct 3 10:54:14 2013 +0200
+
+    Update composer.json
+    
+    delete "antwebes/chatea-client-lib": "0.2.*@dev"
+
+commit c100de4585c683787afd2c49126d23123e486847
+Author: Javier <jjbier@gmail.com>
+Date:   Thu Oct 3 10:52:56 2013 +0200
+
+    Update composer.json
+
+commit 3903ba3948c12e3c48b74c176c915ced75a50da4
+Author: Javier <jjbier@gmail.com>
+Date:   Thu Oct 3 10:29:55 2013 +0200
+
+    Update composer.json
+
+commit fd97e9504d1a36c6f31a45dd6618ad1c0789ecce
+Author: Javier <jjbier@gmail.com>
+Date:   Thu Oct 3 10:28:42 2013 +0200
+
+    Update composer.json
+
+commit e91373af21959872c1965eaeb013e5598c78863c
+Author: Javier <jjbier@gmail.com>
+Date:   Thu Oct 3 10:24:58 2013 +0200
+
+    Update composer.json
+
+commit 225edef8bb1edc2f5f0eb9cedb496a99bc582f7f
+Author: Javier <jjbier@gmail.com>
+Date:   Thu Oct 3 10:22:51 2013 +0200
+
+    Update composer.json
+
+commit 7f134d9574de9237bfa9acb15f1389f9932ea00c
+Author: Javier <jjbier@gmail.com>
+Date:   Thu Oct 3 10:21:18 2013 +0200
+
+    Update composer.json
+
+commit 517c397d21e620690ccb4ef4e5ca6f6a61aa0057
+Author: Javier <jjbier@gmail.com>
+Date:   Thu Oct 3 10:17:00 2013 +0200
+
+    Update composer.json
+    
+    Update composer
+
+commit 24f251c027cfc6b0b9e0fa93f0a9c87245179aa9
+Author: Javier <jjbier@gmail.com>
+Date:   Wed Sep 25 13:06:11 2013 +0200
+
+    Update composer.json
+
+commit d5b33587a8b8bc493c68968152e9f14b1f0a340a
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 24 13:02:44 2013 +0200
+
+    update factory whit default opcions
+
+commit d32139e9e6d754ec7b80406d138ce03f1ef42acb
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 24 11:37:05 2013 +0200
+
+    update Factory
+
+commit b9d4481a063fbb8748d5c803fd966dee2b1e6283
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 24 09:34:40 2013 +0200
+
+    has a dependency on a non-existent service "security.context".
+
+commit 85c45044d48fd0816529d571eafff4e070be6064
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 24 09:34:07 2013 +0200
+
+    has a dependency on a non-existent service "security.context".
+
+commit 43615ce510b5fbd171983418bd17a3f3dedcc21b
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Sep 23 16:16:26 2013 +0200
+
+    update refrestoken formatr
+
+commit 605fbc93dbd95f9060b7b9faa494733a64a495ae
+Author: Javier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Sun Sep 22 17:29:09 2013 +0200
+
+    update sunday
+
+commit 810cc502eff39009fe3cec261bdaf66008b5b8d3
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Sep 20 15:18:07 2013 +0200
+
+    update all bundle
+
+commit 7c0bdc543f4a57d8e744db9349443e134d289efd
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Wed Sep 18 18:00:41 2013 +0200
+
+    secured failid
+
+commit 28dc51a900b1feb4905fe2a66864d19d3672f11b
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 17 18:36:14 2013 +0200
+
+    --
+
+commit 6e16a2e133f2a94176c90e8e8dca195b973c19e3
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Fri Sep 13 15:21:23 2013 +0200
+
+    update bundle
+
+commit 00c05da09616b70a606784dca79f220517cb1570
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Sep 12 19:13:17 2013 +0200
+
+    add auto configure
+
+commit cbc38c2435ac9da5264faea7cdac36ffca099c99
+Merge: aa8728b 8d51558
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Sep 12 09:47:51 2013 +0200
+
+    add basic config files
+
+commit aa8728b3fd8eaadde9f1c0949c551ccf4c7b776a
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Thu Sep 12 09:44:26 2013 +0200
+
+    add basic config files
+
+commit 8d515586f3114af034bcaef911aa1268a6cd46ac
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 18:37:36 2013 +0200
+
+    add basic config
+
+commit 5c64a71e0a22a4cf6c7441045d9b0679f55501ef
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 18:09:28 2013 +0200
+
+    update
+
+commit 14e3aab63d410210280463e5da81ec053bb125bc
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 12:28:58 2013 +0200
+
+    last composer update
+
+commit ac3d5bbc003ad3fa914a592adc8398ceef4953d1
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 11:38:49 2013 +0200
+
+    add in .gitignore composer.lock add
+
+commit 43361ebe5c00e11de5b692af85f36fd0a94e04a9
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 11:38:03 2013 +0200
+
+    composer.lock add
+
+commit b26647803cccb3d8b7417a4c4bab1ab63a012cdd
+Merge: 6b8f07d 9132c9e
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 11:36:15 2013 +0200
+
+    Merge branch 'master' of github.com:antwebes/ChateaClientBundle
+
+commit 6b8f07d4c1532fc4133e8c430feb06ddd42aafa6
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 11:35:55 2013 +0200
+
+    composer update version
+
+commit 9132c9ec272c3a96a0f2ce857074166665aac896
+Author: Javier <jjbier@gmail.com>
+Date:   Tue Sep 10 11:15:23 2013 +0200
+
+    Delete s
+
+commit 9ff47c5b29516b3cb4af8b04fedf62f331969cf8
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 10:50:24 2013 +0200
+
+    composer update 2
+
+commit c5fd66c2f76226ac097c8ef0f3b03e2b22d1e9ca
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 10:47:03 2013 +0200
+
+    composer update 2
+
+commit 34dd95a2e8a1fe11d0c0747f1ed69cdb5c827965
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 10:45:32 2013 +0200
+
+    composer update 2
+
+commit e1b35313dd0d24c393219a945b2f5cc9b4ce17e0
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 10:44:03 2013 +0200
+
+    composer update 2
+
+commit 360ab1c4ed1a5723d7da13988bf8e5a57ed1141c
+Merge: fb0b0fe 10babff
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 10:39:24 2013 +0200
+
+    Merge branch 'master' of github.com:antwebes/ChateaClientBundle
+    
+    Conflicts:
+    	composer.json
+
+commit fb0b0fee3a970242900a6d6fec59194901c3b1f5
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Tue Sep 10 10:37:47 2013 +0200
+
+    prepare composer
+
+commit 10babff0b2a642b5a5beb02563537382c3370b56
+Author: Javier <jjbier@gmail.com>
+Date:   Mon Sep 9 18:43:23 2013 +0200
+
+    Update composer.json
+
+commit ee0963a212ab90655bd0dd66522c1d69b6959132
+Author: Javier <jjbier@gmail.com>
+Date:   Mon Sep 9 18:41:11 2013 +0200
+
+    Update composer.json
+
+commit 73b72a8ee2115fbe024d94a590176ee47bcfaa53
+Author: Javier <jjbier@gmail.com>
+Date:   Mon Sep 9 18:39:05 2013 +0200
+
+    Update composer.json
+    
+    update "symfony/framework-bundle": version
+
+commit 3ec7badeabc6955b3a8035deca8b61433e9ce406
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Sep 9 18:36:00 2013 +0200
+
+    add gitignore
+
+commit bc4dc7712d4b679e3589dbc0559ae85abac6e8fe
+Author: Xabier Fernández Rodríguez <jjbier@gmail.com>
+Date:   Mon Sep 9 18:32:35 2013 +0200
+
+    frist commit
