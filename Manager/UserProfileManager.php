@@ -11,6 +11,9 @@ class UserProfileManager extends  BaseManager implements ManagerInterface
 
     public function hydrate(array $item = null)
     {
+        if($item == null ){
+            return null;
+        }
 
         $id                     = array_key_exists('id',$item)?$item['id']:0;
         $about                  = array_key_exists('about',$item)?$item['about']:'';
@@ -47,13 +50,7 @@ class UserProfileManager extends  BaseManager implements ManagerInterface
         {
             return null;
         }
-        $profile = new UserProfile();
-        try{
-            $profile = $this->hydrate($this->getManager()->showUserProfile($id));
-        }catch (ApiException $ex){
-        }
-
-        return $profile;
+        return $this->hydrate($this->getManager()->showUserProfile($id));
     }
 
     public function save(&$object)
