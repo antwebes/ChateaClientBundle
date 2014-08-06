@@ -60,6 +60,9 @@ class UserManager extends BaseManager implements ManagerInterface
             $city = $this->get('CityManager')->hydrate($item['city']);
             $user->setCity($city);
         }
+        if(isset($item['language'])){
+            $user->setLanguage($item['language']);
+        }
         return $user;
     }
 
@@ -211,7 +214,8 @@ class UserManager extends BaseManager implements ManagerInterface
             $object->getPlainPassword(),
             $object->getAffiliate()->getHost(),
             $object->getIp(),
-            $object->getCity()?$object->getCity()->getId():null
+            $object->getCity()?$object->getCity()->getId():null,
+            $object->getLanguage()
         );
     }
 

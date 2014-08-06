@@ -126,6 +126,9 @@ class User implements BaseModel
      * @var \DateTime
      */
     private $lastLogin = null;
+
+    private $language;
+
     /**
      * @return int
      */
@@ -387,5 +390,21 @@ class User implements BaseModel
     public function setLastLogin($lastLogin)
     {
         $this->lastLogin = $lastLogin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
     }
 }
