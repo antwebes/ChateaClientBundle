@@ -21,9 +21,14 @@ class ChannelTypeManager extends BaseManager implements ManagerInterface
 
     public function hydrate(array $item = null)
     {
-        $name   = array_key_exists('name',$item)?$item['name']:'not-name';
-        $id     = array_key_exists('_links',$item) && array_key_exists('channelsType',$item['_links'])?substr($item['_links']['channelsType']['href'],strlen($item['_links']['channelsType']['href'])-1):null;
-        return new ChannelType($name, $id);
+    	
+        $name   = array_key_exists('name',$item) ? $item['name']:'not-name';
+        $id 	= array_key_exists('id',$item) ? $item['id']:'0';
+        $link 	= array_key_exists('_links',$item) && array_key_exists('channelsType',$item['_links']) ? $item['_links']['channelsType'] : null;
+        
+        //what's this ??
+//         $id     = array_key_exists('_links',$item) && array_key_exists('channelsType',$item['_links']) ? substr($item['_links']['channelsType']['href'],strlen($item['_links']['channelsType']['href'])-1):null;
+        return new ChannelType($name, $id, $link);
     }
 
     public function getModel()

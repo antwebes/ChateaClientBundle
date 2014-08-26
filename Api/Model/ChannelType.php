@@ -34,11 +34,13 @@ class ChannelType implements BaseModel
      */
     private $name;
     private $id;
+    private $link;
 
-    function __construct($name = '', $id = 0)
+    function __construct($name = '', $id = 0, $link=null)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->link = $link;
     }
 
     /**
@@ -70,6 +72,23 @@ class ChannelType implements BaseModel
     public function getName()
     {
         return $this->name;
+    }
+    
+    /**
+     * 
+     * @return Ambigous <unknown, string>
+     */
+    public function getLink()
+    {
+    	return $this->link;
+    }
+    /**
+     * 
+     * @param string $link
+     */
+    public function setLink($link)
+    {
+    	$this->link = $link;
     }
 
     public function __toString()
