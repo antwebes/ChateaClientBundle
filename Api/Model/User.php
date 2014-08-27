@@ -216,9 +216,10 @@ class User implements BaseModel
 
     public function getProfile()
     {
-        if($this->oProfile === null && ($this->id !== null)){
-            $this->setProfile(self::getManager()->findProfile($this->id));
-        }
+	//Do request api ?? profile is hidrated in object, if profile is null, profile no exist
+//         if($this->oProfile === null && ($this->id !== null)){
+//             $this->setProfile(self::getManager()->findProfile($this->id));
+//         }
         return $this->oProfile;
     }
 
