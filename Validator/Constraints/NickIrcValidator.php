@@ -5,7 +5,7 @@
  * Date: 19/02/14 - 16:35
  */
 
-namespace Ant\Bundle\ChateaClientBundle\    Validator\Constraints;
+namespace Ant\Bundle\ChateaClientBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;

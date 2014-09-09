@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class NickIrcConstraint extends Constraint
 {
-    public $message = 'The username is not valid. The username is not include spaces, it is not start with number, or it is not include the special characters';
+    public $message = 'The username is not valid. The username cannot include spaces, start with number, or include the special characters';
 
     public function validatedBy()
     {
