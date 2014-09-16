@@ -156,7 +156,7 @@ class UserManager extends BaseManager implements ManagerInterface
     public function updateProfile(UserProfile $profile)
     {
         /*
-        $profile = $this->getManager()->updateUserProfile($this->meUser->getId(),$profile->getAbout(),$profile->getSexualOrientation());
+        $profile = $this->getManager()->updateUserProfile($this->meUser->getId(),$profile->getAbout(),$profile->getSeeking());
         return UserProfileManager::hydrate($profile);
         */
 
