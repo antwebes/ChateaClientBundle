@@ -51,7 +51,6 @@ class Channel implements BaseModel
      * The value for the name field.
      *
      * @NotBlank
-     * @Length(min=4)
      * @var        string
      */
     protected $name;
