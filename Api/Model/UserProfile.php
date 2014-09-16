@@ -6,9 +6,9 @@ use Symfony\Component\Validator\Constraints\Choice;
 
 class UserProfile implements BaseModel
 {
-    const SEXUAL_ORIENTATION_HETEROSEXUAL   = 'heterosexual';
-    const SEXUAL_ORIENTATION_HOMOSEXUAL = 'homosexual';
-    const SEXUAL_ORIENTATION_BISEXUAL   = 'bisexual';
+    const SEEKING_MEN   = 'men';
+    const SEEKING_WOMAN = 'women';
+    const SEEKING_BOTH   = 'both';
     const GENDER_MAN        = 'male';
     const GENDER_WOMAN      = 'female';
     const GENDER_OTHER      = 'other';
@@ -34,9 +34,9 @@ class UserProfile implements BaseModel
     private $id;
     private $about;
     /**
-     * @Choice(choices = {"heterosexual", "homosexual", "bisexual"})
+     * @Choice(choices = {"men", "women", "both"})
      */
-    private $sexualOrientation;
+    private $seeking;
     /**
      * @Choice(choices = {"male", "female", "other"})
      */
@@ -60,7 +60,7 @@ class UserProfile implements BaseModel
         $birthday = null,
         $countVisits = 0,
         $gender = '',
-        $sexualOrientation = '',
+        $seeking = '',
         $youWant = '',
         $updated_at = null,
         $publicatedAt = null
@@ -71,7 +71,7 @@ class UserProfile implements BaseModel
         $this->gender = $gender;
         $this->id = $id;
         $this->publicatedAt = $publicatedAt;
-        $this->sexualOrientation = $sexualOrientation;
+        $this->seeking = $seeking;
         $this->updated_at = $updated_at;
         $this->youWant = $youWant;
     }
@@ -173,19 +173,19 @@ class UserProfile implements BaseModel
     }
 
     /**
-     * @param mixed $sexualOrientation
+     * @param mixed $seeking
      */
-    public function setSexualOrientation($sexualOrientation)
+    public function setSeeking($seeking)
     {
-        $this->sexualOrientation = $sexualOrientation;
+        $this->seeking = $seeking;
     }
 
     /**
      * @return mixed
      */
-    public function getSexualOrientation()
+    public function getSeeking()
     {
-        return $this->sexualOrientation;
+        return $this->seeking;
     }
 
 
