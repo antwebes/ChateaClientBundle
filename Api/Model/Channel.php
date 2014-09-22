@@ -133,7 +133,25 @@ class Channel implements BaseModel
      * @var Array of Channels
      */
     private $oChildren = array();
-
+    
+    /**
+     * 
+     * @var \Datetime the date is last visit to channel
+     */
+    private $lastVisit;
+    /**
+     *
+     * @var \Datetime the date when the channel expire
+     */
+    private $expiredAt;
+    
+    /**
+     * 
+     * @var boolean
+     */
+    private $isExpired;
+    
+    
     /**
      * Get the [id] column value.
      *
@@ -477,4 +495,55 @@ class Channel implements BaseModel
             }
         }
     }
+    
+    /**
+     * @param \Datetime $expiredAt
+     */
+    public function setExpiredAt($expiredAt)
+    {
+    	$this->expiredAt = $expiredAt;
+    }
+    
+    /**
+     * @return \Datetime
+     */
+    public function getExpiredAt()
+    {
+    	return $this->expiredAt;
+    }
+    
+    /**
+     * @param \boolean $expiredAt
+     */
+    public function setIsExpired($isExpired)
+    {
+    	$this->isExpired = $isExpired;
+    }
+    
+    /**
+     * @return \boolean
+     */
+    public function getIsExpired()
+    {
+    	return $this->isExpired;
+    }
+    
+    /**
+     * @param \Datetime $lastVisit
+     */
+    public function setLastVisit($lastVisit)
+    {
+    	$this->lastVisit = $lastVisit;
+    }
+    
+    /**
+     * @return \Datetime
+     */
+    public function getLastVisit()
+    {
+    	return $this->lastVisit;
+    }
+    
+    
+    
 }

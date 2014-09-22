@@ -18,7 +18,8 @@ class Pager implements  Countable, IteratorAggregate
     	$resources,
         $page = 1,
         $lastPage = 1,
-        $filters;
+        $filters,
+        $count;
 
     function __construct(BaseManager $manager, CommandInterface $command, $page = 1, $limit)
     {
@@ -34,6 +35,7 @@ class Pager implements  Countable, IteratorAggregate
         $this->total        = $array_data['total'];
         $this->offset       = $array_data['offset'];
         $this->_links       = $array_data['_links'];
+        $this->count        = $array_data['count'];
         $resources          = $array_data['resources']?$array_data['resources']:null;
         $this->resources    = new ManagerCollection($manager, $resources);
 
@@ -82,8 +84,18 @@ class Pager implements  Countable, IteratorAggregate
     public function getSize()
     {
 
-        return $this->limit;
+        return $this->count;
     }
+
+    /**
+     * Limit of this page
+     * @return int
+     */
+    public function getLimit()
+    {
+
+    }
+
     /**
      * Count elements in all pages
      *
