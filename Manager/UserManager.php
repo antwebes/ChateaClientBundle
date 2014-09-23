@@ -82,12 +82,19 @@ class UserManager extends BaseManager implements ManagerInterface
 		return 'Ant\Bundle\ChateaClientBundle\Api\Model\User';	
 	}
 	
-    public function findById($id)
+    public function findById($id, $asArray = false)
     {
         if(empty($id)){
             return null;
         }
-        return $this->hydrate($this->getManager()->showUser($id));
+
+        $data = $this->getManager()->showUser($id);
+
+        if(!$asArray){
+            return $this->hydrate($data);
+        }else{
+            return $data;
+        }
     }
 
     public function findAll($page = 1, array $filters = null, $limit= null, array $order = null)
