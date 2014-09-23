@@ -41,6 +41,9 @@ class ChannelManager extends BaseManager
         $channel->setCountVisits(array_key_exists('count_visits',$item)?$item['count_visits']:0);
         $channel->setPublicatedAt(new \DateTime(array_key_exists('publicated_at',$item)?$item['publicated_at']:'now'));
         $channel->setChildren(array_key_exists('channels',$item)?$item['channels']:null );
+        $channel->setIsExpired(array_key_exists('is_expired',$item)?$item['is_expired']:null );
+        $channel->setLastVisit(new \DateTime(array_key_exists('last_visit',$item)?$item['last_visit']:null ));
+        $channel->setExpiredAt(new \DateTime(array_key_exists('expired_at',$item)?$item['expired_at']:null ));
 
         if(isset($item['owner']) && isset($item['owner']['id'])){
             $owner = $this->get('UserManager')->hydrate($item['owner']);
