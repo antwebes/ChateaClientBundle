@@ -263,7 +263,7 @@ class UserManager extends BaseManager implements ManagerInterface
         $this->getManager()->setUserNick($user_id, $nick);
     }
 
-    public function searchUserByNameAction($partial)
+    public function searchUserByName($partial)
     {
         $collectionUsers = $this->getManager()->searchUserByName($partial);
         $collection = array();
