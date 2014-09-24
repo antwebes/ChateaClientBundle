@@ -35,7 +35,7 @@ class Pager implements  Countable, IteratorAggregate
         $this->total        = $array_data['total'];
         $this->offset       = $array_data['offset'];
         $this->_links       = $array_data['_links'];
-        $this->count        = $array_data['count'];
+        $this->count        = array_key_exists('count',$array_data)?$array_data['count'] : 0;
         $resources          = $array_data['resources']?$array_data['resources']:null;
         $this->resources    = new ManagerCollection($manager, $resources);
 
