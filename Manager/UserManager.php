@@ -276,4 +276,13 @@ class UserManager extends BaseManager implements ManagerInterface
 
         return $collection;
     }
+
+    /**
+     * Find user with webcam, profile, sex ...
+     * @return array|null Find user with webcam, profile, sex ...
+     */
+    public function getRealTimeMedia()
+    {
+        return $this->getManager()->getRealtimeMedia();
+    }
 }
