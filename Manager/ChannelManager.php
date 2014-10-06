@@ -197,4 +197,17 @@ class ChannelManager extends BaseManager
     	return new Pager($userManager,new Command('showChannelFans',array('channel_id'=>$channel_id, 'filters'=>$filters)),$page, $limit);
 
     }
+
+    public function searchChannelByName($channelName)
+    {
+        $channels = $this->getManager()->searchChannelByName($channelName);
+        $collection = array();
+        if($channels != null || !empty($channelName)){
+            foreach($channels as $channel){
+                $collection [] = $this->hydrate($channel);
+            }
+        }
+        return $collection;
+    }
+
 }
