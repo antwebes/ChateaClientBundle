@@ -128,6 +128,11 @@ class User implements BaseModel
     private $lastLogin = null;
 
     private $language;
+    
+    /**
+     * @var boolean
+     */
+    private $enabled = false;
 
     /**
      * @return int
@@ -407,5 +412,23 @@ class User implements BaseModel
     public function setLanguage($language)
     {
         $this->language = $language;
+    }
+    
+    /**
+     * Get enabled
+     * @return boolean
+     */
+    public function getEnabled()
+    {
+    	return $this->enabled;
+    }
+    
+    /**
+     * Set enabled
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled)
+    {
+    	$this->enabled = $enabled;
     }
 }
