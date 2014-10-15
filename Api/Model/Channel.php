@@ -321,10 +321,10 @@ class Channel implements BaseModel
      *
      * @return Collection|Users[] Collection to store aggregation of User objects.
      */
-    public function getFans()
+    public function getFans($limit=null, $filter = null)
     {
         if($this->oFans == null){
-            $this->setFans(self::getManager()->findFans($this->id));
+            $this->setFans(self::getManager()->findFans($this->id, $page=1, $filter, $limit));
         }
 
         return $this->oFans;

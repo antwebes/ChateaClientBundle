@@ -23,7 +23,6 @@ class ChannelManager extends BaseManager
     }
     public function hydrate(array $item = null, Channel $channel = null)
     {
-
         if($item == null){
             return null;
         }
@@ -190,11 +189,11 @@ class ChannelManager extends BaseManager
     		return null;
     	}
     	
-    	$limit  = $limit == null ? $this->limit : $limit;
+    	$limit  = is_null($limit) ? $this->limit : $limit;
     	
     	$userManager = $this->get('UserManager');
-    	
-    	return new Pager($userManager,new Command('showChannelFans',array('channel_id'=>$channel_id, 'filters'=>$filters)),$page, $limit);
+
+    	return new Pager($userManager,new Command('showChannelFans',array('channel_id'=>$channel_id, 'limit' => $limit, 'filters'=>$filters)),$page, $limit);
 
     }
 }
