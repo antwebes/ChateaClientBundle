@@ -267,10 +267,6 @@ class User implements BaseModel
 
     public  function getChannelsFan()
     {
-        if($this->oFavoriteChannels === null){
-            $this->oFavoriteChannels = self::getManager()->findFavoriteChannels($this->id);
-        }
-
         return $this->oFavoriteChannels;
     }
 
@@ -281,6 +277,10 @@ class User implements BaseModel
 
     public function getChannelsModerated()
     {
+    	if($this->oChannelsModerated === null){
+    		$this->oChannelsModerated = self::getManager()->getChannelsModerated($this->id);
+    	}
+    	
         return $this->oChannelsModerated;
     }
 

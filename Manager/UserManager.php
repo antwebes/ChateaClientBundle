@@ -290,11 +290,11 @@ class UserManager extends BaseManager implements ManagerInterface
         return $this->getManager()->getRealtimeMedia();
     }
 
-    public function showUserChannelIsModerator($user_id, $page =1, $limit = null)
+    public function getChannelsModerated($user_id, $page =1, $limit = null)
     {
         $channelManager = $this->get('ChannelManager');
         $limit  = $limit == null ? $this->limit : $limit ;
-        return  new Pager($channelManager,new Command('showUserChannelIsModerator',array('user_id'=>$user_id)) ,$page, $limit);
+        return  new Pager($channelManager,new Command('getChannelsModerated',array('user_id'=>$user_id)) ,$page, $limit);
 
     }
 }
