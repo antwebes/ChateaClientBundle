@@ -8,11 +8,13 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
 use Doctrine\ORM\Mapping\Entity;
 use Ant\Bundle\ChateaClientBundle\Validator\Constraints\NickIrcConstraint;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+
 /**
  * Class User
  * @package Ant\Bundle\ChateaClientBundle\Api\Model
  */
-class User implements BaseModel
+class User implements BaseModel, AdvancedUserInterface
 {
 
     /**
@@ -430,5 +432,45 @@ class User implements BaseModel
     public function setEnabled($enabled)
     {
     	$this->enabled = $enabled;
+    }
+
+    public function isAccountNonExpired()
+    {
+
+    }
+
+    public function isAccountNonLocked()
+    {
+
+    }
+
+    public function isCredentialsNonExpired()
+    {
+
+    }
+
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    public function getRoles()
+    {
+
+    }
+
+    public function getPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function getSalt()
+    {
+
+    }
+    
+    public function eraseCredentials()
+    {
+
     }
 }
