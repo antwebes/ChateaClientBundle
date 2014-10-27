@@ -130,11 +130,36 @@ class User implements BaseModel, AdvancedUserInterface
     private $lastLogin = null;
 
     private $language;
+
+    /**
+     * @var array[string]
+     */
+    private $roles;
     
     /**
      * @var boolean
      */
     private $enabled = false;
+
+    /**
+     * @var boolean
+     */
+    private $accountNonExpired;
+
+    /**
+     * @var boolean
+     */
+    private $accountNonLocked;
+
+    /**
+     * @var boolean
+     */
+    private $credentialsNonExpired;
+
+    /**
+     * @var boolean
+     */
+    private $validated;
 
     /**
      * @return int
@@ -436,17 +461,32 @@ class User implements BaseModel, AdvancedUserInterface
 
     public function isAccountNonExpired()
     {
+        return $this->accountNonExpired;
+    }
 
+    public function setAccountNonExpired($accountNonExpired)
+    {
+        $this->accountNonExpired = $accountNonExpired;
     }
 
     public function isAccountNonLocked()
     {
+        return $this->accountNonLocked;
+    }
 
+    public function setAccountNonLocked($accountNonLocked)
+    {
+        $this->accountNonLocked = $accountNonLocked;
     }
 
     public function isCredentialsNonExpired()
     {
+        return $this->credentialsNonExpired;
+    }
 
+    public function setCredentialsNonExpired($credentialsNonExpired)
+    {
+        $this->credentialsNonExpired = $credentialsNonExpired;
     }
 
     public function isEnabled()
@@ -456,7 +496,12 @@ class User implements BaseModel, AdvancedUserInterface
 
     public function getRoles()
     {
+        return $this->roles;
+    }
 
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     public function getPassword()
@@ -472,5 +517,15 @@ class User implements BaseModel, AdvancedUserInterface
     public function eraseCredentials()
     {
 
+    }
+
+    public function setValidated($validated)
+    {
+        $this->validated = $validated;
+    }
+
+    public function isValidated()
+    {
+        return $this->validated;
     }
 }
