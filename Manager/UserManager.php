@@ -227,7 +227,8 @@ class UserManager extends BaseManager implements ManagerInterface
             $object->getAffiliate()->getHost(),
             $object->getIp(),
             $object->getCity()?$object->getCity()->getId():null,
-            $object->getLanguage()
+            $object->getLanguage(),
+            $object->getFacebookId() 
         );
     }
 

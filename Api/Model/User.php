@@ -162,6 +162,11 @@ class User implements BaseModel, AdvancedUserInterface
     private $validated;
 
     /**
+     * @var string
+     */
+    private $facebookId;
+
+    /**
      * @return int
      */
     public function getId()
@@ -527,5 +532,15 @@ class User implements BaseModel, AdvancedUserInterface
     public function isValidated()
     {
         return $this->validated;
+    }
+
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+    }
+
+    public function getFacebookId()
+    {
+        return $this->facebookId;
     }
 }
