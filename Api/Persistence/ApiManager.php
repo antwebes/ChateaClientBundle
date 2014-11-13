@@ -4,6 +4,7 @@ namespace Ant\Bundle\ChateaClientBundle\Api\Persistence;
 
 use Ant\ChateaClient\Client\Api;
 use Ant\Bundle\ChateaClientBundle\Api\Util\CommandInterface;
+use Guzzle\Common\Exception\InvalidArgumentException;
 
 /**
  * Class ApiManager
@@ -41,11 +42,16 @@ class ApiManager extends Api implements ObjectManager
     {
         $reflection = new \ReflectionMethod($this,$command->getName());
         $parametersWhoRequestFunction = $reflection->getParameters();
-        
+
 		$arguments = array();
        
         foreach($parametersWhoRequestFunction as $parameterWhoRequest){
             if(!array_key_exists($parameterWhoRequest->getName(),$command->getParams()) ){
+            	
+            	if (!$parameterWhoRequest->isDefaultValueAvailable()){
+            		$messageError= 'Error in -> ChateaClienBundle/Api/Persistence/ApiManager The param "'. $parameterWhoRequest->getName() .'" without value by default, or params missing'; 
+            		throw new InvalidArgumentException($messageError);
+            	}
             	array_push($arguments,$parameterWhoRequest->getDefaultValue());
             }else{
             	array_push($arguments,$command->getParam($parameterWhoRequest->getName()));

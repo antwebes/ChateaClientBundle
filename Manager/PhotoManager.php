@@ -74,11 +74,27 @@ class PhotoManager extends BaseManager
         }
         return $this->hydrate($this->getManager()->showPhoto((int)$photo_id));
     }
+    
+    public function getPhotos(array $filters = null)
+    {    	
+    	$command = new Command('getPhotos',array('filters' => $filters));
+    	
+    	if($filters != null){
+    		foreach($filters as $key => $value) {
+    			$params[] = sprintf("%s=%s", $key, $value);
+    		}
+    		$filters = implode(',', $params);
+    	}
+    	
+    	return $this->getManager()->execute($command);
+    }
 
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)
     {
-        throw new \Exception('This method is not enabled');
+		throw new \Exception('This method is not enabled');
 
+       
+        
 		/*if (!$limit) $limit = $this->limit;
 
 		$command = new Command('showChannels',array('filter' => $filters, 'order' => $order));
