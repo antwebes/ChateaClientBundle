@@ -8,13 +8,11 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
 use Doctrine\ORM\Mapping\Entity;
 use Ant\Bundle\ChateaClientBundle\Validator\Constraints\NickIrcConstraint;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-
 /**
  * Class User
  * @package Ant\Bundle\ChateaClientBundle\Api\Model
  */
-class User implements BaseModel, AdvancedUserInterface
+class User implements BaseModel
 {
 
     /**
@@ -130,36 +128,11 @@ class User implements BaseModel, AdvancedUserInterface
     private $lastLogin = null;
 
     private $language;
-
-    /**
-     * @var array[string]
-     */
-    private $roles;
     
     /**
      * @var boolean
      */
     private $enabled = false;
-
-    /**
-     * @var boolean
-     */
-    private $accountNonExpired;
-
-    /**
-     * @var boolean
-     */
-    private $accountNonLocked;
-
-    /**
-     * @var boolean
-     */
-    private $credentialsNonExpired;
-
-    /**
-     * @var boolean
-     */
-    private $validated;
 
     /**
      * @var string
@@ -219,7 +192,7 @@ class User implements BaseModel, AdvancedUserInterface
      */
     public function getUsernameCanonical()
     {
-    	return $this->usernameCanonical;
+        return $this->usernameCanonical;
     }
     
     /**
@@ -227,7 +200,7 @@ class User implements BaseModel, AdvancedUserInterface
      */
     public function setUsernameCanonical($usernameCanonical)
     {
-    	$this->usernameCanonical = $usernameCanonical;
+        $this->usernameCanonical = $usernameCanonical;
     }
 
     /**
@@ -253,7 +226,7 @@ class User implements BaseModel, AdvancedUserInterface
 
     public function getProfile()
     {
-	//Do request api ?? profile is hidrated in object, if profile is null, profile no exist
+    //Do request api ?? profile is hidrated in object, if profile is null, profile no exist
 //         if($this->oProfile === null && ($this->id !== null)){
 //             $this->setProfile(self::getManager()->findProfile($this->id));
 //         }
@@ -323,12 +296,12 @@ class User implements BaseModel, AdvancedUserInterface
 
     public function getOcity()
     {
-    	return $this->oCity;
+        return $this->oCity;
     }
     
     public function setOcity($oCity)
     {
-    	$this->oCity = $oCity;
+        $this->oCity = $oCity;
     }
     
     public function getCity()
@@ -410,6 +383,7 @@ class User implements BaseModel, AdvancedUserInterface
     {
         return $this->plainPassword;
     }
+
     public function setPlainPassword($v)
     {
         $this->plainPassword = $v;
@@ -452,7 +426,7 @@ class User implements BaseModel, AdvancedUserInterface
      */
     public function getEnabled()
     {
-    	return $this->enabled;
+        return $this->enabled;
     }
     
     /**
@@ -461,77 +435,7 @@ class User implements BaseModel, AdvancedUserInterface
      */
     public function setEnabled($enabled)
     {
-    	$this->enabled = $enabled;
-    }
-
-    public function isAccountNonExpired()
-    {
-        return $this->accountNonExpired;
-    }
-
-    public function setAccountNonExpired($accountNonExpired)
-    {
-        $this->accountNonExpired = $accountNonExpired;
-    }
-
-    public function isAccountNonLocked()
-    {
-        return $this->accountNonLocked;
-    }
-
-    public function setAccountNonLocked($accountNonLocked)
-    {
-        $this->accountNonLocked = $accountNonLocked;
-    }
-
-    public function isCredentialsNonExpired()
-    {
-        return $this->credentialsNonExpired;
-    }
-
-    public function setCredentialsNonExpired($credentialsNonExpired)
-    {
-        $this->credentialsNonExpired = $credentialsNonExpired;
-    }
-
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-    }
-
-    public function getPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    public function getSalt()
-    {
-
-    }
-    
-    public function eraseCredentials()
-    {
-
-    }
-
-    public function setValidated($validated)
-    {
-        $this->validated = $validated;
-    }
-
-    public function isValidated()
-    {
-        return $this->validated;
+        $this->enabled = $enabled;
     }
 
     public function setFacebookId($facebookId)
