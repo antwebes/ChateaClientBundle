@@ -75,16 +75,11 @@ class PhotoManager extends BaseManager
         return $this->hydrate($this->getManager()->showPhoto((int)$photo_id));
     }
     
-    public function getPhotos(array $filters = null)
+    public function getPhotos($filters = null)
     {    	
     	$command = new Command('getPhotos',array('filters' => $filters));
     	
-    	if($filters != null){
-    		foreach($filters as $key => $value) {
-    			$params[] = sprintf("%s=%s", $key, $value);
-    		}
-    		$filters = implode(',', $params);
-    	}
+
     	
     	return $this->getManager()->execute($command);
     }
