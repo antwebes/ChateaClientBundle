@@ -189,6 +189,13 @@ class ChannelManager extends BaseManager
     		return null;
     	}
     	
+    	if($filters != null){
+    		foreach($filters as $key => $value) {
+    			$params[] = sprintf("%s=%s", $key, $value);
+    		}
+    		$filters = implode(',', $params);
+    	}
+    	
     	$limit  = is_null($limit) ? $this->limit : $limit;
     	
     	$userManager = $this->get('UserManager');
