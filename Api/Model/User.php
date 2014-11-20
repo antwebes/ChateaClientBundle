@@ -135,6 +135,11 @@ class User implements BaseModel
     private $enabled = false;
 
     /**
+     * @var string
+     */
+    private $facebookId;
+
+    /**
      * @return int
      */
     public function getId()
@@ -187,7 +192,7 @@ class User implements BaseModel
      */
     public function getUsernameCanonical()
     {
-    	return $this->usernameCanonical;
+        return $this->usernameCanonical;
     }
     
     /**
@@ -195,7 +200,7 @@ class User implements BaseModel
      */
     public function setUsernameCanonical($usernameCanonical)
     {
-    	$this->usernameCanonical = $usernameCanonical;
+        $this->usernameCanonical = $usernameCanonical;
     }
 
     /**
@@ -221,7 +226,7 @@ class User implements BaseModel
 
     public function getProfile()
     {
-	//Do request api ?? profile is hidrated in object, if profile is null, profile no exist
+    //Do request api ?? profile is hidrated in object, if profile is null, profile no exist
 //         if($this->oProfile === null && ($this->id !== null)){
 //             $this->setProfile(self::getManager()->findProfile($this->id));
 //         }
@@ -291,12 +296,12 @@ class User implements BaseModel
 
     public function getOcity()
     {
-    	return $this->oCity;
+        return $this->oCity;
     }
     
     public function setOcity($oCity)
     {
-    	$this->oCity = $oCity;
+        $this->oCity = $oCity;
     }
     
     public function getCity()
@@ -378,6 +383,7 @@ class User implements BaseModel
     {
         return $this->plainPassword;
     }
+
     public function setPlainPassword($v)
     {
         $this->plainPassword = $v;
@@ -420,7 +426,7 @@ class User implements BaseModel
      */
     public function getEnabled()
     {
-    	return $this->enabled;
+        return $this->enabled;
     }
     
     /**
@@ -429,6 +435,16 @@ class User implements BaseModel
      */
     public function setEnabled($enabled)
     {
-    	$this->enabled = $enabled;
+        $this->enabled = $enabled;
+    }
+
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+    }
+
+    public function getFacebookId()
+    {
+        return $this->facebookId;
     }
 }

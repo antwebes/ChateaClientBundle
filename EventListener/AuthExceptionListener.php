@@ -29,7 +29,7 @@ class AuthExceptionListener
         $request = $event->getRequest();
         $controller = $controllerResolver->getController($event->getRequest());
 
-        if($exception instanceof ApiException && $this->hasApiUserAnnotation($controller)){
+        if($controller && $exception instanceof ApiException && $this->hasApiUserAnnotation($controller)){
             try{
                 $request->getSession()->invalidate();
             }catch(\Exception $e){
