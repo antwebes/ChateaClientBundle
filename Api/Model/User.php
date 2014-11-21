@@ -438,7 +438,7 @@ class User implements BaseModel
         $this->enabled = $enabled;
     }
     
-    public function isEnabled($enabled)
+    public function isEnabled()
     {
     	$this->getEnabled();
     }
