@@ -53,6 +53,15 @@ class Affiliate implements BaseModel
     protected $host;
 
     /**
+     * @var string
+     */
+    protected $confirmedUri;
+    /**
+     * @var string
+     */
+    protected $resettingUrl;
+
+    /**
      * Get host
      * @return string
      */
@@ -91,5 +100,37 @@ class Affiliate implements BaseModel
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmedUri()
+    {
+        return $this->confirmedUri;
+    }
+
+    /**
+     * @param mixed $confirmedUri
+     */
+    public function setConfirmedUri($confirmedUri)
+    {
+        $this->confirmedUri = $confirmedUri;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResettingUrl()
+    {
+        return $this->resettingUrl;
+    }
+
+    /**
+     * @param string $resettingUrl
+     */
+    public function setResettingUrl($resettingUrl)
+    {
+        $this->resettingUrl = $resettingUrl;
     }
 }
