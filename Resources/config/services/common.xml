@@ -26,8 +26,7 @@
         <service id="antwebes_chateaclient_lib.client"
                  class="%antwebes_chateaclient_lib.client.class%"
                  factory-class="%antwebes_chateaclient_lib.factory_client_app.class%"
-                 factory-method="factory"
-                 public="false">
+                 factory-method="factory">
             <argument type="collection">
                 <argument key="client_id">%chatea_client.app_auth.client_id%</argument>
                 <argument key="secret">%chatea_client.app_auth.secret%</argument>
