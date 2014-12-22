@@ -28,8 +28,13 @@ class AffiliateManager extends BaseManager
         $affiliate = new Affiliate();
         $affiliate->setName(array_key_exists('name',$item)?$item['name']:null);
         $affiliate->setHost(array_key_exists('host',$item)?$item['host']:null);
-        $affiliate->setConfirmedUri(array_key_exists('confirmed_uri',$item)?$item['confirmed_uri']:null);
-        $affiliate->setResettingUrl(array_key_exists('resetting_url',$item)?$item['resetting_url']:null);
+        $affiliate->setEmail(array_key_exists('email',$item)?$item['email']:null);
+        $affiliate->setPhone(array_key_exists('phone',$item)?$item['phone']:null);
+        $affiliate->setNif(array_key_exists('nif',$item)?$item['nif']:null);
+        if(array_key_exists('user',$item)){
+            $user = $this->get('UserManager')->hydrate($item['user']);
+            $affiliate->setUser($user);
+        }
         return $affiliate;
     }
 

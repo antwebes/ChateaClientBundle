@@ -53,13 +53,29 @@ class Affiliate implements BaseModel
     protected $host;
 
     /**
-     * @var string
+     * @var User
      */
-    protected $confirmedUri;
+    private $user;
+
     /**
      * @var string
      */
-    protected $resettingUrl;
+    private $phone;
+
+    /**
+     * @var string
+     */
+    private $address;
+
+    /**
+     * @var string
+     */
+    private $nif;
+
+    /**
+     * @var string
+     */
+    private $email;
 
     /**
      * Get host
@@ -103,34 +119,82 @@ class Affiliate implements BaseModel
     }
 
     /**
-     * @return mixed
+     * @return User
      */
-    public function getConfirmedUri()
+    public function getUser()
     {
-        return $this->confirmedUri;
+        return $this->user;
     }
 
     /**
-     * @param mixed $confirmedUri
+     * @param User $user
      */
-    public function setConfirmedUri($confirmedUri)
+    public function setUser($user)
     {
-        $this->confirmedUri = $confirmedUri;
+        $this->user = $user;
     }
 
     /**
      * @return string
      */
-    public function getResettingUrl()
+    public function getPhone()
     {
-        return $this->resettingUrl;
+        return $this->phone;
     }
 
     /**
-     * @param string $resettingUrl
+     * @param string $phone
      */
-    public function setResettingUrl($resettingUrl)
+    public function setPhone($phone)
     {
-        $this->resettingUrl = $resettingUrl;
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNif()
+    {
+        return $this->nif;
+    }
+
+    /**
+     * @param string $nif
+     */
+    public function setNif($nif)
+    {
+        $this->nif = $nif;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 }
