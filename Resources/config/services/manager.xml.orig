@@ -14,8 +14,11 @@
         <parameter key="antwebes_chateaclient_bundle.manager.photo_vote_manager.class">Ant\Bundle\ChateaClientBundle\Manager\PhotoVoteManager</parameter>
         <parameter key="antwebes_chateaclient_bundle.manager.affiliate_manager.class">Ant\Bundle\ChateaClientBundle\Manager\AffiliateManager</parameter>
         <parameter key="antwebes_chateaclient_bundle.manager.city_manager.class">Ant\Bundle\ChateaClientBundle\Manager\CityManager</parameter>
+<<<<<<< HEAD
         <parameter key="antwebes_chateaclient_bundle.manager.client_manager.class">Ant\Bundle\ChateaClientBundle\Manager\ClientManager</parameter>
+=======
         <parameter key="antwebes_chateaclient_bundle.manager.real_time_manager.class">Ant\Bundle\ChateaClientBundle\Manager\RealTimeManager</parameter>
+>>>>>>> 80bd38187567b5248c604fe0eb9f72223d98b378
     </parameters>
 
         <services>
@@ -127,8 +130,9 @@
                     <argument type="string">%chatea_client.limits.city_manager%</argument>
                 </call>
             </service>
-
-			<service id="antwebes_chateaclient_bundle.manager.client_manager"
+<<<<<<< HEAD
+            
+            <service id="antwebes_chateaclient_bundle.manager.client_manager"
                      class="%antwebes_chateaclient_bundle.manager.client_manager.class%"
                      factory-class="Ant\Bundle\ChateaClientBundle\Manager\FactoryManager"
                      factory-method="factory"
@@ -139,13 +143,17 @@
                     <argument type="string">%chatea_client.limits.client_manager%</argument>
                 </call>
             </service>
+            
+            
+=======
 
-			<service id="antwebes_chateaclient_bundle.manager.real_time_manager"
+            <service id="antwebes_chateaclient_bundle.manager.real_time_manager"
                      class="%antwebes_chateaclient_bundle.manager.real_time_manager.class%"
                      public="false">
                 <argument type="service" id="antwebes_chateaclient_manager" />
             </service>
 
+>>>>>>> 80bd38187567b5248c604fe0eb9f72223d98b378
             <service id="api_channels"          alias="antwebes_chateaclient_bundle.manager.channel_manager"        synthetic="true" />
             <service id="api_channels_types"    alias="antwebes_chateaclient_bundle.manager.channel_type_manager"   synthetic="true" />
             <service id="api_users"             alias="antwebes_chateaclient_bundle.manager.user_manager"           synthetic="true" />
@@ -155,8 +163,11 @@
             <service id="api_photo_votes"       alias="antwebes_chateaclient_bundle.manager.photo_vote_manager"     synthetic="true" />
             <service id="api_affiliates"        alias="antwebes_chateaclient_bundle.manager.affiliate_manager"      synthetic="true" />
             <service id="api_cities"            alias="antwebes_chateaclient_bundle.manager.city_manager"           synthetic="true" />
+<<<<<<< HEAD
             <service id="api_clients"        	alias="antwebes_chateaclient_bundle.manager.client_manager"      	synthetic="true" />
+=======
             <service id="api_real_time"         alias="antwebes_chateaclient_bundle.manager.real_time_manager"      synthetic="true" />
+>>>>>>> 80bd38187567b5248c604fe0eb9f72223d98b378
 
         </services>
 </container>
