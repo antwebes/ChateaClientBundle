@@ -39,11 +39,12 @@ class UserManager extends BaseManager implements ManagerInterface
         $user->setNick(array_key_exists('nick',$item)?$item['nick']:'not-nick');
         $user->setLastLogin(array_key_exists('last_login',$item)?$item['last_login']: null);
 		$user->setEnabled(array_key_exists('enabled',$item)?$item['enabled']: null);
-        
-        if(isset($item['affiliate'])){
-            $affiliate = $this->get('AffiliateManager')->hydrate($item['affiliate']);
-            $user->setAffiliate($affiliate);
+
+        if(isset($item['client'])){
+            $client = $this->get('ClientManager')->hydrate($item['client']);
+            $user->setClient($client);
         }
+        
         if(isset($item['channels_fan'])){
             $user->setChannelsFan($this->mapChannels($item['channels_fan']));
         }
@@ -224,7 +225,7 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         return $this->getManager()->register($object->getUsername(),$object->getEmail(),$object->getPlainPassword(),
             $object->getPlainPassword(),
-            $object->getAffiliate()->getHost(),
+            $object->getAffiliate()->getId(),
             $object->getIp(),
             $object->getCity()?$object->getCity()->getId():null,
             $object->getLanguage(),

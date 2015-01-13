@@ -26,8 +26,8 @@ class AffiliateManager extends BaseManager
     public function hydrate(array $item = null)
     {
         $affiliate = new Affiliate();
+        $affiliate->setId(array_key_exists('id',$item)?$item['id']:0);
         $affiliate->setName(array_key_exists('name',$item)?$item['name']:null);
-        $affiliate->setHost(array_key_exists('host',$item)?$item['host']:null);
         $affiliate->setEmail(array_key_exists('email',$item)?$item['email']:null);
         $affiliate->setPhone(array_key_exists('phone',$item)?$item['phone']:null);
         $affiliate->setNif(array_key_exists('nif',$item)?$item['nif']:null);

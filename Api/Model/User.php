@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
 use Doctrine\ORM\Mapping\Entity;
 use Ant\Bundle\ChateaClientBundle\Validator\Constraints\NickIrcConstraint;
+use Ant\Bundle\ChateaClientBundle\Api\Model\Client;
 /**
  * Class User
  * @package Ant\Bundle\ChateaClientBundle\Api\Model
@@ -120,7 +121,7 @@ class User implements BaseModel
     /**
      * @var null
      */
-    private $oAffiliate = null;
+    private $oClient = null;
 
     /**
      * @var \DateTime
@@ -368,13 +369,13 @@ class User implements BaseModel
         return $this->nick;
     }
 
-    public function getAffiliate()
+    public function getClient()
     {
-        return $this->oAffiliate;
+        return $this->oClient;
     }
-    public function setAffiliate(Affiliate $v)
+    public function setClient(Client $v=null)
     {
-        $this->oAffiliate = $v;
+        $this->oClient = $v;
     }
 
 

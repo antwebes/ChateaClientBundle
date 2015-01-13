@@ -16,7 +16,8 @@ class FactoryManager
                                        'PhotoManager'       =>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoManager',
                                        'PhotoAlbumManager'  =>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoAlbumManager',
                                        'PhotoVoteManager'   =>'\Ant\Bundle\ChateaClientBundle\Manager\PhotoVoteManager',
-                                       'CityManager'        =>'\Ant\Bundle\ChateaClientBundle\Manager\CityManager'
+                                       'CityManager'        =>'\Ant\Bundle\ChateaClientBundle\Manager\CityManager',
+    								   'ClientManager'      =>'\Ant\Bundle\ChateaClientBundle\Manager\ClientManager'
                                 );
 	
 	/**
@@ -25,7 +26,7 @@ class FactoryManager
 	static public function get($apiManager, $name)
 	{
 		if(!array_key_exists($name,self::$managerMap)){
-            throw new \InvalidArgumentException('this manager ['.$name.']is not supported');
+            throw new \InvalidArgumentException('Error in Factory Manager. This manager ['.$name.']is not supported');
         }
         $className = self::$managerMap[$name];
         return self::factory($apiManager, $className);

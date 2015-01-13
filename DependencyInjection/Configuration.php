@@ -37,6 +37,8 @@ class Configuration implements ConfigurationInterface
                         ->integerNode('photo_album_manager')->min(1)->defaultValue(10)->end()
                         ->integerNode('photo_vote_manager')->min(1)->defaultValue(10)->end()
                         ->integerNode('affiliate_manager')->min(1)->defaultValue(10)->end()
+                        ->integerNode('city_manager')->min(1)->defaultValue(10)->end()
+                        ->integerNode('client_manager')->min(1)->defaultValue(10)->end()
                     ->end()
                 ->end()
                 ->scalarNode("api_endpoint")->isRequired()->end()

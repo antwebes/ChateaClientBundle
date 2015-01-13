@@ -50,7 +50,7 @@ class Affiliate implements BaseModel
      /**
      * @var string
      */
-    protected $host;
+    protected $id;
 
     /**
      * @var User
@@ -78,12 +78,12 @@ class Affiliate implements BaseModel
     private $email;
 
     /**
-     * Get host
+     * Get id
      * @return string
      */
-    public function getHost()
+    public function getId()
     {
-        return $this->host;
+        return $this->id;
     }
 
     /**
@@ -96,12 +96,17 @@ class Affiliate implements BaseModel
     }
 
     /**
-     * Set host
-     * @param string $host
+     * Set id
+     * @param string $id
      */
-    public function setHost($host)
+    public function setId($id)
     {
-        $this->host = $host;
+       	if ($id !== null && is_numeric($id)) {
+            $id = (int) $id;
+        }
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
