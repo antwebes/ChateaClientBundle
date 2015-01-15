@@ -30,6 +30,7 @@ class AffiliateManager extends BaseManager
         $affiliate->setName(array_key_exists('name',$item)?$item['name']:null);
         $affiliate->setEmail(array_key_exists('email',$item)?$item['email']:null);
         $affiliate->setPhone(array_key_exists('phone',$item)?$item['phone']:null);
+        $affiliate->setAddress(array_key_exists('address',$item)?$item['address']:null);
         $affiliate->setNif(array_key_exists('nif',$item)?$item['nif']:null);
         if(array_key_exists('user',$item)){
             $user = $this->get('UserManager')->hydrate($item['user']);
