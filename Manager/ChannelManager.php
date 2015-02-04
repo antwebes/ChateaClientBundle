@@ -107,6 +107,15 @@ class ChannelManager extends BaseManager
         }
         return $this->hydrate($this->getManager()->showChannel($channel_id));
     }
+    
+    public function findBySlug($channel_slug)
+    {
+    	if ($channel_slug === null || !$channel_slug)
+    	{
+    		return null;
+    	}
+    	return $this->hydrate($this->getManager()->findBySlug($channel_slug));
+    }
 
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)
     {
