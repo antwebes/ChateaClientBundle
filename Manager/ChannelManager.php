@@ -43,6 +43,7 @@ class ChannelManager extends BaseManager
         $channel->setIsExpired(array_key_exists('is_expired',$item)?$item['is_expired']:null );
         $channel->setLastVisit(array_key_exists('last_visit',$item)?new \DateTime($item['last_visit']):null );
         $channel->setExpiredAt(array_key_exists('expired_at',$item)?new \DateTime($item['expired_at']):null );
+        $channel->setLanguage(array_key_exists('language',$item)?$item['language']:'' );
 
         if(isset($item['owner']) && isset($item['owner']['id'])){
             $owner = $this->get('UserManager')->hydrate($item['owner']);

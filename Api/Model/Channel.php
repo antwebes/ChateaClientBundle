@@ -76,6 +76,13 @@ class Channel implements BaseModel
      * Length(min=4)
      */
     protected $description = '';
+
+    /**
+     * The value for the lnaguage field.
+     * @var        string
+     */
+    protected $language;
+
     /**
      * @var bool
      */
@@ -281,6 +288,34 @@ class Channel implements BaseModel
 
         return $this;
     } // setDescription()
+
+
+    /**
+     * Get the [language] column value.
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * Set the value of [language] column.
+     *
+     * @param string $v new value
+     * @return Channel The current object (for fluent API support)
+     */
+    public function setLanguage($v)
+    {
+        if ($v !== null && is_string($v)) {
+            $v = (string) $v;
+        }
+
+        $this->language = $v;
+
+        return $this;
+    }
 
     /**
      * @return User|null
