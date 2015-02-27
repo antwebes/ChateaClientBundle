@@ -134,7 +134,7 @@ class ChannelManager extends BaseManager
             throw new \InvalidArgumentException('The parameter have been of type Channel');
         }
 
-        $newChannel = $this->getManager()->addChanel($object->getName(),$object->getTitle(),$object->getDescription());
+        $newChannel = $this->getManager()->addChanel($object->getName(),$object->getIrcChannel(),$object->getDescription(), $object->getChannelType()->getName());
 
         $object = $this->hydrate($newChannel);
 

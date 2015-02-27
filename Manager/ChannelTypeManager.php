@@ -55,6 +55,19 @@ class ChannelTypeManager extends BaseManager implements ManagerInterface
         return $data;
     }
 
+    public function getByName($name)
+    {
+        $channelTypes = array_filter($this->findAll(), function($channelType) use ($name){
+            return $channelType->getName() == $name;
+        });
+
+        if(count($channelTypes) > 0) {
+            return array_pop($channelTypes);
+        }
+
+        return null;
+    }
+
     public function save(&$object)
     {
         throw new \Exception("this method is not avaliable");
