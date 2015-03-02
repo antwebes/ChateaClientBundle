@@ -1,44 +1,50 @@
-<h1>{{ 'register.channel' | trans }}</h1>
-<form action="{{ path('chatea_client_register_channel') }}" {{ form_enctype(form) }} method="POST">
-    {% if from_has_error  %}
-        <div class="alert alert-danger">
-            {{ form_errors(form) }}
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{% block chatea_title %}{{ 'register.channel' | trans }}{% endblock %}
+
+{% block chatea_body %}
+    <h1>{{ 'register.channel' | trans }}</h1>
+    <form action="{{ path('chatea_client_register_channel') }}" {{ form_enctype(form) }} method="POST">
+        {% if from_has_error  %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            {{ form_label(form.name, 'form.name.label',{'label_attr': {'class': 'col-lg-3 control-label'}}) }}
+            <div class="col-lg-9">
+                {{ form_errors(form.name) }}
+                {{ form_widget(form.name,{'attr': {'class': 'form-control', 'placeholder':'form.name.placeholder', 'data-id':'iframe_channel_name'}} ) }}
+            </div>
         </div>
-    {% endif %}
-    <div class="form-group">
-        {{ form_label(form.name, 'form.name.label',{'label_attr': {'class': 'col-lg-3 control-label'}, 'translation_domain' : 'IframeRegistrationChannel'}) }}
-        <div class="col-lg-9">
-            {{ form_errors(form.name , {'translation_domain' : 'IframeRegistrationChannel'}) }}
-            {{ form_widget(form.name,{'attr': {'class': 'form-control', 'placeholder':'form.name.placeholder', 'data-id':'iframe_channel_name'}, 'translation_domain' : 'IframeRegistrationChannel' } ) }}
+        <div class="form-group">
+            {{ form_label(form.irc_channel,'form.irc_channel.label',{ 'label_attr': {'class': 'col-lg-3 control-label'}}) }}
+            <div class="col-lg-9">
+                {{ form_errors(form.irc_channel) }}
+                {{ form_widget(form.irc_channel,{'attr': {'class': 'form-control', 'placeholder':'form.irc_channel.placeholder', 'data-id':'iframe_channel_irc_channel'}} ) }}
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        {{ form_label(form.irc_channel,'form.irc_channel.label',{ 'label_attr': {'class': 'col-lg-3 control-label'}, 'translation_domain' : 'IframeRegistrationChannel'}) }}
-        <div class="col-lg-9">
-            {{ form_errors(form.irc_channel , {'translation_domain' : 'IframeRegistrationChannel'}) }}
-            {{ form_widget(form.irc_channel,{'attr': {'class': 'form-control', 'placeholder':'form.irc_channel.placeholder', 'data-id':'iframe_channel_irc_channel'}, 'translation_domain' : 'IframeRegistrationChannel' } ) }}
+        <div class="form-group">
+            {{ form_label(form.language,'form.language.label',{ 'label_attr': {'class': 'col-lg-3 control-label'}}) }}
+            <div class="col-lg-9">
+                {{ form_errors(form.language) }}
+                {{ form_widget(form.language,{'attr': {'class': 'form-control'}} ) }}
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        {{ form_label(form.language,'form.language.label',{ 'label_attr': {'class': 'col-lg-3 control-label'}, 'translation_domain' : 'IframeRegistrationChannel'}) }}
-        <div class="col-lg-9">
-            {{ form_errors(form.language , {'translation_domain' : 'IframeRegistrationChannel'}) }}
-            {{ form_widget(form.language,{'attr': {'class': 'form-control'}, 'translation_domain' : 'IframeRegistrationChannel' } ) }}
+        <div class="form-group">
+            {{ form_label(form.description,'form.description.label',{ 'label_attr': {'class': 'col-lg-3 control-label'}}) }}
+            <div class="col-lg-9">
+                {{ form_errors(form.description) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder':'form.description.placeholder'}} ) }}
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        {{ form_label(form.description,'form.description.label',{ 'label_attr': {'class': 'col-lg-3 control-label'}, 'translation_domain' : 'IframeRegistrationChannel'}) }}
-        <div class="col-lg-9">
-            {{ form_errors(form.description , {'translation_domain' : 'IframeRegistrationChannel'}) }}
-            {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder':'form.description.placeholder'}, 'translation_domain' : 'IframeRegistrationChannel' } ) }}
+        {{ form_widget(form._token) }}
+        {{ form_rest(form) }}
+        <div class="form-group">&nbsp;</div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input name="register" type="submit" class="btn btn-lg pull-right btn-primary" value="{{ 'registration.submit'|trans }}" />
+            </div>
         </div>
-    </div>
-    {{ form_widget(form._token) }}
-    {{ form_rest(form) }}
-    <div class="form-group">&nbsp;</div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <input name="register" type="submit" class="btn btn-lg pull-right btn-primary" value="{{ 'registration.submit'|trans }}" />
-        </div>
-    </div>
-</form>
+    </form>
+{% endblock %}

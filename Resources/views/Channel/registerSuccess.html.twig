@@ -1,2 +1,8 @@
-<h1>{{ 'register.channel' | trans }}</h1>
-<p>{{ 'register.channel.success' | trans }}</p>
+{% extends 'ChateaClientBundle::mainLayout.html.twig' %}
+
+{% block chatea_title %}{{ 'register.channel' | trans }}{% endblock %}
+
+{% block chatea_body %}
+    <h1>{{ 'register.channel' | trans }}</h1>
+    <p>{{ 'register.channel.success' | trans }}</p>
+{% endblock %}
