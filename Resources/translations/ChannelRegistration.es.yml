@@ -1,0 +1,20 @@
+register-channel.legend: Registro de un nuevo canal
+form.name.label: Nombre:
+form.name.placeholder: nombre del canal
+form.irc_channel.label: Nombre en irc:
+form.irc_channel.placeholder: nombre en irc del canal
+form.language.label: Idioma:
+form.owner.label: Fundador:
+form.owner.placeholder: fundador del canal
+form.channel_type.label:  Tipo:
+form.description.label: Descripción:
+form.description.placeholder: descripción del canal
+form.language.english: Ingles
+form.language.english.spanish: Español
+form.channelType.adult: Adulto
+form.channelType.love: Amor
+form.channelType.locale: Regional
+form.channelType.friends: Amigos
+form.channelType.sports: Deportes
+register.channel.success: El canal se ha creado con éxito
+registration.submit: Crear

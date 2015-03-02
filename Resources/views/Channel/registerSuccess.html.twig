@@ -1,8 +1,10 @@
 {% extends 'ChateaClientBundle::mainLayout.html.twig' %}
 
-{% block chatea_title %}{{ 'register.channel' | trans }}{% endblock %}
+{% trans_default_domain 'ChannelRegistration' %}
+
+{% block chatea_title %}{{ 'register-channel.legend' | trans }}{% endblock %}
 
 {% block chatea_body %}
-    <h1>{{ 'register.channel' | trans }}</h1>
+    <h1>{{ 'register-channel.legend' | trans }}</h1>
     <p>{{ 'register.channel.success' | trans }}</p>
 {% endblock %}

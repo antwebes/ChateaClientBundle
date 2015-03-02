@@ -1,0 +1,20 @@
+register-channel.legend: Register new channel
+form.name.label: Name:
+form.name.placeholder: input the channel name
+form.irc_channel.label: Irc name:
+form.irc_channel.placeholder: the irc name
+form.language.label: Language:
+form.owner.label: Founder:
+form.owner.placeholder: the nick name of founder
+form.channel_type.label:  Type:
+form.description.label: Description:
+form.description.placeholder: the description of channel
+form.language.english: English
+form.language.english.spanish: Spanish
+form.channelType.adult: Adult
+form.channelType.love: Love
+form.channelType.locale: Locale
+form.channelType.friends: Friends
+form.channelType.sports: Sports
+register.channel.success: Channel created successfully
+registration.submit: Create

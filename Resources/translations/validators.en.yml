@@ -1,0 +1,7 @@
+form.password.mismatch: 'The passwords do not match'
+form.gender.not_defined: 'Not defined'
+form.seeking.empty_value: 'Choose an option'
+api.entity.channel.name.unique.constraints.message: The channel name is already used.
+api.entity.channel.slug.unique.constraints.message: The slug is already used (You change channel name).
+api.entity.channel.ircChannel.unique.constraints.message: The channel irc name is already used.
+
