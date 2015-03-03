@@ -6,4 +6,19 @@
     <route id="chatea_client_register_channel" path="/registro-canal">
         <default key="_controller">ChateaClientBundle:Channel:register</default>
     </route>
+    <route id="chatea_client_register_user" path="/registro">
+        <default key="_controller">ChateaClientBundle:User:register</default>
+    </route>
+    <route id="confirm_email" path="/confirm-email">
+        <default key="_controller">ChateaClientBundle:User:confirmEmail</default>
+    </route>
+    <route id="confirm_email" path="/confirm-email">
+        <default key="_controller">ChateaClientBundle:User:confirmEmail</default>
+    </route>
+    <route id="chatea_confirmed" path="/register/confirmed">
+        <default key="_controller">ChateaClientBundle:User:confirmed</default>
+    </route>
+    <route id="chatea_confirmed_success" path="/register/success">
+        <default key="_controller">ChateaClientBundle:User:confirmedSuccess</default>
+    </route>
 </routes>

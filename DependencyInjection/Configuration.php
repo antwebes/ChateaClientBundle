@@ -54,6 +54,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('secret')->end()
                     ->end()
                 ->end()
+            ->scalarNode('app_id')->end()
             ->end();
         return $treeBuilder;
     }

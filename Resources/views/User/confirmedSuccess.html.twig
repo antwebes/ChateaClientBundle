@@ -1,0 +1,10 @@
+{% extends 'ChateaClientBundle::mainLayout.html.twig' %}
+
+{% trans_default_domain 'UserRegistration' %}
+
+{% block chatea_title %}{{ 'user.register.confirm.success' | trans }}{% endblock %}
+
+{% block chatea_body %}
+    <h2>{% trans with { '%username%' : user.username} %} Congratulations %username% !! Your account is activated successfully {% endtrans %}</h2>
+    {% trans with { '%username%' : user.username} %} User %username% registered correctly . You can now start chatting. {% endtrans %}
+{% endblock %}
