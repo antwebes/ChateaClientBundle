@@ -15,7 +15,8 @@
         "symfony/framework-bundle": "~2.3",
         "antwebes/chatea-common": "dev-master",
         "antwebes/chatea-client-lib": "dev-master",
-        "antwebes/chatea-secure-bundle": "dev-master"
+        "antwebes/chatea-secure-bundle": "dev-master",
+        "excelwebzone/recaptcha-bundle": "2.3.*@dev"
     },
     "require-dev": {
         "raulfraile/ladybug": "~1.0"
