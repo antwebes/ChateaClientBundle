@@ -1,0 +1,16 @@
+user.register: Register user
+form.username: Username
+form.email: Email
+form.password: Password
+form.password_confirmation: Verification
+form.country: Country
+form.birthday: Birthday
+form.username.placeholder: Enter your username
+form.email.placeholder: Enter your email
+form.password.placeholder: Enter your password
+form.password_confirmation.placeholder: Repeat your password
+form.iagree: I agree
+form.termsAndConditions: to the terms and conditions
+registration.submit: Register
+user.register.success: "You have been successfully registered"
+user.register.confirm.success: "Your account has been successfully confirmated"

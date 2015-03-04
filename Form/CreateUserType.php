@@ -1,9 +1,7 @@
 <?php
 namespace Ant\Bundle\ChateaClientBundle\Form;
 
-use Ant\Bundle\ChateaClientBundle\Form\Transformer\ChannelTypeToNameTransformer;
 use Ant\Bundle\ChateaClientBundle\Form\Transformer\CityLocationTransformer;
-use Ant\Bundle\ChateaClientBundle\Manager\ChannelTypeManager;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,10 +21,8 @@ class CreateUserType extends AbstractType
             array(
                 'label' => 'form.email',
                 'required' => true,
-                'translation_domain' => 'IframeRegistration',
+                'translation_domain' => 'UserRegistration',
                 'label_attr' => array('class'=>'col-lg-3 control-label'),
-                'attr'      => array('class'=>'form-control','placeholder'=>'form.email.placeholder')
-
             )
         );
 
@@ -34,26 +30,23 @@ class CreateUserType extends AbstractType
             array(
                 'required' => true,
                 'label' => 'form.username',
-                'translation_domain'=> 'IframeRegistration',
+                'translation_domain'=> 'UserRegistration',
                 'label_attr'        => array('class'=>'col-lg-3 control-label'),
-                'attr'              => array('class'=>'form-control','placeholder'=>'form.username.placeholder')
             )
         );
 
         $builder->add('plainPassword', 'repeated', array(
             'type' => 'password',
-            'options' => array('translation_domain' => 'IframeRegistration'),
+            'options' => array('translation_domain' => 'UserRegistration'),
             'first_options' =>
                 array(
                     'label'     => 'form.password',
                     'label_attr' => array('class'=>'col-lg-3 control-label'),
-                    'attr'       => array('class'=>'form-control','placeholder'=>'form.password.placeholder')
                 ),
             'second_options' =>
                 array(
                     'label'      => 'form.password_confirmation',
                     'label_attr' => array('class'=>'col-lg-3 control-label'),
-                    'attr'       => array('class'=>'form-control','placeholder'=>'form.password_confirmation.placeholder')
                 ),
             'invalid_message' => 'form.password.mismatch',
         ));
@@ -63,7 +56,7 @@ class CreateUserType extends AbstractType
             array(
                 'required' => true,
                 'label'      => 'form.birthday',
-                'translation_domain'=> 'IframeRegistration',
+                'translation_domain'=> 'UserRegistration',
                 "mapped" => false,
                 "years"	=> range (date('Y')-90, date('Y')-18),
                 "empty_value" => '',
@@ -74,7 +67,7 @@ class CreateUserType extends AbstractType
 
         $builder->add("terms_and_conditions", "checkbox", array(
                 "mapped" => false,
-                'translation_domain'=> 'IframeRegistration',
+                'translation_domain'=> 'UserRegistration',
                 "constraints" => new True(array("message" => "form.terms_and_conditions.error_message")),
                 'label'      => 'form.terms_and_conditions',
                 'label_attr' => array('class'=>'checkbox')

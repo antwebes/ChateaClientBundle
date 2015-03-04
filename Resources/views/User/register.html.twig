@@ -23,28 +23,28 @@
                 {{ form_label(form.username) }}
                 <div class="col-lg-9">
                     {{ form_errors(form.username) }}
-                    {{ form_widget(form.username) }}
+                    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'form.username.placeholder'}, 'translation_domain' : 'UserRegistration' }) }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form_label(form.email) }}
                 <div class="col-lg-9">
                     {{ form_errors(form.email) }}
-                    {{ form_widget(form.email) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'form.email.placeholder'}, 'translation_domain' : 'UserRegistration' }) }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form_label(form.plainPassword.first) }}
                 <div class="col-lg-9">
                     {{ form_errors(form.plainPassword.first) }}
-                    {{ form_widget(form.plainPassword.first) }}
+                    {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'form.password.placeholder'}, 'translation_domain' : 'UserRegistration' }) }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form_label(form.plainPassword.second) }}
                 <div class="col-lg-9">
                     {{ form_errors(form.plainPassword.second) }}
-                    {{ form_widget(form.plainPassword.second) }}
+                    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation.placeholder'}, 'translation_domain' : 'UserRegistration' }) }}
                 </div>
             </div>
 
