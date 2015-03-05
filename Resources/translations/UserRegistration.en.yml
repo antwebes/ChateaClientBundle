@@ -4,6 +4,7 @@ form.email: Email
 form.password: Password
 form.password_confirmation: Verification
 form.country: Country
+form.city: City
 form.birthday: Birthday
 form.username.placeholder: Enter your username
 form.email.placeholder: Enter your email

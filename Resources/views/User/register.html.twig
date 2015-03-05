@@ -102,3 +102,38 @@
         </form>
     </div>
 {% endblock %}
+
+{% block chatea_css %}
+    {{ parent() }}
+    {% stylesheets
+    "@ChateaClientBundle/Resources/public/css/jquery-ui-1.10.3.custom.min.css"
+    %}
+    <link href="{{ asset(asset_url) }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock chatea_css %}
+
+{% block chatea_js %}
+    <script>
+        window.api_endpoint = "{{ api_endpoint }}";
+    </script>
+    {% javascripts
+        '@ChateaClientBundle/Resources/public/js/jquery-ui-1.10.3.custom.min.js'
+        '@ChateaClientBundle/Resources/public/js/cities.js'
+    %}
+    <script src="{{ asset(asset_url) }}"></script>
+    {% endjavascripts %}
+    <script>
+        var executed = false;
+
+        var onlyOnce = function(){
+            if(!executed){
+                executed = true;
+                fillSelectCountry( '{{ app.request.get('country')|raw }}' );
+            }
+        };
+
+        $(document).ready(function(){
+            onlyOnce();
+        });
+    </script>
+{% endblock %}

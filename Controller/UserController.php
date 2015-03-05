@@ -18,6 +18,7 @@ class UserController extends Controller
     public function registerAction(Request $request)
     {
         $language = $this->getLanguageFromRequestAndSaveInSessionRequest($request);
+        $apiEndpoint = $this->container->getParameter('chatea_client.api_endpoint');
 
         $formOptions = array(
             'language'              => $language,
@@ -54,6 +55,7 @@ class UserController extends Controller
             'errors' => $form->getErrors(),
             'alerts' => null,
             'language' => $language,
+            'api_endpoint' => $apiEndpoint
         ));
     }
 
@@ -127,7 +129,12 @@ class UserController extends Controller
 
         if ($this->isJson($e->getMessage())){
             $serverError = json_decode($e->getMessage());
-            ldd($serverError);
+            $serverErrorArray = json_decode($e->getMessage(), true);
+
+            if(!isset($serverErrorArray['errors'])){
+                return true;
+            }
+
             if(is_object($serverError->errors)){
                 $errors = json_decode($e->getMessage(), true);
                 $this->fillForm($errors['errors'], $form);
