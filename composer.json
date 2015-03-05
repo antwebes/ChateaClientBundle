@@ -14,8 +14,8 @@
     "require" : {
         "symfony/framework-bundle": "~2.3",
         "antwebes/chatea-common": "@dev",
-        "antwebes/chatea-client-lib": "dev-master@dev",
-        "antwebes/chatea-secure-bundle": "dev-master@dev",
+        "antwebes/chatea-client-lib": "@dev",
+        "antwebes/chatea-secure-bundle": "@dev",
         "excelwebzone/recaptcha-bundle": "1.0.0"
     },
     "require-dev": {
