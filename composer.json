@@ -13,10 +13,10 @@
     "license" : "MIT",
     "require" : {
         "symfony/framework-bundle": "~2.3",
-        "antwebes/chatea-common": "dev-master",
-        "antwebes/chatea-client-lib": "dev-master",
-        "antwebes/chatea-secure-bundle": "dev-master",
-        "excelwebzone/recaptcha-bundle": "2.3.*@dev"
+        "antwebes/chatea-common": "@dev",
+        "antwebes/chatea-client-lib": "@dev",
+        "antwebes/chatea-secure-bundle": "@dev",
+        "excelwebzone/recaptcha-bundle": "1.0.0"
     },
     "require-dev": {
         "raulfraile/ladybug": "~1.0"
