@@ -116,7 +116,7 @@ class UserController extends Controller
 
     private function getLanguageFromRequestAndSaveInSessionRequest(Request $request)
     {
-        $language = $request->get('language','en');
+        $language = $request->get('language', $this->container->getParameter('kernel.default_locale'));
         $request->setLocale($language);
         $request->getSession()->set('_locale', $language);
 
