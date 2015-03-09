@@ -22,9 +22,9 @@ class ChannelController extends Controller
         $channelManager = $this->get('api_channels');
         $form = $this->createForm(new CreateChannelType(), $channel, ['channelTypeManager' => $channelTypeManager]);
 
-        if ('POST' === $request->getMethod()) {
+        if ('POST' === $request->getMethod()){
             $form->submit($request);
-            if ($form->isValid()) {
+            if ($form->isValid()){
                 try {
                     $channelManager->save($channel);
                     return $this->render('ChateaClientBundle:Channel:registerSuccess.html.twig');
@@ -66,7 +66,7 @@ class ChannelController extends Controller
     private function fillForm($errors, $form)
     {
         $translator = $this->get('translator');
-
+;
         foreach ($errors as $field => $message) {
 
             if ($form->has($field)){
@@ -77,6 +77,10 @@ class ChannelController extends Controller
                     $this->fillForm($message, $form->get($field));
                 }
             }else{
+                if(!isset($message['message']) && preg_match('/slug/i', $message)){
+                    continue;
+                }
+
                 //receive an error from the library
                 //the message can to be a string :"This form should not contain extra fields." For this reason I include this if
                 $messageString = (isset($message['message']) ? $message['message']: $message);

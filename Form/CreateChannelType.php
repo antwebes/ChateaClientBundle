@@ -15,7 +15,7 @@ class CreateChannelType extends AbstractType
         $channelTypes = $this->buildChannelsTypeChoices($options['channelTypeManager']);
         $builder
             ->add('name', 'text')
-            ->add('irc_channel', 'text')
+            ->add('ircChannel', 'text')
             ->add('description', 'textarea', array('required' => false))
             ->add('language', 'choice',
                 array('choices'=> array('en'=>'form.language.english','es'=>'form.language.english.spanish')));

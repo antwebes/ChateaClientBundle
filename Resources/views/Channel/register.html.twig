@@ -20,10 +20,10 @@
             </div>
         </div>
         <div class="form-group">
-            {{ form_label(form.irc_channel,'form.irc_channel.label',{ 'label_attr': {'class': 'col-lg-3 control-label'}, 'translation_domain' : 'ChannelRegistration'}) }}
+            {{ form_label(form.ircChannel,'form.irc_channel.label',{ 'label_attr': {'class': 'col-lg-3 control-label'}, 'translation_domain' : 'ChannelRegistration'}) }}
             <div class="col-lg-9">
-                {{ form_errors(form.irc_channel , {'translation_domain' : 'ChannelRegistration'}) }}
-                {{ form_widget(form.irc_channel,{'attr': {'class': 'form-control', 'placeholder':'form.irc_channel.placeholder', 'data-id':'channel_irc_channel'}, 'translation_domain' : 'ChannelRegistration' } ) }}
+                {{ form_errors(form.ircChannel , {'translation_domain' : 'ChannelRegistration'}) }}
+                {{ form_widget(form.ircChannel,{'attr': {'class': 'form-control', 'placeholder':'form.irc_channel.placeholder', 'data-id':'channel_irc_channel'}, 'translation_domain' : 'ChannelRegistration' } ) }}
             </div>
         </div>
         <div class="form-group">
@@ -56,4 +56,12 @@
             </div>
         </div>
     </form>
+{% endblock %}
+
+{% block chatea_js %}
+    { parent() }}
+    {% javascripts  '@ChateaClientBundle/Resources/public/js/jquery.stringToSlug.min.js'
+                    '@ChateaClientBundle/Resources/public/js/channelSlug.js' %}
+    <script src="{{ asset(asset_url) }}"></script>
+    {% endjavascripts %}
 {% endblock %}
