@@ -1,0 +1,10 @@
+{% extends 'ChateaClientBundle::mainLayout.html.twig' %}
+
+{% trans_default_domain 'UserChange' %}
+
+{% block chatea_title %}{{ 'user.change_email' | trans }}{% endblock %}
+
+{% block chatea_body %}
+    <h1>{{ 'user.change_email' | trans }}</h1>
+    <p>{{ 'user.change_email.success' | trans }}</p>
+{% endblock %}

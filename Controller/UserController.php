@@ -1,9 +1,13 @@
 <?php
 namespace Ant\Bundle\ChateaClientBundle\Controller;
 
+use Ant\Bundle\ChateaClientBundle\Api\Model\ChangeEmail;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Client;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
+use Ant\Bundle\ChateaClientBundle\Api\Model\ChangePassword;
+use Ant\Bundle\ChateaClientBundle\Form\ChangeEmailType;
 use Ant\Bundle\ChateaClientBundle\Form\CreateUserType;
+use Ant\Bundle\ChateaClientBundle\Form\ChangePasswordType;
 use Ant\Bundle\ChateaSecureBundle\Security\User\User as SecureUser;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
 
@@ -112,6 +116,51 @@ class UserController extends Controller
         $response =  $this->render('ChateaClientBundle:User:confirmedSuccess.html.twig',array('user'=>$this->getUser()));
 
         return $response;
+    }
+
+    /**
+     * @APIUser
+     *
+     */
+    public function userSettingsAction(Request $request)
+    {
+        $changePassword = new ChangePassword();
+        $changeEmail = new ChangeEmail();
+        $userManager = $this->get('api_users');
+        $form = $this->createForm(new ChangePasswordType(), $changePassword);
+        $formChangeEmail = $this->createForm(new ChangeEmailType(), $changeEmail);
+
+        if ('POST' === $request->getMethod() && $request->get('change_password')){
+            $form->submit($request);
+            if ($form->isValid()){
+                try {
+                    $userManager->changePassword($changePassword);
+
+                    return $this->render('ChateaClientBundle:User:changePasswordSuccess.html.twig');
+                }catch(\Exception $e){
+                    $this->addErrorsToForm($e, $form);
+                }
+            }
+        }
+
+        if ('POST' === $request->getMethod() && $request->get('change_email')){
+            $formChangeEmail->submit($request);
+            if ($formChangeEmail->isValid()){
+                try {
+                    $userManager->changeEmail($changeEmail);
+
+                    return $this->render('ChateaClientBundle:User:changeEmailSuccess.html.twig');
+                }catch(\Exception $e){
+                    $this->addErrorsToForm($e, $formChangeEmail);
+                }
+            }
+        }
+
+        return $this->render('ChateaClientBundle:User:userSettings.html.twig', array(
+            'form' => $form->createView(),
+            'formEmail' => $formChangeEmail->createView(),
+            'errors' => $form->getErrors(),
+            ));
     }
 
     private function getLanguageFromRequestAndSaveInSessionRequest(Request $request)

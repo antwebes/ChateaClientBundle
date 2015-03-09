@@ -1,0 +1,83 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{% trans_default_domain 'UserChange' %}
+
+{% block chatea_title %}{{ 'user.change_password' | trans }}{% endblock %}
+
+{% block chatea_body %}
+    <h1>{{ 'user.change_password' | trans }}</h1>
+    <div class="col-xs-12">
+        <form action="{{ path('chatea_client_user_settings') }}" {{ form_enctype(form) }} method="POST">
+            {% if errors | length > 0 %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form) }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                {{ form_label(form.oldPassword) }}
+                <div class="col-lg-9">
+                    {{ form_errors(form.oldPassword) }}
+                    {{ form_widget(form.oldPassword, {'attr': {'class': 'form-control', 'placeholder': 'form.old_password.placeholder'}, 'translation_domain' : 'UserChange' }) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.newPassword) }}
+                <div class="col-lg-9">
+                    {{ form_errors(form.newPassword) }}
+                    {{ form_widget(form.newPassword, {'attr': {'class': 'form-control', 'placeholder': 'form.new_password.placeholder'}, 'translation_domain' : 'UserChange' }) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.repeatPassword) }}
+                <div class="col-lg-9">
+                    {{ form_errors(form.repeatPassword) }}
+                    {{ form_widget(form.repeatPassword, {'attr': {'class': 'form-control', 'placeholder': 'form.repeat_password.placeholder'}, 'translation_domain' : 'UserChange' }) }}
+                </div>
+            </div>
+
+            {{ form_widget(form._token) }}
+            {{ form_rest(form) }}
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input name="register" type="submit" class="btn btn-lg pull-right btn-primary" value="{{ 'change_user.submit'|trans }}" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <h1>{{ 'user.change_email' | trans }}</h1>
+    <div class="col-xs-12">
+        <form action="{{ path('chatea_client_user_settings') }}" {{ form_enctype(formEmail) }} method="POST">
+            {% if errors | length > 0 %}
+                <div class="alert alert-danger">
+                    {{ form_errors(formEmail) }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                {{ form_label(formEmail.password) }}
+                <div class="col-lg-9">
+                    {{ form_errors(formEmail.password) }}
+                    {{ form_widget(formEmail.password, {'attr': {'class': 'form-control', 'placeholder': 'form.password.placeholder'}, 'translation_domain' : 'UserChange' }) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(formEmail.email) }}
+                <div class="col-lg-9">
+                    {{ form_errors(formEmail.email) }}
+                    {{ form_widget(formEmail.email, {'attr': {'class': 'form-control', 'placeholder': 'form.email.placeholder'}, 'translation_domain' : 'UserChange' }) }}
+                </div>
+            </div>
+
+            {{ form_rest(formEmail) }}
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input name="register" type="submit" class="btn btn-lg pull-right btn-primary" value="{{ 'change_user.submit'|trans }}" />
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

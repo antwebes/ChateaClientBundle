@@ -1,6 +1,8 @@
 <?php
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
+use Ant\Bundle\ChateaClientBundle\Api\Model\ChangeEmail;
+use Ant\Bundle\ChateaClientBundle\Api\Model\ChangePassword;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Paginator;
@@ -232,6 +234,16 @@ class UserManager extends BaseManager implements ManagerInterface
             $object->getFacebookId(),
             $object->isEnabled()
         );
+    }
+
+    public function changePassword(ChangePassword $changePassword)
+    {
+        $this->getManager()->changePassword($changePassword->getOldPassword(), $changePassword->getNewPassword(), $changePassword->getRepeatPassword());
+    }
+
+    public function changeEmail(ChangeEmail $changeEmail)
+    {
+        $this->getManager()->updateMe($changeEmail->getEmail(), $changeEmail->getPassword());
     }
 
     public function update(&$object)
