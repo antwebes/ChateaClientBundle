@@ -138,7 +138,7 @@ class UserController extends Controller
 
                     return $this->render('ChateaClientBundle:User:changePasswordSuccess.html.twig');
                 }catch(\Exception $e){
-                    $this->addErrorsToForm($e, $form);
+                    $this->addErrorsToForm($e, $form, 'password');
                 }
             }
         }
@@ -151,7 +151,7 @@ class UserController extends Controller
 
                     return $this->render('ChateaClientBundle:User:changeEmailSuccess.html.twig');
                 }catch(\Exception $e){
-                    $this->addErrorsToForm($e, $formChangeEmail);
+                    $this->addErrorsToForm($e, $formChangeEmail, 'email');
                 }
             }
         }
@@ -172,7 +172,7 @@ class UserController extends Controller
         return $language;
     }
 
-    protected function addErrorsToForm($e, $form)
+    protected function addErrorsToForm($e, $form, $context = '_')
     {
         $translator = $this->get('translator');
 
@@ -186,7 +186,7 @@ class UserController extends Controller
 
             if(is_object($serverError->errors)){
                 $errors = json_decode($e->getMessage(), true);
-                $this->fillForm($errors['errors'], $form);
+                $this->fillForm($errors['errors'], $form, $context);
             }else{
                 $form->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $serverError->errors))));
             }
@@ -201,18 +201,22 @@ class UserController extends Controller
      * @param array $errors errors of the form
      * @param Form $form form where we go to include the errors
      */
-    private function fillForm($errors, $form)
+    private function fillForm($errors, $form, $context)
     {
+        $fieldMap = ['current_password' => ['password' => 'oldPassword', 'email' => 'password']];
+
         $translator = $this->get('translator');
 
         foreach ($errors as $field => $message) {
+            if(isset($fieldMap[$field]) && isset($fieldMap[$field][$context])){
+                $field = $fieldMap[$field][$context];
+            }
 
             if ($form->has($field)){
                 if (isset($message['message'])){
                     $form->get($field)->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $message['message']))));
                 }else{
-                    //in this case the message is a form field within another field.
-                    $this->fillForm($message, $form->get($field));
+                    $this->fillForm($message, $form->get($field), $context);
                 }
             }else{
                 //receive an error from the library
