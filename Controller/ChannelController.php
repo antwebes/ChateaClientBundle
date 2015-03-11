@@ -46,6 +46,12 @@ class ChannelController extends Controller
 
         if ($this->isJson($e->getMessage())){
             $serverError = json_decode($e->getMessage());
+            $serverErrorArray = json_decode($e->getMessage(), true);
+
+            if(!isset($serverErrorArray['errors'])){
+                return true;
+            }
+
             if(is_object($serverError->errors)){
                 $errors = json_decode($e->getMessage(), true);
                 $this->fillForm($errors['errors'], $form);

@@ -23,6 +23,7 @@ class UserController extends Controller
     {
         $language = $this->getLanguageFromRequestAndSaveInSessionRequest($request);
         $apiEndpoint = $this->container->getParameter('chatea_client.api_endpoint');
+        $translator = $this->get('translator');
 
         $formOptions = array(
             'language'              => $language,
@@ -34,6 +35,7 @@ class UserController extends Controller
         //$channelTypeManager = $this->get('api_channels_types');
         $userManager = $this->get('api_users');
         $form = $this->createForm(new CreateUserType(), $user, $formOptions);
+        $problem = null;
 
         if ('POST' === $request->getMethod()) {
             $form->submit($request);
@@ -49,18 +51,27 @@ class UserController extends Controller
 
                     return $this->render('ChateaClientBundle:User:registerSuccess.html.twig');
                 }catch(\Exception $e){
-                    $this->addErrorsToForm($e, $form);
+                    $serverErrorArray = json_decode($e->getMessage(), true);
+
+                    if(isset($serverErrorArray['error']) && $serverErrorArray['error'] == "invalid_client"){
+                        $problem = 'user.register.invalid_client';
+                    }else{
+                        $this->addErrorsToForm($e, $form);
+                    }
                 }
             }
         }
 
-        return $this->render('ChateaClientBundle:User:register.html.twig', array(
+        $templateVars = array(
             'form' => $form->createView(),
             'errors' => $form->getErrors(),
             'alerts' => null,
             'language' => $language,
-            'api_endpoint' => $apiEndpoint
-        ));
+            'api_endpoint' => $apiEndpoint,
+            'problem' => $problem
+        );
+
+        return $this->render('ChateaClientBundle:User:register.html.twig', $templateVars);
     }
 
     public function confirmEmailAction()
