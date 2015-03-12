@@ -24,17 +24,25 @@
             {% endif %}
 
             <div class="form-group">
-                {{ form_label(form.username) }}
+                {{ form_label(form.email) }}
                 <div class="col-lg-9">
-                    {{ form_errors(form.username) }}
-                    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'form.username.placeholder'}, 'translation_domain' : 'UserRegistration' }) }}
+                    <span data-id="email-suggestions" class="help-block"></span>
+                    {{ form_errors(form.email) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'form.email.placeholder', 'data-id': 'registration_form_email'}, 'translation_domain' : 'UserRegistration' }) }}
+                    <span data-id="help-block">{{ "form.enter_valid_email" | trans }}</span>
                 </div>
             </div>
             <div class="form-group">
-                {{ form_label(form.email) }}
+                {{ form_label(form.username) }}
                 <div class="col-lg-9">
-                    {{ form_errors(form.email) }}
-                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'form.email.placeholder'}, 'translation_domain' : 'UserRegistration' }) }}
+                    {{ form_errors(form.username) }}
+                    <span data-id="username-validate" class="help-validate"></span>
+                    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'form.username.placeholder', 'data-id': 'registration_form_username'}, 'translation_domain' : 'UserRegistration' }) }}
+                    <span data-id="help-block">{{ "form.nick_not_spaces" | trans }}, <font color="red">{{ "form.incorrect" | trans }}:</font> barack obama <font color="green">{{ "form.correct" | trans }}:</font> barack_obama {{ "form.or" | trans }} barackObama</span>
+
+                    <div data-id="suggestions-username-block" class="suggestions" style="display:none">
+                        <div class="suggestions-title">{{ "Suggestions" | trans }}:</div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -123,11 +131,20 @@
     {% javascripts
         '@ChateaClientBundle/Resources/public/js/jquery-ui-1.10.3.custom.min.js'
         '@ChateaClientBundle/Resources/public/js/cities.js'
+        '@ChateaClientBundle/Resources/public/js/userNickSuggestions.js'
     %}
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
     <script>
         var executed = false;
+        var messages = {
+            mail_is_aviable: '{{ 'form.mail_is_aviable' | trans }}',
+            username_is_aviable: '{{ 'form.username_is_aviable' | trans }}',
+            server_errors: {
+                'This value is already used.': '{{ 'form.username_already_used' | trans }}',
+                'Email already in use. An email only be used in chatsfree account at a time.': '{{ 'form.email_already_used' | trans }}'
+            }
+        };
 
         var onlyOnce = function(){
             if(!executed){
@@ -138,6 +155,7 @@
 
         $(document).ready(function(){
             onlyOnce();
+            userNickSuggestions(messages);
         });
     </script>
 {% endblock %}

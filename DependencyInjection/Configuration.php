@@ -55,6 +55,9 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->scalarNode('app_id')->end()
+            ->arrayNode('api_request_allow')
+                ->prototype('scalar')->end()
+            ->end()
             ->end();
         return $treeBuilder;
     }

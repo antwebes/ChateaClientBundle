@@ -13,6 +13,15 @@ form.password_confirmation.placeholder: Repeat your password
 form.city.placeholder: Enter a city
 form.iagree: I agree
 form.termsAndConditions: to the terms and conditions
+form.enter_valid_email: "Write an valid email account, you will receive a email to confirm the register"
+form.nick_not_spaces: "The nickname can not have spaces"
+form.incorrect: "Incorrect"
+form.correct: "Correct"
+form.or: "or"
+form.mail_is_aviable: "Email is available."
+form.username_is_aviable: "Username is available."
+form.username_already_used: "This username is already being used."
+form.email_already_used: "Email already in use. An email only be used in a account at a time."
 registration.submit: Register
 user.register.success: "You have been successfully registered"
 user.register.confirm.success: "Your account has been successfully confirmated"

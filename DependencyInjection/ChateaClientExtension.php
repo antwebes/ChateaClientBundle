@@ -20,13 +20,10 @@ class ChateaClientExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-
-
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
         $loader->load('common.xml');
         $loader->load('security.xml');
         $loader->load('manager.xml');
-
 
         $config = $this->processConfiguration(new Configuration(), $configs);
 
@@ -44,6 +41,7 @@ class ChateaClientExtension extends Extension
         $container->setParameter('chatea_client.app_id', $config['app_id']);
         $container->setParameter('chatea_client.app_auth.secret', $config['app_auth']['secret']);
         $container->setParameter('chatea_client.api_endpoint', $config['api_endpoint']);
+        $container->setParameter('chatea_client.api_request_allow', $config['api_request_allow']);
 
         if($config['filestore']['file_directory'] == 'default'){
             $config['filestore']['file_directory'] = $container->getParameter('kernel.cache_dir');
@@ -69,8 +67,5 @@ class ChateaClientExtension extends Extension
         //register public manage
         $container->setDefinition('antwebes_chateaclient_bundle.api.persistence.api_manager',$manager);
         $container->setDefinition('antwebes_chateaclient_manager',$manager);
-
-
-
     }
 }

@@ -23,7 +23,6 @@ class UserController extends Controller
     {
         $language = $this->getLanguageFromRequestAndSaveInSessionRequest($request);
         $apiEndpoint = $this->container->getParameter('chatea_client.api_endpoint');
-        $translator = $this->get('translator');
 
         $formOptions = array(
             'language'              => $language,
@@ -68,7 +67,7 @@ class UserController extends Controller
             'alerts' => null,
             'language' => $language,
             'api_endpoint' => $apiEndpoint,
-            'problem' => $problem
+            'problem' => $problem,
         );
 
         return $this->render('ChateaClientBundle:User:register.html.twig', $templateVars);
