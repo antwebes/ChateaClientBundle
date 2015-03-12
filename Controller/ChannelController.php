@@ -20,7 +20,8 @@ class ChannelController extends Controller
         $channel = new Channel();
         $channelTypeManager = $this->get('api_channels_types');
         $channelManager = $this->get('api_channels');
-        $form = $this->createForm(new CreateChannelType(), $channel, ['channelTypeManager' => $channelTypeManager]);
+        $language = $this->container->getParameter('kernel.default_locale');
+        $form = $this->createForm(new CreateChannelType(), $channel, ['channelTypeManager' => $channelTypeManager, 'language' => $language]);
 
         if ('POST' === $request->getMethod()){
             $form->submit($request);

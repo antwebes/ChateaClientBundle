@@ -18,7 +18,7 @@ class CreateChannelType extends AbstractType
             ->add('ircChannel', 'text')
             ->add('description', 'textarea', array('required' => false))
             ->add('language', 'choice',
-                array('choices'=> array('en'=>'form.language.english','es'=>'form.language.english.spanish')));
+                array('choices'=> array('en'=>'form.language.english','es'=>'form.language.english.spanish'), 'preferred_choices' => array($options['language'])));
 
 
         $builder->add(
@@ -35,7 +35,7 @@ class CreateChannelType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Ant\Bundle\ChateaClientBundle\Api\Model\Channel'
         ));
-        $resolver->setRequired(array('channelTypeManager'));
+        $resolver->setRequired(array('channelTypeManager', 'language'));
     }
 
     public function getName()
