@@ -27,31 +27,36 @@ class ApiProxyController extends Controller
      */
     public function apiAction(Request $request)
     {
-        $pathInfo = $request->getPathInfo();
-
-        if(!$this->getApiRequestAllow()->isAllow($pathInfo)){
-            throw new NotFoundHttpException('No route allow for " '.$request->getMethod().' '.$pathInfo.'"');
-        }
-
-        $apiUri = trim($request->getRequestUri(),'/');
-
-        try{
-            return $this->container->get('antwebes_chateaclient_bundle.http.api_client')->sendRequest('GET',$apiUri);
-        }catch (ClientErrorResponseException $e){
-            $headersGuzzle = $e->getResponse()->getHeaders()->toArray();
-            $headersSymfony = array();
-
-            foreach($headersGuzzle as $key=>$value){
-                //this header is not suporter in symfony
-                if($key != 'Transfer-Encoding' && $value !== 'chunked'){
-                    $headersSymfony[$key] = $value[0];
-                }
+        if ($request->isXmlHttpRequest() or $request->headers->get('Content-Type') =='application/json') {
+            $pathInfo = $request->getPathInfo();
+            if(!$this->getApiRequestAllow()->isAllow($pathInfo)){
+                throw new NotFoundHttpException('No route allow for " '.$request->getMethod().' '.$pathInfo.'"');
+            }
+            $query_string = null;
+            if ($request->server->get('QUERY_STRING')){
+                $query_string = '?' .$request->server->get('QUERY_STRING');
             }
 
-            return new Response($e->getResponse()->getBody(true),
-                $e->getResponse()->getStatusCode(),
-                $headersSymfony
-            );
+            $url_api = $pathInfo . $query_string;
+            $apiUri = trim($url_api,'/');
+            try{
+                return $this->container->get('antwebes_chateaclient_bundle.http.api_client')->sendRequest('GET',$apiUri);
+            }catch (ClientErrorResponseException $e){
+                $headersGuzzle = $e->getResponse()->getHeaders()->toArray();
+                $headersSymfony = array();
+                foreach($headersGuzzle as $key=>$value){
+//this header is not suporter in symfony
+                    if($key != 'Transfer-Encoding' && $value !== 'chunked'){
+                        $headersSymfony[$key] = $value[0];
+                    }
+                }
+                return new Response($e->getResponse()->getBody(true),
+                    $e->getResponse()->getStatusCode(),
+                    $headersSymfony
+                );
+            }
+        }else{
+            throw new NotFoundHttpException();
         }
     }
 }
