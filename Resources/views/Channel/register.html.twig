@@ -6,7 +6,7 @@
 
 {% block chatea_body %}
     <h1>{{ 'register-channel.legend' | trans }}</h1>
-    <form action="{{ path('chatea_client_register_channel') }}" {{ form_enctype(form) }} method="POST">
+    <form class="form-horizontal" action="{{ path('chatea_client_register_channel') }}" {{ form_enctype(form) }} method="POST">
         {% if from_has_error  %}
             <div class="alert alert-danger">
                 {{ form_errors(form) }}
