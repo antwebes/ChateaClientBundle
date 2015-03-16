@@ -7,6 +7,6 @@
 {% block chatea_body %}
     <h1>{{ 'reset-password.legend' | trans }}</h1>
     <p>
-        {{ 'reset-password.success' | trans }}
+        {{ 'reset-password.success' | trans({'%email%': email}) }}
     </p>
 {% endblock %}

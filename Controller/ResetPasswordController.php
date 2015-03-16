@@ -39,9 +39,9 @@ class ResetPasswordController extends Controller
 
         if($form->isValid()){
             try {
-                $users->forgotPassword($resetPassword->getEmail());
+                $serverResponse = json_decode($users->forgotPassword($resetPassword->getEmail()), true);
 
-                $response = $this->render('ChateaClientBundle:ResetPassword:success.html.twig');
+                $response = $this->render('ChateaClientBundle:ResetPassword:success.html.twig', array('email' => $serverResponse['email']));
 
 
                 return $response;
@@ -50,7 +50,7 @@ class ResetPasswordController extends Controller
                 try {
                     $this->addErrorsToFormFromException($form, $e);
                 } catch(\Exception $ex) {
-                    $response = $this->render('ChateaClientBundle:ResetPassword:error.html.twig', array('exception' => $ex));
+                    $response = $this->render('ChateaClientBundle:ResetPassword:error.html.twig', array('error' => $this->translateException($ex->getMessage())));
 
                     //$response->setSharedMaxAge($this->container->getParameter('user_bundle_reset_do_reset'));
 
@@ -78,9 +78,24 @@ class ResetPasswordController extends Controller
         //TODO: esto esta acoplado al formato del error que llega desde la libreira: ojo chapuza
         $translator = $this->get('translator');
         $serverError = json_decode($e->getMessage());
-        $tranlatedError = $translator->trans("%%error%%", array("%%error%%" => $serverError->errors));
+        $tranlatedError = $this->translateException($serverError->errors);
 
         $form->get('email')
             ->addError(new FormError($tranlatedError));
+    }
+
+    private function translateException($errorMessage)
+    {
+        $translator = $this->get('translator');
+        $errorMapping = array(
+            "The password for this user has already been requested within the last 24 hours." => "reset-password.already_requested",
+            "The username or email address does not exist." => "reset-password.user_not_exist"
+        );
+
+        if(isset($errorMapping[$errorMessage])){
+            return $translator->trans($errorMapping[$errorMessage], array(), 'ResetPassword');
+        }
+
+        return $errorMessage;
     }
 }

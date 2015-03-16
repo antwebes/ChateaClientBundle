@@ -257,7 +257,7 @@ class UserManager extends BaseManager implements ManagerInterface
 
     public function forgotPassword($usernameOrEmail)
     {
-        $this->getManager()->forgotPassword($usernameOrEmail);
+        return $this->getManager()->forgotPassword($usernameOrEmail);
     }
 
     /**
