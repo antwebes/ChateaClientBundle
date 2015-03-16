@@ -10,7 +10,7 @@ class ChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            'oldPassword', 'password',
+            'currentPassword', 'password',
             array(
                 'label' => 'form.old_password',
                 'required' => true,
@@ -19,23 +19,13 @@ class ChangePasswordType extends AbstractType
             )
         );
 
-        $builder->add(
-            'newPassword', 'password',
+        $builder->add('plainPassword', 'repeated',
             array(
-                'label' => 'form.new_password',
+                'type' => 'password',
+                'first_options' => array('label' => 'form.new_password', 'label_attr' => array('class'=>'col-lg-3 control-label')),
+                'second_options' => array('label' => 'form.repeat_password', 'label_attr' => array('class'=>'col-lg-3 control-label')),
                 'required' => true,
                 'translation_domain' => 'UserChange',
-                'label_attr' => array('class'=>'col-lg-3 control-label'),
-            )
-        );
-
-        $builder->add(
-            'repeatPassword', 'password',
-            array(
-                'label' => 'form.repeat_password',
-                'required' => true,
-                'translation_domain' => 'UserChange',
-                'label_attr' => array('class'=>'col-lg-3 control-label'),
             )
         );
     }

@@ -238,7 +238,7 @@ class UserManager extends BaseManager implements ManagerInterface
 
     public function changePassword(ChangePassword $changePassword)
     {
-        $this->getManager()->changePassword($changePassword->getOldPassword(), $changePassword->getNewPassword(), $changePassword->getRepeatPassword());
+        $this->getManager()->changePassword($changePassword->getCurrentPassword(), $changePassword->getPlainPassword(), $changePassword->getPlainPassword());
     }
 
     public function changeEmail(ChangeEmail $changeEmail)

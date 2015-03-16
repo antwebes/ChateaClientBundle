@@ -213,7 +213,7 @@ class UserController extends Controller
      */
     private function fillForm($errors, $form, $context)
     {
-        $fieldMap = ['current_password' => ['password' => 'oldPassword', 'email' => 'password']];
+        $fieldMap = ['current_password' => ['password' => 'currentPassword', 'email' => 'password']];
 
         $translator = $this->get('translator');
 
@@ -224,7 +224,7 @@ class UserController extends Controller
 
             if ($form->has($field)){
                 if (isset($message['message'])){
-                    $form->get($field)->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $message['message']))));
+                    $form->get($field)->addError(new FormError($this->translateServerError($message['message'])));
                 }else{
                     $this->fillForm($message, $form->get($field), $context);
                 }
@@ -254,5 +254,19 @@ class UserController extends Controller
         }catch(\Exception $e){
 
         }
+    }
+
+    private function translateServerError($errorMessage)
+    {
+        $translator = $this->get('translator');
+        $errorMapping = array(
+            "This value should be the user current password." => "form.current_password_match",
+        );
+
+        if(isset($errorMapping[$errorMessage])){
+            return $translator->trans($errorMapping[$errorMessage], array(), 'UserChange');
+        }
+
+        return $errorMessage;
     }
 }

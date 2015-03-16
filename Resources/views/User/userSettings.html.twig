@@ -15,24 +15,24 @@
             {% endif %}
 
             <div class="form-group">
-                {{ form_label(form.oldPassword) }}
+                {{ form_label(form.currentPassword) }}
                 <div class="col-lg-9">
-                    {{ form_errors(form.oldPassword) }}
-                    {{ form_widget(form.oldPassword, {'attr': {'class': 'form-control', 'placeholder': 'form.old_password.placeholder'}, 'translation_domain' : 'UserChange' }) }}
+                    {{ form_errors(form.currentPassword) }}
+                    {{ form_widget(form.currentPassword, {'attr': {'class': 'form-control', 'placeholder': 'form.old_password.placeholder'}, 'translation_domain' : 'UserChange' }) }}
                 </div>
             </div>
             <div class="form-group">
-                {{ form_label(form.newPassword) }}
+                {{ form_label(form.plainPassword.first) }}
                 <div class="col-lg-9">
-                    {{ form_errors(form.newPassword) }}
-                    {{ form_widget(form.newPassword, {'attr': {'class': 'form-control', 'placeholder': 'form.new_password.placeholder'}, 'translation_domain' : 'UserChange' }) }}
+                    {{ form_errors(form.plainPassword.first) }}
+                    {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'form.new_password.placeholder'}, 'translation_domain' : 'UserChange' }) }}
                 </div>
             </div>
             <div class="form-group">
-                {{ form_label(form.repeatPassword) }}
+                {{ form_label(form.plainPassword.second) }}
                 <div class="col-lg-9">
-                    {{ form_errors(form.repeatPassword) }}
-                    {{ form_widget(form.repeatPassword, {'attr': {'class': 'form-control', 'placeholder': 'form.repeat_password.placeholder'}, 'translation_domain' : 'UserChange' }) }}
+                    {{ form_errors(form.plainPassword.second) }}
+                    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'form.repeat_password.placeholder'}, 'translation_domain' : 'UserChange' }) }}
                 </div>
             </div>
 

@@ -11,60 +11,40 @@ class ChangePassword
     /**
      * @var string old password
      */
-    private $oldPassword;
+    private $currentPassword;
 
     /**
      * @var string new password
      */
-    private $newPassword;
+    private $plainPassword;
 
-    /**
-     * @var string repeat new password
-     */
-    private $repeatPassword;
-
-    public function getOldPassword()
+    public function getCurrentPassword()
     {
-        return $this->oldPassword;
+        return $this->currentPassword;
     }
 
     /**
-     * Set the old password
+     * Set the current password
      *
-     * @param string $oldPassword
+     * @param string $currentPassword
      */
-    public function setOldPassword($oldPassword)
+    public function setCurrentPassword($currentPassword)
     {
-        $this->oldPassword = $oldPassword;
+        $this->currentPassword = $currentPassword;
     }
 
-    public function getNewPassword()
+    public function getPlainPassword()
     {
-        return $this->newPassword;
+        return $this->plainPassword;
     }
 
     /**
-     * Set the new password
+     * Set the current password
      *
-     * @param string $newPassword
+     * @param string $planPassword
      */
-    public function setNewPassword($newPassword)
+    public function setPlainPassword($plainPassword)
     {
-        $this->newPassword = $newPassword;
-    }
-
-    public function getRepeatPassword()
-    {
-        return $this->repeatPassword;
-    }
-
-    /**
-     * Set the new password repeated
-     *
-     * @param string $repeatPassword
-     */
-    public function setRepeatPassword($repeatPassword)
-    {
-        $this->repeatPassword = $repeatPassword;
+        $this->plainPassword = $plainPassword;
     }
 }
