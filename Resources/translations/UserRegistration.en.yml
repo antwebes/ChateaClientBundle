@@ -22,6 +22,7 @@ form.mail_is_aviable: "Email is available."
 form.username_is_aviable: "Username is available."
 form.username_already_used: "This username is already being used."
 form.email_already_used: "Email already in use. An email only be used in a account at a time."
+form.email_not_valid: "The value of email is not a valid email address."
 registration.submit: Register
 user.register.success: "You have been successfully registered"
 user.register.confirm.success: "Your account has been successfully confirmated"

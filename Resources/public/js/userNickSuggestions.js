@@ -60,7 +60,8 @@ function userNickSuggestions(messages) {
         }
 
         function checkEmail(emailInput) {
-            var url_source = '/api/users/email-available';
+            var url_source = 'api/users/email-available';
+            
             $.ajax({
                 url: url_source,
                 data: {email: emailInput},
@@ -71,7 +72,7 @@ function userNickSuggestions(messages) {
                 error: function (responseError) {
                     var response = $.parseJSON(responseError.responseText);
                     var messageError = response.errors.email.message;
-                    $('span[data-id="email-suggestions"]').html('<p class="alert-danger">' + transServerError(messageError) + '.</p>');
+                    $('span[data-id="email-suggestions"]').html('<p class="alert-danger">' + transServerError(messageError) + '</p>');
                 }
 
             });
@@ -102,7 +103,7 @@ function userNickSuggestions(messages) {
         }
 
         function findSuggestions(usernameInput, emailInput) {
-            var url_source = '/api/users/username-available';
+            var url_source = 'api/users/username-available';
             $('div[data-id="suggestions-username-block"]').hide();
             $.ajax({
                 url: url_source,
@@ -114,7 +115,11 @@ function userNickSuggestions(messages) {
                 error: function (responseError) {
                     var response = $.parseJSON(responseError.responseText);
                     writeUsernameSuggestions(response.suggestion);
-                    $('span[data-id="username-validate"]').html('<p class="alert-danger">' + transServerError(response.errors.username.message) + '</p>');
+                    if (response.errors.username){
+                        $('span[data-id="username-validate"]').html('<p class="alert-danger">' + transServerError(response.errors.username.message) + '</p>');
+                    }else if (response.errors.email){
+                        $('span[data-id="username-validate"]').html('<p class="alert-danger">' + transServerError(response.errors.email.message) + '</p>');
+                    }
                 }
 
             });
