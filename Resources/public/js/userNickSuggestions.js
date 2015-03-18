@@ -60,10 +60,10 @@ function userNickSuggestions(messages) {
         }
 
         function checkEmail(emailInput) {
-            var url_source = 'api/users/email-available';
+            var url_source = '/api/users/email-available';
             
             if(typeof window.homepage != 'undefined'){
-                //maybe the path homepage, finish with /, we have to remove this /
+                //maybe the path homepage, finish with /, we have to remove this / of url_source
                 var lastChar = window.homepage.substr(window.homepage.length - 1);
                 if (lastChar === '/'){
                     url_source = url_source.substring(1);
@@ -112,10 +112,10 @@ function userNickSuggestions(messages) {
         }
 
         function findSuggestions(usernameInput, emailInput) {
-            var url_source = 'api/users/username-available';
+            var url_source = '/api/users/username-available';
             
             if(typeof window.homepage != 'undefined'){
-                //maybe the path homepage, finish with /, we have to remove this /
+                //maybe the path homepage, finish with /, we have to remove this / of url_source
                 var lastChar = window.homepage.substr(window.homepage.length - 1);
                 if (lastChar === '/'){
                     url_source = url_source.substring(1);
