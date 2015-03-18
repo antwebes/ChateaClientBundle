@@ -2,5 +2,36 @@
 
 <routes xmlns="http://symfony.com/schema/routing"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">    
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+    <route id="chatea_client_register_channel" path="/register-channel">
+        <default key="_controller">ChateaClientBundle:Channel:register</default>
+    </route>
+    <route id="chatea_client_register_user" path="/register-user">
+        <default key="_controller">ChateaClientBundle:User:register</default>
+    </route>
+    <route id="chatea_client_reset_password" path="/reset-password" methods="POST">
+        <default key="_controller">ChateaClientBundle:ResetPassword:reset</default>
+    </route>
+    <route id="chatea_client_reset_password_perform" path="/reset-password" methods="POST">
+        <default key="_controller">ChateaClientBundle:ResetPassword:doReset</default>
+    </route>
+    <route id="confirm_email" path="/confirm-email">
+        <default key="_controller">ChateaClientBundle:User:confirmEmail</default>
+    </route>
+    <route id="confirm_email" path="/confirm-email">
+        <default key="_controller">ChateaClientBundle:User:confirmEmail</default>
+    </route>
+    <route id="chatea_confirmed" path="/register/confirmed">
+        <default key="_controller">ChateaClientBundle:User:confirmed</default>
+    </route>
+    <route id="chatea_confirmed_success" path="/register/success">
+        <default key="_controller">ChateaClientBundle:User:confirmedSuccess</default>
+    </route>
+    <route id="chatea_client_user_settings" path="/user-settings">
+        <default key="_controller">ChateaClientBundle:User:userSettings</default>
+    </route>
+    <route id="chatea_client_api" path="/api/{_resource}">
+        <default key="_controller">ChateaClientBundle:ApiProxy:api</default>
+        <requirement key="_resource">.+</requirement>
+    </route>
 </routes>

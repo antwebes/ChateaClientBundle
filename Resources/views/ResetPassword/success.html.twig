@@ -1,0 +1,12 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{% trans_default_domain 'ResetPassword' %}
+
+{% block chatea_title %}{{ 'reset-password.legend' | trans }}{% endblock %}
+
+{% block chatea_body %}
+    <h1>{{ 'reset-password.legend' | trans }}</h1>
+    <p>
+        {{ 'reset-password.success' | trans({'%email%': email}) }}
+    </p>
+{% endblock %}

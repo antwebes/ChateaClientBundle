@@ -140,11 +140,26 @@
                 </call>
             </service>
 
-			<service id="antwebes_chateaclient_bundle.manager.real_time_manager"
+            <service id="antwebes_chateaclient_bundle.manager.real_time_manager"
                      class="%antwebes_chateaclient_bundle.manager.real_time_manager.class%"
                      public="false">
                 <argument type="service" id="antwebes_chateaclient_manager" />
             </service>
+
+            <service id="antwebes_chateaclient_bundle.http.api_request_allow"
+                     class="Ant\Bundle\ChateaClientBundle\Http\ApiRequestAllow">
+                <argument>%chatea_client.api_request_allow%</argument>
+            </service>
+
+            <service id="antwebes_chateaclient_bundle.http.api_client"
+                     class="Ant\Bundle\ChateaClientBundle\Http\ApiClient">
+                <argument type="string">%chatea_client.api_endpoint%</argument>
+                <argument type="service" id="antwebes_chateaclient_lib_filestore" />
+                <argument type="string">%chatea_client.app_auth.client_id%</argument>
+                <argument type="string">%chatea_client.app_auth.secret%</argument>
+                <argument type="string">%kernel.root_dir%</argument>
+            </service>
+
 
             <service id="api_channels"          alias="antwebes_chateaclient_bundle.manager.channel_manager"        synthetic="true" />
             <service id="api_channels_types"    alias="antwebes_chateaclient_bundle.manager.channel_type_manager"   synthetic="true" />

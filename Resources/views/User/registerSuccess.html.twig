@@ -1,0 +1,10 @@
+{% extends 'ChateaClientBundle::mainLayout.html.twig' %}
+
+{% trans_default_domain 'UserRegistration' %}
+
+{% block chatea_title %}{{ 'user.register' | trans }}{% endblock %}
+
+{% block chatea_body %}
+    <h1>{{ 'user.register' | trans }}</h1>
+    <p>{{ 'user.register.success' | trans }}</p>
+{% endblock %}

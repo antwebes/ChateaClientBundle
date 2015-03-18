@@ -1,0 +1,35 @@
+{
+    "name" : "antwebes/chatea-client-bundle",
+    "description" : "Symfony2 bundle for ChateaClient library, It makes it easy to use API of api.chatea.net",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Xabier Fernández Rodríguez AS jjbier",
+        "email" : "jjbier@gmail.com",
+        "homepage" : "https://github.com/antwebes",
+        "role" : "Developer"
+    }],
+    "keywords" : ["chatea","chateagratis","bundle","api"],
+    "homepage" : "https://github.com/antwebes/ChateaClientBundle",
+    "license" : "MIT",
+    "require" : {
+        "symfony/framework-bundle": "~2.3",
+<<<<<<< HEAD
+        "antwebes/chatea-common": "0.1.0",
+        "antwebes/chatea-client-lib": "0.1.0",
+        "antwebes/chatea-secure-bundle": "0.1.0",
+=======
+        "antwebes/chatea-common": "@dev",
+        "antwebes/chatea-client-lib": "@dev",
+        "antwebes/chatea-secure-bundle": "@dev",
+>>>>>>> develop
+        "excelwebzone/recaptcha-bundle": "1.0.0"
+    },
+    "require-dev": {
+        "raulfraile/ladybug": "~1.0"
+    },
+    "autoload": {
+        "psr-0": { "Ant\\Bundle\\ChateaClientBundle": "" }
+    },
+    "target-dir": "Ant/Bundle/ChateaClientBundle"
+
+}

@@ -1,0 +1,43 @@
+user.register: Register user
+form.username: Username
+form.email: Email
+form.password: Password
+form.password_confirmation: Verification
+form.country: Country
+form.city: City
+form.birthday: Birthday
+form.username.placeholder: Enter your username
+form.email.placeholder: Enter your email
+form.password.placeholder: Enter your password
+form.password_confirmation.placeholder: Repeat your password
+form.city.placeholder: Enter a city
+form.iagree: I agree
+form.termsAndConditions: to the terms and conditions
+form.enter_valid_email: "Write an valid email account, you will receive a email to confirm the register"
+form.nick_not_spaces: "The nickname can not have spaces"
+form.incorrect: "Incorrect"
+form.correct: "Correct"
+form.or: "or"
+form.mail_is_aviable: "Email is available."
+form.username_is_aviable: "Username is available."
+form.username_already_used: "This username is already being used."
+form.email_already_used: "Email already in use. An email only be used in a account at a time."
+form.email_not_valid: "The value of email is not a valid email address."
+registration.submit: Register
+user.register.success: "You have been successfully registered"
+user.register.confirm.success: "Your account has been successfully confirmated"
+user.register.confirm: "Confirm your account"
+user.register.confirm_need: "You need confirm your account"
+user.register.we_sent_you_mail: "We sent a verification link to the email address you used to create the account"
+user.register.click_to_confirm: "Click the link in that email to verify that you own this address"
+user.register.if_you_dont_confirm: "If you don't verify your address, you may not be able to access certain Chatsfree products or features"
+user.register.where_is_my_email: "Where is my confirmation email?"
+user.register.we_sent_you_verification_mail: "We sent a verification link to your email"
+user.register.mail_not_in_inbox: "If you don't have a email in your inbox,  fill with your email for resent the confirmed email !"
+user.register.your_mail: "Your email address"
+user.register.write_your_mail: "Write your email to send me verification email."
+user.register.confirm.submit: "Submit"
+user.register.i_need_help: "I need help"
+user.register.confirmed.title: "Congratulations %username% !! Your account is activated successfully"
+user.register.confirmed.message: "User %username% registered correctly . You can now start chatting."
+user.register.invalid_client: "Due to tecnichal problems, it is impsible to register users now. Please contacto with the webmaster of this site."

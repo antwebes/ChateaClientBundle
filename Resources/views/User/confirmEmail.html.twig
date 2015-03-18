@@ -1,0 +1,141 @@
+{% extends 'ChateaClientBundle::mainLayout.html.twig' %}
+
+{% trans_default_domain 'UserRegistration' %}
+
+{% block chatea_title %}{{ 'user.register.confirm' | trans }}{% endblock %}
+
+{% block chatea_body %}
+    <h1>{{ 'user.register.confirm' | trans }}</h1>
+    <style>
+        .left {
+            float: left;
+            position: relative;
+        }
+
+        .width100 {
+            width: 100% !important;
+        }
+
+        .m-t-40 {
+            margin-top: 40px;
+        }
+
+        .m-b-15 {
+            margin-bottom: 15px;
+        }
+        .text_title {
+            color: #222;
+            font-family: Georgia;
+            font-size: 2em;
+            font-style: italic;
+        }
+        .txt-header-h4 {
+            color: #666666;
+            font-family: Georgia;
+            font-size: 16px;
+            font-style: italic;
+            line-height: 25px;
+        }
+
+    </style>
+
+    {% block chatea_confirm_need_confirmation %}
+        <div class="width100 left m-b-15">
+
+            <div class="row">
+                <div style="width:38.2%" class="left"><hr class="hr-style m-t-20"></div>
+                <div style="width:23.5%" class="left">
+                    <center><span class="text_title">{{ "user.register.confirm_need" | trans }}</span></center>
+                </div>
+                <div style="width:38.2%" class="left"><hr class="hr-style m-t-20"></div>
+            </div>
+            <center>
+                <span class="txt-header-h4"><p>{{"user.register.we_sent_you_mail" |trans}}
+                    </p><p>
+                        {{ "user.register.click_to_confirm" | trans }}
+                    </p><p>
+                        {{ "user.register.if_you_dont_confirm" | trans }}
+                    </p>
+            </center>
+        </div>
+    {% endblock %}
+
+    {% block chatea_confirm_where_is_my_mail %}
+        <div class="width100 left m-b-15 m-t-40">
+
+            <div class="row">
+                <div style="width:40.2%" class="left"><hr class="hr-style m-t-20"></div>
+                <div style="width:19.5%" class="left">
+                    <center><span class="text_title">{{ "user.register.where_is_my_email" | trans}}</span></center>
+                </div>
+                <div style="width:40.2%" class="left"><hr class="hr-style m-t-20"></div>
+            </div>
+            <center><span class="txt-header-h4">{{ "user.register.we_sent_you_verification_mail" |trans }}<br/>
+                    {{ "user.register.mail_not_in_inbox"  | trans }}
+                    <br/>
+
+                    <div class="col-lg-offset-4 col-lg-4 col-xs-12">
+                        <form role="form" id="form-resend-confirmation-email">
+                            <div class="form-group">
+                                <label for="inputEmailResend">{{ "user.register.your_mail" | trans }}</label>
+                                <input type="email" class="form-control" id="inputEmailResend" placeholder="{{ "user.register.write_your_mail" | trans }}" required="required">
+                            </div>
+                            <button type="submit" class="btn btn-default">{{ "user.register.confirm.submit" | trans }}</button>
+                        </form>
+                    </div>
+
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-12 col-xs-12 text-left" id="succes-resend-confirmation-email"></div>
+                    </div>
+
+                    </span></center>
+        </div>
+    {% endblock %}
+
+    {% block chatea_confirm_need_help %}
+        <div class="width100 left m-b-15 m-t-40">
+
+            <div class="row">
+                <div style="width:40.2%" class="left"><hr class="hr-style m-t-20"></div>
+                <div style="width:19.5%" class="left">
+                    <center><span class="text_title">{{ "user.register.i_need_help" }}</span></center>
+                </div>
+                <div style="width:40.2%" class="left"><hr class="hr-style m-t-20"></div>
+            </div>
+
+            <div class="col-md-6 col-xs-12">
+                <center><span class="txt-header-h4">
+                    {{ "You can click on the link in the left bar on section help." | trans }}
+                        <br/>
+                    or
+                    <br/>
+                        {{ "Write our email: cfree@chatsfree.net" |trans }}
+                </span></center>
+            </div>
+
+
+            <div class="col-md-6 col-xs-12">
+                <center><span class="txt-header-h4">
+                    <p>{{ "You can send your comments about social networks: " }}</p>
+                    <p>{% trans %}You can follow us on <b>Twitter</b>: @Chatsfree. {% endtrans %}<a target="_blank" href="https://twitter.com/ChatsFree">{{ "Click here to go" | trans }}</a></p>
+                    <p>{% trans %}You can follow us on <b>Google +</b>: Chats free. {% endtrans %}<a target="_blank" href="https://plus.google.com/u/0/104718051087747847566">{{ "Click here to go" | trans }}</a></p>
+                    <p>{% trans %}You can about <b>facebook</b>: Chatsfree. {% endtrans %}<a target="_blank" href="https://www.facebook.com/chatsfree">{{ "Click here to go" | trans }}</a></p>
+                </span></center>
+            </div>
+
+        </div>
+    {% endblock %}
+{% endblock %}
+
+{% block chatea_js %}
+    <script>
+        window.api_endpoint = "{{ api_endpoint }}";
+        window.token = "{{ userAccessToken }}";
+    </script>
+    {% javascripts
+    '@ChateaClientBundle/Resources/public/js/resend-confirmation-email.js'
+    %}
+    <script src="{{ asset(asset_url) }}"></script>
+    {% endjavascripts %}
+{% endblock %}
