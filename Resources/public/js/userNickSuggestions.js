@@ -62,6 +62,15 @@ function userNickSuggestions(messages) {
         function checkEmail(emailInput) {
             var url_source = 'api/users/email-available';
             
+            if(typeof window.homepage != 'undefined'){
+                //maybe the path homepage, finish with /, we have to remove this /
+                var lastChar = window.homepage.substr(window.homepage.length - 1);
+                if (lastChar === '/'){
+                    url_source = url_source.substring(1);
+                }
+                url_source = window.homepage + url_source;
+            }
+
             $.ajax({
                 url: url_source,
                 data: {email: emailInput},
@@ -104,6 +113,16 @@ function userNickSuggestions(messages) {
 
         function findSuggestions(usernameInput, emailInput) {
             var url_source = 'api/users/username-available';
+            
+            if(typeof window.homepage != 'undefined'){
+                //maybe the path homepage, finish with /, we have to remove this /
+                var lastChar = window.homepage.substr(window.homepage.length - 1);
+                if (lastChar === '/'){
+                    url_source = url_source.substring(1);
+                }
+                url_source = window.homepage + url_source;
+            }
+
             $('div[data-id="suggestions-username-block"]').hide();
             $.ajax({
                 url: url_source,
