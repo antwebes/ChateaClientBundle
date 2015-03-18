@@ -30,8 +30,4 @@
     <route id="chatea_client_user_settings" path="/user-settings">
         <default key="_controller">ChateaClientBundle:User:userSettings</default>
     </route>
-    <route id="chatea_client_api" path="/api/{_resource}">
-        <default key="_controller">ChateaClientBundle:ApiProxy:api</default>
-        <requirement key="_resource">.+</requirement>
-    </route>
 </routes>
