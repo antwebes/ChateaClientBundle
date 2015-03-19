@@ -16,3 +16,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 
 * 0.1.4 (2015-03-19)
  * translate errors in reset password
+ 
+* 0.1.5 (2015-03-19)
+ * translate errors in change email
