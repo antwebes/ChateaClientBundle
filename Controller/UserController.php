@@ -265,6 +265,8 @@ class UserController extends Controller
 
         if(isset($errorMapping[$errorMessage])){
             return $translator->trans($errorMapping[$errorMessage], array(), 'UserChange');
+        }else if(preg_match("/The email '(.+)' is not a valid email/", $errorMessage, $matches)){;
+            return $translator->trans('form.email_not_valid_server', array('%email%' => $matches[1]), 'UserChange');
         }
 
         return $errorMessage;
