@@ -10,3 +10,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 * 0.1.2 (2015-03-18)
 
  * separate route api.xml, and include window.homepage in UserNickSuggestions to customize call to api
+
+* 0.1.3 (2015-03-19)
+ * hotfix, method onKernelException must listen only apiException
