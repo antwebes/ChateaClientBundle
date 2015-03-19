@@ -13,3 +13,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 
 * 0.1.3 (2015-03-19)
  * hotfix, method onKernelException must listen only apiException
+
+* 0.1.4 (2015-03-19)
+ * translate errors in reset password
