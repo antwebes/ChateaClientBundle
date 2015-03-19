@@ -25,20 +25,22 @@ class AuthExceptionListener
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
-        $controllerResolver = new ControllerResolver();
-        $request = $event->getRequest();
-        $controller = $controllerResolver->getController($event->getRequest());
+        if  ($exception instanceof ApiException ){
+            $controllerResolver = new ControllerResolver();
+            $request = $event->getRequest();
+            $controller = $controllerResolver->getController($event->getRequest());
 
-        if($controller && $exception instanceof ApiException && $this->hasApiUserAnnotation($controller)){
-            try{
-                $request->getSession()->invalidate();
-            }catch(\Exception $e){
+            if($controller && $this->hasApiUserAnnotation($controller)){
+                try{
+                    $request->getSession()->invalidate();
+                }catch(\Exception $e){
 
+                }
+
+                $url = $this->urlGenerator->generate($this->loginRoute);
+                $response = new RedirectResponse($url, 302);
+                $event->setResponse($response);
             }
-
-            $url = $this->urlGenerator->generate($this->loginRoute);
-            $response = new RedirectResponse($url, 302);
-            $event->setResponse($response);
         }
     }
 
