@@ -22,6 +22,7 @@ class ChangePasswordType extends AbstractType
         $builder->add('plainPassword', 'repeated',
             array(
                 'type' => 'password',
+                'invalid_message' => $options['translator']->trans('form.new_password_must_match', array(), 'UserChange'),
                 'first_options' => array('label' => 'form.new_password', 'label_attr' => array('class'=>'col-lg-3 control-label')),
                 'second_options' => array('label' => 'form.repeat_password', 'label_attr' => array('class'=>'col-lg-3 control-label')),
                 'required' => true,
@@ -34,6 +35,7 @@ class ChangePasswordType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Ant\Bundle\ChateaClientBundle\Api\Model\ChangePassword'
         ));
+        $resolver->setRequired(array('translator'));
     }
 
     public function getName()
