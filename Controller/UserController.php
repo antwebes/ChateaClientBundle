@@ -137,7 +137,7 @@ class UserController extends Controller
         $changePassword = new ChangePassword();
         $changeEmail = new ChangeEmail();
         $userManager = $this->get('api_users');
-        $form = $this->createForm(new ChangePasswordType(), $changePassword);
+        $form = $this->createForm(new ChangePasswordType(), $changePassword, array('translator' => $this->get('translator')));
         $formChangeEmail = $this->createForm(new ChangeEmailType(), $changeEmail);
 
         if ('POST' === $request->getMethod() && $request->get('change_password')){
