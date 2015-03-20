@@ -60,7 +60,7 @@
 
 {% block chatea_js %}
     {{ parent() }}
-    {% javascripts  '@ChateaClientBundle/Resources/public/js/jquery.stringToSlug.min.js'
+    {% javascripts  '@ChateaClientBundle/Resources/public/js/jquery.stringToSlug.js'
                     '@ChateaClientBundle/Resources/public/js/channelSlug.js' %}
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}

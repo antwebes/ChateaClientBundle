@@ -92,22 +92,23 @@ function userNickSuggestions(messages) {
                 return;
             }
 
-            var suggestionMessage = "<ul>";
+            var suggestionsSpans = [];
+
             suggestions.forEach(function (entry) {
-                suggestionMessage += '<li data-id="suggestion-btn-link" data-suggestion-sources="username" class="btn-link suggestion-btn-link">' + entry + '</li>';
+                suggestionsSpans.push('<span data-id="suggestion-btn-link" data-suggestion-sources="username" class="btn-link suggestion-btn-link">' + entry + '</span>');
             });
-            suggestionMessage += '</ul>';
 
-            $('div[data-id="suggestions-username-block"]').show();
-            $('div[data-id="suggestions-username-block"]').html(suggestionMessage);
+            var suggestionMessage = messages.nick_suggestions + ': ' + suggestionsSpans.join(' | ');
 
-
-            $('li[data-id="suggestion-btn-link"]').click(function () {
-                $("#user_registration_username").val($(this).text());
-                var username = $('input[data-id="registration_form_username"]').val();
-                var email = $('input[data-id="registration_form_emial"]').val();
-                findSuggestions(username, email);
-            });
+            $('div[data-id="suggestions-username-block"]')
+                .html(suggestionMessage)
+                .show();
+            $('.suggestion-btn-link').click(function () {
+                    $("#user_registration_username").val($(this).text());
+                    var username = $('input[data-id="registration_form_username"]').val();
+                    var email = $('input[data-id="registration_form_emial"]').val();
+                    findSuggestions(username, email);
+                });
 
         }
 

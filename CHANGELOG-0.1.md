@@ -16,3 +16,12 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 
 * 0.1.4 (2015-03-19)
  * translate errors in reset password
+ 
+* 0.1.5 (2015-03-19)
+ * translate errors in change email
+ * the ircChannel also can contain the ñ char
+ * fixed some translations spanish
+ * traslated pending server errors
+ * Restyle nick suggestions, in one file
+ * Separate template register in two templates ( _register_body.html.twig )
+ 
