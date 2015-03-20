@@ -4,7 +4,17 @@
 <!--[if IE 8]>    <html  xmlns:fb="http://www.facebook.com/2008/fbml" class="no-js lt-ie9 {{bp_html_classes|default('')}}" lang="{{bp_language|default('es')}}" {{bp_html_attributes|default('')|raw}}> <![endif]-->
 <!--[if gt IE 8]><!--> <html  xmlns:fb="http://www.facebook.com/2008/fbml" class="no-js {{bp_html_classes|default('')}}" lang="{{bp_language|default('es')}}" {{bp_html_attributes|default('')|raw}}> <!--<![endif]-->
     <head {{bp_head_attributes|default('')|raw}}>
-        <title>{% block chatea_title %}{% endblock %}</title>
+    	{% block chatea_metadata %}
+	        <title>{% block chatea_title %}{% endblock %}</title>
+			{% block head_meta %}
+	          <meta charset="utf-8">
+	          <meta name="description" content="{% block head_meta_description %}{% endblock %}">
+	          <meta name="keywords" content="{% block head_meta_keywords %}{% endblock %}">
+	          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	          <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	          {% block head_meta_rel_canonical %}{% endblock %}
+	        {% endblock head_meta %}
+	    {% endblock chatea_metadata %}
     </head>
     <body>
         {% block chatea_body %}{% endblock %}

@@ -3,116 +3,11 @@
 {% trans_default_domain 'UserRegistration' %}
 
 {% block chatea_title %}{{ 'user.register' | trans }}{% endblock %}
+{% block chatea_meta_description %}{% endblock %}
+{% block chatea_meta_keywords %}{% endblock %}
 
 {% block chatea_body %}
-    {% if problem is not null %}
-        <div class="alert alert-warning" role="alert">{{ problem | trans }}</div>
-    {% endif %}
-
-    <h1>{{ 'user.register' | trans }}</h1>
-    <div class="col-xs-12">
-        <form class="form-horizontal" action="{{ path('chatea_client_register_user', {"language": app.request.locale }) }}" {{ form_enctype(form) }} method="POST">
-            {% if alerts is not null %}
-                <div class="alert alert-warning">
-                    {{ alerts }}
-                </div>
-            {% endif %}
-            {% if errors | length > 0 %}
-                <div class="alert alert-danger">
-                    {{ form_errors(form) }}
-                </div>
-            {% endif %}
-
-            <div class="form-group">
-                {{ form_label(form.email) }}
-                <div class="col-lg-9">
-                    <span data-id="email-suggestions" class="help-block"></span>
-                    {{ form_errors(form.email) }}
-                    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'form.email.placeholder', 'data-id': 'registration_form_email'}, 'translation_domain' : 'UserRegistration' }) }}
-                    <span data-id="help-block">{{ "form.enter_valid_email" | trans }}</span>
-                </div>
-            </div>
-            <div class="form-group">
-                {{ form_label(form.username) }}
-                <div class="col-lg-9">
-                    {{ form_errors(form.username) }}
-                    <span data-id="username-validate" class="help-validate"></span>
-                    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'form.username.placeholder', 'data-id': 'registration_form_username'}, 'translation_domain' : 'UserRegistration' }) }}
-                    <span data-id="help-block">{{ "form.nick_not_spaces" | trans }}, <font color="red">{{ "form.incorrect" | trans }}:</font> barack obama <font color="green">{{ "form.correct" | trans }}:</font> barack_obama {{ "form.or" | trans }} barackObama</span>
-
-                    <div data-id="suggestions-username-block" class="suggestions" style="display:none">
-                        <div class="suggestions-title">{{ "Suggestions" | trans }}:</div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                {{ form_label(form.plainPassword.first) }}
-                <div class="col-lg-9">
-                    {{ form_errors(form.plainPassword.first) }}
-                    {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'form.password.placeholder'}, 'translation_domain' : 'UserRegistration' }) }}
-                </div>
-            </div>
-            <div class="form-group">
-                {{ form_label(form.plainPassword.second) }}
-                <div class="col-lg-9">
-                    {{ form_errors(form.plainPassword.second) }}
-                    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation.placeholder'}, 'translation_domain' : 'UserRegistration' }) }}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-lg-3 control-label" for="registration_form_country">{{ "form.country" | trans }}</label>
-                <div class="col-lg-9">
-                    <select class="form-control" id="form_search_country" name="country">
-                    </select>
-                </div>
-            </div>
-            <div id="register_select_city" class="form-group" style="display: none ">
-                <label class="col-lg-3 control-label" for="registration_form_city" >{{ "form.city" | trans }}</label>
-                <div class="col-lg-9">
-                    <input id="registration_form_search_city" type="text" name="search_city"  class="form-control" placeholder="{{ 'form.city.placeholder' | trans }}" value="{{ app.request.get('search_city', '') }}" />
-                    <a id="suggestion_city">Los Angeles, United States</a>
-                </div>
-            </div>
-
-            <div class="form-group">
-                {{ form_label(form.birthday) }}
-                <div class="col-lg-9" id="birthday_fields">
-                    {{ form_errors(form.birthday) }}
-                    {{ form_widget(form.birthday) }}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-lg-3 control-label"></div>
-                <div class="col-lg-9" id="recaptcha_field">
-                    {{ form_errors(form.recaptcha) }}
-                    {{ form_widget(form.recaptcha) }}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-lg-offset-2 col-lg-9 controls">
-                    <label class="checkbox">
-                        {{ form_widget(form.terms_and_conditions) }}
-                        {{ "form.iagree"  | trans }}
-                        <a href="http://www.antweb.es/aviso-legal.html" target="_blank">
-                            {{ "form.termsAndConditions"  | trans }}
-                        </a>
-                    </label>
-                </div>
-            </div>
-
-            {{ form_widget(form._token) }}
-            {{ form_rest(form) }}
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <input name="register" type="submit" class="btn btn-lg pull-right btn-primary" value="{{ 'registration.submit'|trans }}" />
-                </div>
-            </div>
-        </form>
-    </div>
+    {% include "ChateaClientBundle:User:_register_body.html.twig" %}
 {% endblock %}
 
 {% block chatea_css %}
