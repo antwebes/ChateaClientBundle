@@ -13,9 +13,9 @@
     "license" : "MIT",
     "require" : {
         "symfony/framework-bundle": "~2.3",
-        "antwebes/chatea-common": "@dev",
-        "antwebes/chatea-client-lib": "@dev",
-        "antwebes/chatea-secure-bundle": "@dev",
+        "antwebes/chatea-common": "0.1.0",
+        "antwebes/chatea-client-lib": "0.1.0",
+        "antwebes/chatea-secure-bundle": "0.1.0",
         "excelwebzone/recaptcha-bundle": "1.0.0"
     },
     "require-dev": {

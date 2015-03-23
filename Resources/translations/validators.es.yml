@@ -3,6 +3,7 @@ form:
     password.mismatch: "Las contraseñas no coinciden"
     gender.not_defined: "No está definido"
     seeking.empty_value: "Elija una opción"
+    rfc_1459: "El canal irc no es valido. Ver RFC-1459"
 api.entity.channel.name.unique.constraints.message: El nombre del canal ya esta en uso
 api.entity.channel.slug.unique.constraints.message: El slug del canal ya esta en uso (cambia el nombre del canal)
 api.entity.channel.ircChannel.unique.constraints.message: El nombre irc del canal ya esta en uso

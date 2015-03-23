@@ -16,5 +16,7 @@ form.channelType.love: Love
 form.channelType.locale: Locale
 form.channelType.friends: Friends
 form.channelType.sports: Sports
+form.user_no_permission: This user has no permission for this action
+form.login_once: The user should login in irc service at least once
 register.channel.success: Channel created successfully
 registration.submit: Create
