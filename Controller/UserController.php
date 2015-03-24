@@ -48,14 +48,14 @@ class UserController extends Controller
 
                     $this->authenticateUser($user);
 
-                    return $this->render('ChateaClientBundle:User:registerSuccess.html.twig');
+                    return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
                 }catch(\Exception $e){
                     $serverErrorArray = json_decode($e->getMessage(), true);
 
                     if(isset($serverErrorArray['error']) && $serverErrorArray['error'] == "invalid_client"){
                         $problem = 'user.register.invalid_client';
                     }else{
-                        $this->addErrorsToForm($e, $form);
+                        $this->addErrorsToForm($e, $form, 'UserRegistration');
                     }
                 }
             }
@@ -222,9 +222,13 @@ class UserController extends Controller
                 $field = $fieldMap[$field][$context];
             }
 
+            if($context == '_'){
+                $context = 'UserChange';
+            }
+
             if ($form->has($field)){
                 if (isset($message['message'])){
-                    $form->get($field)->addError(new FormError($this->translateServerError($message['message'])));
+                    $form->get($field)->addError(new FormError($this->translateServerError($message['message'], $context)));
                 }else{
                     $this->fillForm($message, $form->get($field), $context);
                 }
@@ -232,7 +236,7 @@ class UserController extends Controller
                 //receive an error from the library
                 //the message can to be a string :"This form should not contain extra fields." For this reason I include this if
                 $messageString = (isset($message['message']) ? $message['message']: $message);
-                $form->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $field . '->'.$messageString))));
+                $form->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $field . '->'.$messageString), $context)));
             }
         }
     }
@@ -256,17 +260,19 @@ class UserController extends Controller
         }
     }
 
-    private function translateServerError($errorMessage)
+    private function translateServerError($errorMessage, $translationContext = 'UserChange')
     {
         $translator = $this->get('translator');
         $errorMapping = array(
             "This value should be the user current password." => "form.current_password_match",
+            "This value is already used." => "form.username_already_used",
+            "The email is already used" => "form.mail_is_aviable",
         );
 
         if(isset($errorMapping[$errorMessage])){
-            return $translator->trans($errorMapping[$errorMessage], array(), 'UserChange');
+            return $translator->trans($errorMapping[$errorMessage], array(), $translationContext);
         }else if(preg_match("/The email '(.+)' is not a valid email/", $errorMessage, $matches)){;
-            return $translator->trans('form.email_not_valid_server', array('%email%' => $matches[1]), 'UserChange');
+            return $translator->trans('form.email_not_valid_server', array('%email%' => $matches[1]), $translationContext);
         }
 
         return $errorMessage;

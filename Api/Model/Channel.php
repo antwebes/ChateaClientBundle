@@ -65,7 +65,7 @@ class Channel implements BaseModel
      * @var
      * @Regex(pattern = "/([#&]\w+)/",
      *               match = true,
-     *               message = "The irc channel value is not valid. view RFC-1459") RFC-1459(http://www.irchelp.org/irchelp/rfc/chapter1.html#c1_3)
+     *               message = "form.rfc_1459") RFC-1459(http://www.irchelp.org/irchelp/rfc/chapter1.html#c1_3)
      */
     protected $ircChannel;
 

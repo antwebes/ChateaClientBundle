@@ -57,7 +57,7 @@ class ChannelController extends Controller
                 $errors = json_decode($e->getMessage(), true);
                 $this->fillForm($errors['errors'], $form);
             }else{
-                $form->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $serverError->errors))));
+                $form->addError(new FormError($this->translateServerMessage($serverError->errors)));
             }
         } else {
             //llega un string de error proveniente de la libreria
@@ -73,12 +73,12 @@ class ChannelController extends Controller
     private function fillForm($errors, $form)
     {
         $translator = $this->get('translator');
-;
+
         foreach ($errors as $field => $message) {
 
             if ($form->has($field)){
                 if (isset($message['message'])){
-                    $form->get($field)->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $message['message']))));
+                    $form->get($field)->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $this->translateServerMessage($message['message'])))));
                 }else{
                     //in this case the message is a form field within another field.
                     $this->fillForm($message, $form->get($field));
@@ -91,6 +91,7 @@ class ChannelController extends Controller
                 //receive an error from the library
                 //the message can to be a string :"This form should not contain extra fields." For this reason I include this if
                 $messageString = (isset($message['message']) ? $message['message']: $message);
+                $messageString = $this->translateSeverMessage($messageString);
                 $form->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $field . '->'.$messageString))));
             }
         }
@@ -102,5 +103,22 @@ class ChannelController extends Controller
                 is_object(json_decode($string)) || is_array(json_decode($string))
             )
         );
+    }
+
+    private function translateServerMessage($message)
+    {
+        $errorMap = array(
+            'This user has no permission for this action' => 'form.user_no_permission',
+            'The user should login in irc service at least once' => 'form.login_once',
+            'The irc channel value is not valid. view RFC-1459' => 'form.rfc_1459'
+        );
+
+        $translator = $this->get('translator');
+
+        if(!isset($errorMap[$message])){
+            return $message;
+        }
+
+        return $translator->trans($errorMap[$message], array(), 'ChannelRegistration');
     }
 }

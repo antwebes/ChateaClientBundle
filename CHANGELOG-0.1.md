@@ -25,3 +25,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Restyle nick suggestions, in one file
  * Separate template register in two templates ( _register_body.html.twig )
  
+* 0.1.6 (2015-03-23)
+ * translate server side error errors in user registration
+ * translate server side error in channel registration
+ * Send object user to template registerSuccess.html.twig
