@@ -48,7 +48,7 @@ class UserController extends Controller
 
                     $this->authenticateUser($user);
 
-                    return $this->render('ChateaClientBundle:User:registerSuccess.html.twig');
+                    return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
                 }catch(\Exception $e){
                     $serverErrorArray = json_decode($e->getMessage(), true);
 

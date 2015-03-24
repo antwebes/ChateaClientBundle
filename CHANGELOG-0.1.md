@@ -28,3 +28,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 * 0.1.6 (2015-03-23)
  * translate server side error errors in user registration
  * translate server side error in channel registration
+ * Send object user to template registerSuccess.html.twig
