@@ -110,7 +110,8 @@ class ChannelController extends Controller
         $errorMap = array(
             'This user has no permission for this action' => 'form.user_no_permission',
             'The user should login in irc service at least once' => 'form.login_once',
-            'The irc channel value is not valid. view RFC-1459' => 'form.rfc_1459'
+            'The irc channel value is not valid. view RFC-1459' => 'form.rfc_1459',
+            'The channel name is already used.' => 'form.channel_name_already_used',
         );
 
         $translator = $this->get('translator');
