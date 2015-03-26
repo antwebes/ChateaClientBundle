@@ -33,3 +33,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 * 0.1.7 (2015-03-26)
  * Include contentType: "application/json" call ajax userNickSuggestion
  * Update documentation
+ * Create event USER_REGISTER_SUCCESS, to can modify client to register user

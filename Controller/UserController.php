@@ -10,6 +10,8 @@ use Ant\Bundle\ChateaClientBundle\Form\CreateUserType;
 use Ant\Bundle\ChateaClientBundle\Form\ChangePasswordType;
 use Ant\Bundle\ChateaSecureBundle\Security\User\User as SecureUser;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
+use Ant\Bundle\ChateaClientBundle\Event\UserEvent;
+use Ant\Bundle\ChateaClientBundle\Event\ChateaClientEvents;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -44,6 +46,11 @@ class UserController extends Controller
                     $client->setId($this->container->getParameter('chatea_client.app_id'));
 
                     $user->setClient($client);
+
+                    // create the FilterOrderEvent and dispatch it
+                    $event = new UserEvent($user, $request);
+                    $this->container->get('event_dispatcher')->dispatch(ChateaClientEvents::USER_REGISTER_SUCCESS, $event);
+
                     $userManager->save($user);
 
                     $this->authenticateUser($user);
