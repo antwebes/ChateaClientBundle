@@ -67,5 +67,7 @@ class ChateaClientExtension extends Extension
         //register public manage
         $container->setDefinition('antwebes_chateaclient_bundle.api.persistence.api_manager',$manager);
         $container->setDefinition('antwebes_chateaclient_manager',$manager);
+        $container->setParameter('chatea_client.register_with_profile',$config['register_with_profile']);
+
     }
 }

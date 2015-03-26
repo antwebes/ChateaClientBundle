@@ -225,7 +225,7 @@ class UserManager extends BaseManager implements ManagerInterface
      */
     public function save(&$object)
     {
-        return $this->getManager()->register($object->getUsername(),$object->getEmail(),$object->getPlainPassword(),
+        $data = $this->getManager()->register($object->getUsername(),$object->getEmail(),$object->getPlainPassword(),
             $object->getPlainPassword(),
             $object->getClient()->getId(),
             $object->getIp(),
@@ -234,6 +234,7 @@ class UserManager extends BaseManager implements ManagerInterface
             $object->getFacebookId(),
             $object->isEnabled()
         );
+        return $this->hydrate($data, $object);
     }
 
     public function changePassword(ChangePassword $changePassword)
@@ -312,4 +313,21 @@ class UserManager extends BaseManager implements ManagerInterface
         return  new Pager($channelManager,new Command('getChannelsModerated',array('user_id'=>$user_id)) ,$page, $limit);
 
     }
+
+    public function addUserProfile(&$object, $image = null)
+    {
+        /*** @var \Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile $profile  */
+        $profile = $object->getProfile() ? $object->getProfile() : null;
+        $data = $this->getManager()->addUserProfile(
+            $object->getId(),
+            $profile->getAbout(),
+            $profile->getSeeking(),
+            $profile->getGender(),
+            $profile->getYouWant(),
+            $profile->getBirthday(),
+            $image
+        );
+        return $this->hydrate($data, $object);
+    }
+
 }

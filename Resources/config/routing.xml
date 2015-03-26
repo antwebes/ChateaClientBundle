@@ -30,4 +30,10 @@
     <route id="chatea_client_user_settings" path="/user-settings">
         <default key="_controller">ChateaClientBundle:User:userSettings</default>
     </route>
+    <route id="chatea_user_profile" path="/register/profile/{userId}" methods="GET|POST">
+        <default key="_controller">ChateaClientBundle:User:registerProfile</default>
+    </route>
+    <route id="chatea_client_register_user_success" path="/register-user-success/{userId}" methods="GET|POST">
+        <default key="_controller">ChateaClientBundle:User:registrationUserSuccess</default>
+    </route>
 </routes>

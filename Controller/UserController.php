@@ -5,7 +5,9 @@ use Ant\Bundle\ChateaClientBundle\Api\Model\ChangeEmail;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Client;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChangePassword;
+use Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile;
 use Ant\Bundle\ChateaClientBundle\Form\ChangeEmailType;
+use Ant\Bundle\ChateaClientBundle\Form\CreateUserProfileType;
 use Ant\Bundle\ChateaClientBundle\Form\CreateUserType;
 use Ant\Bundle\ChateaClientBundle\Form\ChangePasswordType;
 use Ant\Bundle\ChateaSecureBundle\Security\User\User as SecureUser;
@@ -31,7 +33,7 @@ class UserController extends Controller
         );
 
         $user = new User();
-        //$channelTypeManager = $this->get('api_channels_types');
+        /** @var \Ant\Bundle\ChateaClientBundle\Manager\UserManager $userManager */
         $userManager = $this->get('api_users');
         $form = $this->createForm(new CreateUserType(), $user, $formOptions);
         $problem = null;
@@ -45,9 +47,13 @@ class UserController extends Controller
 
                     $user->setClient($client);
                     $userManager->save($user);
+                    $birthday = $form->get('birthday')->getData()->format('Y-m-d');
+                    $request->getSession()->set('user_'.$user->getId().'.birthday',$birthday);
 
                     $this->authenticateUser($user);
-
+                    if($this->container->getParameter('chatea_client.register_with_profile') == true){
+                        return $this->redirect($this->generateUrl('chatea_user_profile',array('userId'=>$user->getId())));
+                    }
                     return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
                 }catch(\Exception $e){
                     $serverErrorArray = json_decode($e->getMessage(), true);
@@ -73,6 +79,72 @@ class UserController extends Controller
         return $this->render('ChateaClientBundle:User:register.html.twig', $templateVars);
     }
 
+    /**
+     * @param $userId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function registrationUserSuccessAction($userId)
+    {
+        /** @var \Ant\Bundle\ChateaClientBundle\Manager\UserManager $userManager */
+        $userManager = $this->container->get('api_users');
+
+        $user = $userManager->findById($userId);
+        if($user != null){
+            return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
+        }else{
+            throw $this->createNotFoundException();
+        }
+
+    }
+    public function registerProfileAction($userId, Request $request)
+    {
+        /** @var \Ant\Bundle\ChateaClientBundle\Manager\UserManager $userManager */
+        $userManager = $this->container->get('api_users');
+
+        $user = $userManager->findById($userId);
+
+        $birthday = $request->getSession()->get('user_'.$user->getId().'.birthday');
+
+        $userProfile = new UserProfile();
+        $form = $this->createForm(new CreateUserProfileType(),$userProfile,array('birthday'=>$birthday));
+
+        $language = $this->getLanguageFromRequestAndSaveInSessionRequest($request);
+        $problem = null;
+
+        if ('POST' === $request->getMethod()) {
+            $form->submit($request);
+            if ($form->isValid()) {
+                try {
+                    $files = $request->files->all();
+                    /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $image */
+                    $image = $files[$form->getName()]['image'];
+                    $image->move($image->getPath(),$image->getFilename());
+                    $filename = $image->getPath() . '/'.$image->getFilename();
+                    $user->setProfile($userProfile);
+                    $userManager->addUserProfile($user,$filename);
+                    return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
+
+                }catch(\Exception $e){
+                    $serverErrorArray = json_decode($e->getMessage(), true);
+
+                    if(isset($serverErrorArray['error']) && $serverErrorArray['error'] == "invalid_client"){
+                        $problem = 'user.register.invalid_client';
+                    }else{
+                        $this->addErrorsToForm($e, $form, 'UserRegistration');
+                    }
+                }
+            }
+        }
+        return $this->render('ChateaClientBundle:User:register_profile.html.twig', array(
+            'user' => $user,
+            'language' => $language,
+            'problem' => $problem,
+            'form' => $form->createView(),
+            'alerts' => null,
+            'errors' => $form->getErrors(),
+        ));
+
+    }
     public function confirmEmailAction()
     {
         if ($this->getUser() != null && !$this->getUser()->isValidated()){
@@ -277,4 +349,5 @@ class UserController extends Controller
 
         return $errorMessage;
     }
+
 }
