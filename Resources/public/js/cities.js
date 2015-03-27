@@ -100,19 +100,19 @@
         //if country has not cities
         if (!country.has_cities){
             if (country.city_default > 0){
-                $('#iframe_user_registration_city').val(country.city_default);
+                $('#user_registration_city').val(country.city_default);
             }else{
                 //error the country must has a city_default
-                $('#iframe_user_registration_city').val('666');
+                $('#user_registration_city').val('666');
             }
-            $('#registration_form_search_city').parent().parent().hide()
+            $('#registration_form_search_city').parent().parent().hide();
         }else{
             //empty input so user can write city and autocomplete
             $('#registration_form_search_city').val('');
             //empty value the id of city to save in user
-            $('#iframe_user_registration_city').val('');
+            $('#user_registration_city').val('');
             //show the input to write city
-            $('#registration_form_search_city').parent().parent().show()
+            $('#registration_form_search_city').parent().parent().show();
         }
     });
 
