@@ -25,6 +25,7 @@ class UserController extends Controller
     {
         $language = $this->getLanguageFromRequestAndSaveInSessionRequest($request);
         $apiEndpoint = $this->container->getParameter('chatea_client.api_endpoint');
+        $countriesPath = __DIR__ . '/../Resources/config/countries.json';
 
         $formOptions = array(
             'language'              => $language,
@@ -75,6 +76,7 @@ class UserController extends Controller
             'language' => $language,
             'api_endpoint' => $apiEndpoint,
             'problem' => $problem,
+            'countries' => $this->loadCountries($countriesPath)
         );
 
         return $this->render('ChateaClientBundle:User:register.html.twig', $templateVars);
@@ -283,5 +285,24 @@ class UserController extends Controller
         }
 
         return $errorMessage;
+    }
+
+    private function loadCountries($countriesPath)
+    {
+        $content = json_decode(file_get_contents($countriesPath), true);
+
+        $builder = function($entry){
+            $country = $entry['name'];
+
+            unset($entry['name']);
+
+            $hasCities = $entry['has_cities'] ? 'true' : 'false';
+            $value = '{"country_code":"'.$entry['country_code'].'","has_cities":'.$hasCities.',"city_default":'.$entry['city_default'].'}';
+
+            return array('value' => $value, 'name' => $country);
+        };
+
+        return array_map($builder, $content);
+        return implode('', array_map($builder, $content));
     }
 }
