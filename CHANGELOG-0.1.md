@@ -34,3 +34,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Include contentType: "application/json" call ajax userNickSuggestion
  * Update documentation
  * Create event USER_REGISTER_SUCCESS, to can modify client to register user
+ * Email field required in form resetting password
