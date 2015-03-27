@@ -229,7 +229,7 @@ class UserController extends Controller
                 $field = $fieldMap[$field][$context];
             }
 
-            if($context == '_'){
+            if(in_array($context, array('_', 'password', 'email'))){
                 $context = 'UserChange';
             }
 
