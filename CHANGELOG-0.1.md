@@ -36,3 +36,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Create event USER_REGISTER_SUCCESS, to can modify client to register user
  * Email field required in form resetting password
  * Path resset password method GET
+ * Combo countries in template
