@@ -6,8 +6,10 @@ Symfony2 bundle for ChateaClient library, It makes it easy to use API of api.cha
 Install
 -------
 
-1) Añadir Bundle a AppKernel.php
+1) Añadir Bundle a AppKernel.php ( ChateaClientBundle y ChateaSecureBundle )
+
     new  Ant\Bundle\ChateaClientBundle\ChateaClientBundle()
+    new Ant\Bundle\ChateaSecureBundle\ChateaSecureBundle()
     
 2) Añadir no ficheiro de configuracion  ou no routing.yml
 
@@ -20,10 +22,25 @@ antwebes_chateclient:
 3) Configurar client_id y secret de la aplicación en app/config/config.yml:
 
 ```
+chatea_secure:
+    app_auth:
+        client_id: %chatea_client_id%
+        secret: %chatea_secret_id%
+        enviroment: %chatea_enviroment%
+    api_endpoint: %api_endpoint%
+
 chatea_client:
     app_auth:
-        client_id: id_del_cliente
-        secret: secret_del_cliente
+        client_id: %chatea_client_id%
+        secret: %chatea_secret_id%
+    api_endpoint: %api_endpoint%
+    app_id: %chatea_app_id%
+    
+ewz_recaptcha:
+    public_key:  %recaptcha_public_key%
+    private_key: %recaptcha_private_key%
+    locale_key:  kernel.default_locale
+    enabled: %recaptcha_enabled%
 ```
 
 4) Configurar el firewall en app/config/security.yml:

@@ -10,6 +10,8 @@ use Ant\Bundle\ChateaClientBundle\Form\CreateUserType;
 use Ant\Bundle\ChateaClientBundle\Form\ChangePasswordType;
 use Ant\Bundle\ChateaSecureBundle\Security\User\User as SecureUser;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
+use Ant\Bundle\ChateaClientBundle\Event\UserEvent;
+use Ant\Bundle\ChateaClientBundle\Event\ChateaClientEvents;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -23,6 +25,7 @@ class UserController extends Controller
     {
         $language = $this->getLanguageFromRequestAndSaveInSessionRequest($request);
         $apiEndpoint = $this->container->getParameter('chatea_client.api_endpoint');
+        $countriesPath = __DIR__ . '/../Resources/config/countries.json';
 
         $formOptions = array(
             'language'              => $language,
@@ -44,6 +47,11 @@ class UserController extends Controller
                     $client->setId($this->container->getParameter('chatea_client.app_id'));
 
                     $user->setClient($client);
+
+                    // create the FilterOrderEvent and dispatch it
+                    $event = new UserEvent($user, $request);
+                    $this->container->get('event_dispatcher')->dispatch(ChateaClientEvents::USER_REGISTER_SUCCESS, $event);
+
                     $userManager->save($user);
 
                     $this->authenticateUser($user);
@@ -68,6 +76,7 @@ class UserController extends Controller
             'language' => $language,
             'api_endpoint' => $apiEndpoint,
             'problem' => $problem,
+            'countries' => $this->loadCountries($countriesPath)
         );
 
         return $this->render('ChateaClientBundle:User:register.html.twig', $templateVars);
@@ -222,7 +231,7 @@ class UserController extends Controller
                 $field = $fieldMap[$field][$context];
             }
 
-            if($context == '_'){
+            if(in_array($context, array('_', 'password', 'email'))){
                 $context = 'UserChange';
             }
 
@@ -276,5 +285,24 @@ class UserController extends Controller
         }
 
         return $errorMessage;
+    }
+
+    private function loadCountries($countriesPath)
+    {
+        $content = json_decode(file_get_contents($countriesPath), true);
+
+        $builder = function($entry){
+            $country = $entry['name'];
+
+            unset($entry['name']);
+
+            $hasCities = $entry['has_cities'] ? 'true' : 'false';
+            $value = '{"country_code":"'.$entry['country_code'].'","has_cities":'.$hasCities.',"city_default":'.$entry['city_default'].'}';
+
+            return array('value' => $value, 'name' => $country);
+        };
+
+        return array_map($builder, $content);
+        return implode('', array_map($builder, $content));
     }
 }

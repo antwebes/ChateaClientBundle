@@ -1,4 +1,5 @@
 (function(window, api_endpoint){
+    $(document).ready(function(){
     var country_code = '';
     var country_auto_geo = '';
     var search_city_cache = {};
@@ -6,7 +7,7 @@
 
     function findCityByIp()
     {
-        console.log(api_endpoint+'/geo/locations');
+        //console.log(api_endpoint+'/geo/locations');
         var promise = jQuery.ajax({
             url: api_endpoint+'/geo/locations',
             type: 'get',
@@ -45,7 +46,18 @@
             console.log(cityByIpPromise);
         }
 
-        $.ajax({
+        if(userSelectedCountry === ''){
+            cityByIpPromise.done(function(){
+                $('#form_search_country option:contains('+country_auto_geo+')').prop('selected',true);
+                $("#form_search_country").trigger('change');
+                setSelectedCity();
+            });
+        }else{
+            $('#form_search_country option[value="'+userSelectedCountry+'"]').prop('selected',true);
+            setSelectedCity();
+        }
+
+        /*$.ajax({
             url: url_source,
             dataType: "json",
             success: function( data ) {
@@ -72,14 +84,17 @@
                 setSelectedCity();
             }
 
-        });
+        });*/
     }
 
     /*
      * this function is activated for each click in the select of countries
      */
     $("#form_search_country").change(function(){
+
         var countryJSON = $(this).children(":selected").val();
+        countryJSON = $("<div/>").html(countryJSON).text();
+
         var country = $.parseJSON(countryJSON);
         country_code = country.country_code;
         //if country has not cities
@@ -154,4 +169,5 @@
     };
 
     window.fillSelectCountry = fillSelectCountry;
+    });
 })(window, window.api_endpoint);
