@@ -20,6 +20,7 @@ class ResetPasswordType extends AbstractType
         $builder
             ->add('email', 'email', array('required' => true))
         ;
+        $builder->add('recaptcha', 'ewz_recaptcha', array('mapped' => false, 'constraints' => array(new CaptchaTrue())));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

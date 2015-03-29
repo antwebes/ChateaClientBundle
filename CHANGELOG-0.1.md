@@ -37,3 +37,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Email field required in form resetting password
  * Path resset password method GET
  * Combo countries in template
+
+* 0.1.8 (2015-03-29)
+ * Include captcha in page reset password
