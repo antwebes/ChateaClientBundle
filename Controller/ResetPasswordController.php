@@ -32,13 +32,13 @@ class ResetPasswordController extends Controller
     public function doResetAction(Request $request)
     {
         $resetPassword = new ResetPassword();
-        $users = $this->get('api_users');
         $form = $this->createForm(new ResetPasswordType(), $resetPassword);
 
         $form->submit($request);
 
         if($form->isValid()){
             try {
+                $users = $this->get('api_users');
                 $serverResponse = json_decode($users->forgotPassword($resetPassword->getEmail()), true);
 
                 $response = $this->render('ChateaClientBundle:ResetPassword:success.html.twig', array('email' => $serverResponse['email']));
@@ -78,10 +78,14 @@ class ResetPasswordController extends Controller
         //TODO: esto esta acoplado al formato del error que llega desde la libreira: ojo chapuza
         $translator = $this->get('translator');
         $serverError = json_decode($e->getMessage());
-        $tranlatedError = $this->translateException($serverError->errors);
+        if ($serverError != null){
+            $translatedError = $this->translateException($serverError->errors);
+        }else{
+            $translatedError = 'Some error has ocurred in form Reset';
+        }
 
         $form->get('email')
-            ->addError(new FormError($tranlatedError));
+            ->addError(new FormError($translatedError));
     }
 
     private function translateException($errorMessage)

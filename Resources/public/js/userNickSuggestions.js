@@ -75,6 +75,7 @@ function userNickSuggestions(messages) {
                 url: url_source,
                 data: {email: emailInput},
                 dataType: "json",
+                contentType: "application/json",
                 success: function (response) {
                     $('span[data-id="email-suggestions"]').html('<p class="alert-success">' + messages.mail_is_aviable + '</p>');
                 },
@@ -129,6 +130,7 @@ function userNickSuggestions(messages) {
                 url: url_source,
                 data: {username: usernameInput, email: emailInput},
                 dataType: "json",
+                contentType: "application/json",
                 success: function (response) {
                     $('span[data-id="username-validate"]').html('<p class="alert-success">' + messages.username_is_aviable + '</p>');
                 },

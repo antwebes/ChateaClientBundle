@@ -6,9 +6,11 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
-use Doctrine\ORM\Mapping\Entity;
+
 use Ant\Bundle\ChateaClientBundle\Validator\Constraints\NickIrcConstraint;
 use Ant\Bundle\ChateaClientBundle\Api\Model\Client;
+use Ant\Bundle\ChateaClientBundle\Validator\Constraints\Language;
+
 /**
  * Class User
  * @package Ant\Bundle\ChateaClientBundle\Api\Model
@@ -128,6 +130,9 @@ class User implements BaseModel
      */
     private $lastLogin = null;
 
+    /**
+     * @var @Language
+     */
     private $language;
     
     /**

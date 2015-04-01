@@ -29,3 +29,15 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * translate server side error errors in user registration
  * translate server side error in channel registration
  * Send object user to template registerSuccess.html.twig
+
+* 0.1.7 (2015-03-26)
+ * Include contentType: "application/json" call ajax userNickSuggestion
+ * Update documentation
+ * Create event USER_REGISTER_SUCCESS, to can modify client to register user
+ * Email field required in form resetting password
+ * Path resset password method GET
+ * Combo countries in template
+
+* 0.1.8 (2015-03-29)
+ * Include captcha in page reset password
+ * Include constraint to language of user

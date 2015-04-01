@@ -59,6 +59,9 @@
 	        <label class="col-lg-3 control-label" for="registration_form_country">{{ "form.country" | trans }}</label>
 	        <div class="col-lg-9">
 	            <select class="form-control" id="form_search_country" name="country">
+					{% for country in countries %}
+						<option value="{{ country.value }}">{{ country.name }}</option>
+					{% endfor %}
 	            </select>
 	        </div>
 	    </div>

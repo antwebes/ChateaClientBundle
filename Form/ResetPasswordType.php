@@ -12,14 +12,17 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\True as CaptchaTrue;
+
 class ResetPasswordType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
+            ->add('email', 'email', array('required' => true))
         ;
+        $builder->add('recaptcha', 'ewz_recaptcha', array('mapped' => false, 'constraints' => array(new CaptchaTrue())));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

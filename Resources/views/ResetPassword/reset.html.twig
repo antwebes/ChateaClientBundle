@@ -10,9 +10,10 @@
         <div class="form-group">
             {{ form_label(form.email, 'reset-password.email', {'translation_domain' : 'ResetPassword'}) }}
             {{ form_errors(form.email) }}
-            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'required': true}}) }}
         </div>
         {{ form_widget(form._token) }}
+        {{ form_rest(form) }}
         <input name="register" type="submit" class="btn btn-primary" value="{{ "reset-password.submit" | trans}}" />
     </form>
 {% endblock %}
