@@ -45,7 +45,7 @@ class LanguageValidator extends ConstraintValidator
         $languages = $this->getLanguageNames();
 
         if (!array_key_exists($value,$languages)) {
-            $this->context->addViolation($constraint->message, array('{{ value }}' => $value));
+            $this->context->addViolation($constraint->message, array('%string%' => $value));
         }
     }
 
