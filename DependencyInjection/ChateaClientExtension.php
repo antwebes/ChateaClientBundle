@@ -67,5 +67,15 @@ class ChateaClientExtension extends Extension
         //register public manage
         $container->setDefinition('antwebes_chateaclient_bundle.api.persistence.api_manager',$manager);
         $container->setDefinition('antwebes_chateaclient_manager',$manager);
+
+        if(array_key_exists('languages',$config) && array_key_exists('dir',$config['languages'])){
+            if($config['languages']['dir'] == null){
+                $container->setParameter('chatea_client.languages_dir', $container->getParameter('kernel.root_dir').'/config');
+            }else{
+                $container->setParameter('chatea_client.languages_dir', $config['languages']['dir']);
+            }
+        }
+        $container->setParameter('chatea_client.languages_file', 'languages.yml');
+        $container->setParameter('chatea_client.languages_header', 'languages');
     }
 }

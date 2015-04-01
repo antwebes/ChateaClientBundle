@@ -32,13 +32,13 @@ class ResetPasswordController extends Controller
     public function doResetAction(Request $request)
     {
         $resetPassword = new ResetPassword();
-        $users = $this->get('api_users');
         $form = $this->createForm(new ResetPasswordType(), $resetPassword);
 
         $form->submit($request);
 
         if($form->isValid()){
             try {
+                $users = $this->get('api_users');
                 $serverResponse = json_decode($users->forgotPassword($resetPassword->getEmail()), true);
 
                 $response = $this->render('ChateaClientBundle:ResetPassword:success.html.twig', array('email' => $serverResponse['email']));

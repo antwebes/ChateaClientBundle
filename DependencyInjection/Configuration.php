@@ -57,8 +57,19 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('app_id')->end()
             ->arrayNode('api_request_allow')
                 ->prototype('scalar')->end()
-            ->end()
+                ->end()
+        ->end();
+
+
+        $rootNode
+            ->children()
+            ->arrayNode('languages')->addDefaultsIfNotSet()->children()
+                ->scalarNode('dir')->defaultNull()->end()
+                ->scalarNode('file')->defaultValue('config/languages.yml')->end()
+                ->scalarNode('header')->defaultValue('languages')->end()
+                ->end()
             ->end();
+
         return $treeBuilder;
     }
 }

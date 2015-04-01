@@ -40,3 +40,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 
 * 0.1.8 (2015-03-29)
  * Include captcha in page reset password
+ * Include constraint to language of user
