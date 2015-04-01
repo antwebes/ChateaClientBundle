@@ -63,7 +63,7 @@ class Channel implements BaseModel
 
     /**
      * @var
-     * @Regex(pattern = "/([#&]\w+)/",
+     * @Regex(pattern = "/([#&][^\s,\cG]+)/",
      *               match = true,
      *               message = "form.rfc_1459") RFC-1459(http://www.irchelp.org/irchelp/rfc/chapter1.html#c1_3)
      */
