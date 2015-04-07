@@ -1,0 +1,31 @@
+languages:
+    af:
+      name: "Afrikaans"
+      nativeName: "Afrikaans"
+    es:
+      name: "Spanish; Castilian"
+      nativeName: "español, castellano"
+    en:
+      name: "English"
+      nativeName: "English"
+    de:
+      name: "German"
+      nativeName: "Deutsch"
+    fr:
+      name: "French"
+      nativeName: "français, langue française"
+    id:
+      name: "Indonesian"
+      nativeName: "Bahasa Indonesia"
+    it:
+      name: "Italian"
+      nativeName: "Italiano"
+    nl:
+      name: "Dutch"
+      nativeName: "Nederlands, Vlaams"
+    qu:
+      name: "Quechua"
+      nativeName: "Runa Simi, Kichwa"
+    pt:
+      name: "Portuguese"
+      nativeName: "Português"
