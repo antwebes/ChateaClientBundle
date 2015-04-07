@@ -12,6 +12,7 @@ use Ant\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
+use Ant\Bundle\ChateaClientBundle\Validator\Constraints\Language;
 
 /**
  * Class Channel
@@ -80,6 +81,7 @@ class Channel implements BaseModel
     /**
      * The value for the lnaguage field.
      * @var        string
+     * @Language
      */
     protected $language;
 
