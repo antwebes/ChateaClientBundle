@@ -65,7 +65,7 @@ class Configuration implements ConfigurationInterface
             ->children()
             ->arrayNode('languages')->addDefaultsIfNotSet()->children()
                 ->scalarNode('dir')->defaultNull()->end()
-                ->scalarNode('file')->defaultValue('config/languages.yml')->end()
+                ->scalarNode('file')->defaultValue('languages.yml')->end()
                 ->scalarNode('header')->defaultValue('languages')->end()
                 ->end()
             ->end();

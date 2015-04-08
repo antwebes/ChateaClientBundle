@@ -12,6 +12,7 @@ use Ant\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
+use Ant\Bundle\ChateaClientBundle\Validator\Constraints\Language;
 
 /**
  * Class Channel
@@ -63,7 +64,7 @@ class Channel implements BaseModel
 
     /**
      * @var
-     * @Regex(pattern = "/([#&]\w+)/",
+     * @Regex(pattern = "/([#&][^\s,&\cG]+)/",
      *               match = true,
      *               message = "form.rfc_1459") RFC-1459(http://www.irchelp.org/irchelp/rfc/chapter1.html#c1_3)
      */
@@ -80,6 +81,7 @@ class Channel implements BaseModel
     /**
      * The value for the lnaguage field.
      * @var        string
+     * @Language
      */
     protected $language;
 

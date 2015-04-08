@@ -70,7 +70,7 @@ class ChateaClientExtension extends Extension
 
         if(array_key_exists('languages',$config) && array_key_exists('dir',$config['languages'])){
             if($config['languages']['dir'] == null){
-                $container->setParameter('chatea_client.languages_dir', $container->getParameter('kernel.root_dir').'/config');
+                $container->setParameter('chatea_client.languages_dir', __DIR__.'/../Resources/config');
             }else{
                 $container->setParameter('chatea_client.languages_dir', $config['languages']['dir']);
             }
