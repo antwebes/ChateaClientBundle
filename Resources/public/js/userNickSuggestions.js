@@ -44,12 +44,13 @@
     });
 })(jQuery);
 
+var emailCheckMinlength = 4;
+
 function userNickSuggestions(messages) {
     $(document).ready(function () {
         $('span[data-id="email-suggestions"]').html("");
 
         var suggestionMinlength = 4;
-        var emailCheckMinlength = 4;
 
         function transServerError(error){
             if(typeof messages.server_errors[error] != 'undefined'){
@@ -147,19 +148,70 @@ function userNickSuggestions(messages) {
             });
         }
 
+
         $('input[data-id="registration_form_username"]').donetyping(function () {
             var value = $(this).val();
-            var email = $('input[data-id="registration_form_email"]').val();
+            var email = $('input[data-id="form_email"]').val();
             if (value.length > suggestionMinlength) {
                 $('span[data-id="username-validate"]').html("");
                 findSuggestions(value, email);
             }
         });
-        $('input[data-id="registration_form_email"]').donetyping(function () {
+        $('input[data-id="form_email"]').donetyping(function () {
             var value = $(this).val();
             if (value.length > emailCheckMinlength) {
                 checkEmail(value);
+                checkTwoFieldsEmailAndShowError(messages);
             }
         });
+        // Check if two fields emails mismatch
+        $('input[data-id="form_email_second"]').donetyping(function () {
+            var value = $(this).val();
+            if (value.length > emailCheckMinlength) {
+                checkEmail(value);
+                checkTwoFieldsEmailAndShowError(messages);
+            }
+        });
+    });
+}
+
+function areSameTwoFieldsEmail(){
+    // The two emails inputs
+    var email           = $('input[data-id="form_email"]').val();
+    var confirmEmail    = $('input[data-id="form_email_second"]').val();
+ 
+    // Check for equality with the emails inputs
+    if (email != confirmEmail ) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function checkTwoFieldsEmailAndShowError(messages){
+    if (!($('input[data-id="form_email"]').val().length === 0 || $('input[data-id="form_email_second"]').val().length === 0)){
+        if (!areSameTwoFieldsEmail()){
+            $('span[data-id="email-mismatch-error"]').html('<p class="alert-danger">' + messages.emails_not_mismatch + '</p>');
+        }else{
+            $('span[data-id="email-mismatch-error"]').html('');
+        }
+    }
+}
+
+//this function is out of suggestions nick, so can I use this js in settings of user
+function checkEmailsMismatch(messages){
+    // Check if two fields emails mismatch
+    $('input[data-id="form_email_second"]').donetyping(function () {
+        var value = $(this).val();
+        if (value.length > emailCheckMinlength) {
+            checkTwoFieldsEmailAndShowError(messages);
+        }
+    });
+
+    $('input[data-id="form_email"]').donetyping(function () {
+        var value = $(this).val();
+        if (value.length > emailCheckMinlength) {
+            checkTwoFieldsEmailAndShowError(messages);
+        }
     });
 }

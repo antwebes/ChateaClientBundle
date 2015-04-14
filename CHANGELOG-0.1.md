@@ -49,3 +49,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 * 0.1.10 (2015-04-10)
  * Update version ChateaSecureBundle v0.1.2
  * remove function jquery.stringToSlug, used in function channelName->channelIrcName
+
+* 0.1.11 (2015-04-15)
+ * Include repeat form email to register and settings users
+ * Include check that two inputs of email are same with jquery

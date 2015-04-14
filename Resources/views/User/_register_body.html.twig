@@ -18,15 +18,24 @@
 	        </div>
 	    {% endif %}
 
-	    <div class="form-group">
-	        {{ form_label(form.email) }}
-	        <div class="col-lg-9">
-	            <span data-id="email-suggestions" class="help-block"></span>
-	            {{ form_errors(form.email) }}
-	            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'form.email.placeholder', 'data-id': 'registration_form_email'}, 'translation_domain' : 'UserRegistration' }) }}
-	            <span data-id="help-block">{{ "form.enter_valid_email" | trans }}</span>
-	        </div>
-	    </div>
+		<div class="form-group">
+			{{ form_label(form.email.first) }}
+			<div class="col-lg-9">
+				<span data-id="email-suggestions" class="help-block"></span>
+				{{ form_errors(form.email) }}
+				{{ form_errors(form.email.first) }}
+				{{ form_widget(form.email.first, {'attr': {'class': 'form-control', 'placeholder': 'form.email.placeholder', 'data-id': 'form_email'}, 'translation_domain' : 'UserRegistration' }) }}
+				<span data-id="help-block">{{ "form.enter_valid_email" | trans }}</span>
+			</div>
+		</div>
+		<div class="form-group">
+			{{ form_label(form.email.second) }}
+			<div class="col-lg-9">
+				<span data-id="email-mismatch-error" class="help-block"></span>
+				{{ form_errors(form.email.second) }}
+				{{ form_widget(form.email.second, {'attr': {'class': 'form-control', 'placeholder': 'form.email.repeat.placeholder', 'data-id': 'form_email_second'}, 'translation_domain' : 'UserRegistration' }) }}
+			</div>
+		</div>
 	    <div class="form-group">
 	        {{ form_label(form.username) }}
 	        <div class="col-lg-9">
