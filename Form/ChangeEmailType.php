@@ -20,12 +20,20 @@ class ChangeEmailType extends AbstractType
         );
 
         $builder->add(
-            'email', 'email',
+            'email', 'repeated',
             array(
-                'label' => 'form.email',
+                'type' => 'email',
                 'required' => true,
                 'translation_domain' => 'UserChange',
-                'label_attr' => array('class'=>'col-lg-3 control-label'),
+                'first_options' => array(
+                    'label' => 'form.email',
+                    'label_attr' => array('class'=>'col-lg-3 control-label'),
+                ),
+                'invalid_message' => 'form.email.mismatch',
+                'second_options' => array(
+                    'label' => 'form.email.repeat',
+                    'label_attr' => array('class'=>'col-lg-3 control-label'),
+                )
             )
         );
     }

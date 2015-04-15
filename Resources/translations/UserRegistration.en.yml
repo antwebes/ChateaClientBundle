@@ -1,6 +1,7 @@
 user.register: Register user
 form.username: Username
 form.email: Email
+form.email.repeat: Repeat email
 form.password: Password
 form.password_confirmation: Verification
 form.country: Country
@@ -8,6 +9,7 @@ form.city: City
 form.birthday: Birthday
 form.username.placeholder: Enter your username
 form.email.placeholder: Enter your email
+form.email.repeat.placeholder: Repeat your email
 form.password.placeholder: Enter your password
 form.password_confirmation.placeholder: Repeat your password
 form.city.placeholder: Enter a city
@@ -18,6 +20,7 @@ form.nick_not_spaces: "The nickname can not have spaces"
 form.incorrect: "Incorrect"
 form.correct: "Correct"
 form.or: "or"
+form.email.mismatch: "The emails do not match"
 form.mail_is_aviable: "Email is available."
 form.username_is_aviable: "Username is available."
 form.username_already_used: "This username is already being used."
