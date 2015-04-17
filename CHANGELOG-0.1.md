@@ -53,3 +53,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 * 0.1.11 (2015-04-15)
  * Include repeat form email to register and settings users
  * Include check that two inputs of email are same with jquery
+
+* 0.1.12(2015-04-17)
+ * Include translations to page re-send email confirmation & disable button when success this action
