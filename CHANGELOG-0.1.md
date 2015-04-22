@@ -56,3 +56,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 
 * 0.1.12(2015-04-17)
  * Include translations to page re-send email confirmation & disable button when success this action
+
+* 0.1.13(2015-04-22)
+ * Update version chateaSecureBundle 0.1.3, users locked cannot login
