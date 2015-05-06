@@ -105,6 +105,8 @@ class User implements BaseModel
      */
     private $oPhotos = NULL;
 
+    private $oPhotosPage = NULL;
+
     /**
      * The value for visit
      */
@@ -320,10 +322,11 @@ class User implements BaseModel
         $this->oCity = $oCity;
     }
 
-    public function getPhotos()
+    public function getPhotos($page = 1)
     {
-        if($this->oPhotos === null){
-            $this->oPhotos = self::getManager()->findPhotos($this->id);
+        if($this->oPhotos === null || $page !== $this->oPhotosPage){
+            $this->oPhotosPage = $page;
+            $this->oPhotos = self::getManager()->findPhotos($this->id, $page);
         }
 
         return $this->oPhotos;
