@@ -43,3 +43,11 @@ user.register.i_need_help: "I need help"
 user.register.confirmed.title: "Congratulations %username% !! Your account is activated successfully"
 user.register.confirmed.message: "User %username% registered correctly . You can now start chatting."
 user.register.invalid_client: "Due to tecnichal problems, it is impsible to register users now. Please contacto with the webmaster of this site."
+user.register_profile: 'Register profile'
+user.register_profile.skip: 'Skip'
+registration_profile.submit: 'Submit'
+form.label.gender: 'Gender'
+form.label.seeking: 'Seeking'
+form.label.youWant: 'You want'
+form.label.about: 'About'
+form.label.image: 'Image'
