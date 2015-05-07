@@ -39,6 +39,6 @@ class CreateUserProfileType extends AbstractType
 
     public function getName()
     {
-        return 'user_profile';
+        return 'social_profile';
     }
 }

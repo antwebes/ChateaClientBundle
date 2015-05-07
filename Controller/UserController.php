@@ -96,10 +96,15 @@ class UserController extends Controller
         }
 
     }
+
+    /**
+     * @APIUser
+     */
     public function registerProfileAction($userId, Request $request)
     {
         /** @var \Ant\Bundle\ChateaClientBundle\Manager\UserManager $userManager */
         $userManager = $this->container->get('api_users');
+        $api = $this->container->get('antwebes_chateaclient_manager');
 
         $user = $userManager->findById($userId);
 
@@ -117,11 +122,13 @@ class UserController extends Controller
                 try {
                     $files = $request->files->all();
                     /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $image */
-                    $image = $files[$form->getName()]['image'];
-                    $image->move($image->getPath(),$image->getFilename());
-                    $filename = $image->getPath() . '/'.$image->getFilename();
+//                    $image = $files[$form->getName()]['image'];
+//                    $image->move($image->getPath(),$image->getFilename());
+//                    $filename = $image->getPath() . '/'.$image->getFilename();
+                    //ldd($filename);
                     $user->setProfile($userProfile);
-                    $userManager->addUserProfile($user,$filename);
+                    $userManager->addUserProfile($user);
+                    //$api->addPhoto($user->getId(), $filename, ' ');
                     return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
 
                 }catch(\Exception $e){
@@ -142,6 +149,8 @@ class UserController extends Controller
             'form' => $form->createView(),
             'alerts' => null,
             'errors' => $form->getErrors(),
+            'access_token' => $this->container->get('security.context')->getToken()->getUser()->getAccessToken(),
+            'api_endpoint' => $this->container->getParameter('api_endpoint')
         ));
 
     }
