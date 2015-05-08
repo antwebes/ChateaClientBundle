@@ -59,3 +59,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 
 * 0.1.13(2015-04-22)
  * Update version chateaSecureBundle 0.1.3, users locked cannot login
+
+* 0.1.14(2015-05-07)
+ * Photos user can to be paginated

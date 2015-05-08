@@ -178,8 +178,10 @@ class UserManager extends BaseManager implements ManagerInterface
     }
     public function findPhotos($user_id, $page= 1, $limit = null)
     {
-        $limit  = $limit == null ? $this->limit : $limit ;
-        return  new Pager($this,new Command('showPhotos',array('user_id'=>$user_id)) ,$page, $limit);
+        $limit        = $limit == null ? $this->limit : $limit ;
+        $photoManager = $this->get('PhotoManager');
+
+        return  new Pager($photoManager, new Command('ShowUserPhotos', array('user_id' => $user_id)) ,$page, $limit);
 
     }
     public function findVisit($user_id)
