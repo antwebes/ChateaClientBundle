@@ -47,7 +47,16 @@ user.register_profile: 'Registrar perfil'
 user.register_profile.skip: 'Saltar'
 registration_profile.submit: 'Enviar'
 form.label.gender: 'Genero'
-form.label.seeking: 'Buscan'
+form.label.seeking: 'Busca'
 form.label.youWant: 'Tu quieres'
 form.label.about: 'Sobre mi'
 form.label.image: 'Imagen'
+form.placeholder.youWant: 'Escribe un pequeño texto para que los demás sepan que es lo que esperas de este chat. Amistad, encontrar el amor, pasar un buen rato..'
+form.placeholder.about: 'Escribe algo sobre ti, para que los demás usuarios te conozcan un poco'
+form.seeking.empty_value: 'Escoge una opción'
+Men: 'Hombres'
+Women: 'Mujeres'
+Men and women: 'Hombres y mujeres'
+Male: Hombre
+Female: Mujer
+Not defined: Otro

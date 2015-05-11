@@ -1,6 +1,6 @@
 form.password.mismatch: 'The passwords do not match'
 form.gender.not_defined: 'Not defined'
-form.seeking.empty_value: 'Choose an option'
+form.seeking.empty_value: 'Choose annnn option'
 form.rfc_1459: The irc channel value is not valid. view RFC-1459
 api.entity.channel.name.unique.constraints.message: The channel name is already used.
 api.entity.channel.slug.unique.constraints.message: The slug is already used (You change channel name).

@@ -15,8 +15,8 @@ class CreateUserProfileType extends AbstractType
             ))
             ->add('seeking', 'choice', array(
                 'choices'   	=> array("men" => "Men",  "women" => "Women", "both" => "Men and women"),
-                'empty_value' 	=> 'Choose an option','required' => false,
-                'label'			=> 'I am seeking'
+                'empty_value' 	=> 'form.seeking.empty_value','required' => false,
+                'label'			=> 'form.seeking.label'
             ))
             ->add('youWant', 'textarea',array('required'=>false))
             ->add('about', 'textarea',array('required' => false))
@@ -34,6 +34,9 @@ class CreateUserProfileType extends AbstractType
         $resolver->setRequired(array(
             'birthday'
         ));
+        $resolver->setDefaults([
+            'translation_domain' => 'UserRegistration',
+        ]);
     }
 
 
