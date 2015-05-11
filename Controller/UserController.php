@@ -98,15 +98,17 @@ class UserController extends Controller
 
     public function confirmedAction(Request $request)
     {
-        $id             = $request->get('id');
-        $accessToken    = $request->get('access_token');
         $refreshToken   = $request->get('refresh_token');
-        $expiresIn      = $request->get('expires_in');
-        $scope          = $request->get('scope');
+        $authData       = $this->get('chat_secure.adapter')->withRefreshToken($refreshToken);
+        $id             = $authData['id'];
+        $accessToken    = $authData['access_token'];
+        $refreshToken   = $authData['refresh_token'];
+        $expiresIn      = $authData['expires_in'];
+        $scope          = $authData['scope'];
         $scope          = is_array($scope)?$scope:array($scope);
-        $tokenType      = $request->get('token_type');
-        $username       = $request->get('username');
-        $roles          = explode(",", $request->get('roles'));
+        $tokenType      = $authData['token_type'];
+        $username       = $authData['username'];
+        $roles          = $authData['roles'];
 
         if($username == ''){
             throw new BadRequestHttpException();
