@@ -47,3 +47,4 @@ user.register.confirmed.title: "Congratulations %username% !! Your account is ac
 user.register.confirmed.message: "User %username% registered correctly . You can now start chatting."
 user.register.invalid_client: "Due to tecnichal problems, it is impsible to register users now. Please contacto with the webmaster of this site."
 user.confirm_email.not_owner_of_email: "This email is not associated with your User"
+user.confirm_email.already_requested: "Confirmation mail can only be requested once every 24 hours"

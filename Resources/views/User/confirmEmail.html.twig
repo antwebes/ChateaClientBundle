@@ -135,7 +135,8 @@
         var messages = {
             success: '{{user.register.we_sent_you_verification_mail' | trans }}',
             server_errors: {
-                'The email is not linked with your account': '{{ 'user.confirm_email.not_owner_of_email' | trans }}'
+                'The email is not linked with your account': '{{ 'user.confirm_email.not_owner_of_email' | trans }}',
+                'Confirmation mail can only be requested once every 24 hours': '{{ 'user.confirm_email.already_requested' | trans }}'
             }
         };
     </script>
