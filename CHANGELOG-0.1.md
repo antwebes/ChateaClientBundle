@@ -62,3 +62,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 
 * 0.1.14(2015-05-07)
  * Photos user can to be paginated
+ 
+* 0.1.15(2015-05-1)
+ * Update version captch to branch 2.3
