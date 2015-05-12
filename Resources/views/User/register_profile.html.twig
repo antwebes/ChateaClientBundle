@@ -88,8 +88,17 @@
             };
 
             var trans = function(msg){
+                var regex = /Files of ClientMimetype ([^\s]+\/[^s]+) or MimeType are not allowed./;
                 if(typeof translations[msg] != 'undefined'){
                     return translations[msg];
+                }else{
+                    var invalidImage = '{{ 'user.image.invalid' | trans }}';
+                    var test = regex.exec(msg);
+
+                    if(test){
+                        console.log(test);
+                        return invalidImage.replace('%mimtype%', test[1]);
+                    }
                 }
 
                 return msg;

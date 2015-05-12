@@ -57,3 +57,4 @@ form.seeking.empty_value: 'Choose an option'
 user.allready_has_profile: 'The user already has a profile'
 user.profile.gender.choice.invalid: 'This value is not valid'
 profile.seekin.choice: 'This value is not valid'
+user.image.invalid: "The %mimtype% format is not allowed. The allowed image formats are: 'image/jpeg', 'image/png', 'image/gif'"

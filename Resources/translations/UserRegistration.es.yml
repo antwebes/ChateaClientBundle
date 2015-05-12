@@ -63,3 +63,4 @@ Not defined: Otro
 user.allready_has_profile: 'El usuario ya tiene un perfil'
 user.profile.gender.choice.invalid: 'Este valor no es válido'
 profile.seekin.choice: 'Este valor no es válido'
+user.image.invalid: "El formato %mimtype% no esta permitido. Los formatos de imagen validos son: 'image/jpeg', 'image/png', 'image/gif'"
