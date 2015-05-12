@@ -60,3 +60,6 @@ Men and women: 'Hombres y mujeres'
 Male: Hombre
 Female: Mujer
 Not defined: Otro
+user.allready_has_profile: 'El usuario ya tiene un perfil'
+user.profile.gender.choice.invalid: 'Este valor no es válido'
+profile.seekin.choice: 'Este valor no es válido'

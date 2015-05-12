@@ -15,15 +15,13 @@
 <div class="col-xs-12">
     <form id="profileForm" class="form-horizontal" action="{{ path('chatea_user_profile', {"userId": user.id } ) }}" {{ form_enctype(form) }} method="POST">
         {% if alerts is not null %}
-            <div class="alert alert-warning">
+            <div id="form-errors" class="alert alert-warning">
                 {{ alerts }}
             </div>
         {% endif %}
-        {% if errors | length > 0 %}
-            <div class="alert alert-danger">
-                {{ form_errors(form) }}
-            </div>
-        {% endif %}
+        <div id="form-errors" class="alert alert-danger" style="display: none">
+
+        </div>
 
         <div class="form-group">
             <label class="col-lg-3 control-label" for="user_profile_gender">{{ "form.label.gender" | trans }}</label>
@@ -83,6 +81,19 @@
             // we need this variable becaus if we choose a file we habe to send data via FormData.
             // If we use FormData without choosing a file, we send an empnty image and therfore produce an error on the server
             var sendFile = false;
+            var translations = {
+                'The user already has a profile': '{{ 'user.allready_has_profile' | trans }}',
+                'profile.gender.choice': '{{ 'user.profile.gender.choice.invalid' | trans }}',
+                'profile.seeking.choice': '{{ 'user.profile.gender.seeking.invalid' | trans }}'
+            };
+
+            var trans = function(msg){
+                if(typeof translations[msg] != 'undefined'){
+                    return translations[msg];
+                }
+
+                return msg;
+            }
 
             $('#profileForm input[type=file]').on('change', function(){ //we have choosen a file
                 sendFile = true;
@@ -90,6 +101,30 @@
 
             $('#profileForm')
                 .submit( function( e ) {
+                    var onSuccess = function(){
+                        window.location.href = '{{ path('chatea_client_register_user_success',{'userId': user.id }) }}';
+                    };
+
+                    var onError = function(xhr, error){
+                        var responseJSON = xhr.responseJSON;
+                        $('.help-validate').remove();
+
+                        if(typeof responseJSON.errors != 'undefined'){
+                            if(typeof responseJSON.errors === 'object') {
+                                for(field in responseJSON.errors){
+                                    var $error = $('<span class="help-validate"><p class="alert-danger">'+ trans(responseJSON.errors[field].message) +'</p></span>');
+                                    var $field = $('#social_profile_'+field);
+                                    $error.insertBefore($field);
+                                }
+                            }else {
+                                $('#form-errors')
+                                        .empty()
+                                        .append($('<ul><li>' + trans(responseJSON.errors) + '</li></ul>'))
+                                        .show();
+                            }
+                        }
+                    };
+
                     if(sendFile){
                         var formData = new FormData( this );
 
@@ -100,9 +135,8 @@
                             processData: false,
                             contentType: false,
                             crossDomain: true,
-                            success: function(){
-                                window.location.href = '{{ path('chatea_client_register_user_success',{'userId': user.id }) }}';
-                            }
+                            success: onSuccess,
+                            error: onError
                         } );
                     }else{
                         //no file was choosen, we serialize the form in normal form
@@ -112,9 +146,8 @@
                             url: '{{ api_endpoint }}/api/users/{{ user.id }}/profiles?access_token={{ access_token }}',
                             type: 'POST',
                             data: formData,
-                            success: function(){
-                                window.location.href = '{{ path('chatea_client_register_user_success',{'userId': user.id }) }}';
-                            }
+                            success: onSuccess,
+                            error: onError
                         } );
                     }
 
