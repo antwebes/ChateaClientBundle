@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class UserController extends Controller
@@ -99,6 +100,11 @@ class UserController extends Controller
     public function confirmedAction(Request $request)
     {
         $refreshToken   = $request->get('refresh_token');
+
+        if($refreshToken == ''){
+            throw new BadRequestHttpException();
+        }
+
         $authData       = $this->get('chat_secure.adapter')->withRefreshToken($refreshToken);
         $id             = $authData['id'];
         $accessToken    = $authData['access_token'];
@@ -109,10 +115,6 @@ class UserController extends Controller
         $tokenType      = $authData['token_type'];
         $username       = $authData['username'];
         $roles          = $authData['roles'];
-
-        if($username == ''){
-            throw new BadRequestHttpException();
-        }
 
         $newSecureUser =  new SecureUser($id,$username,$accessToken,$refreshToken, true,$tokenType,$expiresIn,$scope,$roles);
         $authenticatedToken = new UsernamePasswordToken($newSecureUser, null, 'secured_area', $newSecureUser->getRoles());
