@@ -3,34 +3,37 @@
 <routes xmlns="http://symfony.com/schema/routing"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
-    <route id="chatea_client_register_channel" path="/register-channel">
+    <route id="chatea_client_register_channel" path="/registrar-canal">
         <default key="_controller">ChateaClientBundle:Channel:register</default>
     </route>
-    <route id="chatea_client_register_user" path="/register-user">
+    <route id="chatea_client_register_user" path="/registro">
         <default key="_controller">ChateaClientBundle:User:register</default>
     </route>
-    <route id="chatea_client_reset_password" path="/reset-password" methods="GET">
+    <route id="chatea_client_reset_password" path="/resetear-contraseña" methods="GET">
         <default key="_controller">ChateaClientBundle:ResetPassword:reset</default>
     </route>
-    <route id="chatea_client_reset_password_perform" path="/reset-password" methods="POST">
+    <route id="chatea_client_reset_password_perform" path="/resetear-contraseña" methods="POST">
         <default key="_controller">ChateaClientBundle:ResetPassword:doReset</default>
     </route>
-    <route id="confirm_email" path="/confirm-email">
+    <route id="confirm_email" path="/confirmar-email">
         <default key="_controller">ChateaClientBundle:User:confirmEmail</default>
     </route>
-    <route id="chatea_confirmed" path="/register/confirmed">
+    <route id="chatea_confirmed" path="/registro/confirmado">
         <default key="_controller">ChateaClientBundle:User:confirmed</default>
     </route>
-    <route id="chatea_confirmed_success" path="/register/success">
+    <route id="chatea_confirmed_success" path="/registro/completado">
         <default key="_controller">ChateaClientBundle:User:confirmedSuccess</default>
     </route>
-    <route id="chatea_client_user_settings" path="/user-settings">
+    <route id="chatea_client_user_settings" path="/usuario-ajustes">
         <default key="_controller">ChateaClientBundle:User:userSettings</default>
     </route>
-    <route id="chatea_user_profile" path="/register/profile/{userId}" methods="GET|POST">
+    <route id="chatea_user_profile" path="/registro/perfil/{userId}" methods="GET|POST">
         <default key="_controller">ChateaClientBundle:User:registerProfile</default>
     </route>
-    <route id="chatea_client_register_user_success" path="/register-user-success/{userId}" methods="GET|POST">
+    <route id="chatea_client_register_user_success" path="/registro-usuario-completado/{userId}" methods="GET|POST">
         <default key="_controller">ChateaClientBundle:User:registrationUserSuccess</default>
+    </route>
+    <route id="chatea_client_update_profile" path="/perfil/actualizar" methods="GET">
+        <default key="_controller">ChateaClientBundle:Profile:update</default>
     </route>
 </routes>

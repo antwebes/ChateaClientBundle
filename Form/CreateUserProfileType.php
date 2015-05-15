@@ -20,10 +20,20 @@ class CreateUserProfileType extends AbstractType
             ))
             ->add('youWant', 'textarea',array('required'=>false))
             ->add('about', 'textarea',array('required' => false))
-            ->add('birthday', 'hidden', array('required' => true,'data'=>$options['birthday']))
+            
+            
             ->add('image', 'file', array('required'=>false, 'mapped' => false)
             )
         ;
+        if (array_key_exists('birthday', $options)) {
+			$builder->add('birthday', 'hidden', array('required' => true,'data'=>$options['birthday']));
+        } else{
+        	$builder->add('birthday', 'date', array(
+			    'widget' => 'choice',
+			    // this is actually the default format for single_text
+			    'format' => 'yyyy-MM-dd',
+        		'required' => true));
+        }
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -31,7 +41,7 @@ class CreateUserProfileType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile',
         ));
-        $resolver->setRequired(array(
+        $resolver->setOptional(array(
             'birthday'
         ));
         $resolver->setDefaults([

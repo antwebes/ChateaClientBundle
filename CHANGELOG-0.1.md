@@ -68,3 +68,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 
 * 0.1.16(2015-05-13)
  * Fix error with translations in confirm-email page
+ * Include branch userProfile, now user register and register profile, and photo with ajax

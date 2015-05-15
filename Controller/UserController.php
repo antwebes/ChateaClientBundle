@@ -120,7 +120,13 @@ class UserController extends Controller
 
         $birthday = $request->getSession()->get('user_'.$user->getId().'.birthday');
 
-        $userProfile = new UserProfile();
+        if (!is_null($user->getProfile())){
+        	//HACER UN REDIRECT A LA URL DE MODIFICAR PERFIL
+        	$userProfile = $user->getProfile();
+        }else{
+        	$userProfile = new UserProfile();
+        }
+        
         $form = $this->createForm(new CreateUserProfileType(),$userProfile,array('birthday'=>$birthday));
 
         $language = $this->getLanguageFromRequestAndSaveInSessionRequest($request);
@@ -135,7 +141,6 @@ class UserController extends Controller
 //                    $image = $files[$form->getName()]['image'];
 //                    $image->move($image->getPath(),$image->getFilename());
 //                    $filename = $image->getPath() . '/'.$image->getFilename();
-                    //ldd($filename);
                     $user->setProfile($userProfile);
                     $userManager->addUserProfile($user);
                     //$api->addPhoto($user->getId(), $filename, ' ');
