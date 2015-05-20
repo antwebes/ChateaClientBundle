@@ -69,3 +69,7 @@ profile.seekin.choice: 'Este valor no es válido'
 user.image.invalid: "El formato %mimtype% no esta permitido. Los formatos de imagen validos son: 'image/jpeg', 'image/png', 'image/gif'"
 user.confirm_email.not_owner_of_email: "El email introducido no está asociado a tu usuario"
 user.confirm_email.already_requested: "La solicitud de envio de correo de confirnación solo puede ser realizado cada 24 horas"
+user.edit_profile: "Editar perfil"
+user.change_profile: "Cambiar datos de perfil"
+user.edit_profile_photo: "Editar foto de perfil"
+user.edit_profile.success: "Tu perfil ha sido actualizado con éxito"

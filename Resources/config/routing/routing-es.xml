@@ -33,7 +33,13 @@
     <route id="chatea_client_register_user_success" path="/registro-usuario-completado/{userId}" methods="GET|POST">
         <default key="_controller">ChateaClientBundle:User:registrationUserSuccess</default>
     </route>
-    <route id="chatea_client_update_profile" path="/perfil/actualizar" methods="GET">
+    <route id="chatea_client_update_profile" path="/perfil/actualizar" methods="GET|POST">
         <default key="_controller">ChateaClientBundle:Profile:update</default>
+    </route>
+    <route id="chatea_client_update_profile_index" path="/perfil" methods="GET">
+        <default key="_controller">ChateaClientBundle:Profile:updateIndex</default>
+    </route>
+    <route id="chatea_client_update_profile_photo" path="/perfil/actualizar/foto" methods="GET">
+        <default key="_controller">ChateaClientBundle:Profile:updatePhoto</default>
     </route>
 </routes>

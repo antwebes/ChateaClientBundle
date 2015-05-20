@@ -1,0 +1,28 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{% trans_default_domain 'UserRegistration' %}
+
+{% block chatea_title %}{{ 'user.edit_profile_photo' | trans }}{% endblock %}
+{% block chatea_meta_description %}{% endblock %}
+{% block chatea_meta_keywords %}{% endblock %}
+
+{% block chatea_body %}
+    <h1>{{ 'user.edit_profile_photo' | trans }}</h1>
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('chatea_client_update_profile_index') }}">{{ 'user.change_profile' | trans }}</a></li>
+        <li class="active">{{ 'user.edit_profile_photo' | trans }}</li>
+    </ol>
+
+    <div class="col-xs-12">
+        <form id="profileForm" class="form-horizontal" method="POST">
+
+
+            <div class="form-group row">
+                <div class="col-sm-offset-10 col-sm-2">
+                    <input name="register" type="submit" class="btn btn-lg pull-right btn-primary" value="{{ 'registration_profile.submit'|trans }}" />
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

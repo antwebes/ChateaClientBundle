@@ -6,10 +6,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
-use Ant\Bundle\ChateaClientBundle\Form\CreateUserProfileType;
+use Ant\Bundle\ChateaClientBundle\Form\EditUserProfileType;
 
 class ProfileController extends Controller
 {
+	public function updateIndexAction(Request $request)
+	{
+		return $this->render('ChateaClientBundle:User:edit_profile_index.html.twig');
+	}
+
+	public function updatePhotoAction(Request $request)
+	{
+		return $this->render('ChateaClientBundle:User:edit_profile_photo.html.twig');
+	}
+
 	/**
 	 * @APIUser
 	 */
@@ -26,34 +36,29 @@ class ProfileController extends Controller
     		return $this->redirect($this->generateUrl('chatea_user_profile'));
     	}else{
     		$userProfile = $user->getProfile();
-    		
-    		//of api I get a date time... so I must convert to date time to render in form CreateUserProfileType
-    		$timestamp = strtotime($userProfile->getBirthday());
-    		$date = new \DateTime();
-    		$date->setTimestamp($timestamp);
-    		$userProfile->setBirthday($date);
+
+			//of api I get a date time... so I must convert to date time to render in form CreateUserProfileType
+			$timestamp = strtotime($userProfile->getBirthday());
+			$date = new \DateTime();
+			$date->setTimestamp($timestamp);
+			$userProfile->setBirthday($date);
     	}
     	
-    	$form = $this->createForm(new CreateUserProfileType(),$userProfile);
+    	$form = $this->createForm(new EditUserProfileType(),$userProfile);
     	
     	$language = $this->getLanguageFromRequestAndSaveInSessionRequest($request);
     	$problem = null;
+		$success = null;
     	
     	if ('POST' === $request->getMethod()) {
     		$form->submit($request);
     		if ($form->isValid()) {
     			try {
-    				$files = $request->files->all();
-    				/** @var \Symfony\Component\HttpFoundation\File\UploadedFile $image */
-    				//                    $image = $files[$form->getName()]['image'];
-    				//                    $image->move($image->getPath(),$image->getFilename());
-    				//                    $filename = $image->getPath() . '/'.$image->getFilename();
     				$user->setProfile($userProfile);
-    				$userManager->addUserProfile($user);
-    				//$api->addPhoto($user->getId(), $filename, ' ');
-    				return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
-    	
+    				$userManager->updateProfile($user);
+					$success = true;
     			}catch(\Exception $e){
+					ldd($e->getMessage());
     				$serverErrorArray = json_decode($e->getMessage(), true);
     	
     				if(isset($serverErrorArray['error']) && $serverErrorArray['error'] == "invalid_client"){
@@ -64,12 +69,14 @@ class ProfileController extends Controller
     			}
     		}
     	}
-    	return $this->render('ChateaClientBundle:User:register_profile.html.twig', array(
+
+    	return $this->render('ChateaClientBundle:User:edit_profile.html.twig', array(
     			'user' => $user,
     			'language' => $language,
     			'problem' => $problem,
     			'form' => $form->createView(),
     			'alerts' => null,
+				'success' => $success,
     			'errors' => $form->getErrors(),
     			'access_token' => $this->container->get('security.context')->getToken()->getUser()->getAccessToken(),
     			'api_endpoint' => $this->container->getParameter('api_endpoint')
