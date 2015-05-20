@@ -46,4 +46,20 @@ user.register.i_need_help: "I need help"
 user.register.confirmed.title: "Congratulations %username% !! Your account is activated successfully"
 user.register.confirmed.message: "User %username% registered correctly . You can now start chatting."
 user.register.invalid_client: "Due to tecnichal problems, it is impsible to register users now. Please contacto with the webmaster of this site."
+user.register_profile: 'Register profile'
+user.register_profile.skip: 'Skip'
+registration_profile.submit: 'Submit'
+form.label.gender: 'Gender'
+form.label.seeking: 'Seeking'
+form.label.youWant: 'You want'
+form.label.about: 'About'
+form.label.image: 'Image'
+form.placeholder.youWant: 'I want love, friendly...'
+form.placeholder.about: 'I am ...'
+form.seeking.empty_value: 'Choose an option'
+user.allready_has_profile: 'The user already has a profile'
+user.profile.gender.choice.invalid: 'This value is not valid'
+profile.seekin.choice: 'This value is not valid'
+user.image.invalid: "The %mimtype% format is not allowed. The allowed image formats are: 'image/jpeg', 'image/png', 'image/gif'"
 user.confirm_email.not_owner_of_email: "This email is not associated with your User"
+user.confirm_email.already_requested: "Confirmation mail can only be requested once every 24 hours"

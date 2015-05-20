@@ -46,4 +46,26 @@ user.register.i_need_help: "Necesito ayuda"
 user.register.confirmed.title: "Felicidadesa %username% !! Tu cuenta ha sido activada con éxiito"
 user.register.confirmed.message: "Usuario %username% registrado correctament. Puedes empezar a chatear ahora."
 user.register.invalid_client: "Debido a problemas técnicos en este momento nos es imposible realizar registros. Por favor pongase en contacto con el administrador de la web."
+user.register_profile: 'Registrar perfil'
+user.register_profile.skip: 'Saltar'
+registration_profile.submit: 'Enviar'
+form.label.gender: 'Genero'
+form.label.seeking: 'Busca'
+form.label.youWant: 'Tu quieres'
+form.label.about: 'Sobre mi'
+form.label.image: 'Imagen'
+form.placeholder.youWant: 'Escribe un pequeño texto para que los demás sepan que es lo que esperas de este chat. Amistad, encontrar el amor, pasar un buen rato..'
+form.placeholder.about: 'Escribe algo sobre ti, para que los demás usuarios te conozcan un poco'
+form.seeking.empty_value: 'Escoge una opción'
+Men: 'Hombres'
+Women: 'Mujeres'
+Men and women: 'Hombres y mujeres'
+Male: Hombre
+Female: Mujer
+Not defined: Otro
+user.allready_has_profile: 'El usuario ya tiene un perfil'
+user.profile.gender.choice.invalid: 'Este valor no es válido'
+profile.seekin.choice: 'Este valor no es válido'
+user.image.invalid: "El formato %mimtype% no esta permitido. Los formatos de imagen validos son: 'image/jpeg', 'image/png', 'image/gif'"
 user.confirm_email.not_owner_of_email: "El email introducido no está asociado a tu usuario"
+user.confirm_email.already_requested: "La solicitud de envio de correo de confirnación solo puede ser realizado cada 24 horas"

@@ -99,7 +99,7 @@
             <div class="row">
                 <div style="width:40.2%" class="left"><hr class="hr-style m-t-20"></div>
                 <div style="width:19.5%" class="left">
-                    <center><span class="text_title">{{ "user.register.i_need_help" }}</span></center>
+                    <center><span class="text_title">{{ "user.register.i_need_help" | trans() }}</span></center>
                 </div>
                 <div style="width:40.2%" class="left"><hr class="hr-style m-t-20"></div>
             </div>
@@ -133,9 +133,10 @@
         window.api_endpoint = "{{ api_endpoint }}";
         window.token = "{{ userAccessToken }}";
         var messages = {
-            success: '{{user.register.we_sent_you_verification_mail' | trans }}',
+            success: '{{'user.register.we_sent_you_verification_mail' | trans }}',
             server_errors: {
-                'The email is not linked with your account': '{{ 'user.confirm_email.not_owner_of_email' | trans }}'
+                'The email is not linked with your account': '{{ 'user.confirm_email.not_owner_of_email' | trans }}',
+                'Confirmation mail can only be requested once every 24 hours': '{{ 'user.confirm_email.already_requested' | trans }}'
             }
         };
     </script>
