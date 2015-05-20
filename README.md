@@ -80,6 +80,10 @@ Autenticación
 Por defecto todas las llamadas a apichatea se hacen con el usario de la aplicación. 
 
 Si desea realizar una llamada a apichatea que requiere un usuario logueado use la anotación @APIUser.
+
+Está implementada en:
+>Ant\Bundle\ChateaClientBundle\EventListener\AuthTokenUpdaterListener;
+
 Dicha anotación averiguará si el usuario está autenticado y en caso de ser así realizara las llamadas 
 a apichatea con el usuario logueado. Ejemplo:
 

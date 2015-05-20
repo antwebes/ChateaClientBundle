@@ -168,14 +168,22 @@ class UserManager extends BaseManager implements ManagerInterface
         return $this->get('UserProfileManager')->findById($user_id);
     }
 
-    public function updateProfile(UserProfile $profile)
+    public function updateProfile(User $user)
     {
-        /*
-        $profile = $this->getManager()->updateUserProfile($this->meUser->getId(),$profile->getAbout(),$profile->getSeeking());
-        return UserProfileManager::hydrate($profile);
-        */
+        $profile = $user->getProfile();
 
+        $profile = $this->getManager()->updateUserProfile(
+            $user->getId(),
+            $profile->getAbout(),
+            $profile->getSeeking(),
+            $profile->getGender(),
+            $profile->getYouWant(),
+            $profile->getBirthday()
+            );
+
+        return $this->get('UserProfileManager')->hydrate($profile);
     }
+
     public function findPhotos($user_id, $page= 1, $limit = null)
     {
         $limit        = $limit == null ? $this->limit : $limit ;
