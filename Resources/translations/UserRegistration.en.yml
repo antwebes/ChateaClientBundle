@@ -66,4 +66,5 @@ user.confirm_email.already_requested: "Confirmation mail can only be requested o
 user.edit_profile: "Edit profile"
 user.change_profile: "Change profile data"
 user.edit_profile_photo: "Edit profile photo"
+user.edit_profile_photo.success: "Profile photo has been updated successful"
 user.edit_profile.success: "Your profile has been updated successfully"

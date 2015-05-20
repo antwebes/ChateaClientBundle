@@ -2,6 +2,7 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Controller;
 
+use Ant\Bundle\ChateaClientBundle\Form\EditUserProfilePhotoType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -17,7 +18,15 @@ class ProfileController extends Controller
 
 	public function updatePhotoAction(Request $request)
 	{
-		return $this->render('ChateaClientBundle:User:edit_profile_photo.html.twig');
+		$form = $this->createForm(new EditUserProfilePhotoType());
+		$user = $this->container->get('security.context')->getToken()->getUser();
+
+		return $this->render('ChateaClientBundle:User:edit_profile_photo.html.twig', array(
+			'form' => $form->createView(),
+			'user' => $user,
+			'access_token' => $user->getAccessToken(),
+			'api_endpoint' => $this->container->getParameter('api_endpoint')
+		));
 	}
 
 	/**
