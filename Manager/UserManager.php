@@ -172,13 +172,19 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         $profile = $user->getProfile();
 
+        $birthday = $profile->getBirthday();
+
+        if($birthday instanceof \DateTime){
+            $birthday = $birthday->format('Y-m-d');
+        }
+
         $profile = $this->getManager()->updateUserProfile(
             $user->getId(),
             $profile->getAbout(),
             $profile->getSeeking(),
             $profile->getGender(),
             $profile->getYouWant(),
-            $profile->getBirthday()
+            $birthday
             );
 
         return $this->get('UserProfileManager')->hydrate($profile);
