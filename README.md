@@ -128,3 +128,5 @@ class AreaRestringidaController
     }
 }
 ```
+
+Dicha annotación es gestionada por el listener ```Ant\Bundle\ChateaClientBundle\EventListener\AuthTokenUpdaterListener``` que escucha al evento del controlador para averiguar si debe actualizar el access token del usuario en caso necesario.
