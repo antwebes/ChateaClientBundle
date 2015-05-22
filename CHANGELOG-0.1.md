@@ -71,3 +71,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Include branch userProfile, now user register and register profile, and photo with ajax
  * Update version ChateaSecureBundle
  * When API calls the comfirmed URL now the data of the user is taken by refresh token from the API
+ * Update version chateaClientLib v0.1.2
