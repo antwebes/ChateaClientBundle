@@ -168,14 +168,28 @@ class UserManager extends BaseManager implements ManagerInterface
         return $this->get('UserProfileManager')->findById($user_id);
     }
 
-    public function updateProfile(UserProfile $profile)
+    public function updateProfile(User $user)
     {
-        /*
-        $profile = $this->getManager()->updateUserProfile($this->meUser->getId(),$profile->getAbout(),$profile->getSeeking());
-        return UserProfileManager::hydrate($profile);
-        */
+        $profile = $user->getProfile();
 
+        $birthday = $profile->getBirthday();
+
+        if($birthday instanceof \DateTime){
+            $birthday = $birthday->format('Y-m-d');
+        }
+
+        $profile = $this->getManager()->updateUserProfile(
+            $user->getId(),
+            $profile->getAbout(),
+            $profile->getSeeking(),
+            $profile->getGender(),
+            $profile->getYouWant(),
+            $birthday
+            );
+
+        return $this->get('UserProfileManager')->hydrate($profile);
     }
+
     public function findPhotos($user_id, $page= 1, $limit = null)
     {
         $limit        = $limit == null ? $this->limit : $limit ;
@@ -227,7 +241,7 @@ class UserManager extends BaseManager implements ManagerInterface
      */
     public function save(&$object)
     {
-        return $this->getManager()->register($object->getUsername(),$object->getEmail(),$object->getPlainPassword(),
+        $data = $this->getManager()->register($object->getUsername(),$object->getEmail(),$object->getPlainPassword(),
             $object->getPlainPassword(),
             $object->getClient()->getId(),
             $object->getIp(),
@@ -236,6 +250,7 @@ class UserManager extends BaseManager implements ManagerInterface
             $object->getFacebookId(),
             $object->isEnabled()
         );
+        return $this->hydrate($data, $object);
     }
 
     public function changePassword(ChangePassword $changePassword)
@@ -314,4 +329,21 @@ class UserManager extends BaseManager implements ManagerInterface
         return  new Pager($channelManager,new Command('getChannelsModerated',array('user_id'=>$user_id)) ,$page, $limit);
 
     }
+
+    public function addUserProfile(&$object, $image = null)
+    {
+        /*** @var \Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile $profile  */
+        $profile = $object->getProfile() ? $object->getProfile() : null;
+        $data = $this->getManager()->addUserProfile(
+            $object->getId(),
+            $profile->getAbout(),
+            $profile->getSeeking(),
+            $profile->getGender(),
+            $profile->getYouWant(),
+            $profile->getBirthday(),
+            $image
+        );
+        return $this->hydrate($data, $object);
+    }
+
 }

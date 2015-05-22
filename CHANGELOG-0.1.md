@@ -65,3 +65,9 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  
 * 0.1.15(2015-05-1)
  * Update version captch to branch 2.3
+ 
+* 0.1.16(2015-05-20)
+ * Fix error with translations in confirm-email page
+ * Include branch userProfile, now user register and register profile, and photo with ajax
+ * Update version ChateaSecureBundle
+ * When API calls the comfirmed URL now the data of the user is taken by refresh token from the API
