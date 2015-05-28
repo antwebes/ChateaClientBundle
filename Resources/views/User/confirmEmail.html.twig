@@ -51,9 +51,14 @@
             </div>
             <center>
                 <span class="txt-header-h4"><p>{{"user.register.we_sent_you_mail" |trans}}
-                    </p><p>
+                    </p>
+                    <p>
                         {{ "user.register.click_to_confirm" | trans }}
-                    </p><p>
+                    </p>
+                    <p>
+                        {% trans with {'%path%': path('chatea_client_user_settings'), '%title%' : 'change_email'|trans } %}user.register.change_password{% endtrans %}
+                    </p>
+                    <p>
                         {{ "user.register.if_you_dont_confirm" | trans }}
                     </p>
             </center>

@@ -68,3 +68,5 @@ user.change_profile: "Change profile data"
 user.edit_profile_photo: "Edit profile photo"
 user.edit_profile_photo.success: "Profile photo has been updated successful"
 user.edit_profile.success: "Your profile has been updated successfully"
+user.register.change_password: You can also change your email <a href="%path%" title="%title%">from here</a>
+change_email: "Change email"
