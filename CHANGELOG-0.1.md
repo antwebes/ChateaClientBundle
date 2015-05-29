@@ -75,3 +75,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  
 * 0.1.17(2015-05-28)
  * Include link to user settings in page confirmation email
+ * change version recaptcha 2.3.*@dev -> 2.3.*
