@@ -37,7 +37,7 @@ class OutstandingEntryManager extends BaseManager
         }
 
         if(isset($item['resource']) && isset($item['resource']['id'])){
-            $resource = $this->get('UserManager')->hydrate($item['resource']);
+            $resource = $this->hydrateResource($item);
             $outstandingEntry->setResource($resource);
         }
 
@@ -108,5 +108,21 @@ class OutstandingEntryManager extends BaseManager
     public function getModel()
     {
         return 'Ant\Bundle\ChateaClientBundle\Api\Model\OutstandingEntry';
+    }
+
+    /**
+     * @param array $item
+     * @return mixed
+     */
+    private function hydrateResource(array $item)
+    {
+        if($item['resource_type'] == 'User'){
+            $manager = $this->get('UserManager');
+        }else{
+            $manager = $this->get('ChannelManager');
+        }
+
+        $resource = $manager->hydrate($item['resource']);
+        return $resource;
     }
 }
