@@ -170,7 +170,7 @@
                 <argument type="service" id="antwebes_chateaclient_manager" />
                 <argument type="string">%antwebes_chateaclient_bundle.manager.outstanding_entry_manager.class%</argument>
                 <call method="setLimit">
-                    <argument type="string">%chatea_client.limits.client_manager%</argument>
+                    <argument type="string">%chatea_client.limits.outstanding_manager%</argument>
                 </call>
             </service>
 

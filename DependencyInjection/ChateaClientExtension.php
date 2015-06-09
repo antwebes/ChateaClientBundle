@@ -37,6 +37,7 @@ class ChateaClientExtension extends Extension
         $container->setParameter('chatea_client.limits.affiliate_manager', $config['limits']['affiliate_manager']);
         $container->setParameter('chatea_client.limits.city_manager', $config['limits']['city_manager']);
         $container->setParameter('chatea_client.limits.client_manager', $config['limits']['client_manager']);
+        $container->setParameter('chatea_client.limits.outstanding_manager', $config['limits']['outstanding_manager']);
         $container->setParameter('chatea_client.app_auth.client_id', $config['app_auth']['client_id']);
         $container->setParameter('chatea_client.app_id', $config['app_id']);
         $container->setParameter('chatea_client.app_auth.secret', $config['app_auth']['secret']);
