@@ -77,4 +77,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Include link to user settings in page confirmation email
  * change version recaptcha 2.3.*@dev -> 2.3.*
  * include manage of channels
+ 
+* 0.1.18(2015-06-10)
+ * Added ChannelManager::addFanToChannel method
  * refix error in ProfileController, send param userId to create profile
