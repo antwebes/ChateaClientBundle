@@ -226,4 +226,8 @@ class ChannelManager extends BaseManager
         return $collection;
     }
 
+    public function addFanToChannel($fan, $channel)
+    {
+        $this->getManager()->addUserChannelFan($channel->getId(), $fan->getId());
+    }
 }

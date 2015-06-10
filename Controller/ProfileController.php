@@ -40,9 +40,9 @@ class ProfileController extends Controller
     	$userManager = $this->container->get('api_users');
     	
     	$user = $userManager->findById($userOnline->getId());
-    	    	
+
     	if (is_null($user->getProfile())){
-    		return $this->redirect($this->generateUrl('chatea_user_profile'));
+    		return $this->redirect($this->generateUrl('chatea_user_profile', array('userId'=>$user->getId())));
     	}else{
     		$userProfile = $user->getProfile();
 

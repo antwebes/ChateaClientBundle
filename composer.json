@@ -22,7 +22,7 @@
 		"antwebes/chatea-common" : "0.1.0",
 		"antwebes/chatea-client-lib" : "0.1.2",
 		"antwebes/chatea-secure-bundle" : "0.1.4",
-		"excelwebzone/recaptcha-bundle" : "2.3.*@dev"
+		"excelwebzone/recaptcha-bundle" : "2.3.*"
 	},
 	"require-dev" : {
 		"raulfraile/ladybug" : "~1.0"
