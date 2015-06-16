@@ -36,6 +36,11 @@ class OutstandingEntryManager extends BaseManager
             $outstandingEntry->setOutstander($outstander);
         }
 
+        if(isset($item['creator']) && isset($item['creator']['id'])){
+            $creator = $this->get('UserManager')->hydrate($item['creator']);
+            $outstandingEntry->setCreator($creator);
+        }
+
         if(isset($item['resource']) && isset($item['resource']['id'])){
             $resource = $this->hydrateResource($item);
             $outstandingEntry->setResource($resource);

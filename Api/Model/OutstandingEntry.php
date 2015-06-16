@@ -36,6 +36,10 @@ class OutstandingEntry implements BaseModel
      */
     protected $outstander;
 
+    /**
+     * @var User
+     */
+    protected $creator;
 
     protected $resource;
 
@@ -169,5 +173,21 @@ class OutstandingEntry implements BaseModel
     public function setInvalidated($invalidated)
     {
         $this->invalidated = $invalidated;
+    }
+
+    /**
+     * @return User
+     */
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    /**
+     * @param User $creator
+     */
+    public function setCreator($creator)
+    {
+        $this->creator = $creator;
     }
 }
