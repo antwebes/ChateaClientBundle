@@ -1,9 +1,4 @@
 <?php
-/**
- * Created by Javier Fernández Rodríguez for Ant-Webs S.L.
- * User: Xabier <jbier@gmail.com>
- * Date: 3/12/14 - 16:34
- */
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 
@@ -11,9 +6,8 @@ use Ant\Bundle\ChateaClientBundle\Api\Model\OutstandingEntry;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
 
-
 /**
- * Class OperatorManager
+ * Class OutstandingEntryManager
  * @package Ant\Bundle\ChateaAdminBundle\Manager
  */
 class OutstandingEntryManager extends BaseManager
