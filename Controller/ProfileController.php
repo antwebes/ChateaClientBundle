@@ -67,7 +67,6 @@ class ProfileController extends Controller
     				$userManager->updateProfile($user);
 					$success = true;
     			}catch(\Exception $e){
-					ldd($e->getMessage());
     				$serverErrorArray = json_decode($e->getMessage(), true);
     	
     				if(isset($serverErrorArray['error']) && $serverErrorArray['error'] == "invalid_client"){
