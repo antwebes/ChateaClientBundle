@@ -19,12 +19,17 @@ class ProfileController extends Controller
 	public function updatePhotoAction(Request $request)
 	{
 		$form = $this->createForm(new EditUserProfilePhotoType());
-		$user = $this->container->get('security.context')->getToken()->getUser();
+		$userOnline = $this->getUser();
+
+		/** @var \Ant\Bundle\ChateaClientBundle\Manager\UserManager $userManager */
+		$userManager = $this->container->get('api_users');
+
+		$user = $userManager->findById($userOnline->getId());
 
 		return $this->render('ChateaClientBundle:User:edit_profile_photo.html.twig', array(
 			'form' => $form->createView(),
 			'user' => $user,
-			'access_token' => $user->getAccessToken(),
+			'access_token' => $userOnline->getAccessToken(),
 			'api_endpoint' => $this->container->getParameter('api_endpoint')
 		));
 	}
