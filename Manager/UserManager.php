@@ -180,10 +180,10 @@ class UserManager extends BaseManager implements ManagerInterface
 
         $profile = $this->getManager()->updateUserProfile(
             $user->getId(),
-            $profile->getAbout(),
-            $profile->getSeeking(),
+            $profile->getAbout()?$profile->getAbout():"",
+            $profile->getSeeking()?$profile->getSeeking():"",
             $profile->getGender(),
-            $profile->getYouWant(),
+            $profile->getYouWant()?$profile->getYouWant():"",
             $birthday
             );
 

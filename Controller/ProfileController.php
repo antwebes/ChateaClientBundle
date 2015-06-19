@@ -4,12 +4,12 @@ namespace Ant\Bundle\ChateaClientBundle\Controller;
 
 use Ant\Bundle\ChateaClientBundle\Form\EditUserProfilePhotoType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
 use Ant\Bundle\ChateaClientBundle\Form\EditUserProfileType;
+use Symfony\Component\Form\FormError;
 
-class ProfileController extends Controller
+class ProfileController extends BaseController
 {
 	public function updateIndexAction(Request $request)
 	{
@@ -105,4 +105,55 @@ class ProfileController extends Controller
     
     	return $language;
     }
+    
+    /**
+     *
+     * @param array $errors errors of the form
+     * @param Form $form form where we go to include the errors
+     */
+    protected function fillForm($errors, $form, $context)
+    {
+    	$translator = $this->get('translator');
+    
+    	foreach ($errors as $field => $message) {
+    
+    		if ($form->has($field)){
+    			if (isset($message['message'])){
+    				$form->get($field)->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $this->translateServerMessage($message['message'])))));
+    			}else{
+    				//in this case the message is a form field within another field.
+    				$this->fillForm($message, $form->get($field));
+    			}
+    		}else{
+    			if(!isset($message['message']) && preg_match('/slug/i', $message)){
+    				continue;
+    			}
+    
+    			//receive an error from the library
+    			//the message can to be a string :"This form should not contain extra fields." For this reason I include this if
+    			$messageString = (isset($message['message']) ? $message['message']: $message);
+    			$messageString = $this->translateServerMessage($messageString);
+    			$form->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $field . '->'.$messageString))));
+    		}
+    	}
+    }
+    
+    private function translateServerMessage($message)
+    {
+    	$errorMap = array(
+    			'This user has no permission for this action' => 'form.user_no_permission',
+    			'The user should login in irc service at least once' => 'form.login_once',
+    			'The irc channel value is not valid. view RFC-1459' => 'form.rfc_1459',
+    			'The channel name is already used.' => 'form.channel_name_already_used',
+    	);
+    
+    	$translator = $this->get('translator');
+    
+    	if(!isset($errorMap[$message])){
+    		return $message;
+    	}
+    
+    	return $translator->trans($errorMap[$message], array(), 'ChannelRegistration');
+    }
+    
 }

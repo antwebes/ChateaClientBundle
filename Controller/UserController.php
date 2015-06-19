@@ -15,14 +15,13 @@ use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
 use Ant\Bundle\ChateaClientBundle\Event\UserEvent;
 use Ant\Bundle\ChateaClientBundle\Event\ChateaClientEvents;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     public function registerAction(Request $request)
     {
@@ -281,36 +280,12 @@ class UserController extends Controller
         return $language;
     }
 
-    protected function addErrorsToForm($e, $form, $context = '_')
-    {
-        $translator = $this->get('translator');
-
-        if ($this->isJson($e->getMessage())){
-            $serverError = json_decode($e->getMessage());
-            $serverErrorArray = json_decode($e->getMessage(), true);
-
-            if(!isset($serverErrorArray['errors'])){
-                return true;
-            }
-
-            if(is_object($serverError->errors)){
-                $errors = json_decode($e->getMessage(), true);
-                $this->fillForm($errors['errors'], $form, $context);
-            }else{
-                $form->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $serverError->errors))));
-            }
-        } else {
-            //llega un string de error proveniente de la libreria
-            throw new \Exception($e);
-        }
-    }
-
     /**
      *
      * @param array $errors errors of the form
      * @param Form $form form where we go to include the errors
      */
-    private function fillForm($errors, $form, $context)
+    protected function fillForm($errors, $form, $context)
     {
         $fieldMap = ['current_password' => ['password' => 'currentPassword', 'email' => 'password']];
 
@@ -338,14 +313,6 @@ class UserController extends Controller
                 $form->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $field . '->'.$messageString), $context)));
             }
         }
-    }
-
-    private function isJson($string)
-    {
-        return (is_string($string) && (
-                is_object(json_decode($string)) || is_array(json_decode($string))
-            )
-        );
     }
 
     private function authenticateUser($user)

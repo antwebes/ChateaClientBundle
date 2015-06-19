@@ -91,7 +91,7 @@ class ChannelController extends Controller
                 //receive an error from the library
                 //the message can to be a string :"This form should not contain extra fields." For this reason I include this if
                 $messageString = (isset($message['message']) ? $message['message']: $message);
-                $messageString = $this->translateSeverMessage($messageString);
+                $messageString = $this->translateServerMessage($messageString);
                 $form->addError(new FormError($translator->trans('%%error%%', array('%%error%%' => $field . '->'.$messageString))));
             }
         }

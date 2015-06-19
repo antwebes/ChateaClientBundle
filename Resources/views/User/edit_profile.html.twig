@@ -31,8 +31,12 @@
                 </div>
             {% endif %}
             <div id="form-errors" class="alert alert-danger" style="display: none">
-
             </div>
+            {% if errors | length > 0 %}
+	        <div class="alert alert-danger">
+				{{ form_errors(form) }}
+	        </div>
+	    	{% endif %}
 
             <div class="form-group">
                 <label class="col-lg-3 control-label" for="user_profile_gender">{{ "form.label.gender" | trans }}</label>
