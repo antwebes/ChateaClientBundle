@@ -346,4 +346,16 @@ class UserManager extends BaseManager implements ManagerInterface
         return $this->hydrate($data, $object);
     }
 
+    public function getUserVisits($user, $limit)
+    {
+        $data = $this->getManager()->getVisitorsOfUser($user->getId(), $limit);
+
+        $users = array();
+
+        foreach($data['resources'] as $resource){
+            $users[] = $this->hydrate($resource['participant_voyeur']);
+        }
+
+        return $users;
+    }
 }
