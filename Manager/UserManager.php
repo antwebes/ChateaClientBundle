@@ -128,6 +128,21 @@ class UserManager extends BaseManager implements ManagerInterface
         return  new Pager($this,$command,$page, $limit);
 
     }
+
+    public function findOutstandingUsers()
+    {
+        $command = new Command('showUsers', array('filters' => 'outstanding=1', 'order' => null));
+        $array_data = $this->getManager()->execute($command);
+        $array_data = array_key_exists('resources',$array_data)? $array_data['resources']: array();
+        $output = array();
+
+        foreach($array_data as $data){
+            $output[] = $this->hydrate($data);
+        }
+
+        return $output;
+    }
+
     public function findAllUsers()
     {
         $command = new Command('showUsers',array());
