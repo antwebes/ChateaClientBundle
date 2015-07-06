@@ -29,7 +29,11 @@ class UserController extends BaseController
         $apiEndpoint = $this->container->getParameter('chatea_client.api_endpoint');
         $countriesPath = __DIR__ . '/../Resources/config/countries.json';
 
-        $formOptions = array(
+        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirect("/");
+        }
+
+            $formOptions = array(
             'language'              => $language,
             'cityLocationManager'   => $this->get('api_cities'),
             'ip'                    => $request->getClientIp(),
