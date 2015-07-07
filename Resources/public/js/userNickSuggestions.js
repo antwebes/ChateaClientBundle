@@ -78,7 +78,11 @@ function userNickSuggestions(messages) {
                 dataType: "json",
                 contentType: "application/json",
                 success: function (response) {
+
                     $('span[data-id="email-suggestions"]').html('<p class="alert-success">' + messages.mail_is_aviable + '</p>');
+                    if(!response.smtp_valid) {
+                        $('span[data-id="email-suggestions"]').html('<p class="alert alert-warning"><i class="icon-attention"></i> ' + messages.mail_is_available_but_not_validate + '</p>');
+                    }
                 },
                 error: function (responseError) {
                     var response = $.parseJSON(responseError.responseText);
