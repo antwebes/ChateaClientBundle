@@ -88,3 +88,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * When editing the profile phot we get the whole user
  * Redirect to index when user is logged in register page
  * improve_upload_photo
+ * update version ChateaClientLib v0.1.3
