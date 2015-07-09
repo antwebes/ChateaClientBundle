@@ -81,3 +81,10 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 * 0.1.18(2015-06-10)
  * Added ChannelManager::addFanToChannel method
  * refix error in ProfileController, send param userId to create profile
+
+* 0.1.19(2015-07-09)
+ * Implemented getUserVisits method
+ * Added findOutstandingUsers method
+ * When editing the profile phot we get the whole user
+ * Redirect to index when user is logged in register page
+ * improve_upload_photo
