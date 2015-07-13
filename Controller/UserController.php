@@ -30,7 +30,7 @@ class UserController extends BaseController
         $countriesPath = __DIR__ . '/../Resources/config/countries.json';
 
         if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            return $this->redirect("/");
+            return $this->redirect($request->getBaseUrl());
         }
 
             $formOptions = array(
