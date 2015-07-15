@@ -9,10 +9,10 @@
     <route id="chatea_client_register_user" path="/registro">
         <default key="_controller">ChateaClientBundle:User:register</default>
     </route>
-    <route id="chatea_client_reset_password" path="/resetear-contraseña" methods="GET">
+    <route id="chatea_client_reset_password" path="/resetear-contrasena" methods="GET">
         <default key="_controller">ChateaClientBundle:ResetPassword:reset</default>
     </route>
-    <route id="chatea_client_reset_password_perform" path="/resetear-contraseña" methods="POST">
+    <route id="chatea_client_reset_password_perform" path="/resetear-contrasena" methods="POST">
         <default key="_controller">ChateaClientBundle:ResetPassword:doReset</default>
     </route>
     <route id="confirm_email" path="/confirmar-email">
