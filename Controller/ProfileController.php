@@ -47,7 +47,7 @@ class ProfileController extends BaseController
     	$user = $userManager->findById($userOnline->getId());
 
     	if (is_null($user->getProfile())){
-    		return $this->redirect($this->generateUrl('chatea_user_profile', array('userId'=>$user->getId())));
+    		return $this->redirect($this->generateUrl('chatea_user_profile'));
     	}else{
     		$userProfile = $user->getProfile();
 

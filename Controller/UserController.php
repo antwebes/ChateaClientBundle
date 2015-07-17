@@ -21,6 +21,8 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
 class UserController extends BaseController
 {
     public function registerAction(Request $request)
@@ -63,8 +65,11 @@ class UserController extends BaseController
                     $request->getSession()->set('user_'.$user->getId().'.birthday',$birthday);
 
                     $this->authenticateUser($user);
+
+                    $this->get("session")->getFlashBag()->add('userId', $user->getId());
+
                     if($this->container->getParameter('chatea_client.register_with_profile') == true){
-                        return $this->redirect($this->generateUrl('chatea_user_profile',array('userId'=>$user->getId())));
+                        return $this->redirect($this->generateUrl('chatea_user_profile'));
                     }
                     return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
                 }catch(\Exception $e){
@@ -113,11 +118,13 @@ class UserController extends BaseController
     /**
      * @APIUser
      */
-    public function registerProfileAction($userId, Request $request)
+    public function registerProfileAction(Request $request)
     {
         /** @var \Ant\Bundle\ChateaClientBundle\Manager\UserManager $userManager */
         $userManager = $this->container->get('api_users');
         $api = $this->container->get('antwebes_chateaclient_manager');
+
+        $userId = $this->get("session")->getFlashBag()->get('userId');
 
         $user = $userManager->findById($userId);
 
