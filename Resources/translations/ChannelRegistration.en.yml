@@ -21,3 +21,4 @@ form.login_once: The user should login in irc service at least once
 form.channel_name_already_used: The channel name is already used.
 register.channel.success: Channel created successfully
 registration.submit: Create
+form.user_no_permission.user_not_enabled: This user has no permission for this action. You need to validate your email address to register a room.

@@ -22,3 +22,4 @@ form.login_once: Este usuario debería loguearse al menos una vez en el irc
 form.channel_name_already_used: Este nombre de canal ya está en uso.
 register.channel.success: El canal se ha creado con éxito
 registration.submit: Crear
+form.user_no_permission.user_not_enabled: Este usuario no tiene permisos para esta acción. Necesitas validar tu email para registrar un canal.
