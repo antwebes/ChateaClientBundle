@@ -53,6 +53,7 @@ function userNickSuggestions(messages) {
         var suggestionMinlength = 4;
 
         function transServerError(error){
+            sendEvent("registration", "error", error);
             if(typeof messages.server_errors[error] != 'undefined'){
                 return messages.server_errors[error];
             }
@@ -83,6 +84,7 @@ function userNickSuggestions(messages) {
                     if(response.smtp_valid != undefined) {
                         if(!response.smtp_valid) {
                             $('span[data-id="email-suggestions"]').html('<p class="alert alert-warning"><i class="icon-attention"></i> ' + messages.mail_is_available_but_not_validate + '</p>');
+                            sendEvent("registration", "warning", "smtp_validation");
                         }
                     }
                 },
@@ -90,6 +92,7 @@ function userNickSuggestions(messages) {
                     var response = $.parseJSON(responseError.responseText);
                     var messageError = response.errors.email.message;
                     $('span[data-id="email-suggestions"]').html('<p class="alert-danger">' + transServerError(messageError) + '</p>');
+                    sendEvent("registration", "error", response.errors.email.message);
                 }
 
             });
@@ -101,9 +104,10 @@ function userNickSuggestions(messages) {
             }
 
             var suggestionsSpans = [];
-
+            var i = 0;
             suggestions.forEach(function (entry) {
-                suggestionsSpans.push('<span data-id="suggestion-btn-link" data-suggestion-sources="username" class="btn-link suggestion-btn-link">' + entry + '</span>');
+                i++;
+                suggestionsSpans.push('<span data-id="suggestion-btn-link" data-suggestion-sources="username" data-num="'+i+'" class="btn-link suggestion-btn-link">' + entry + '</span>');
             });
 
             var suggestionMessage = messages.nick_suggestions + ': ' + suggestionsSpans.join(' | ');
@@ -116,6 +120,7 @@ function userNickSuggestions(messages) {
                     var username = $('input[data-id="registration_form_username"]').val();
                     var email = $('input[data-id="registration_form_emial"]').val();
                     findSuggestions(username, email);
+                    sendEvent("registration", "use_suggestion", "suggestion-" +$(this).data("num"));
                 });
 
         }
@@ -144,6 +149,7 @@ function userNickSuggestions(messages) {
                 error: function (responseError) {
                     var response = $.parseJSON(responseError.responseText);
                     writeUsernameSuggestions(response.suggestion);
+                    sendEvent("registration", "error", "username_not_available");
                     if (response.errors.username){
                         $('span[data-id="username-validate"]').html('<p class="alert-danger">' + transServerError(response.errors.username.message) + '</p>');
                     }else if (response.errors.email){
@@ -198,6 +204,7 @@ function checkTwoFieldsEmailAndShowError(messages){
     if (!($('input[data-id="form_email"]').val().length === 0 || $('input[data-id="form_email_second"]').val().length === 0)){
         if (!areSameTwoFieldsEmail()){
             $('span[data-id="email-mismatch-error"]').html('<p class="alert-danger">' + messages.emails_not_mismatch + '</p>');
+            sendEvent("registration", "error", "email_not_match");
         }else{
             $('span[data-id="email-mismatch-error"]').html('');
         }
@@ -220,4 +227,15 @@ function checkEmailsMismatch(messages){
             checkTwoFieldsEmailAndShowError(messages);
         }
     });
+}
+
+
+function sendEvent(category, action, label, value) {
+    if (ga != undefined) {
+        if(value != undefined) {
+            ga('send', 'event', category, action, label, value);
+        }else {
+            ga('send', 'event', category, action, label);
+        }
+    }
 }

@@ -77,6 +77,16 @@
 {% block chatea_js %}
     {{ parent() }}
     <script>
+        function sendEvent(category, action, label, value) {
+            if (ga != undefined) {
+                if(value != undefined) {
+                    ga('send', 'event', category, action, label, value);
+                }else {
+                    ga('send', 'event', category, action, label);
+                }
+            }
+        }
+
         $(function(){
             // we need this variable becaus if we choose a file we habe to send data via FormData.
             // If we use FormData without choosing a file, we send an empnty image and therfore produce an error on the server
@@ -105,7 +115,12 @@
             }
 
             $('#profileForm input[type=file]').on('change', function(){ //we have choosen a file
+                sendEvent("registration", "profile", "send_photo");
                 sendFile = true;
+            });
+
+            $("#skipBtn").click(function () {
+                sendEvent("registration", "profile", "skip");
             });
 
             $('#profileForm')
@@ -159,7 +174,7 @@
                             error: onError
                         } );
                     }
-
+                    sendEvent("registration", "profile", "compolete");
                     e.preventDefault();
                 });
         });
