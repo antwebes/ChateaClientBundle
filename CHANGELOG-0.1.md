@@ -96,3 +96,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * send events to analytics in form register
  * spinner in button save of form create profile
  * check max photo length 1 Mb
+ * show error customize when user register channel without validate
