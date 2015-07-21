@@ -231,8 +231,8 @@ function checkEmailsMismatch(messages){
 
 
 function sendEvent(category, action, label, value) {
-    if (ga != undefined) {
-        if(value != undefined) {
+    if (typeof ga !== 'undefined') {
+        if(typeof value !== 'undefined') {
             ga('send', 'event', category, action, label, value);
         }else {
             ga('send', 'event', category, action, label);
