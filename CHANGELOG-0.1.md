@@ -92,3 +92,5 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  
 * 0.1.20(2015-07-15)
  * change url resetear-contraseña -> resetear-contrasena
+ * refix desing page profile and edit profile photo
+ * send events to analytics in form register
