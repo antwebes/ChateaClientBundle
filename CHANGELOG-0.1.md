@@ -94,3 +94,5 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * change url resetear-contraseña -> resetear-contrasena
  * refix desing page profile and edit profile photo
  * send events to analytics in form register
+ * spinner in button save of form create profile
+ * check max photo length 1 Mb
