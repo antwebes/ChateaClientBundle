@@ -49,6 +49,7 @@ user.register.confirmed.message: "User %username% registered correctly . You can
 user.register.invalid_client: "Due to tecnichal problems, it is impsible to register users now. Please contacto with the webmaster of this site."
 user.register_profile: 'Register profile'
 user.register_profile.skip: 'Skip'
+user.profile.max_file_upload: 'This photo is too large. Max file size allowed 1Mb'
 registration_profile.submit: 'Submit'
 form.label.gender: 'Gender'
 form.label.seeking: 'Seeking'

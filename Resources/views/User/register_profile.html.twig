@@ -58,16 +58,20 @@
                 {{ form_widget(form.image) }}
             </div>
         </div>
+        <div id="file-errors"></div>
         {{ form_widget(form._token) }}
         {{ form_rest(form) }}
         <div class="form-group row">
-            <div class="col-sm-offset-9 col-sm-1">
-                <a id="skipBtn" class="btn btn-lg btn-primary" role="button" href="{{ path('chatea_client_register_user_success',{'userId': user.id }) }}">
+            <div class="col-sm-1">
+                <a id="skipBtn" class="btn btn-default" role="button" href="{{ path('chatea_client_register_user_success',{'userId': user.id }) }}">
                     {{ 'user.register_profile.skip' | trans }}
                 </a>
             </div>
-            <div class="col-sm-2">
-                <input name="register" type="submit" class="btn btn-lg pull-right btn-primary" value="{{ 'registration_profile.submit'|trans }}" />
+            <div class="col-sm-offset-9 col-sm-2">
+                <button id="btn_register" name="register" type="submit" class="btn btn-lg pull-right btn-primary">
+                    <i id="icon_register" class=""></i>
+                    {{ 'registration_profile.submit'|trans }}
+                </button>
             </div>
         </div>
     </form>
@@ -78,8 +82,8 @@
     {{ parent() }}
     <script>
         function sendEvent(category, action, label, value) {
-            if (ga != undefined) {
-                if(value != undefined) {
+            if (typeof ga !== 'undefined') {
+                if(typeof value !== 'undefined') {
                     ga('send', 'event', category, action, label, value);
                 }else {
                     ga('send', 'event', category, action, label);
@@ -94,7 +98,8 @@
             var translations = {
                 'The user already has a profile': '{{ 'user.allready_has_profile' | trans }}',
                 'profile.gender.choice': '{{ 'user.profile.gender.choice.invalid' | trans }}',
-                'profile.seeking.choice': '{{ 'user.profile.gender.seeking.invalid' | trans }}'
+                'profile.seeking.choice': '{{ 'user.profile.gender.seeking.invalid' | trans }}',
+                'profile.max_file_upload': '{{ 'user.profile.max_file_upload' | trans }}'
             };
 
             var trans = function(msg){
@@ -123,8 +128,26 @@
                 sendEvent("registration", "profile", "skip");
             });
 
+
+            $('#social_profile_image').bind('change', function() {
+                if(this.files[0].size > 1048576) {
+                    $('#file-errors')
+                            .empty()
+                            .append($('<div class="alert alert-error" style="mragin-top:10px">'+trans("profile.max_file_upload")+'</div>'))
+                            .show();
+                    $("#btn_register").prop('disabled', true);
+                } else {
+                    $('#file-errors').empty();
+                    $("#btn_register").prop('disabled', false);
+                }
+            });
+
             $('#profileForm')
                 .submit( function( e ) {
+                    $("#icon_register").addClass('icon-spinner icon-spin');
+                    $("#btn_register").prop('disabled', true);
+
+
                     var onSuccess = function(){
                         window.location.href = '{{ path('chatea_client_register_user_success',{'userId': user.id }) }}';
                     };
@@ -132,6 +155,7 @@
                     var onError = function(xhr, error){
                         var responseJSON = xhr.responseJSON;
                         $('.help-validate').remove();
+
 
                         if(typeof responseJSON.errors != 'undefined'){
                             if(typeof responseJSON.errors === 'object') {
