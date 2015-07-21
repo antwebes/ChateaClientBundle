@@ -13,7 +13,7 @@
 
     <h1>{{ 'user.register_profile' | trans }}</h1>
 <div class="col-xs-12">
-    <form id="profileForm" class="form-horizontal" action="{{ path('chatea_user_profile', {"userId": user.id } ) }}" {{ form_enctype(form) }} method="POST">
+    <form id="profileForm" class="form-horizontal" action="{{ path('chatea_user_profile') }}" {{ form_enctype(form) }} method="POST">
         {% if alerts is not null %}
             <div id="form-errors" class="alert alert-warning">
                 {{ alerts }}

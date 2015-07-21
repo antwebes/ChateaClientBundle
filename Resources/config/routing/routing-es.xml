@@ -27,7 +27,7 @@
     <route id="chatea_client_user_settings" path="/usuario-ajustes">
         <default key="_controller">ChateaClientBundle:User:userSettings</default>
     </route>
-    <route id="chatea_user_profile" path="/registro/perfil/{userId}" methods="GET|POST">
+    <route id="chatea_user_profile" path="/registro/perfil/" methods="GET|POST">
         <default key="_controller">ChateaClientBundle:User:registerProfile</default>
     </route>
     <route id="chatea_client_register_user_success" path="/registro-usuario-completado/{userId}" methods="GET|POST">
