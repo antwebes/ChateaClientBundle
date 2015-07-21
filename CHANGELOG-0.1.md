@@ -90,7 +90,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * improve_upload_photo
  * update version ChateaClientLib v0.1.3
  
-* 0.1.20(2015-07-15)
+* 0.1.20(2015-07-21)
  * change url resetear-contraseña -> resetear-contrasena
  * refix desing page profile and edit profile photo
  * send events to analytics in form register
