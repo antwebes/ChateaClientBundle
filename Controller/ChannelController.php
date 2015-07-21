@@ -57,6 +57,9 @@ class ChannelController extends Controller
                 $errors = json_decode($e->getMessage(), true);
                 $this->fillForm($errors['errors'], $form);
             }else{
+                if($e->getCode() == 403){
+                    $serverError->errors .= '. You are not have validate your account.';
+                }
                 $form->addError(new FormError($this->translateServerMessage($serverError->errors)));
             }
         } else {
@@ -108,6 +111,7 @@ class ChannelController extends Controller
     private function translateServerMessage($message)
     {
         $errorMap = array(
+            'This user has no permission for this action. You are not have validate your account.' => 'form.user_no_permission.user_not_enabled',
             'This user has no permission for this action' => 'form.user_no_permission',
             'The user should login in irc service at least once' => 'form.login_once',
             'The irc channel value is not valid. view RFC-1459' => 'form.rfc_1459',
