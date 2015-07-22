@@ -1,0 +1,118 @@
+    <script>
+        $(function(){
+            // we need this variable becaus if we choose a file we habe to send data via FormData.
+            // If we use FormData without choosing a file, we send an empnty image and therfore produce an error on the server
+            var sendFile = false;
+            var translations = {
+                'The user already has a profile': '{{ 'user.allready_has_profile' | trans }}',
+                'profile.gender.choice': '{{ 'user.profile.gender.choice.invalid' | trans }}',
+                'profile.seeking.choice': '{{ 'user.profile.gender.seeking.invalid' | trans }}'
+            };
+
+            var trans = function(msg){
+                var regex = /Files of ClientMimetype ([^\s]+\/[^s]+) or MimeType are not allowed./;
+                if(typeof translations[msg] != 'undefined'){
+                    return translations[msg];
+                }else{
+                    var invalidImage = '{{ 'user.image.invalid' | trans }}';
+                    var test = regex.exec(msg);
+
+                    if(test){
+                        console.log(test);
+                        return invalidImage.replace('%mimtype%', test[1]);
+                    }
+                }
+
+                return msg;
+            }
+
+            $('#profileForm input[type=file]').on('change', function(){ //we have choosen a file
+                sendFile = true;
+
+                $('#send-file').show();
+            });
+
+            $('#profileForm')
+                    .submit( function( e ) {
+                        var onSuccess = function(){
+                           $('#uploadSuccess').show();
+                           $('#upload-widget').fadeOut(200);
+                        };
+
+                        var assignProfilePhoto = function(responseJSON){
+                            $.ajax( {
+                                url: '{{ api_endpoint }}/api/users/{{ user.id }}/profile_photo?access_token={{ access_token }}',
+                                type: 'PATCH',
+                                data: { photo_id: responseJSON.id },
+                                success: onSuccess,
+                                error: onError
+                            } );
+                        };
+
+                        var onError = function(xhr, error){
+                            var responseJSON = xhr.responseJSON;
+                            $('.help-validate').remove();
+
+                            if(typeof responseJSON.errors != 'undefined'){
+                                if(typeof responseJSON.errors === 'object') {
+                                    for(field in responseJSON.errors){
+                                        var $error = $('<span class="help-validate"><p class="alert-danger">'+ trans(responseJSON.errors[field].message) +'</p></span>');
+                                        var $field = $('#social_profile_'+field);
+                                        $error.insertBefore($field);
+                                    }
+                                }else {
+                                    $('#form-errors')
+                                            .empty()
+                                            .append($('<ul><li>' + trans(responseJSON.errors) + '</li></ul>'))
+                                            .show();
+                                }
+                            }
+                        };
+
+                        $('#uploadSuccess').hide();
+
+                        if(sendFile){
+                            var formData = new FormData( this );
+                            $('#send-file').hide();
+
+                            $.ajax( {
+                                url: '{{ api_endpoint }}/api/users/{{ user.id }}/photo?access_token={{ access_token }}',
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                crossDomain: true,
+                                success: assignProfilePhoto,
+                                error: onError
+                            } );
+                        }else{
+                            alert('photo');
+                        }
+
+                        e.preventDefault();
+                    });
+        });
+
+
+        $(document).on('change', '.btn-file :file', function() {
+            var input = $(this),
+                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready( function() {
+            $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if( input.length ) {
+                    input.val(log);
+                } else {
+                    $("#filename").html(log);
+                }
+
+            });
+        });
+    </script>
