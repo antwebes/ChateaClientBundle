@@ -367,9 +367,12 @@ class UserManager extends BaseManager implements ManagerInterface
 
         $users = array();
 
-        foreach($data['resources'] as $resource){
-            $users[] = $this->hydrate($resource['participant_voyeur']);
+        if (is_array($data) && array_key_exist('resources', $data) && is_array($data['resources'])){
+        	foreach($data['resources'] as $resource){
+        		$users[] = $this->hydrate($resource['participant_voyeur']);
+        	}	
         }
+        
 
         return $users;
     }
