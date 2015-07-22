@@ -73,7 +73,8 @@
 
                         if(sendFile){
                             var formData = new FormData( this );
-                            $('#send-file').hide();
+                            $("#icon_register").addClass('icon-spinner icon-spin');
+                            $("#send-file").prop('disabled', true);
 
                             $.ajax( {
                                 url: '{{ api_endpoint }}/api/users/{{ user.id }}/photo?access_token={{ access_token }}',

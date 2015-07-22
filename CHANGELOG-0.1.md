@@ -90,7 +90,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * improve_upload_photo
  * update version ChateaClientLib v0.1.3
  
-* 0.1.20(2015-07-21)
+* 0.1.20(2015-07-22)
  * change url resetear-contraseña -> resetear-contrasena
  * refix desing page profile and edit profile photo
  * send events to analytics in form register
@@ -99,4 +99,5 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * show error customize when user register channel without validate
  * In register profile get id Of user session
  * externalize to template twig, js that manage show/hide button photo profile upload, and this template use prettyBundle
-
+ * hotfix with show visit, check if is array
+ * include spin in button upload photo profile

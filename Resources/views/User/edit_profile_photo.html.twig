@@ -29,7 +29,10 @@
             {{ form_rest(form) }}
             <div class="form-group row">
                 <div class="col-sm-offset-10 col-sm-2">
-                    <input id="send-file" style="display: none" name="register" type="submit" class="btn btn-lg pull-right btn-primary" value="{{ 'registration_profile.submit'|trans }}" />
+                	<button id="send-file" name="register" type="submit" style="display: none" class="btn btn-lg pull-right btn-primary">
+	                    <i id="icon_register" class=""></i>
+						{{ 'registration_profile.submit'|trans }}
+	                </button>
                 </div>
             </div>
         </form>
