@@ -230,4 +230,9 @@ class ChannelManager extends BaseManager
     {
         $this->getManager()->addUserChannelFan($channel->getId(), $fan->getId());
     }
+
+    public function delUserChannelFan($fan, $channel)
+    {
+        $this->getManager()->delUserChannelFan($channel->getId(), $fan->getId());
+    }
 }
