@@ -66,8 +66,6 @@ class UserController extends BaseController
 
                     $this->authenticateUser($user);
 
-                    $this->get("session")->getFlashBag()->add('userId', $user->getId());
-
                     if($this->container->getParameter('chatea_client.register_with_profile') == true){
                         return $this->redirect($this->generateUrl('chatea_user_profile'));
                     }
@@ -124,7 +122,7 @@ class UserController extends BaseController
         $userManager = $this->container->get('api_users');
         $api = $this->container->get('antwebes_chateaclient_manager');
 
-        $userId = $this->get("session")->getFlashBag()->get('userId');
+        $userId = $this->getUser()->getId();
 
         $user = $userManager->findById($userId);
 
