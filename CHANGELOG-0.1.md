@@ -98,3 +98,5 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * check max photo length 1 Mb
  * show error customize when user register channel without validate
  * In register profile get id Of user session
+ * externalize to template twig, js that manage show/hide button photo profile upload, and this template use prettyBundle
+
