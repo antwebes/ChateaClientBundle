@@ -101,3 +101,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * externalize to template twig, js that manage show/hide button photo profile upload, and this template use prettyBundle
  * hotfix with show visit, check if is array
  * include spin in button upload photo profile
+ 
+* 0.1.20(2015-07-27)
+ * update version chateaSecureBundle to 0.1.5 
