@@ -191,6 +191,11 @@ class UserController extends BaseController
         return $this->redirect($this->generateUrl('homepage'));
     }
 
+    /**
+     * @deprecated
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function confirmedAction(Request $request)
     {
         $refreshToken   = $request->get('refresh_token');
