@@ -104,3 +104,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  
 * 0.1.20(2015-07-27)
  * update version chateaSecureBundle to 0.1.5 
+ * Marked UserController::confirmedAction as deprecated
