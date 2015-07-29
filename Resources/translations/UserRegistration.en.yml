@@ -44,8 +44,8 @@ user.register.your_mail: "Your email address"
 user.register.write_your_mail: "Write your email to send me verification email."
 user.register.confirm.submit: "Submit"
 user.register.i_need_help: "I need help"
-user.register.confirmed.title: "Congratulations %username% !! Your account is activated successfully"
-user.register.confirmed.message: "User %username% registered correctly . You can now start chatting."
+user.register.confirmed.title: "Congratulations !! Your account is activated successfully"
+user.register.confirmed.message: "You have been registered correctly. You can now start chatting."
 user.register.invalid_client: "Due to tecnichal problems, it is impsible to register users now. Please contacto with the webmaster of this site."
 user.register_profile: 'Register profile'
 user.register_profile.skip: 'Skip'
