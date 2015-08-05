@@ -198,13 +198,6 @@ class UserController extends BaseController
      */
     public function confirmedAction(Request $request)
     {
-        $redirectResponse = $this->redirect($this->generateUrl('chatea_confirmed_success'));
-
-        return $redirectResponse;
-    }
-
-    public function confirmedSuccessAction()
-    {
         $response = $this->render('ChateaClientBundle:User:confirmedSuccess.html.twig');
 
         return $response;

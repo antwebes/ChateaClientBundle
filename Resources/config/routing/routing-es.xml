@@ -21,9 +21,6 @@
     <route id="chatea_confirmed" path="/registro/confirmado">
         <default key="_controller">ChateaClientBundle:User:confirmed</default>
     </route>
-    <route id="chatea_confirmed_success" path="/registro/completado">
-        <default key="_controller">ChateaClientBundle:User:confirmedSuccess</default>
-    </route>
     <route id="chatea_client_user_settings" path="/usuario-ajustes">
         <default key="_controller">ChateaClientBundle:User:userSettings</default>
     </route>
