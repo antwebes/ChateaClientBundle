@@ -31,6 +31,8 @@ form.email_already_used: "Email already in use. An email only be used in a accou
 form.email_not_valid: "The value of email is not a valid email address."
 registration.submit: Register
 user.register.success: "You have been successfully registered"
+register.success.title: 'Only you need verify your account'
+register.success.action: 'We send you a confirmation email. Click in the link to in your email to verify your account.'
 user.register.confirm.success: "Your account has been successfully confirmated"
 user.register.confirm: "Confirm your account"
 user.register.confirm_need: "You need confirm your account"

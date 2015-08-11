@@ -30,7 +30,9 @@ form.nick_suggestions: "Sugerencias"
 form.email_already_used: "Esta dirección de correo ya está en uso. Una dirección solo puede ser usado por una única cuenta."
 form.email_not_valid: "La dirección de email no es válida."
 registration.submit: "Registrar"
-user.register.success: "El registro se ha realizado con éxito"
+user.register.success: "El registro se ha realizado con éxito. Ahora solo es necesario que valides tu dirección de email."
+register.success.title: 'Sólamente necesitas hacer un paso más.'
+register.success.action: 'Pincha en el enlace de confirmación que hemos enviado a tu email para validar tu cuenta.'
 user.register.confirm.success: "Tu cuenta ha sido confirmada con éxito"
 user.register.confirm: "Confirma tu cuenta"
 user.register.confirm_need: "Necesitas confirmar tu cuenta."
