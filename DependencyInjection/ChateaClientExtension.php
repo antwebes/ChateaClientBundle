@@ -43,6 +43,7 @@ class ChateaClientExtension extends Extension
         $container->setParameter('chatea_client.app_auth.secret', $config['app_auth']['secret']);
         $container->setParameter('chatea_client.api_endpoint', $config['api_endpoint']);
         $container->setParameter('chatea_client.api_request_allow', $config['api_request_allow']);
+        $container->setParameter('chatea_client.authenticate_client_as_guest', $config['authenticate_client_as_guest']);
 
         if($config['filestore']['file_directory'] == 'default'){
             $config['filestore']['file_directory'] = $container->getParameter('kernel.cache_dir');

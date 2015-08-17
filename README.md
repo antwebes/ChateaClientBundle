@@ -35,6 +35,7 @@ chatea_client:
         secret: %chatea_secret_id%
     api_endpoint: %api_endpoint%
     app_id: %chatea_app_id%
+    authenticate_client_as_guest: true|false #optional (by deafault false) to indicate if client authenticates as guest. In case of false it authenticates with client credentials
     
 ewz_recaptcha:
     public_key:  %recaptcha_public_key%
