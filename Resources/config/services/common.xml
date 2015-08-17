@@ -35,6 +35,7 @@
                 <argument key="base_url">%chatea_client.api_endpoint%</argument>
                 <argument key="store" type="service" id="antwebes_chateaclient_lib_filestore" />
                 <argument key="OAuth2Client" type="service" id="antwebes_chateaclient_lib.client_auth" />
+                <argument key="as_guest">%chatea_client.authenticate_client_as_guest%</argument>
             </argument>
         </service>
 
