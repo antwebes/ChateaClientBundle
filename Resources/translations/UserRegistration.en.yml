@@ -74,3 +74,4 @@ user.edit_profile_photo.success: "Profile photo has been updated successful"
 user.edit_profile.success: "Your profile has been updated successfully"
 user.register.change_password: You can also change your email <a href="%path%" title="%title%">from here</a>
 change_email: "Change email"
+upload.pictures.alert.sexual_content: Do not upload pictures with sexual content. These will be removed without notice.

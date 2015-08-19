@@ -19,8 +19,11 @@
             <div id="uploadSuccess" class="alert alert-success" style="display:none">
                 {{ 'user.edit_profile_photo.success' | trans }}
             </div>
+            <br/>
+            <div class="alert alert-info">
+                <strong>Info!</strong> {% trans from "UserRegistration" %}upload.pictures.alert.sexual_content{% endtrans %}
+            </div>
             <div class="well form-group">
-{#                 <label class="col-lg-3 control-label">{{ "form.label.image" | trans }}</label>#}
                 <div class="col-lg-9 btn btn-large">
                     {{ form_errors(form.image) }}
                     {{ form_widget(form.image) }}
