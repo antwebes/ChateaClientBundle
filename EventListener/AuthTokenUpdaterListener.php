@@ -53,6 +53,7 @@ class AuthTokenUpdaterListener
     private function assertUserIsLoggedIn()
     {
         $token = $this->securityContext->getToken();
+
         $isAuthenticated = $token !== null &&
                            $token->isAuthenticated() && 
                            $token->getUser() instanceof User &&
