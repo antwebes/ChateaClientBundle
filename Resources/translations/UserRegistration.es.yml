@@ -81,3 +81,4 @@ user.edit_profile.success: "Tu perfil ha sido actualizado con éxito"
 user.register.change_password: También puedes cambiarte de email <a href="%path%" title="%title%">desde aquí</a>
 change_email: "Cambiar email"
 upload.pictures.alert.sexual_content:  No subas fotos con contenido sexual. Estas serán eliminadas sin previo aviso.
+user.last_visits: "Últimas visitas"
