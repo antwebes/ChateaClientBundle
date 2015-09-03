@@ -1,0 +1,64 @@
+{% trans_default_domain 'UserRegistration' %}
+
+<form id="profileForm" class="form-horizontal" action="{{ path('chatea_client_update_profile' ) }}" {{ form_enctype(form) }} method="POST">
+    {% if alerts is not null %}
+        <div id="form-errors" class="alert alert-warning" data-behat="msg-warning">
+            {{ alerts }}
+        </div>
+    {% endif %}
+    {% if success is not null %}
+        <div class="alert alert-success" data-behat="msg-success">
+            {{ 'user.edit_profile.success' | trans }}
+        </div>
+    {% endif %}
+    <div id="form-errors" class="alert alert-danger" style="display: none">
+    </div>
+    {% if errors | length > 0 %}
+    <div class="alert alert-danger">
+        {{ form_errors(form) }}
+    </div>
+    {% endif %}
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label" for="user_profile_gender">{{ "form.label.gender" | trans }}</label>
+        <div class="col-lg-9">
+            {{ form_errors(form.gender) }}
+            {{ form_widget(form.gender, {'attr': {'class': 'form-control' }, 'translation_domain' : 'UserRegistration' }) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label" for="user_profile_seeking">{{ "form.label.seeking" | trans }}</label>
+        <div class="col-lg-9">
+            {{ form_errors(form.seeking) }}
+            {{ form_widget(form.seeking, {'attr': {'class': 'form-control' }, 'translation_domain' : 'UserRegistration' }) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label" for="user_profile_youWant">{{ "form.label.youWant" | trans }}</label>
+        <div class="col-lg-9">
+            {{ form_errors(form.youWant) }}
+            {{ form_widget(form.youWant, {'attr': {'class': 'form-control', 'placeholder': 'form.placeholder.youWant' }, 'translation_domain' : 'UserRegistration' }) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label" for="user_profile_about">{{ "form.label.about" | trans }}</label>
+        <div class="col-lg-9">
+            {{ form_errors(form.about) }}
+            {{ form_widget(form.about, {'attr': {'class': 'form-control', 'placeholder': 'form.placeholder.about' }, 'translation_domain' : 'UserRegistration' }) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label" for="user_profile_birthday">{{ "form.birthday" | trans }}</label>
+        <div class="col-lg-9">
+            {{ form_errors(form.birthday) }}
+            {{ form_widget(form.birthday, {'translation_domain' : 'UserRegistration' }) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-offset-10 col-sm-2">
+            <input name="register" type="submit" class="btn btn-lg pull-right btn-primary" value="{{ 'registration_profile.submit'|trans }}" />
+        </div>
+    </div>
+    {{ form_widget(form._token) }}
+    {{ form_rest(form) }}
+</form>
