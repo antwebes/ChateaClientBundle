@@ -3,6 +3,7 @@
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChangeEmail;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChangePassword;
+use Ant\Bundle\ChateaClientBundle\Api\Model\OutstandingEntry;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Paginator;
@@ -71,6 +72,17 @@ class UserManager extends BaseManager implements ManagerInterface
         if(isset($item['language'])){
             $user->setLanguage($item['language']);
         }
+
+        if(isset($item['outstanding'])){
+            $outstandingData = $item['outstanding'];
+            $outstandingEntry = new OutstandingEntry();
+
+            $outstandingEntry->setFrom(new \DateTime($outstandingData['from']));
+            $outstandingEntry->setUntil(new \DateTime($outstandingData['until']));
+
+            $user->setOutstandingEntry($outstandingEntry);
+        }
+
         return $user;
     }
 
