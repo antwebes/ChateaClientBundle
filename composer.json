@@ -20,7 +20,7 @@
 	"require" : {
 		"symfony/framework-bundle" : "~2.3",
 		"antwebes/chatea-common" : "0.1.0",
-		"antwebes/chatea-client-lib" : "0.1.4",
+		"antwebes/chatea-client-lib" : "0.1.5",
 		"antwebes/chatea-secure-bundle" : "0.1.5",
 		"excelwebzone/recaptcha-bundle" : "2.3.*"
 	},

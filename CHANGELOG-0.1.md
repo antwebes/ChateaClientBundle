@@ -114,3 +114,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 * 0.1.23(2015-09-07)
  * add page who saw my profile
  * init organize folders and template 
+ * Update version chateaClientLib v0.1.5
