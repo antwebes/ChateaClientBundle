@@ -110,3 +110,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * update version chateaClientLib to 0.1.4 
  * Added report photo method
  * add messages not sexual content in photos
+ 
+* 0.1.23(2015-09-07)
+ * add page who saw my profile
+ * init organize folders and template 
