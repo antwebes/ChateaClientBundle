@@ -115,3 +115,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * add page who saw my profile
  * init organize folders and template 
  * Update version chateaClientLib v0.1.5
+ 
+* 0.1.23(2015-09-XX)
+ * Include data-behat to test go to page update photo profile
