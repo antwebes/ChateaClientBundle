@@ -21,6 +21,7 @@ class AuthTokenUpdaterListenerTest extends \PHPUnit_Framework_TestCase
         $this->annotationReader = new AnnotationReader();
         $user = new User(1,'test_user','aie84asd989asdf88asdf99asdf99','refresh_token',true);
         $user->setExpiresIn(time()+3600);
+
         $this->securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
         $this->token = new UsernamePasswordToken(
             $user,
