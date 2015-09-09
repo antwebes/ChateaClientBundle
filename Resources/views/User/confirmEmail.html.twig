@@ -111,21 +111,21 @@
 
             <div class="col-md-6 col-xs-12">
                 <center><span class="txt-header-h4">
-                    {{ "You can click on the link in the left bar on section help." | trans }}
+                    {{ "help.link_help" | trans({}, "help") }}
                         <br/>
-                    or
+                    {{ "help.or" | trans({}, "help") }}
                     <br/>
-                        {{ "Write our email: cfree@chatsfree.net" |trans }}
+                        {{ "page_confirm_email.write_our_email" |trans }}
                 </span></center>
             </div>
 
 
             <div class="col-md-6 col-xs-12">
                 <center><span class="txt-header-h4">
-                    <p>{{ "You can send your comments about social networks: " }}</p>
-                    <p>{% trans %}You can follow us on <b>Twitter</b>: @Chatsfree. {% endtrans %}<a target="_blank" href="https://twitter.com/ChatsFree">{{ "Click here to go" | trans }}</a></p>
-                    <p>{% trans %}You can follow us on <b>Google +</b>: Chats free. {% endtrans %}<a target="_blank" href="https://plus.google.com/u/0/104718051087747847566">{{ "Click here to go" | trans }}</a></p>
-                    <p>{% trans %}You can about <b>facebook</b>: Chatsfree. {% endtrans %}<a target="_blank" href="https://www.facebook.com/chatsfree">{{ "Click here to go" | trans }}</a></p>
+                    <p>{{ "help.contact_social_networks" | trans({}, "help") }}</p>
+                    <p>{{ "help.follow_us" | trans({}, "help") }} <b>Twitter</b>: @Chatsfree. <a target="_blank" href="https://twitter.com/ChatsFree"> {{ "help.click_here" | trans({}, "help") }}</a></p>
+                    <p>{{ "help.follow_us" | trans({}, "help") }} <b>Google +</b>: Chats free. <a target="_blank" href="https://plus.google.com/u/0/104718051087747847566"> {{ "help.click_here" | trans({}, "help") }}</a></p>
+                    <p>{{ "help.follow_us" | trans({}, "help") }} <b>facebook</b>: Chatsfree. <a target="_blank" href="https://www.facebook.com/chatsfree"> {{ "help.click_here" | trans({}, "help") }}</a></p>
                 </span></center>
             </div>
 

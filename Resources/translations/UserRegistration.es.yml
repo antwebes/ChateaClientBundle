@@ -52,6 +52,7 @@ user.register.invalid_client: "Debido a problemas técnicos en este momento nos 
 user.register_profile: 'Registrar perfil'
 user.register_profile.skip: 'No por ahora'
 user.profile.max_file_upload: 'Esta foto es demasiado grande. Tamaño máximo permitido 1Mb'
+page_confirm_email.write_our_email: Escribe a nuestro email de contacto
 registration_profile.submit: 'Enviar'
 form.label.gender: 'Genero'
 form.label.seeking: 'Busca'
