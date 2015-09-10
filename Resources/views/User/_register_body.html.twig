@@ -21,11 +21,10 @@
 		<div class="form-group">
 			{{ form_label(form.email.first) }}
 			<div class="col-lg-9">
-				<span data-id="email-suggestions" class="help-block"></span>
 				{{ form_errors(form.email) }}
 				{{ form_errors(form.email.first) }}
 				{{ form_widget(form.email.first, {'attr': {'class': 'form-control', 'placeholder': 'form.email.placeholder', 'data-id': 'form_email'}, 'translation_domain' : 'UserRegistration' }) }}
-				<span data-id="help-block">{{ "form.enter_valid_email" | trans }}</span>
+				<span data-id="help-block">{{ "form.enter_valid_email" | trans }}</span>&nbsp;<span data-id="email-suggestions"></span>
 			</div>
 		</div>
 		<div class="form-group">
@@ -40,9 +39,9 @@
 	        {{ form_label(form.username) }}
 	        <div class="col-lg-9">
 	            {{ form_errors(form.username) }}
-	            <span data-id="username-validate" class="help-validate"></span>
 	            {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'form.username.placeholder', 'data-id': 'registration_form_username'}, 'translation_domain' : 'UserRegistration' }) }}
-	            <span data-id="help-block">{{ "form.nick_not_spaces" | trans }}, <font color="red">{{ "form.incorrect" | trans }}:</font> barack obama <font color="green">{{ "form.correct" | trans }}:</font> barack_obama {{ "form.or" | trans }} barackObama</span>
+	            <span data-id="help-block">{{ "form.nick_not_spaces" | trans }}, <font color="red">{{ "form.incorrect" | trans }}:</font> barack obama <font color="green">{{ "form.correct" | trans }}:</font> barack_obama {{ "form.or" | trans }} barackObama</span> &nbsp;
+                <span data-id="username-validate"></span>
 
 	            <div data-id="suggestions-username-block" class="suggestions" style="display:none">
 	                <div class="suggestions-title">{{ "Suggestions" | trans }}:</div>

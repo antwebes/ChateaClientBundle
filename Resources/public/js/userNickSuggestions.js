@@ -80,10 +80,18 @@ function userNickSuggestions(messages) {
                 contentType: "application/json",
                 success: function (response) {
 
-                    $('span[data-id="email-suggestions"]').html('<p class="alert-success">' + messages.mail_is_aviable + '</p>');
+                    $('span[data-id="email-suggestions"]').html(messages.mail_is_aviable)
+                        .removeClass('alert-danger')
+                        .removeClass('alert-warning')
+                        .addClass('alert-success');
+
                     if(response.smtp_valid != undefined) {
                         if(!response.smtp_valid) {
-                            $('span[data-id="email-suggestions"]').html('<p class="alert alert-warning"><i class="icon-attention"></i> ' + messages.mail_is_available_but_not_validate + '</p>');
+                            $('span[data-id="email-suggestions"]')
+                                .html('<i class="icon-attention"></i> ' + messages.mail_is_available_but_not_validate)
+                                .removeClass('alert-success')
+                                .removeClass('alert-danger')
+                                .addClass('alert-warning');
                             sendEvent("registration", "warning", "smtp_validation");
                         }
                     }
@@ -91,7 +99,11 @@ function userNickSuggestions(messages) {
                 error: function (responseError) {
                     var response = $.parseJSON(responseError.responseText);
                     var messageError = response.errors.email.message;
-                    $('span[data-id="email-suggestions"]').html('<p class="alert-danger">' + transServerError(messageError) + '</p>');
+                    $('span[data-id="email-suggestions"]').html(transServerError(messageError))
+                        .removeClass('alert-success')
+                        .removeClass('alert-warning')
+                        .addClass('alert')
+                        .addClass('alert-danger');
                     sendEvent("registration", "error", response.errors.email.message);
                 }
 
@@ -144,16 +156,16 @@ function userNickSuggestions(messages) {
                 dataType: "json",
                 contentType: "application/json",
                 success: function (response) {
-                    $('span[data-id="username-validate"]').html('<p class="alert-success">' + messages.username_is_aviable + '</p>');
+                    $('span[data-id="username-validate"]').html(messages.username_is_aviable).removeClass('alert-danger').addClass('alert-success');
                 },
                 error: function (responseError) {
                     var response = $.parseJSON(responseError.responseText);
                     writeUsernameSuggestions(response.suggestion);
                     sendEvent("registration", "error", "username_not_available");
                     if (response.errors.username){
-                        $('span[data-id="username-validate"]').html('<p class="alert-danger">' + transServerError(response.errors.username.message) + '</p>');
+                        $('span[data-id="username-validate"]').html(transServerError(response.errors.username.message)).removeClass('alert-success').addClass('alert-danger');
                     }else if (response.errors.email){
-                        $('span[data-id="username-validate"]').html('<p class="alert-danger">' + transServerError(response.errors.email.message) + '</p>');
+                        $('span[data-id="username-validate"]').html(transServerError(response.errors.email.message)).removeClass('alert-success').addClass('alert-danger');
                     }
                 }
 
