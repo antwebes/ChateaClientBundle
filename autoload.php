@@ -8,6 +8,6 @@ use Composer\Autoload\ClassLoader;
  */
 $loader = require __DIR__.'/vendor/autoload.php';
 
-AnnotationRegistry::registerAutoloadNamespace('Ant\Bundle\ChateaClientBundle', __DIR__ . '/../../..');
+AnnotationRegistry::registerFile(__DIR__.'/Security/Authentication/Annotation/APIUser.php');
 
 return $loader;
