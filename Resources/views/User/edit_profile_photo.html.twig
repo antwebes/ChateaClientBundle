@@ -14,26 +14,59 @@
         <li class="active">{{ 'user.edit_profile_photo' | trans }}</li>
     </ol>
 
+<style>
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            background: red;
+            cursor: inherit;
+            display: block;
+        }
+        input[readonly] {
+            background-color: white !important;
+            cursor: text !important;
+        }
+    </style>
     <div class="col-xs-12">
         <form id="profileForm" class="form-horizontal" method="POST">
             <div id="uploadSuccess" class="alert alert-success" style="display:none">
                 {{ 'user.edit_profile_photo.success' | trans }}
             </div>
-            <br/>
-            <div class="alert alert-info">
-                <strong>Info!</strong> {% trans from "UserRegistration" %}upload.pictures.alert.sexual_content{% endtrans %}
-            </div>
-            <div class="well form-group">
-                <div class="col-lg-9 btn btn-large">
+            <div id="upload-widget" class="form-group">
+                <div class="col-xs-8 col-xs-offset-2">
                     {{ form_errors(form.image) }}
-                    {{ form_widget(form.image) }}
+
+                    <div class="alert alert-info">
+                        <strong>Info!</strong> {% trans from "UserRegistration" %}upload.pictures.alert.sexual_content{% endtrans %}
+                    </div>
+                    <span class="file-input btn btn-block btn-default btn-file btn-subtext">
+                        {% if user.profilePhoto %}
+                            <img src="{{ user | userProfilePhotoUrl("medium") }}" class="avatar avatar-150 photo" width="150" height="150" alt="{{ 'profile_picture_of' | trans({},'PrettyBundle') }} {{ user.username }}" />
+                        {% else %}
+                            <i class="fa fa-upload" style="font-size: 10em"></i>
+                        {% endif %}
+                        <h3>Haz click para subir una foto&hellip;</h3> {{ form_widget(form.image) }}
+                        <span id="filename"></span>
+                    </span>
+
+
                 </div>
             </div>
             {{ form_rest(form) }}
             <div class="form-group row">
-                <div class="col-sm-offset-10 col-sm-2">
-                	<button id="send-file" name="register" type="submit" style="display: none" class="btn btn-lg pull-right btn-primary">
-	                    <i id="icon_register" class=""></i>
+                <div class="col-xs-8 col-xs-offset-2">
+                	<button id="send-file" name="register" type="submit" style="display: none" class="btn btn-block pull-right btn-primary">
 						{{ 'registration_profile.submit'|trans }}
 	                </button>
                 </div>
