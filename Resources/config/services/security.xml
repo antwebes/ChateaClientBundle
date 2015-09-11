@@ -33,5 +33,14 @@
           <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
         </service>
 
+
+        <service class="Ant\Bundle\ChateaClientBundle\EventListener\AccessDeniedHttpExceptionListener"
+                 id="ant_chatea_client.event_listener.access_denied_http_exception_listener">
+            <argument id="security.context" type="service"/>
+            <argument id="router" type="service"/>
+            <argument type="string">chatea_client_register_user_success</argument>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
     </services>
 </container>

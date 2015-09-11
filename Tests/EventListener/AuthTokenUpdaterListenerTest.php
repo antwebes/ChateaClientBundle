@@ -1,9 +1,12 @@
 <?php
 namespace Ant\Bundle\ChateaClientBundle\Tests\EventListener;
 
+use Doctrine\Common\Annotations\AnnotationReader;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Ant\Bundle\ChateaClientBundle\EventListener\AuthTokenUpdaterListener;
 use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
-use Doctrine\Common\Annotations\AnnotationReader;
+use Ant\Bundle\ChateaSecureBundle\Security\User\User;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class AuthTokenUpdaterListenerTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,10 +19,21 @@ class AuthTokenUpdaterListenerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->annotationReader = new AnnotationReader();
-        $this->securityContext = $this->getMockForAbstractClass('Symfony\Component\Security\Core\SecurityContextInterface');
+        $user = new User(1,'test_user','aie84asd989asdf88asdf99asdf99','refresh_token',true);
+        $user->setExpiresIn(time()+3600);
+
+        $this->securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
+        $this->token = new UsernamePasswordToken(
+            $user,
+            'test_credentials',
+            'test_provider',
+            array('ROLE_USER','ROLE_USER_TEST')
+        );
+
         $this->client = $this->getMockBuilder('Ant\ChateaClient\Service\Client\ChateaGratisAppClient')
             ->disableOriginalConstructor()
             ->getMock();
+
         $this->authTokenUpdaterListener = new AuthTokenUpdaterListener($this->annotationReader, $this->securityContext, $this->client);
     }
 
@@ -28,6 +42,7 @@ class AuthTokenUpdaterListenerTest extends \PHPUnit_Framework_TestCase
         $this->client
             ->expects($this->never())
             ->method('updateAccessToken');
+
 
         $eventAction1 = $this->createFilterControllerEvent('ControllerWithNoAnnotation', 'action1');
         $eventAction2 = $this->createFilterControllerEvent('ControllerWithNoAnnotation', 'action2');
@@ -38,6 +53,10 @@ class AuthTokenUpdaterListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testTokenIsUpdatedIfMethodHasAnnotationAndUserIsLoggedIn()
     {
+        $this->securityContext ->expects($this->any())
+            ->method('getToken')
+            ->will($this->returnValue($this->token));
+
         $this->client
             ->expects($this->once())
             ->method('updateAccessToken')
@@ -55,6 +74,10 @@ class AuthTokenUpdaterListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testTokenIsUpdatedIfClassHasAnnotationAndUserIsLoggedIn()
     {
+        $this->securityContext ->expects($this->any())
+            ->method('getToken')
+            ->will($this->returnValue($this->token));
+
         $this->client
             ->expects($this->exactly(2))
             ->method('updateAccessToken')
@@ -71,10 +94,11 @@ class AuthTokenUpdaterListenerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function testAccessDeniedExceptionIsThrowenIfMethodHasAnnotationAndSecurityContextHasntToken()
     {
+
         $this->client
             ->expects($this->never())
             ->method('updateAccessToken');
@@ -87,7 +111,7 @@ class AuthTokenUpdaterListenerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function testAccessDeniedExceptionIsThrowenIfClassHasAnnotationAndSecurityContextHasntToken()
     {
@@ -240,12 +264,12 @@ class ControllerWithNoAnnotation
 {
     public function action1()
     {
-        
+
     }
 
     public function action2()
     {
-        
+
     }
 }
 
@@ -253,7 +277,7 @@ class ControllerWithMethodAnnotation
 {
     public function action1()
     {
-        
+
     }
 
     /**
@@ -261,7 +285,7 @@ class ControllerWithMethodAnnotation
      */
     public function action2()
     {
-        
+
     }
 }
 
