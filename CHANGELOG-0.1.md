@@ -118,3 +118,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  
 * 0.1.23(2015-09-XX)
  * Include data-behat to test go to page update photo profile
+ * add method searchUserByNamePaginated in usermanager
