@@ -102,7 +102,6 @@ function userNickSuggestions(messages) {
                     $('span[data-id="email-suggestions"]').html(transServerError(messageError))
                         .removeClass('alert-success')
                         .removeClass('alert-warning')
-                        .addClass('alert')
                         .addClass('alert-danger');
                     sendEvent("registration", "error", response.errors.email.message);
                 }
