@@ -388,4 +388,18 @@ class UserManager extends BaseManager implements ManagerInterface
 
         return $users;
     }
+
+    /**
+     * Find user by partial name
+     *
+     * @param string $partial the partial name
+     * @param int $page the number page
+     * @return Pager the pager
+     */
+    public function searchUserByNamePaginated($partial, $page = 1)
+    {
+        $command = new Command('searchUserByName',array('partial' => $partial,'paginated'=>true));
+
+        return  new Pager($this,$command,$page, $this->limit);
+    }
 }
