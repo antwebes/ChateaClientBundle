@@ -244,7 +244,7 @@ class AuthTokenUpdaterListenerTest extends \PHPUnit_Framework_TestCase
 
     private function getAuthenticatedUser($isCredentialsNonExpired = true)
     {
-        $userMock = $this->getMockBuilder('Ant\Bundle\ChateaClientBundle\Security\User\User')
+        $userMock = $this->getMockBuilder('Ant\Bundle\ChateaSecureBundle\Security\User\User')
             ->disableOriginalConstructor()
             ->getMock();
 
