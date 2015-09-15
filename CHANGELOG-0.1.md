@@ -116,9 +116,9 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * init organize folders and template 
  * Update version chateaClientLib v0.1.5
  
-* 0.1.24(2015-09-14)
+* 0.1.24(2015-09-15)
  * Include data-behat to test go to page update photo profile
  * Include photo actually in form update photo profile
  * add method searchUserByNamePaginated in usermanager
  * remove refresh token now to do autologin we use a parameter autologin
- * update version chateaClientLib 0.1.6 
+ * update method searchUserByNamePaginated now call findAll with filter partial_name and add basic test
