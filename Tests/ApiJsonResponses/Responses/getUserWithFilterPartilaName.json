@@ -1,0 +1,204 @@
+{
+  "total": 5,
+  "limit": 100,
+  "offset": 0,
+  "count": 5,
+  "_links": {
+    "self": {
+      "href": "http://api.chatsfree.lo/app_dev.php/api/users"
+    }
+  },
+  "resources": [
+    {
+      "id": 78303,
+      "username": "olafoo",
+      "username_canonical": "olafoo",
+      "last_login": "2015-07-25T00:44:23+0200",
+      "profile": {
+        "about": "todo",
+        "seeking": "women",
+        "gender": "male",
+        "birthday": "1974-12-01T00:00:00+0100",
+        "count_visits": 0,
+        "you_want": "Quiero Pasarla bien contigo"
+      },
+      "city": {
+        "name": "no_city",
+        "country": {
+          "name": "Mexico"
+        },
+        "id": 502604
+      },
+      "on_line": false,
+      "language": "es",
+      "_links": {
+        "self": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/78303"
+        },
+        "channels": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/78303/channels"
+        },
+        "channels_fan": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/78303/channelsFan"
+        },
+        "blocked_users": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/78303/blocked"
+        },
+        "photos": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/78303/photos"
+        },
+        "channels_moderated": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/78303/moderated"
+        }
+      }
+    },
+    {
+      "id": 63243,
+      "username": "foo",
+      "username_canonical": "foo",
+      "last_login": "2015-07-19T08:14:22+0200",
+      "city": {
+        "name": "no_city",
+        "country": {
+          "name": "Spain"
+        },
+        "id": 502517
+      },
+      "on_line": false,
+      "language": "es",
+      "_links": {
+        "self": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/63243"
+        },
+        "channels": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/63243/channels"
+        },
+        "channels_fan": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/63243/channelsFan"
+        },
+        "blocked_users": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/63243/blocked"
+        },
+        "photos": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/63243/photos"
+        },
+        "channels_moderated": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/63243/moderated"
+        }
+      }
+    },
+    {
+      "id": 59666,
+      "username": "rodolfoo0",
+      "username_canonical": "rodolfoo0",
+      "last_login": "2015-06-13T12:25:17+0200",
+      "profile": {
+        "gender": "male",
+        "birthday": "1992-04-05T00:00:00+0200",
+        "count_visits": 0,
+        "profile_photo": {
+          "id": 1973,
+          "number_votes": "0",
+          "path": "https://s3.amazonaws.com/images-chatsfree/original/2015/06/13/557c04be98036.jpg",
+          "path_large": "https://s3.amazonaws.com/images-chatsfree/2015/06/13/557c04be98036_large.jpg",
+          "path_medium": "https://s3.amazonaws.com/images-chatsfree/2015/06/13/557c04be98036_medium.jpg",
+          "path_small": "https://s3.amazonaws.com/images-chatsfree/2015/06/13/557c04be98036_small.jpg",
+          "path_icon": "https://s3.amazonaws.com/images-chatsfree/2015/06/13/557c04be98036_icon.jpg"
+        }
+      },
+      "city": {
+        "name": "no_city",
+        "country": {
+          "name": "Mexico"
+        },
+        "id": 502604
+      },
+      "on_line": false,
+      "language": "es",
+      "_links": {
+        "self": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/59666"
+        },
+        "channels": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/59666/channels"
+        },
+        "channels_fan": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/59666/channelsFan"
+        },
+        "blocked_users": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/59666/blocked"
+        },
+        "photos": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/59666/photos"
+        },
+        "channels_moderated": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/59666/moderated"
+        }
+      }
+    },
+    {
+      "id": 34112,
+      "username": "SsUuRrFfoO",
+      "username_canonical": "ssuurrffoo",
+      "last_login": "2015-04-15T19:43:00+0200",
+      "on_line": false,
+      "language": "es",
+      "_links": {
+        "self": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/34112"
+        },
+        "channels": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/34112/channels"
+        },
+        "channels_fan": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/34112/channelsFan"
+        },
+        "blocked_users": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/34112/blocked"
+        },
+        "photos": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/34112/photos"
+        },
+        "channels_moderated": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/34112/moderated"
+        }
+      }
+    },
+    {
+      "id": 959,
+      "username": "soulfood",
+      "username_canonical": "soulfood",
+      "last_login": "2014-09-13T10:01:19+0200",
+      "profile": {
+        "about": "I've got a soft spot for intelligent and cute spots...I am an easy going person who enjoys good conversation.The biggest part of me is my drive and ambition. I generally accomplish anything I set my mind to I love to travel and experience new things.I can be very spontaneous at times. I am the sort of person that is very supportive of my mate, but I am not submissive. I will walk with you, beside you, not behind you.. i am interested in the kind of person you are.your personality matters alot... Above all you must have a good sense of humor my aspirations are enormous",
+        "seeking": "women",
+        "gender": "male",
+        "birthday": "1968-11-30T00:00:00+0100",
+        "count_visits": 0,
+        "you_want": "There is no perfect woman as there is no perfect man but i love a natural woman down too earth full of life good sense of hunmor one that never brings her past too the present never compares her man too another sensitive too her man wants and needs one th"
+      },
+      "on_line": false,
+      "language": "en",
+      "_links": {
+        "self": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/959"
+        },
+        "channels": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/959/channels"
+        },
+        "channels_fan": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/959/channelsFan"
+        },
+        "blocked_users": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/959/blocked"
+        },
+        "photos": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/959/photos"
+        },
+        "channels_moderated": {
+          "href": "http://api.chatsfree.lo/app_dev.php/api/users/959/moderated"
+        }
+      }
+    }
+  ]
+}
