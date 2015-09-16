@@ -453,7 +453,7 @@ class User implements BaseModel
     
     public function isEnabled()
     {
-    	$this->getEnabled();
+    	return $this->getEnabled();
     }
 
     public function setFacebookId($facebookId)
