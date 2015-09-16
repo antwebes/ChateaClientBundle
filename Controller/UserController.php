@@ -106,6 +106,10 @@ class UserController extends BaseController
 
         $user = $userManager->findById($userId);
         if($user != null){
+            if($user->isEnabled()){
+                return $this->redirect($this->generateUrl('chatea_client_update_profile_index'));
+            }
+
             return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
         }else{
             throw $this->createNotFoundException();
