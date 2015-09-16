@@ -124,7 +124,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * update method searchUserByNamePaginated now call findAll with filter partial_name and add basic test
  * ATTENTION! This version has dependeces with foreign bundles
  
-* 0.1.25 (2015-09-XX)
+* 0.1.25 (2015-09-16)
  * Remove dependeces with foreign bundles
  * Include filter twig UserProfilePhotoUrlExtension
  * Hotfix From edit profile sent page confirm email
