@@ -401,4 +401,17 @@ class UserManager extends BaseManager implements ManagerInterface
         $filters['partial_name'] = $partial;
         return $this->findAll($page,$filters,$limit,$order);
     }
+
+    /**
+     * Updates a users city
+     * @param $user
+     * @param $city
+     */
+    public function updateUserCity($user, $city)
+    {
+        $this->getManager()->updateUserCity(
+            $user->getId(),
+            $city->getId()
+        );
+    }
 }

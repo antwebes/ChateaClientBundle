@@ -88,7 +88,7 @@ class CreateUserType extends AbstractType
 
 //        $clientTransformer = new ClientTransformer($options['clientManager']);
 
-        $builder->add(  $builder->create('city','hidden',   array('required' => false))
+        $builder->add(  $builder->create('city','hidden',   array('required' => false, 'attr' => array('data-city-finder' => 'current_city')))
             ->addModelTransformer($cityLocationTransformer)
         );
 

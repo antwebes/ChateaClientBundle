@@ -1,0 +1,75 @@
+parameters:
+    kernel.secret: an_secrete
+    secret: asecret
+    api_endpoint: 'http://myapi.com/api'
+
+chatea_client:
+    api_endpoint: %api_endpoint%
+    app_auth:
+        client_id: aid
+        secret: apisecrete
+    app_id: 1
+
+chatea_secure:
+    app_auth:
+        client_id: aid
+        secret: apisecrete
+        enviroment: test
+    api_endpoint: %api_endpoint%
+    homepage_path: homepage
+
+framework:
+    form:            ~
+    session: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig', 'php']
+    router:
+        resource: "%kernel.root_dir%/../../Resources/config/routing/routing.xml"
+        strict_requirements: ~
+
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    globals:
+        version: "0.1.0"
+
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        antwebs_chateaclient_provider:
+            id: antwebs_chateasecure_user_provider
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        secured_area:
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000 # 365 days in seconds
+                path:     /
+                domain:   ~
+            pattern:    ^/
+            anonymous: ~
+            antwebs_chateasecure_login:
+                check_path: _security_check
+                login_path: _antwebes_chateaclient_login
+                provider: antwebs_chateaclient_provider
+            logout:
+                invalidate_session: false
+                path:   _antwebes_chateaclient_logout
+                target: homepage
+                handlers: [antwewebs_revoke_access_on_logout_handler]
+
+    access_control:
+        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
+        - { path: ^/usuarios/.*/fotos, roles: ROLE_USER }
+        - { path: ^/perfil, roles: ROLE_USER }

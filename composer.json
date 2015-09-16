@@ -19,11 +19,16 @@
 	"license" : "MIT",
 	"require" : {
 		"symfony/framework-bundle" : "~2.3",
-		"antwebes/chatea-common" : "0.1.0",
-		"antwebes/chatea-client-lib" : "0.1.5",
-		"antwebes/chatea-secure-bundle" : "0.1.5",
-		"excelwebzone/recaptcha-bundle" : "2.3.*@dev",
-		"doctrine/annotations" : "^1.2"
+        "symfony/form": "2.3.*",
+        "symfony/validator": "2.3.*",
+        "symfony/twig-bundle": "2.3.*",
+        "symfony/security-bundle": "2.3.*",
+        "symfony/assetic-bundle": "~2.3",
+        "antwebes/chatea-common" : "0.1.0",
+        "antwebes/chatea-client-lib" : "0.1.5",
+        "antwebes/chatea-secure-bundle" : "0.1.5",
+        "excelwebzone/recaptcha-bundle" : "2.3.*@dev",
+        "doctrine/annotations" : "^1.2"
 	},
 	"require-dev" : {
 		"raulfraile/ladybug" : "~1.0"

@@ -67,7 +67,7 @@
 	    <div class="form-group">
 	        <label class="col-lg-3 control-label" for="registration_form_country">{{ "form.country" | trans }}</label>
 	        <div class="col-lg-9">
-	            <select class="form-control" id="form_search_country" name="country">
+	            <select class="form-control" id="form_search_country" name="country" data-city-finder="search_country">
 					{% for country in countries %}
 						<option value="{{ country.value }}">{{ country.name }}</option>
 					{% endfor %}
@@ -77,8 +77,16 @@
 	    <div id="register_select_city" class="form-group" style="display: none ">
 	        <label class="col-lg-3 control-label" for="registration_form_city" >{{ "form.city" | trans }}</label>
 	        <div class="col-lg-9">
-	            <input id="registration_form_search_city" type="text" name="search_city"  class="form-control" placeholder="{{ 'form.city.placeholder' | trans }}" value="{{ app.request.get('search_city', '') }}" />
-	            <a id="suggestion_city">Los Angeles, United States</a>
+	            <input
+                        id="registration_form_search_city"
+                        type="text"
+                        name="search_city"
+                        class="form-control"
+                        placeholder="{{ 'form.city.placeholder' | trans }}"
+                        value="{{ app.request.get('search_city', '') }}"
+                        data-city-finder="search_city"
+                        />
+	            <a id="suggestion_city" data-city-finder="suggestion_city">Los Angeles, United States</a>
 	        </div>
 	    </div>
 

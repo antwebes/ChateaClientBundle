@@ -60,7 +60,7 @@ class CityLocationTransformer implements DataTransformerInterface
         if (null === $city) {
             return "";
         }
-        return $city;
+        return $city->getId();
     }
 
     /**

@@ -33,6 +33,9 @@
     <route id="chatea_client_update_profile" path="/profile/update" methods="GET|POST">
         <default key="_controller">ChateaClientBundle:Profile:update</default>
     </route>
+    <route id="chatea_client_update_profile_city" path="/profile/city" methods="GET|POST">
+        <default key="_controller">ChateaClientBundle:Profile:editCity</default>
+    </route>
     <route id="chatea_client_update_profile_index" path="/profile" methods="GET">
         <default key="_controller">ChateaClientBundle:Profile:updateIndex</default>
     </route>
