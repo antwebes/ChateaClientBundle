@@ -122,3 +122,8 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * add method searchUserByNamePaginated in usermanager
  * remove refresh token now to do autologin we use a parameter autologin
  * update method searchUserByNamePaginated now call findAll with filter partial_name and add basic test
+ * ATTENTION! This version has dependeces with foreign bundles
+ 
+* 0.1.25 (2015-09-XX)
+ * Remove dependeces with foreign bundles
+ * Include filter twig UserProfilePhotoUrlExtension
