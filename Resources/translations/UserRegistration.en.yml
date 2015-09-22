@@ -46,12 +46,13 @@ user.register.your_mail: "Your email address"
 user.register.write_your_mail: "Write your email to send me verification email."
 user.register.confirm.submit: "Submit"
 user.register.i_need_help: "I need help"
-user.register.confirmed.title: "Congratulations %username% !! Your account is activated successfully"
-user.register.confirmed.message: "User %username% registered correctly . You can now start chatting."
+user.register.confirmed.title: "Congratulations !! Your account is activated successfully"
+user.register.confirmed.message: "You have been registered correctly. You can now start chatting."
 user.register.invalid_client: "Due to tecnichal problems, it is impsible to register users now. Please contacto with the webmaster of this site."
 user.register_profile: 'Register profile'
 user.register_profile.skip: 'Skip'
 user.profile.max_file_upload: 'This photo is too large. Max file size allowed 1Mb'
+page_confirm_email.write_our_email: Write our email
 registration_profile.submit: 'Submit'
 form.label.gender: 'Gender'
 form.label.seeking: 'Seeking'
@@ -74,3 +75,4 @@ user.edit_profile_photo.success: "Profile photo has been updated successful"
 user.edit_profile.success: "Your profile has been updated successfully"
 user.register.change_password: You can also change your email <a href="%path%" title="%title%">from here</a>
 change_email: "Change email"
+upload.pictures.alert.sexual_content: Do not upload pictures with sexual content. These will be removed without notice.

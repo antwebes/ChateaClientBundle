@@ -132,4 +132,13 @@ class PhotoManager extends BaseManager
         $this->getManager()->delPhoto($object_id);
     }
 
+    /**
+     * Report a photo
+     * @param $photo
+     * @param $reason
+     */
+    public function reportPhoto($photo, $reason)
+    {
+        $this->getManager()->reportPhoto($photo->getId(), $reason);
+    }
 }

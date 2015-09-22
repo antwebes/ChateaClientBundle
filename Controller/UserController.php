@@ -106,6 +106,10 @@ class UserController extends BaseController
 
         $user = $userManager->findById($userId);
         if($user != null){
+            if($user->isEnabled()){
+                return $this->redirect($this->generateUrl('chatea_client_update_profile_index'));
+            }
+
             return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
         }else{
             throw $this->createNotFoundException();
@@ -198,44 +202,7 @@ class UserController extends BaseController
      */
     public function confirmedAction(Request $request)
     {
-        $refreshToken   = $request->get('refresh_token');
-
-        if($refreshToken == ''){
-            throw new BadRequestHttpException();
-        }
-
-        $authData       = $this->get('chat_secure.adapter')->withRefreshToken($refreshToken);
-        $id             = $authData['id'];
-        $accessToken    = $authData['access_token'];
-        $refreshToken   = $authData['refresh_token'];
-        $expiresIn      = $authData['expires_in'];
-        $scope          = $authData['scope'];
-        $scope          = is_array($scope)?$scope:array($scope);
-        $tokenType      = $authData['token_type'];
-        $username       = $authData['username'];
-        $roles          = $authData['roles'];
-
-        $newSecureUser =  new SecureUser($id,$username,$accessToken,$refreshToken, true,$tokenType,$expiresIn,$scope,$roles);
-        $authenticatedToken = new UsernamePasswordToken($newSecureUser, null, 'secured_area', $newSecureUser->getRoles());
-        //put new token in session
-        $this->get('session')->set('_security_main',serialize($authenticatedToken));
-
-        $redirectResponse = $this->redirect($this->generateUrl('chatea_confirmed_success'));
-        /*$remberMeService = $this->get('api.rememberme.service');
-
-        $remberMeService->regenerateRememberMeTokenIfPresent($request, $redirectResponse, $authenticatedToken);*/
-        $this->get('security.context')->setToken($authenticatedToken);
-
-        return $redirectResponse;
-    }
-
-    public function confirmedSuccessAction()
-    {
-        if($this->getUser() == null){
-            throw new AccessDeniedHttpException();
-        }
-
-        $response =  $this->render('ChateaClientBundle:User:confirmedSuccess.html.twig',array('user'=>$this->getUser()));
+        $response = $this->render('ChateaClientBundle:User:confirmedSuccess.html.twig');
 
         return $response;
     }

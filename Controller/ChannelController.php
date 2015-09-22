@@ -8,6 +8,7 @@ use Ant\Bundle\ChateaClientBundle\Security\Authentication\Annotation\APIUser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class ChannelController extends Controller
 {
@@ -17,6 +18,10 @@ class ChannelController extends Controller
      */
     public function registerAction(Request $request)
     {
+        if(! $this->container->get('security.context')->isGranted('ROLE_USER_ENABLED')){
+            throw new AccessDeniedHttpException('The user does not have permission for register channel. Is not validated');
+        }
+
         $channel = new Channel();
         $channelTypeManager = $this->get('api_channels_types');
         $channelManager = $this->get('api_channels');

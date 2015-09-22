@@ -46,12 +46,13 @@ user.register.your_mail: "Tu cuenta de correo"
 user.register.write_your_mail: "Escribe to cuenta de correo para enviarte un correo para verificar la cuenta."
 user.register.confirm.submit: "Enviar"
 user.register.i_need_help: "Necesito ayuda"
-user.register.confirmed.title: "Felicidadesa %username% !! Tu cuenta ha sido activada con éxiito"
-user.register.confirmed.message: "Usuario %username% registrado correctament. Puedes empezar a chatear ahora."
+user.register.confirmed.title: "Felicidadesa !! Tu cuenta ha sido activada con éxiito"
+user.register.confirmed.message: "Has sido registrado correctamente. Puedes empezar a chatear ahora."
 user.register.invalid_client: "Debido a problemas técnicos en este momento nos es imposible realizar registros. Por favor pongase en contacto con el administrador de la web."
 user.register_profile: 'Registrar perfil'
 user.register_profile.skip: 'No por ahora'
 user.profile.max_file_upload: 'Esta foto es demasiado grande. Tamaño máximo permitido 1Mb'
+page_confirm_email.write_our_email: Escribe a nuestro email de contacto
 registration_profile.submit: 'Enviar'
 form.label.gender: 'Genero'
 form.label.seeking: 'Busca'
@@ -80,3 +81,5 @@ user.edit_profile_photo: "Editar foto de perfil"
 user.edit_profile.success: "Tu perfil ha sido actualizado con éxito"
 user.register.change_password: También puedes cambiarte de email <a href="%path%" title="%title%">desde aquí</a>
 change_email: "Cambiar email"
+upload.pictures.alert.sexual_content:  No subas fotos con contenido sexual. Estas serán eliminadas sin previo aviso.
+user.last_visits: "Últimas visitas"

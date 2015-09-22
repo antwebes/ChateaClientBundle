@@ -105,3 +105,26 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
 * 0.1.21(2015-07-27)
  * update version chateaSecureBundle to 0.1.5 
  * Marked UserController::confirmedAction as deprecated
+  
+* 0.1.22(2015-08-31)
+ * update version chateaClientLib to 0.1.4 
+ * Added report photo method
+ * add messages not sexual content in photos
+ 
+* 0.1.23(2015-09-07)
+ * add page who saw my profile
+ * init organize folders and template 
+ * Update version chateaClientLib v0.1.5
+ 
+* 0.1.24(2015-09-15)
+ * Include data-behat to test go to page update photo profile
+ * Include photo actually in form update photo profile
+ * add method searchUserByNamePaginated in usermanager
+ * remove refresh token now to do autologin we use a parameter autologin
+ * update method searchUserByNamePaginated now call findAll with filter partial_name and add basic test
+ * ATTENTION! This version has dependeces with foreign bundles
+ 
+* 0.1.25 (2015-09-16)
+ * Remove dependeces with foreign bundles
+ * Include filter twig UserProfilePhotoUrlExtension
+ * Hotfix From edit profile sent page confirm email

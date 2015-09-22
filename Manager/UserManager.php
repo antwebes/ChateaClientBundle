@@ -3,6 +3,7 @@
 namespace Ant\Bundle\ChateaClientBundle\Manager;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChangeEmail;
 use Ant\Bundle\ChateaClientBundle\Api\Model\ChangePassword;
+use Ant\Bundle\ChateaClientBundle\Api\Model\OutstandingEntry;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Command;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Pager;
 use Ant\Bundle\ChateaClientBundle\Api\Util\Paginator;
@@ -71,6 +72,17 @@ class UserManager extends BaseManager implements ManagerInterface
         if(isset($item['language'])){
             $user->setLanguage($item['language']);
         }
+
+        if(isset($item['outstanding'])){
+            $outstandingData = $item['outstanding'];
+            $outstandingEntry = new OutstandingEntry();
+
+            $outstandingEntry->setFrom(new \DateTime($outstandingData['from']));
+            $outstandingEntry->setUntil(new \DateTime($outstandingData['until']));
+
+            $user->setOutstandingEntry($outstandingEntry);
+        }
+
         return $user;
     }
 
@@ -375,5 +387,18 @@ class UserManager extends BaseManager implements ManagerInterface
         
 
         return $users;
+    }
+
+    /**
+     * Find user by partial name
+     *
+     * @param string $partial the partial name
+     * @param int $page the number page
+     * @return Pager the pager
+     */
+    public function searchUserByNamePaginated($partial, $page = 1, array $filters = null, $limit= null, array $order = null)
+    {
+        $filters['partial_name'] = $partial;
+        return $this->findAll($page,$filters,$limit,$order);
     }
 }

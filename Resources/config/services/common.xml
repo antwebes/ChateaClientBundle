@@ -68,5 +68,11 @@
             <argument type="service" id="antwebes_chateaclient_bundle.util.languages_loader" />
             <tag name="validator.constraint_validator"  alias="chatea_language_validator"/>
         </service>
+        
+      	<service id="core.twig.user_profile_photo_url_extension"
+	        class="Ant\Bundle\ChateaClientBundle\Twig\Extension\UserProfilePhotoUrlExtension"
+	        public="false">
+	        <tag name="twig.extension" />
+	    </service>
     </services>
 </container>

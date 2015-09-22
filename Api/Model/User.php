@@ -147,6 +147,8 @@ class User implements BaseModel
      */
     private $facebookId;
 
+    private $outstandingEntry = null;
+
     /**
      * @return int
      */
@@ -451,7 +453,7 @@ class User implements BaseModel
     
     public function isEnabled()
     {
-    	$this->getEnabled();
+    	return $this->getEnabled();
     }
 
     public function setFacebookId($facebookId)
@@ -462,5 +464,26 @@ class User implements BaseModel
     public function getFacebookId()
     {
         return $this->facebookId;
+    }
+
+    public function isOutstanded()
+    {
+        return $this->outstandingEntry !== null;
+    }
+
+    /**
+     * @return null
+     */
+    public function getOutstandingEntry()
+    {
+        return $this->outstandingEntry;
+    }
+
+    /**
+     * @param null $outstandingEntry
+     */
+    public function setOutstandingEntry($outstandingEntry)
+    {
+        $this->outstandingEntry = $outstandingEntry;
     }
 }
