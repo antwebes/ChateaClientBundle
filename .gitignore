@@ -88,5 +88,6 @@ Icon
 .Trashes
 
 
+Tests/app/cache/
 
 composer.lock
