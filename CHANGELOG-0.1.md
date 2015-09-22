@@ -128,3 +128,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Remove dependeces with foreign bundles
  * Include filter twig UserProfilePhotoUrlExtension
  * Hotfix From edit profile sent page confirm email
+ 
+* 0.1.26 (2015-09-22)
+ * Added support to authenticate as guest 
+ * Implemented update of user city 
