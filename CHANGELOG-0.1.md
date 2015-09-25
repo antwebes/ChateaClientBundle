@@ -133,3 +133,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Added support to authenticate as guest 
  * Implemented update of user city 
  * antwebes/chatea-client-lib 0.1.6
+ 
+* 0.1.27 (2015-??-??)
+ * Version recaptcha 2.3.x-dev
