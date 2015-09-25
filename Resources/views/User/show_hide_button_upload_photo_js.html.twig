@@ -6,7 +6,8 @@
             var translations = {
                 'The user already has a profile': '{{ 'user.allready_has_profile' | trans }}',
                 'profile.gender.choice': '{{ 'user.profile.gender.choice.invalid' | trans }}',
-                'profile.seeking.choice': '{{ 'user.profile.gender.seeking.invalid' | trans }}'
+                'profile.seeking.choice': '{{ 'user.profile.gender.seeking.invalid' | trans }}',
+                'upload.error': '{{ 'user.upload_photo.error' | trans({}, 'UserChange') }}'
             };
 
             var trans = function(msg){
@@ -35,6 +36,7 @@
             $('#profileForm')
                     .submit( function( e ) {
                         var onSuccess = function(){
+                           $('#upload-error').hide();
                            $('#uploadSuccess').show();
                            $('#upload-widget').fadeOut(200);
                         };
@@ -52,6 +54,8 @@
                         var onError = function(xhr, error){
                             var responseJSON = xhr.responseJSON;
                             $('.help-validate').remove();
+                            $('#upload-error').show().html(trans('upload.error'));
+                            $("#send-file").prop('disabled', false);
 
                             if(typeof responseJSON.errors != 'undefined'){
                                 if(typeof responseJSON.errors === 'object') {
@@ -70,6 +74,7 @@
                         };
 
                         $('#uploadSuccess').hide();
+                        $('#upload-error').hide();
 
                         if(sendFile){
                             var formData = new FormData( this );
@@ -86,8 +91,6 @@
                                 success: assignProfilePhoto,
                                 error: onError
                             } );
-                        }else{
-                            alert('photo');
                         }
 
                         e.preventDefault();

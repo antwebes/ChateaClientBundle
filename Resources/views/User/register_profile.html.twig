@@ -103,7 +103,8 @@
                 'The user already has a profile': '{{ 'user.allready_has_profile' | trans }}',
                 'profile.gender.choice': '{{ 'user.profile.gender.choice.invalid' | trans }}',
                 'profile.seeking.choice': '{{ 'user.profile.gender.seeking.invalid' | trans }}',
-                'profile.max_file_upload': '{{ 'user.profile.max_file_upload' | trans }}'
+                'profile.max_file_upload': '{{ 'user.profile.max_file_upload' | trans }}',
+                'upload.error': '{{ 'user.upload_photo.error' | trans({}, 'UserChange') }}'
             };
 
             var trans = function(msg){
@@ -161,7 +162,7 @@
                         $('.help-validate').remove();
 
 
-                        if(typeof responseJSON.errors != 'undefined'){
+                        if(typeof responseJSON != 'undefined' && typeof responseJSON.errors != 'undefined'){
                             if(typeof responseJSON.errors === 'object') {
                                 for(field in responseJSON.errors){
                                     var $error = $('<span class="help-validate"><p class="alert-danger">'+ trans(responseJSON.errors[field].message) +'</p></span>');
@@ -174,6 +175,12 @@
                                         .append($('<ul><li>' + trans(responseJSON.errors) + '</li></ul>'))
                                         .show();
                             }
+                        }else{
+                            var $error = $('<span class="help-validate"><p class="alert-danger">'+ trans('upload.error') +'</p></span>');
+                            var $field = $('#social_profile_image');
+                            $error.insertBefore($field);
+
+                            $("#btn_register").prop('disabled', false);
                         }
                     };
 
