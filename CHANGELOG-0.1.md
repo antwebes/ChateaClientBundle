@@ -134,6 +134,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Implemented update of user city 
  * antwebes/chatea-client-lib 0.1.6
  
-* 0.1.27 (2015-??-??)
+* 0.1.27 (2015-10-05)
  * Version recaptcha 2.3.x-dev
- * Inform error in profile register if photo can not be uploaded 
+ * Inform error in profile register if photo can not be uploaded
+ * updatePhotoAction require @ApiUser
