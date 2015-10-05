@@ -18,6 +18,9 @@ class ProfileController extends BaseController
 		return $this->render('ChateaClientBundle:User:edit_profile_index.html.twig');
 	}
 
+    /**
+     * @APIUser
+     */
 	public function updatePhotoAction(Request $request)
 	{
 		$form = $this->createForm(new EditUserProfilePhotoType());
