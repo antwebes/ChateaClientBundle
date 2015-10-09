@@ -138,3 +138,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Version recaptcha 2.3.x-dev
  * Inform error in profile register if photo can not be uploaded
  * updatePhotoAction require @ApiUser
+ 
+* 0.1.28 (2015-10-09)
+ * Added chatea_client.countries_file parameter
