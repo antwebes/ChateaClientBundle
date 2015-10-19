@@ -141,9 +141,18 @@ class UserManager extends BaseManager implements ManagerInterface
 
     }
 
-    public function findOutstandingUsers()
+    public function findOutstandingUsers(array $filters = array())
     {
-        $command = new Command('showUsers', array('filters' => 'outstanding=1', 'order' => null));
+        $filtersParts = array();
+        $filters['outstanding'] = 1;
+
+        foreach($filters as $filter => $value){
+            $filtersParts[] = sprintf("%s=%s", $filter, $value);
+        }
+
+        $filterString = implode(',', $filtersParts);
+
+        $command = new Command('showUsers', array('filters' => $filterString, 'order' => null));
         $array_data = $this->getManager()->execute($command);
         $array_data = array_key_exists('resources',$array_data)? $array_data['resources']: array();
         $output = array();

@@ -45,4 +45,47 @@ class UserManagerTest extends \PHPUnit_Framework_TestCase
         $userCollection = $userManager->searchUserByNamePaginated('foo');
         $this->assertInstanceOf('Ant\Bundle\ChateaClientBundle\Api\Util\Pager', $userCollection);
     }
+
+    /**
+     * @test
+     */
+    public function testFindOutstandingUsers()
+    {
+        $mockApiManager = $this->getMockBuilder('Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $apiResponses = new ApiResponses();
+
+        $command = new Command('showUsers', array('filters' => 'outstanding=1', 'order' => null));
+
+        $mockApiManager->method('execute')
+            ->with( $command)
+            ->willReturn($apiResponses->getUserWithFilterPartialName());
+
+        $userManager =  new UserManager($mockApiManager);
+        $userCollection = $userManager->findOutstandingUsers();
+    }
+
+
+    /**
+     * @test
+     */
+    public function testFindOutstandingUsersWithFilters()
+    {
+        $mockApiManager = $this->getMockBuilder('Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $apiResponses = new ApiResponses();
+
+        $command = new Command('showUsers', array('filters' => 'country=US,gender=Male,language=en,outstanding=1', 'order' => null));
+
+        $mockApiManager->method('execute')
+            ->with( $command)
+            ->willReturn($apiResponses->getUserWithFilterPartialName());
+
+        $userManager =  new UserManager($mockApiManager);
+        $userCollection = $userManager->findOutstandingUsers(array('country' => 'US', 'gender' => 'Male', 'language' => 'en'));
+    }
 }
