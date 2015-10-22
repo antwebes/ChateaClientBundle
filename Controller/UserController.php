@@ -22,6 +22,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserController extends BaseController
 {
@@ -202,6 +203,10 @@ class UserController extends BaseController
      */
     public function confirmedAction(Request $request)
     {
+        if(!$this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')){
+            throw new AccessDeniedHttpException();
+        }
+
         $response = $this->render('ChateaClientBundle:User:confirmedSuccess.html.twig');
 
         return $response;
