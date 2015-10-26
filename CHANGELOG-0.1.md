@@ -141,3 +141,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  
 * 0.1.28 (2015-10-09)
  * Added chatea_client.countries_file parameter
+ 
+* 0.1.29 ( 2015-10-26)
+ * Added filters to outstanding users when find with searcher
+ * AccessDeniedHttpException in page register confirmed, if user not logged
