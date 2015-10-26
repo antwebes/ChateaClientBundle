@@ -72,7 +72,8 @@ class PhotoManager extends BaseManager
         {
             return null;
         }
-        return $this->hydrate($this->getManager()->showPhoto((int)$photo_id));
+
+        return $this->executeAndHydrateOrHandleApiException('showPhoto', array((int)$photo_id));
     }
     
     public function getPhotos($filters = null)

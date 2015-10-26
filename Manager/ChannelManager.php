@@ -31,6 +31,8 @@ class ChannelManager extends BaseManager
             $channel = new Channel();
         }
 
+        $channel->setManager($this);
+
         $channel->setId(array_key_exists('id',$item)?$item['id']:0);
         $channel->setName(array_key_exists('name',$item)?$item['name']:'not-name');
         $channel->setSlug(array_key_exists('slug',$item)?$item['slug']:'not-slug');
@@ -106,7 +108,8 @@ class ChannelManager extends BaseManager
         {
             return null;
         }
-        return $this->hydrate($this->getManager()->showChannel($channel_id));
+
+        return $this->executeAndHydrateOrHandleApiException('showChannel', array($channel_id));
     }
     
     public function findBySlug($channel_slug)
@@ -115,7 +118,8 @@ class ChannelManager extends BaseManager
     	{
     		return null;
     	}
-    	return $this->hydrate($this->getManager()->findBySlug($channel_slug));
+
+        return $this->executeAndHydrateOrHandleApiException('findBySlug', array($channel_slug));
     }
 
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)

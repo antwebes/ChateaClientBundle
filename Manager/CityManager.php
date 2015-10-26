@@ -47,12 +47,11 @@ class CityManager extends BaseManager
 
     public function findById($id)
     {
-    	if ($id === null || $id === 0 || !$id)
-    	{
+    	if($id === null || $id === 0 || !$id){
     		return null;
     	}
-    	return $this->hydrate($this->getManager()->getCity($id));
-        // TODO: Implement findById() method.
+
+        return $this->executeAndHydrateOrHandleApiException('getCity', array($id));
     }
 
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)

@@ -46,11 +46,11 @@ class UserProfileManager extends  BaseManager implements ManagerInterface
 
     public function findById($id)
     {
-        if($id === null || $id === 0 && !$id)
-        {
+        if($id === null || $id === 0 && !$id){
             return null;
         }
-        return $this->hydrate($this->getManager()->showUserProfile($id));
+
+        return $this->executeAndHydrateOrHandleApiException('showUserProfile', array($id));
     }
 
     public function save(&$object)

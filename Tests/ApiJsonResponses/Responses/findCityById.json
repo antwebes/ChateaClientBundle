@@ -1,0 +1,17 @@
+{
+  "name": "Aaron",
+  "postal_code": "",
+  "region_code": "MO",
+  "country": {
+    "country_code": "US",
+    "name": "United States",
+    "has_cities": true,
+    "city_default": 0
+  },
+  "latitude": 38,
+  "longitude": -94,
+  "metro_code": "",
+  "area_code": "",
+  "id": 364169,
+  "country_code": "US"
+}
