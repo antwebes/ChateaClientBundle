@@ -95,7 +95,7 @@ class AccessDeniedHttpExceptionListener implements  EventSubscriberInterface
             /** @var \Ant\Bundle\ChateaSecureBundle\Security\User\User $user */
             $user = $token != null ? $token->getUser(): null;
 
-            if($token != null && $token->isAuthenticated() && $user != null && false === $user->isValidated() ){
+            if($token != null && $token->isAuthenticated() && $user != null && is_object($user) && false === $user->isValidated() ){
 
                 $url = $this->urlGenerator->generate($this->routeIdUserNotValidated,array('userId'=>$user->getId()));
                 $response = new RedirectResponse($url, 302);
