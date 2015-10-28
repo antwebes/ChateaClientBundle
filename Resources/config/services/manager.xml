@@ -174,11 +174,6 @@
                 </call>
             </service>
 
-            <service id="antwebes_chateaclient_bundle.request.param_converter.api_chatea_param_converter" class="Ant\Bundle\ChateaClientBundle\Request\ParamConverter\ApiChateaParamConverter">
-                <argument type="service" id="antwebes_chateaclient_manager" />
-                <tag name="request.param_converter" priority="-2" converter="api_chatea_param_converter" />
-            </service>
-
             <service id="api_channels"          alias="antwebes_chateaclient_bundle.manager.channel_manager"           synthetic="true" />
             <service id="api_channels_types"    alias="antwebes_chateaclient_bundle.manager.channel_type_manager"      synthetic="true" />
             <service id="api_users"             alias="antwebes_chateaclient_bundle.manager.user_manager"              synthetic="true" />
