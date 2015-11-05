@@ -35,6 +35,7 @@
 {% block chatea_js %}
     <script>
         window.api_endpoint = "{{ api_endpoint }}";
+        window.language = "{{ app.request.locale }}";
     </script>
     {% javascripts
     '@ChateaClientBundle/Resources/public/js/jquery-ui-1.10.3.custom.min.js'
@@ -48,7 +49,7 @@
         var onlyOnce = function(){
             if(!executed){
                 executed = true;
-                fillSelectCountry( '{{ city.country |raw }}' );
+                fillSelectCountry( '{% if city %}{{ city.country |raw }}{% endif %}' );
             }
         };
 

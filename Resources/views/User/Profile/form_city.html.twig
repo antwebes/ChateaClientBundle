@@ -38,7 +38,7 @@
                     name="search_city"
                     class="form-control"
                     placeholder="{{ 'form.city.placeholder' | trans }}"
-                    value="{{ city.name }}, {{ city.country }}"
+                    value="{% if city %}{{ city.name }}, {{ city.country }}{% endif %}"
                     data-city-finder="search_city" />
             <a id="suggestion_city" data-city-finder="suggestion_city">Los Angeles, United States</a>
         </div>

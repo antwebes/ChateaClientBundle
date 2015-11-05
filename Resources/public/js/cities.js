@@ -1,10 +1,11 @@
-(function(window, api_endpoint){
+(function(window, api_endpoint, language){
+	var language = language == '' ? 'en' : language;
     $(document).ready(function(){
         var country_code = '';
         var country_auto_geo = '';
         var search_city_cache = {};
         var search_country_cache = {};
-
+        
         // selects a component by data-city-finder attribute
         var selectComponent = function(component){
             return $('*[data-city-finder="' + component  + '"]');
@@ -53,13 +54,12 @@
 
             if(userSelectedCountry === ''){
                 cityByIpPromise = findCityByIp();
-
-                console.log(cityByIpPromise);
             }
 
             if(userSelectedCountry === ''){
                 cityByIpPromise.done(function(){
-                    $formSearchCountry.find('option:contains('+country_auto_geo+')').prop('selected',true);
+                	$formSearchCountry.find('option').filter(function(i, e) { return $(e).text() == country_auto_geo}).prop('selected',true);
+//                    $formSearchCountry.find('option:contains('+country_auto_geo+')').prop('selected',true);
                     $formSearchCountry.trigger('change');
                     setSelectedCity();
                 });
@@ -117,6 +117,59 @@
             }
         });
         
+      //fill value with data to city_es of api
+        function fillItemWithValuesInSpanish(item, value){
+        	var item_es = item.city_es;
+        	
+        	if (item_es.name != ""){
+        		value['name'] = item_es.name;
+        	}
+        	if (item_es.province_name != ""){
+        		value['province_name'] = item_es.province_name;
+        	}
+        	if (item_es.region_name != ""){
+        		value['region_name'] = item_es.region_name;
+        	}
+        	
+        	return value;
+        }
+
+        //Show value to insert in options to choose city
+        function getValueShowOptionsCity(item){
+        	var value = new Array();
+        	
+        	if (item.name != ""){
+        		value['name'] = item.name;
+        	}
+        	if (item.province_name != ""){
+        		value['province_name'] = item.province_name;
+        	}
+        	if (item.region_name != ""){
+        		value['region_name'] = item.region_name;
+        	}
+        	
+        	if (language == "es"){
+        		value = fillItemWithValuesInSpanish(item, value);
+        	}    	
+        	
+        	var result = "";
+        	var cont = 0;
+        	var cont_comma = 0;
+        	
+        	for (item in value) {
+        		if (cont > cont_comma && value[item] != ""){
+        			cont_comma++;
+        			result += ", ";
+        		}
+        		if (value[item] != ""){
+        			cont++;
+        			result += value[item];
+        		}
+        	}
+        	
+        	return result;
+        }
+        
         $formSearchCity.autocomplete({
             source: function( request, response ) {
                 var url_source = api_endpoint+'/geo/countries/'+ country_code + '/cities/' + $formSearchCity.val();
@@ -125,7 +178,7 @@
                 if ( term in search_city_cache ) {
                     response($.map (search_city_cache[ term ], function( item ) {
                         return {
-                            value   : item.name + ", " + item.country.name,
+                            value   : getValueShowOptionsCity(item),
                             cityId  : item.id
                         }
                     }));
@@ -135,13 +188,15 @@
                     url: url_source,
                     dataType: "json",
                     success: function( data ) {
-                        search_city_cache[ term ] = data;
-                        response( $.map( data, function( item ) {
-                            return {
-                                value: item.name + ", " + item.country.name,
-                                cityId: item.id
-                            }
-                        }));
+                    	if (data){
+	                        search_city_cache[ term ] = data;
+	                        response( $.map( data, function( item ) {
+	                            return {
+	                                value: getValueShowOptionsCity(item),
+	                                cityId: item.id
+	                            }
+	                        }));
+                    	}
                     }
                 });
             },
@@ -170,4 +225,4 @@
 
         window.fillSelectCountry = fillSelectCountry;
     });
-})(window, window.api_endpoint);
+})(window, window.api_endpoint, window.language);
