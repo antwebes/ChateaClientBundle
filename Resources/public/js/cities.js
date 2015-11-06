@@ -16,6 +16,18 @@
         var $formSearchCity = selectComponent('search_city');
         var $suggestionCity = selectComponent('suggestion_city');
 
+        var $sendButton = selectComponent('send');
+
+        var disableButtonIfNoCity = function(){
+            if($formSearchCity.val().length == 0){
+                $sendButton.attr('disabled','disabled');
+            }else{
+                $sendButton.removeAttr('disabled');
+            }
+        };
+
+        $formSearchCity.change(disableButtonIfNoCity);
+
         function findCityByIp()
         {
             //console.log(api_endpoint+'/geo/locations');
@@ -84,6 +96,8 @@
                     $currentCountry.prop('selected', true);
                     $formSearchCountry.trigger('change');
                     $formSearchCity.val(cityName + ', ' + countryName);
+
+                    disableButtonIfNoCity();
                 });
             }
         }
@@ -111,10 +125,12 @@
                 //empty input so user can write city and autocomplete
                 $formSearchCity.val('');
                 //empty value the id of city to save in user
-                $formSearchCity.val('');
+                $currentCity.val('');
                 //show the input to write city
                 $formSearchCity.parent().parent().show();
             }
+
+            disableButtonIfNoCity();
         });
         
       //fill value with data to city_es of api
@@ -212,6 +228,13 @@
             }
         });
 
+        $formSearchCity.change(function(){
+            var $this = $(this);
+
+            if($this.val().length < 2){
+                $currentCity.val('');
+            }
+        });
 
         var setSelectedCity = function(){
             var countryJSON = $formSearchCountry.children(":selected").val();

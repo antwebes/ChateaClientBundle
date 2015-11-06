@@ -10,10 +10,18 @@ namespace Ant\Bundle\ChateaClientBundle\Form\Model;
 
 use Ant\Bundle\ChateaClientBundle\Api\Model\City;
 
+use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 class EditCity 
 {
     /**
+     * @var string
+     */
+    protected $countryName;
+
+    /**
+     * @NotBlank
      * @var City
      */
     protected $city;
@@ -53,5 +61,21 @@ class EditCity
     public function setCityName($cityName)
     {
         $this->cityName = $cityName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountryName()
+    {
+        return $this->countryName;
+    }
+
+    /**
+     * @param string $countryName
+     */
+    public function setCountryName($countryName)
+    {
+        $this->countryName = $countryName;
     }
 }
