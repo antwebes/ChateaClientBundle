@@ -36,9 +36,15 @@
             $('#profileForm')
                     .submit( function( e ) {
                         var onSuccess = function(){
+                            var storageKey = 'has_profile_photo';
+
                            $('#upload-error').hide();
                            $('#uploadSuccess').show();
                            $('#upload-widget').fadeOut(200);
+
+                            if(typeof(window.sessionStorage) != 'undefined'){
+                                sessionStorage.setItem(storageKey, 1);
+                            }
                         };
 
                         var assignProfilePhoto = function(responseJSON){
