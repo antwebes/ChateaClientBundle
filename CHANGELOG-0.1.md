@@ -146,3 +146,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Added filters to outstanding users when find with searcher
  * AccessDeniedHttpException in page register confirmed, if user not logged
  * Update version chateaSecureBundle 0.1.6
+ 
+* 0.1.30 ( 2015-11-??)
+ * Include notification if User has not photo profile
