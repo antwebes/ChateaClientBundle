@@ -41,7 +41,10 @@
                            $('#upload-error').hide();
                            $('#uploadSuccess').show();
                            $('#upload-widget').fadeOut(200);
-                           BoilerSessionStorage.set(storageKey, 1);
+
+                            if(typeof(window.sessionStorage) != 'undefined'){
+                                sessionStorage.setItem(storageKey, 1);
+                            }
                         };
 
                         var assignProfilePhoto = function(responseJSON){

@@ -16,75 +16,45 @@ var BoilerNotifications = (function($) {
     }
 })(jQuery);
 
+(function(window, sessionStorage){
+    /**
+     * Notifies if a user has no profile photo
+     * @param userId
+     * @param apiEndpoint endpoint to make ajax calls
+     * @param token Token to make ajax calls
+     */
+    var notifyIfUserHasNoProfilePhoto = function(userId, apiEndpoint, token, message){
+        var storageKey = 'has_profile_photo';
 
-// a wrapper arround sessionStorage in case the browser dosn't have
-var BoilerSessionStorage = (function(){
-    var wraperStorage = {};
-    var items = {};
-
-    if(typeof(window.sessionStorage) !== "undefined"){
-        wraperStorage.has = function(key){
-            return sessionStorage.getItem(key) !== null;
+        var doNotifyIfUserHasNoProfilePhoto = function(hasProfilePhoto){ // this is executed when we know we have the key in the storage
+            if(!hasProfilePhoto){
+                BoilerNotifications.notity(message);
+            }
         };
 
-        wraperStorage.get = function(key){
-            return sessionStorage.getItem(key);
-        }
+        // if we have not the key in the session storage, we fetch data from the server to search if the user has a profile photo
+        if(sessionStorage == null || sessionStorage.getItem(storageKey) == null){
+            $.ajax({
+                url: apiEndpoint + '/api/users/' + userId + '/profiles?access_token='+token,
+                success: function(data){
+                    var hasProfilePhoto = typeof(data['profile_photo']) != 'undefined' ? 1 : 0;
 
-        wraperStorage.set = function(key, value){
-            sessionStorage.setItem(key, value);
-        }
-    }else{ // in case we don't have sessionStorage
-        wraperStorage.has = function(key){
-            if(typeof(items[key]) !== "undefined"){
-                return true;
-            }
+                    if(sessionStorage !== null){
+                        sessionStorage.setItem(storageKey, hasProfilePhoto);
+                    }
 
-            return false;
-        };
-
-        wraperStorage.get = function(key){
-            if(typeof(items[key]) !== "undefined"){
-                return true;
-            }
-
-            return items[key];
-        }
-
-        wraperStorage.set = function(key, value){
-            items[key] = value;
-        }
-    }
-
-    return wraperStorage;
-})();
-
-/**
- * Notifies if a user has no profile photo
- * @param userId
- * @param apiEndpoint endpoint to make ajax calls
- * @param token Token to make ajax calls
- */
-var notifyIfUserHasNoProfilePhoto = function(userId, apiEndpoint, token, message){
-    var storageKey = 'has_profile_photo';
-
-    var doNotifyIfUserHasNoProfilePhoto = function(){ // this is executed when we know we have the key in the storage
-        if(BoilerSessionStorage.get(storageKey) == 0){
-            BoilerNotifications.notity(message);
+                    //now that we have the key in the storage we do the logic
+                    doNotifyIfUserHasNoProfilePhoto(hasProfilePhoto == 1);
+                }
+            });
+        }else{ // we allready have the key on the storage, we do the logic
+            var hasProfilePhoto = sessionStorage.getItem(storageKey) == 1;
+            doNotifyIfUserHasNoProfilePhoto(hasProfilePhoto);
         }
     };
 
-    // if we have not the key in the session storage, we fetch data from the server to search if the user has a profile photo
-    if(!BoilerSessionStorage.has(storageKey)){
-        $.ajax({
-            url: apiEndpoint + '/api/users/' + userId + '/profiles?access_token='+token,
-            success: function(data){
-                BoilerSessionStorage.set(storageKey, typeof(data['profile_photo']) != 'undefined' ? 1 : 0);
-                //now that we have the key in the storage we do the logic
-                doNotifyIfUserHasNoProfilePhoto();
-            }
-        });
-    }else{ // we allready have the key on the storage, we do the logic
-        doNotifyIfUserHasNoProfilePhoto();
-    }
-};
+    window.notifyIfUserHasNoProfilePhoto = notifyIfUserHasNoProfilePhoto;
+})(
+    window,
+    typeof(window.sessionStorage) !== "undefined" ? window.sessionStorage : null //this way we don't have to use allways typeof every time we want to check if the browser support session storage
+);
