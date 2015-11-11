@@ -11,6 +11,7 @@ use Ant\Bundle\ChateaClientBundle\Api\Model\Channel;
 use Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile;
 use Ant\Bundle\ChateaClientBundle\Api\Model\User;
 use Ant\Bundle\ChateaClientBundle\Api\Model\City;
+use Ant\ChateaClient\Client\ApiException;
 
 class UserManager extends BaseManager implements ManagerInterface
 {
@@ -108,9 +109,9 @@ class UserManager extends BaseManager implements ManagerInterface
             return null;
         }
 
-        $data = $this->getManager()->showUser($id);
+        $data = $this->executeAndHandleApiException('showUser', array($id));
 
-        if(!$asArray){
+        if(!$asArray && $data !== null){
             return $this->hydrate($data);
         }else{
             return $data;

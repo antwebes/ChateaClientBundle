@@ -49,4 +49,13 @@ class FactoryManager
     static public function setObjectManagerInMap($key,$value){
         self::$managerMap[$key]=$value;
     }
+
+    static public function releaseManager($name)
+    {
+        $className = self::$managerMap[$name];
+
+        if(array_key_exists($className,self::$arrayManagers)){
+            unset(self::$arrayManagers[$className]);
+        }
+    }
 }

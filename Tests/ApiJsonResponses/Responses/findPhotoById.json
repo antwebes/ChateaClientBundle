@@ -1,0 +1,26 @@
+{
+  "id": 506,
+  "participant": {
+    "id": 300,
+    "username": "pablo",
+    "username_canonical": "pablo",
+    "language": "es"
+  },
+  "votes": [],
+  "publicated_at": "2014-02-25T11:46:21+0100",
+  "number_votes": "0",
+  "discriminator": "user",
+  "path": "http://images-chatsfree.s3-website-us-east-1.amazonaws.com/original/2014/02/25/530c747d39814.jpeg",
+  "path_large": "http://images-chatsfree.s3-website-us-east-1.amazonaws.com/2014/02/25/530c747d39814_large.jpeg",
+  "path_medium": "http://images-chatsfree.s3-website-us-east-1.amazonaws.com/2014/02/25/530c747d39814_medium.jpeg",
+  "path_small": "http://images-chatsfree.s3-website-us-east-1.amazonaws.com/2014/02/25/530c747d39814_small.jpeg",
+  "path_icon": "http://images-chatsfree.s3-website-us-east-1.amazonaws.com/2014/02/25/530c747d39814_icon.jpeg",
+  "_links": {
+    "self": {
+      "href": "http://api.chateagratis.local/app_dev.php/api/photos/506"
+    },
+    "creator": {
+      "href": "http://api.chateagratis.local/app_dev.php/api/users/300"
+    }
+  }
+}

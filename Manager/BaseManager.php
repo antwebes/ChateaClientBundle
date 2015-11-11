@@ -4,6 +4,7 @@ namespace Ant\Bundle\ChateaClientBundle\Manager;
 
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ApiManager;
 use Ant\Bundle\ChateaClientBundle\Api\Persistence\ObjectManager;
+use Ant\ChateaClient\Client\ApiException;
 
 abstract class BaseManager implements ManagerInterface
 {
@@ -28,5 +29,52 @@ abstract class BaseManager implements ManagerInterface
 	{
 		return FactoryManager::get($this->apiManager, $name);
 	}
-	
+
+    /**
+     * Executes a command and returns the result. If ApiException happens and has status code 404 null is returned else the exception
+     * @param $command Service to execute
+     * @param $params parameters to pass to the service
+     * @return array
+     * @throws ApiException
+     * @throws \Exception
+     */
+    protected function executeAndHandleApiException($command, $params)
+    {
+        try{
+            $manager = $this->getManager();
+            $handler = array($manager, $command);
+            if ( is_callable($handler) ){
+            	$data = call_user_func_array($handler, $params);
+            }else {
+            	throw new \BadMethodCallException('The method "' .$command. '" not exist to this manager. Message showed in mehtod "executeAndHandleApiException" of ChateaClientBundle');
+            }
+        }catch(ApiException $e){
+            if($e->getCode() == 404){
+                return null;
+            }
+
+            throw $e;
+        }
+
+        return $data;
+    }
+
+    /**
+     * Executes a command and hydrates the result. If ApiException happens and has status code 404 null is returned else the exception
+     * @param $command Service to execute
+     * @param $params parameters to pass to the service
+     * @return Object
+     * @throws ApiException
+     * @throws \Exception
+     */
+    protected function executeAndHydrateOrHandleApiException($command, $params)
+    {
+        $data = $this->executeAndHandleApiException($command, $params);
+
+        if($data !== null){
+            return $this->hydrate($data);
+        }
+
+        return null;
+    }
 }
