@@ -149,3 +149,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  
 * 0.1.30 ( 2015-11-??)
  * Include notification if User has not photo profile
+ * Include method wrap to Throw exception when api not return an object, the method is in "BaseManager" with name "executeAndHandleApiException"
