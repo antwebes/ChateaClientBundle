@@ -42,8 +42,12 @@ abstract class BaseManager implements ManagerInterface
     {
         try{
             $manager = $this->getManager();
-
-            $data = call_user_func_array(array($manager, $command), $params);
+            $handler = array($manager, $command);
+            if ( is_callable($handler) ){
+            	$data = call_user_func_array($handler, $params);
+            }else {
+            	throw new \BadMethodCallException('The method "' .$command. '" not exist to this manager. Message showed in mehtod "executeAndHandleApiException" of ChateaClientBundle');
+            }
         }catch(ApiException $e){
             if($e->getCode() == 404){
                 return null;
