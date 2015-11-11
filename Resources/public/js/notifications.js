@@ -86,7 +86,7 @@ var BoilerNotifications = (function($) {
     var notifyIfUserHasNoProfilePhoto = function(userId, apiEndpoint, token, message){
         var storageKey = 'has_profile_photo';
         var remoteVerifyer = function(data){
-            return typeof(data['profile_photo']) != 'undefined' ? 1 : 0;
+            return typeof(data['profile']) != 'undefined' && typeof(data['profile']['profile_photo']) != 'undefined' ? 1 : 0;
         };
 
         checkFromStorageOrRemote(userId, apiEndpoint, token, storageKey, message, remoteVerifyer);
