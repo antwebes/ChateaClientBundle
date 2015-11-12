@@ -88,4 +88,42 @@ class CityManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->fail('Expected an ApiException');
     }
+
+    public function testHydrate()
+    {
+        $data = array(
+            "id" => 3,
+            "country_name" => "United States",
+            "region_name" => "California",
+            "province_name" => "a province",
+            "name" => "Los Angeles",
+            "city_es" => array(
+                "id" => 5368361,
+                "country_name" => "Estados Unidos",
+                "region_name"=> "California es",
+                "province_name" => "una provincia",
+                "name" => "Los Ángeles es"
+            )
+        );
+
+        $city = $this->cityManager->hydrate($data);
+
+        $this->assertEquals(3, $city->getId());
+        $this->assertEquals("United States", $city->getCountry());
+        $this->assertEquals("California", $city->getRegion());
+        $this->assertEquals("a province", $city->getProvince());
+        $this->assertEquals("Los Angeles", $city->getName());
+
+        // check es language
+        $this->assertEquals("Estados Unidos", $city->getCountry('es'));
+        $this->assertEquals("California es", $city->getRegion('es'));
+        $this->assertEquals("una provincia", $city->getProvince('es'));
+        $this->assertEquals("Los Ángeles es", $city->getName('es'));
+
+        // non tranlated language returns the en, default language tranlatin
+        $this->assertEquals("United States", $city->getCountry('fr'));
+        $this->assertEquals("California", $city->getRegion('fr'));
+        $this->assertEquals("a province", $city->getProvince('fr'));
+        $this->assertEquals("Los Angeles", $city->getName('fr'));
+    }
 }
