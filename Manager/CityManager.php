@@ -39,9 +39,18 @@ class CityManager extends BaseManager
         }
         
         $city->setId(array_key_exists('id',$item)?$item['id']:0);
-        $city->setName(array_key_exists('name',$item)?$item['name']:'not-name');
-        $city->setCountry(array_key_exists('country',$item)?$item['country']['name']:'not-country');
-        
+        $city->setName(array_key_exists('name',$item)?$item['name'] : null);
+        $city->setCountry(array_key_exists('country_name',$item)?$item['country_name'] : null);
+        $city->setRegion(array_key_exists('region_name',$item)?$item['region_name'] : null);
+        $city->setProvince(array_key_exists('province_name',$item)?$item['province_name'] : null);
+
+        if(array_key_exists('city_es',$item)){
+            $city->setName(array_key_exists('name',$item['city_es'])?$item['city_es']['name'] : null, 'es');
+            $city->setCountry(array_key_exists('country_name',$item['city_es'])?$item['city_es']['country_name'] : null, 'es');
+            $city->setRegion(array_key_exists('region_name',$item['city_es'])?$item['city_es']['region_name'] : null, 'es');
+            $city->setProvince(array_key_exists('province_name',$item['city_es'])?$item['city_es']['province_name'] : null, 'es');
+        }
+
         return $city;
     }
 

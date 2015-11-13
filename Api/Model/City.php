@@ -25,6 +25,11 @@ class City implements BaseModel
     const MANAGER_CLASS_NAME = 'Ant\\Bundle\\ChateaClientBundle\\Manager\\CityManager';
 
     /**
+     *
+     */
+    private $translatedFields = array();
+
+    /**
      * @var int the unique id
      */
     private $id;
@@ -49,9 +54,9 @@ class City implements BaseModel
      * Returns the name of the city
      * @return string
      */
-    public function getName()
+    public function getName($language = 'en')
     {
-        return $this->name;
+        return $this->getTranslatedField('name', $language);
     }
 
     /**
@@ -59,25 +64,44 @@ class City implements BaseModel
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name, $language = 'en')
     {
-        $this->name = $name;
+        $this->setTranslatedField('name', $name, $language);
+    }
+
+    /**
+     * Returns the province of the city
+     * @return string
+     */
+    public function getProvince($language = 'en')
+    {
+        return $this->getTranslatedField('province', $language);
+    }
+
+    /**
+     * Set the province of the city
+     *
+     * @param string $name
+     */
+    public function setProvince($province, $language = 'en')
+    {
+        $this->setTranslatedField('province', $province, $language);
     }
 
     /**
      * @param \Ant\Bundle\ChateaClientBundle\Api\Model\Country $country
      */
-    public function setCountry($country)
+    public function setCountry($country, $language = 'en')
     {
-        $this->country = $country;
+        $this->setTranslatedField('country', $country, $language);
     }
 
     /**
      * @return \Ant\Bundle\ChateaClientBundle\Api\Model\Country
      */
-    public function getCountry()
+    public function getCountry($language = 'en')
     {
-        return $this->country;
+        return $this->getTranslatedField('country', $language);
     }
 
     /**
@@ -115,21 +139,50 @@ class City implements BaseModel
     /**
      * @param \Ant\Bundle\ChateaClientBundle\Api\Model\Region $region
      */
-    public function setRegion($region)
+    public function setRegion($region, $language = 'en')
     {
-        $this->region = $region;
+        $this->setTranslatedField('region', $region, $language);
     }
 
     /**
      * @return \Ant\Bundle\ChateaClientBundle\Api\Model\Region
      */
-    public function getRegion()
+    public function getRegion($language = 'en')
     {
-        return $this->region;
+        return $this->getTranslatedField('region', $language);
     }
 
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
+    }
+
+    private function setTranslatedField($field, $value, $language)
+    {
+        if(!isset($this->translatedFields[$language])){
+            $this->translatedFields[$language] = array();
+        }
+
+        $this->translatedFields[$language][$field] = $value;
+    }
+
+    private function getTranslatedField($field, $language)
+    {
+        $value = $this->getTranslatedFieldOrNull($field, $language);
+
+        if($value === null || empty($value)){ // if the field does not exist in the quiven language set language to en
+            return $this->getTranslatedFieldOrNull($field, 'en');
+        }
+
+        return $value;
+    }
+
+    private function getTranslatedFieldOrNull($field, $language)
+    {
+        if(!(isset($this->translatedFields[$language]) && isset($this->translatedFields[$language][$field]))){
+            return null;
+        }
+
+        return $this->translatedFields[$language][$field];
     }
 }
