@@ -19,7 +19,7 @@
         var $sendButton = selectComponent('send');
 
         var disableButtonIfNoCity = function(){
-            if($formSearchCity.val().length == 0){
+            if($currentCity.val().length == 0){
                 $sendButton.attr('disabled','disabled');
             }else{
                 $sendButton.removeAttr('disabled');
@@ -96,7 +96,7 @@
                     $currentCountry.prop('selected', true);
                     $formSearchCountry.trigger('change');
                     $formSearchCity.val(cityName + ', ' + countryName);
-
+                    $currentCity.val(actualCityId);
                     disableButtonIfNoCity();
                 });
             }
@@ -225,15 +225,15 @@
             },
             close: function() {
                 $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+                disableButtonIfNoCity(); // check button again
             }
         });
 
         $formSearchCity.change(function(){
             var $this = $(this);
 
-            if($this.val().length < 2){
-                $currentCity.val('');
-            }
+            $currentCity.val('');
+            disableButtonIfNoCity();
         });
 
         var setSelectedCity = function(){
