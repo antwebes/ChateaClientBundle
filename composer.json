@@ -32,7 +32,8 @@
 	},
 	"require-dev" : {
 		"raulfraile/ladybug" : "~1.0",
-	    "sensio/framework-extra-bundle": "^3.0"
+		"sensio/framework-extra-bundle" : "^3.0",
+		"phpunit/phpunit": ">=4.7.6"
 	},
 	"autoload" : {
 		"psr-0" : {

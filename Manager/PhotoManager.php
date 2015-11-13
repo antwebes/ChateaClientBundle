@@ -87,15 +87,22 @@ class PhotoManager extends BaseManager
 
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)
     {
-		throw new \Exception('This method is not enabled');
+        if($filters != null){
+            foreach($filters as $key => $value) {
+                $params[] = sprintf("%s=%s", $key, $value);
+            }
+            $filters = implode(',', $params);
+        }
 
-       
-        
-		/*if (!$limit) $limit = $this->limit;
+        if($order != null){
+            foreach ($order as $key => $value) {
+                $orders[] = sprintf("%s=%s", $key, $value);
+            }
+            $order = implode(',',$orders);
+        }
 
-		$command = new Command('showChannels',array('filter' => $filters, 'order' => $order));
-		return new Pager($this,$command, $page, $limit);*/
-
+        $command = new Command('getPhotos',array('filters' => $filters, 'order' => $order));
+        return new Pager($this,$command, $page, $limit);
     }
 
     public function save(&$object)
