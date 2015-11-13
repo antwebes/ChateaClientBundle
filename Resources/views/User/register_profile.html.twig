@@ -154,7 +154,11 @@
 
 
                     var onSuccess = function(){
-                        window.location.href = '{{ path('chatea_client_register_user_success',{'userId': user.id }) }}';
+                        if(sendFile){
+                            window.location.href = '{{ path('chatea_client_register_user_success',{'userId': user.id , 'photoUploaded': 1}) }}';
+                        }else{
+                            window.location.href = '{{ path('chatea_client_register_user_success',{'userId': user.id }) }}';
+                        }
                     };
 
                     var onError = function(xhr, error){

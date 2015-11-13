@@ -79,6 +79,7 @@ user.change_profile: "Cambiar datos de perfil"
 user.edit_profile_photo.success: "La foto de perfil ha sido actualizada con éxito"
 user.edit_profile_photo: "Editar foto de perfil"
 user.edit_profile.success: "Tu perfil ha sido actualizado con éxito"
+user.edit_profile_photo.can_take_time_refresh: Puede que tarde unos minutos en que se vea la nueva foto de perfil en la pagina. Si no ves los cambios intenta refrescar la pagina con F5.
 user.register.change_password: También puedes cambiarte de email <a href="%path%" title="%title%">desde aquí</a>
 change_email: "Cambiar email"
 upload.pictures.alert.sexual_content:  No subas fotos con contenido sexual. Estas serán eliminadas sin previo aviso.
