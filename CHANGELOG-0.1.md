@@ -156,3 +156,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Implemente findAll of PhotoManager 
  * Update version 0.1.7 chateaClientLib
  * include phpunit version >=4.7.6
+ * Add translated fields of city 
