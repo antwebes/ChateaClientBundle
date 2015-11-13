@@ -170,7 +170,7 @@ class City implements BaseModel
     {
         $value = $this->getTranslatedFieldOrNull($field, $language);
 
-        if($value === null){ // if the field does not exist in the quiven language set language to en
+        if($value === null || empty($value)){ // if the field does not exist in the quiven language set language to en
             return $this->getTranslatedFieldOrNull($field, 'en');
         }
 
