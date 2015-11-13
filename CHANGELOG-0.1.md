@@ -151,3 +151,8 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Include notification if User has not photo profile
  * Include method wrap to Throw exception when api not return an object, the method is in "BaseManager" with name "executeAndHandleApiException"
  * Combo register and change city include field language
+
+* 0.1.31 ( 2015-11-13)
+ * Implemente findAll of PhotoManager 
+ * Update version 0.1.7 chateaClientLib
+ * include phpunit version >=4.7.6
