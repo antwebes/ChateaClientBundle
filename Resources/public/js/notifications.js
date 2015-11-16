@@ -52,6 +52,8 @@ var BoilerNotifications = (function($) {
      * @param remoteVerifyer
      */
     var checkFromStorageOrRemote = function(userId, apiEndpoint, token, storageKey, message, remoteVerifyer){
+        storageKey = storageKey + '_' + userId; // make sure the session belongs to the user
+
         var doNotify = function(mustNotify){ // this is executed when we know we have the key in the storage
             if(!mustNotify){
                 BoilerNotifications.notity(message);
