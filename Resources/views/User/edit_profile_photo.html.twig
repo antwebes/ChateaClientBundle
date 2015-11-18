@@ -40,15 +40,16 @@
     </style>
     <div class="col-xs-12">
         <form id="profileForm" class="form-horizontal" method="POST">
-            <div id="uploadSuccess" class="alert alert-success" style="display:none">
-                {{ 'user.edit_profile_photo.success' | trans }}
+            <div id="uploadSuccess" class="alert alert-success text-center" style="display:none">
+                {{ 'user.edit_profile_photo.success' | trans }} <br />
+                <strong>{{ "atention_capital" | trans({}, 'messages') }}</strong> {{ 'user.edit_profile_photo.can_take_time_refresh' | trans }}
             </div>
             <div id="upload-widget" class="form-group">
                 <div class="col-xs-8 col-xs-offset-2">
                     {{ form_errors(form.image) }}
 
-                    <div class="alert alert-info">
-                        <strong>Info!</strong> {% trans from "UserRegistration" %}upload.pictures.alert.sexual_content{% endtrans %}
+                    <div class="alert alert-info text-center">
+                        <strong>{{ "atention_capital" | trans({}, 'messages') }}</strong> {% trans from "UserRegistration" %}upload.pictures.alert.sexual_content{% endtrans %}
                     </div>
                     <span class="file-input btn btn-block btn-default btn-file btn-subtext">
                         {% if user.profilePhoto %}
