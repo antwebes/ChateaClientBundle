@@ -50,9 +50,9 @@
                 //$("#form_search_country").trigger('change');
 
                 $suggestionCity.click(function (){
-                    $formSearchCity.val(response.city +', '+ response.country);
-                    $currentCity.val(response.cityId);
-                    country_code = response.countryCode;
+                    $formSearchCity.val(response.city +', '+ response.region);
+                    $currentCity.val(response.id);
+                    selectActualCountry(response.country_code);
                 });
             });
 
@@ -66,6 +66,8 @@
 
             if(userSelectedCountry === ''){
                 cityByIpPromise = findCityByIp();
+            }else{
+                findCityByIp();
             }
 
             if(userSelectedCountry === ''){
@@ -84,22 +86,27 @@
                     var countryCode = data.country_code;
                     var countryName = data.country.name;
                     var cityName = data.name;
-                    var $countryOptions = $formSearchCountry.find('option');
 
-                    // search for the option that has the country code
-                    var $currentCountry = $countryOptions.filter(function(i, elem){
-                        var data = JSON.parse($(elem).val());
-
-                        return data.country_code == countryCode;
-                    });
-
-                    $currentCountry.prop('selected', true);
+                    selectActualCountry(countryCode);
                     $formSearchCountry.trigger('change');
                     $formSearchCity.val(cityName + ', ' + countryName);
                     $currentCity.val(actualCityId);
                     disableButtonIfNoCity();
                 });
             }
+        }
+
+        function selectActualCountry(countryCode){
+            var $countryOptions = $formSearchCountry.find('option');
+
+            // search for the option that has the country code
+            var $currentCountry = $countryOptions.filter(function(i, elem){
+                var data = JSON.parse($(elem).val());
+
+                return data.country_code == countryCode;
+            });
+
+            $currentCountry.prop('selected', true);
         }
 
         /*
@@ -185,6 +192,8 @@
         	
         	return result;
         }
+
+        var formSearchCitySelectChanged = false;
         
         $formSearchCity.autocomplete({
             source: function( request, response ) {
@@ -218,21 +227,27 @@
             },
             minLength: 2,
             select: function( event, ui ) {
+                formSearchCitySelectChanged = true;
                 $currentCity.val(ui.item.cityId);
+                disableButtonIfNoCity(); // check button again
             },
             open: function() {
                 $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
             },
             close: function() {
                 $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-                disableButtonIfNoCity(); // check button again
             }
         });
 
         $formSearchCity.change(function(){
             var $this = $(this);
 
-            $currentCity.val('');
+            if(formSearchCitySelectChanged){ // change occurs after changing city so we don't change current city to empty
+                formSearchCitySelectChanged = false;
+            }else{
+                $currentCity.val(''); //the change does not occur due the autocomplete                 
+            }
+
             disableButtonIfNoCity();
         });
 
