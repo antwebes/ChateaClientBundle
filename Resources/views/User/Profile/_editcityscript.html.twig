@@ -25,7 +25,7 @@
             clearUserData();
 
             if(typeof(window.sessionStorage) != 'undefined'){
-                sessionStorage.removeItem('has_city');
+                sessionStorage.removeItem('has_city_{{ app.user.id }}');
             }
         });
     });

@@ -36,7 +36,7 @@
             $('#profileForm')
                     .submit( function( e ) {
                         var onSuccess = function(){
-                            var storageKey = 'has_profile_photo';
+                            var storageKey = 'has_profile_photo_{{ user.id }}';
 
                            $('#upload-error').hide();
                            $('#uploadSuccess').show();
