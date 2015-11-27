@@ -16,6 +16,18 @@
         var $formSearchCity = selectComponent('search_city');
         var $suggestionCity = selectComponent('suggestion_city');
 
+        var $sendButton = selectComponent('send');
+
+        var disableButtonIfNoCity = function(){
+            if($currentCity.val().length == 0){
+                $sendButton.attr('disabled','disabled');
+            }else{
+                $sendButton.removeAttr('disabled');
+            }
+        };
+
+        $formSearchCity.change(disableButtonIfNoCity);
+
         function findCityByIp()
         {
             //console.log(api_endpoint+'/geo/locations');
@@ -38,9 +50,9 @@
                 //$("#form_search_country").trigger('change');
 
                 $suggestionCity.click(function (){
-                    $formSearchCity.val(response.city +', '+ response.country);
-                    $currentCity.val(response.cityId);
-                    country_code = response.countryCode;
+                    $formSearchCity.val(response.city +', '+ response.region);
+                    $currentCity.val(response.id);
+                    selectActualCountry(response.country_code);
                 });
             });
 
@@ -54,6 +66,8 @@
 
             if(userSelectedCountry === ''){
                 cityByIpPromise = findCityByIp();
+            }else{
+                findCityByIp();
             }
 
             if(userSelectedCountry === ''){
@@ -72,20 +86,27 @@
                     var countryCode = data.country_code;
                     var countryName = data.country.name;
                     var cityName = data.name;
-                    var $countryOptions = $formSearchCountry.find('option');
 
-                    // search for the option that has the country code
-                    var $currentCountry = $countryOptions.filter(function(i, elem){
-                        var data = JSON.parse($(elem).val());
-
-                        return data.country_code == countryCode;
-                    });
-
-                    $currentCountry.prop('selected', true);
+                    selectActualCountry(countryCode);
                     $formSearchCountry.trigger('change');
                     $formSearchCity.val(cityName + ', ' + countryName);
+                    $currentCity.val(actualCityId);
+                    disableButtonIfNoCity();
                 });
             }
+        }
+
+        function selectActualCountry(countryCode){
+            var $countryOptions = $formSearchCountry.find('option');
+
+            // search for the option that has the country code
+            var $currentCountry = $countryOptions.filter(function(i, elem){
+                var data = JSON.parse($(elem).val());
+
+                return data.country_code == countryCode;
+            });
+
+            $currentCountry.prop('selected', true);
         }
 
         /*
@@ -111,10 +132,12 @@
                 //empty input so user can write city and autocomplete
                 $formSearchCity.val('');
                 //empty value the id of city to save in user
-                $formSearchCity.val('');
+                $currentCity.val('');
                 //show the input to write city
                 $formSearchCity.parent().parent().show();
             }
+
+            disableButtonIfNoCity();
         });
         
       //fill value with data to city_es of api
@@ -169,6 +192,8 @@
         	
         	return result;
         }
+
+        var formSearchCitySelectChanged = false;
         
         $formSearchCity.autocomplete({
             source: function( request, response ) {
@@ -202,7 +227,9 @@
             },
             minLength: 2,
             select: function( event, ui ) {
+                formSearchCitySelectChanged = true;
                 $currentCity.val(ui.item.cityId);
+                disableButtonIfNoCity(); // check button again
             },
             open: function() {
                 $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
@@ -212,6 +239,17 @@
             }
         });
 
+        $formSearchCity.change(function(){
+            var $this = $(this);
+
+            if(formSearchCitySelectChanged){ // change occurs after changing city so we don't change current city to empty
+                formSearchCitySelectChanged = false;
+            }else{
+                $currentCity.val(''); //the change does not occur due the autocomplete                 
+            }
+
+            disableButtonIfNoCity();
+        });
 
         var setSelectedCity = function(){
             var countryJSON = $formSearchCountry.children(":selected").val();

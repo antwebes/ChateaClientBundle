@@ -43,18 +43,5 @@
     %}
     <script src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
-    <script>
-        var executed = false;
-
-        var onlyOnce = function(){
-            if(!executed){
-                executed = true;
-                fillSelectCountry( '{% if city %}{{ city.country |raw }}{% endif %}' );
-            }
-        };
-
-        $(document).ready(function(){
-            onlyOnce();
-        });
-    </script>
+    {% include "ChateaClientBundle:User:Profile/_editcityscript.html.twig" %}
 {% endblock %}

@@ -20,7 +20,7 @@ class EditCityType extends AbstractType
 
         $builder->add(  $builder->create('city','hidden', array('required' => false, 'attr' => array('data-city-finder' => 'current_city')))
             ->addModelTransformer($cityLocationTransformer)
-        );
+        )->add('countryName');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver){

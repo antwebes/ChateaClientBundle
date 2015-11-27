@@ -1,0 +1,32 @@
+<script>
+    $(document).ready(function(){
+        var executed = false;
+        var $countrySelect = $('*[data-city-finder="search_country"]');
+
+        var onlyOnce = function(){
+            if(!executed){
+                executed = true;
+
+                {% if city %}
+                    fillSelectCountry( '{{ city.country |raw }}' );
+                {% else %}
+                    var selctedCity = '{{ form.countryName.vars.value | raw }}';
+
+                    $countrySelect
+                        .find('option')
+                        .filter(function(i, e){ return $(e).val() == selctedCity}).prop('selected',true);
+                {% endif %}
+            }
+        };
+
+        onlyOnce();
+
+        $("#profileForm").submit(function(){
+            clearUserData();
+
+            if(typeof(window.sessionStorage) != 'undefined'){
+                sessionStorage.removeItem('has_city_{{ app.user.id }}');
+            }
+        });
+    });
+</script>
