@@ -157,3 +157,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Update version 0.1.7 chateaClientLib
  * include phpunit version >=4.7.6
  * Add translated fields of city 
+ 
+* 0.1.32 ( 2015-11-??)
+ * Include notifications to user, as use has not photo profile or user has not city
+ * Save info to show notifications in session storage
