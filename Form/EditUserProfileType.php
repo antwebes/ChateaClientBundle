@@ -29,6 +29,7 @@ class EditUserProfileType extends AbstractType
 			    'widget' => 'choice',
 			    // this is actually the default format for single_text
 			    'format' => 'yyyy-MM-dd',
+                "years"	=> range (date('Y')-90, date('Y')-18),
         		'required' => true));
         }
     }
