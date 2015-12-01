@@ -158,7 +158,8 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * include phpunit version >=4.7.6
  * Add translated fields of city 
  
-* 0.1.32 ( 2015-11-??)
+* 0.1.32 ( 2015-12-01)
  * Include notifications to user, as use has not photo profile or user has not city
  * Save info to show notifications in session storage
  * Range Year to edit profile between 90 and 18
+ * Include new bundle of captcha
