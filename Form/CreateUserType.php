@@ -103,7 +103,7 @@ class CreateUserType extends AbstractType
         $builder->add('recaptcha', 'beelab_recaptcha2', array(
             'label' => false,
             'mapped' => false,
-            'constraints' => new Recaptcha2(),
+            'constraints' => new Recaptcha2(array('message' => 'invalid.recaptcha')),
         ));
     }
 

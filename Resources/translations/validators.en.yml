@@ -6,4 +6,5 @@ form.email.mismatch: "The emails do not match"
 api.entity.channel.name.unique.constraints.message: The channel name is already used.
 api.entity.channel.slug.unique.constraints.message: The slug is already used (You change channel name).
 api.entity.channel.ircChannel.unique.constraints.message: The channel irc name is already used.
+invalid.recaptcha: Invalid recaptcha
 

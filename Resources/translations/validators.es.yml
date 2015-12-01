@@ -8,3 +8,4 @@ form:
 api.entity.channel.name.unique.constraints.message: El nombre del canal ya esta en uso
 api.entity.channel.slug.unique.constraints.message: El slug del canal ya esta en uso (cambia el nombre del canal)
 api.entity.channel.ircChannel.unique.constraints.message: El nombre irc del canal ya esta en uso
+invalid.recaptcha: Recaptcha inválido
