@@ -20,43 +20,5 @@
 {% endblock chatea_css %}
 
 {% block chatea_js %}
-    <script>
-        window.api_endpoint = "{{ api_endpoint }}";
-        window.language = "{{ app.request.locale }}";
-    </script>
-    {% javascripts
-        '@ChateaClientBundle/Resources/public/js/jquery-ui-1.10.3.custom.min.js'
-        '@ChateaClientBundle/Resources/public/js/cities.js'
-        '@ChateaClientBundle/Resources/public/js/userNickSuggestions.js'
-    %}
-    <script src="{{ asset(asset_url) }}"></script>
-    {% endjavascripts %}
-    <script>
-        var executed = false;
-        var messages = {
-            emails_not_mismatch: '{{ 'form.email.mismatch' | trans }}',
-            mail_is_aviable: '{{ 'form.mail_is_aviable' | trans }}',
-            mail_is_available_but_not_validate: '{{ 'form.mail_is_available_but_not_validate' | trans }}',
-            username_is_aviable: '{{ 'form.username_is_aviable' | trans }}',
-            nick_suggestions: '{{ 'form.nick_suggestions' | trans }}',
-            server_errors: {
-                'This value is already used.': '{{ 'form.username_already_used' | trans }}',
-                'Email already in use. An email only be used in chatsfree account at a time.': '{{ 'form.email_already_used' | trans }}',
-                'This value is not a valid email address.': '{{ 'form.email_not_valid' | trans }}',
-                'The username is not valid. The username can not include spaces, it can not start with number, or it can not include the special characters': '{{ 'form.username_not_valid' | trans }}'
-            }
-        };
-
-        var onlyOnce = function(){
-            if(!executed){
-                executed = true;
-                fillSelectCountry( '{{ app.request.get('country')|raw }}' );
-            }
-        };
-
-        $(document).ready(function(){
-            onlyOnce();
-            userNickSuggestions(messages);
-        });
-    </script>
+    {% include "ChateaClientBundle:User:register/registerscript.html.twig" %}
 {% endblock %}

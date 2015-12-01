@@ -27,7 +27,7 @@
 		"antwebes/chatea-common" : "0.1.0",
 		"antwebes/chatea-client-lib" : "0.1.7",
 		"antwebes/chatea-secure-bundle" : "0.1.6",
-		"excelwebzone/recaptcha-bundle" : "2.3.x-dev",
+		"beelab/recaptcha2-bundle" : "0.1.*",
 		"doctrine/annotations" : "^1.2"
 	},
 	"require-dev" : {

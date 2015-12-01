@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\True;
-use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\True as CaptchaTrue;
+use Beelab\Recaptcha2Bundle\Validator\Constraints\Recaptcha2;
 
 class CreateUserType extends AbstractType
 {
@@ -100,7 +100,11 @@ class CreateUserType extends AbstractType
         $builder->add('ip',        'hidden',  array('required' => false,'data'  => $options['ip']));
         $builder->add('language', 'hidden',   array('required' => false,'data'  => $options['language']));
 
-        $builder->add('recaptcha', 'ewz_recaptcha', array('mapped' => false, 'constraints' => array(new CaptchaTrue())));
+        $builder->add('recaptcha', 'beelab_recaptcha2', array(
+            'label' => false,
+            'mapped' => false,
+            'constraints' => new Recaptcha2(),
+        ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver){
