@@ -12,7 +12,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\True as CaptchaTrue;
+use Beelab\Recaptcha2Bundle\Validator\Constraints\Recaptcha2;
 
 class ResetPasswordType extends AbstractType
 {
@@ -21,8 +21,11 @@ class ResetPasswordType extends AbstractType
     {
         $builder
             ->add('email', 'email', array('required' => true))
-        ;
-        $builder->add('recaptcha', 'ewz_recaptcha', array('mapped' => false, 'constraints' => array(new CaptchaTrue())));
+            ->add('recaptcha', 'beelab_recaptcha2', array(
+                'label' => false,
+                'mapped' => false,
+                'constraints' => new Recaptcha2(array('message' => 'invalid.recaptcha')),
+            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
