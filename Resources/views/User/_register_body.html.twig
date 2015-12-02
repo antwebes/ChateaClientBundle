@@ -120,11 +120,16 @@
 
 	    {{ form_widget(form._token) }}
 	    {{ form_rest(form) }}
-
+		{% if errors | length > 0 %}
+	        <div class="alert alert-danger">
+	            {{ form_errors(form) }}
+	        </div>
+	    {% endif %}
 	    <div class="form-group">
 	        <div class="col-sm-offset-2 col-sm-10">
 	            <input name="register" type="submit" class="btn btn-lg pull-right btn-primary" value="{{ 'registration.submit'|trans }}" />
 	        </div>
 	    </div>
+	    
 	</form>
 </div>
