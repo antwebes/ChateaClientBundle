@@ -24,3 +24,4 @@ form.mail_is_aviable: "Email already in use. An email only be used in a account 
 user.edit_city.success: "Your city has been updated successfully"
 user.edit_city: "Edit your city"
 user.upload_photo.error: "An error ocurred uploading the photo"
+user.edit_profile: "Edit profile"

@@ -1,0 +1,8 @@
+user.wellcome: Hello %username%
+user.wellcome.last_visitis: Last users that visited you
+user.wellcome.no_visits: You have no visits. To receive visits we suggest to edit your profile.
+user.wellcome.enter_channels_fan: Enter in some of the rooms you're fan.
+user.wellcome.enter_channels_owner: Enter in some of the rooms you're owner.
+user.wellcome.enter_channels_moderator: Enter in some of the rooms you're moderator.
+user.wellcome.no_channels: There are no rooms
+user.wellcome.view_all_channels: View all rooms

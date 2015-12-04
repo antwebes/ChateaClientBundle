@@ -1,0 +1,8 @@
+user.wellcome: Hola %username%
+user.wellcome.last_visitis: Últimos usuarios que te visitaron
+user.wellcome.no_visits: No has recibido visitas. Para recibir visitas te sugerimos que edites tu perfil.
+user.wellcome.enter_channels_fan: Entra en alguno de tus canales que eres fan.
+user.wellcome.enter_channels_owner: Entra en alguno de tus canales que eres propietarios.
+user.wellcome.enter_channels_moderator: Entra en alguno de tus canales que eres moderador.
+user.wellcome.no_channels: No hay canales
+user.wellcome.view_all_channels: Ver todos los canales

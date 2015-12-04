@@ -1,0 +1,50 @@
+{% extends "ChateaClientBundle::mainLayout.html.twig" %}
+
+{% trans_default_domain 'User' %}
+
+{% block chatea_title %}{{ 'user.wellcome' | trans({'%username%': app.user.username}) }}{% endblock %}
+
+{% set user_channels_url = boilerplate_users_base_url ~ '/'  ~ app.user.id  %}
+
+{% block chatea_body %}
+	<h1>{{ 'user.wellcome' | trans({'%username%': app.user.username}) }}</h1>
+
+	<h3>{{ "user.wellcome.last_visitis" | trans }}</h3>
+	<div class="row">
+		{% for visitor in visitors %}
+			<div class="col-lg-4">
+				<a href="{{ boilerplate_users_base_url }}/{{ visitor.username }}-{{ visitor.id }}?autologin={{ app.user.accessToken }}" target="_blank" title="{{ visitor.username }}">
+					<div>
+						{% if visitor.profilePhoto %}
+							<img src="{{ visitor | userProfilePhotoUrl("icon") }}" class="avatar avatar-50 photo" width="50" height="50" title="{{ visitor.username }}">
+						{% else %}
+							{% image '@ChateaClientBundle/Resources/public/images/no-photo-icon.png'  output="images/no-photo-icon.jpg" %}
+							<img src="{{ asset_url }}">
+							{% endimage %}
+						{% endif %}
+					</div>
+					<div>
+						<div>
+							{{ visitor.username }}
+						</div>
+					</div>
+				</a>
+			</div>
+		{% else %}
+			<div class="col-lg-12">{{ 'user.wellcome.no_visits' | trans }}</div>
+			<div class="col-lg-12">
+				<a href="{{ boilerplate_endpoint }}/perfil?autologin={{ app.user.accessToken }}" target="_blank">{{ 'user.edit_profile' | trans({}, 'UserChange') }}</a>
+			</div>
+		{% endfor %}
+	</div>
+
+
+	<h3>{{ 'user.wellcome.enter_channels_fan' | trans }}</h3>
+	{% include "ChateaClientBundle:User:_channelsList.html.twig" with {'channels': userMe.channelsFan, 'view_all_channels_url': user_channels_url ~ '/canales/fan?autologin=' ~ app.user.accessToken, 'wellcomeChannelsLimit': wellcomeChannelsLimit } %}
+
+	<h3>{{ 'user.wellcome.enter_channels_owner' | trans }}</h3>
+	{% include "ChateaClientBundle:User:_channelsList.html.twig" with {'channels': userMe.channels, 'view_all_channels_url': user_channels_url ~ '/canales/owner?autologin=' ~ app.user.accessToken, 'wellcomeChannelsLimit': wellcomeChannelsLimit } %}
+
+	<h3>{{ 'user.wellcome.enter_channels_moderator' | trans }}</h3>
+	{% include "ChateaClientBundle:User:_channelsList.html.twig" with {'channels': userMe.channelsModerated, 'view_all_channels_url': user_channels_url ~ '/canales/moderator?autologin=' ~ app.user.accessToken, 'wellcomeChannelsLimit': wellcomeChannelsLimit } %}
+{% endblock chatea_body %}

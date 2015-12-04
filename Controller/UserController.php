@@ -257,6 +257,25 @@ class UserController extends BaseController
             ));
     }
 
+    /**
+     * @APIUser
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function wellcomeAction()
+    {
+        $userManager = $this->get('api_users');
+        $visitsLimit = $this->container->getParameter('chatea_client.visits_limit');
+        $wellcomeChannelsLimit = $this->container->getParameter('chatea_client.wellcome_channels_limit');
+        $userMe = $userManager->findMeUser();
+        $visitors = $userManager->getUserVisits($userMe, $visitsLimit);
+
+        return $this->render('ChateaClientBundle:User:wellcome.html.twig', array(
+            'userMe' => $userMe,
+            'visitors' => $visitors,
+            'wellcomeChannelsLimit' => $wellcomeChannelsLimit
+        ));
+    }
+
     private function getLanguageFromRequestAndSaveInSessionRequest(Request $request)
     {
         $language = $request->get('language', $this->container->getParameter('kernel.default_locale'));
