@@ -163,3 +163,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Save info to show notifications in session storage
  * Range Year to edit profile between 90 and 18
  * Include new bundle of captcha
+ 
+* 0.1.33 (2015-12-10)
+ * Added notifyPhotoWithMostPhotos method in notifications.js 
