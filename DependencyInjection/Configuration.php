@@ -57,6 +57,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->scalarNode('app_id')->end()
             ->booleanNode('register_with_profile')->defaultTrue()->end()
+            ->booleanNode('can_skip_register_profile')->defaultTrue()->end()
             ->booleanNode('authenticate_client_as_guest')->defaultFalse()->end()
             ->arrayNode('api_request_allow')
                 ->prototype('scalar')->end()

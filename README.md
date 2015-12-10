@@ -36,6 +36,8 @@ chatea_client:
     api_endpoint: %api_endpoint%
     app_id: %chatea_app_id%
     authenticate_client_as_guest: true|false #optional (by deafault false) to indicate if client authenticates as guest. In case of false it authenticates with client credentials
+    register_with_profile: true|false (by default true) to indicate if we whant to take the register profile step
+    can_skip_register_profile: true|false (by default true) to indicat if we allow the skip button in the register profile page
     
 ewz_recaptcha:
     public_key:  %recaptcha_public_key%

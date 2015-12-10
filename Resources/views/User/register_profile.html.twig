@@ -66,11 +66,14 @@
         {{ form_widget(form._token) }}
         {{ form_rest(form) }}
         <div class="form-group row">
-            <div class="col-sm-1">
-                <a id="skipBtn" class="btn btn-default" role="button" href="{{ path('chatea_client_register_user_success',{'userId': user.id }) }}">
-                    {{ 'user.register_profile.skip' | trans }}
-                </a>
-            </div>
+            {% if canSkip %}
+                <div class="col-sm-1">
+                    <a id="skipBtn" class="btn btn-default" role="button" href="{{ path('chatea_client_register_user_success',{'userId': user.id }) }}">
+                        {{ 'user.register_profile.skip' | trans }}
+                    </a>
+                </div>
+
+            {% endif %}
             <div class="col-sm-offset-9 col-sm-2">
                 <button id="btn_register" name="register" type="submit" class="btn btn-lg pull-right btn-primary">
                     <i id="icon_register" class=""></i>

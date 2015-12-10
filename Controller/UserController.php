@@ -178,7 +178,8 @@ class UserController extends BaseController
             'alerts' => null,
             'errors' => $form->getErrors(),
             'access_token' => $this->container->get('security.context')->getToken()->getUser()->getAccessToken(),
-            'api_endpoint' => $this->container->getParameter('api_endpoint')
+            'api_endpoint' => $this->container->getParameter('api_endpoint'),
+            'canSkip' => $this->container->getParameter('chatea_client.can_skip_register_profile')
         ));
 
     }
