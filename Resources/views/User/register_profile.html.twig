@@ -221,7 +221,7 @@
                 });
 
             {% if not canSkip %}
-            $('a').hide();
+            {% include "ChateaClientBundle:User:register_profile_not_skip_script.html.twig" %}
             {% endif %}
         });
     </script>
