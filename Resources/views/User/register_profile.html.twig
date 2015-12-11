@@ -69,14 +69,14 @@
                 {% if canSkip %}
                     <div class="col-sm-1">
                         <a id="skipBtn" class="btn btn-default" role="button" href="{{ path('chatea_client_register_user_success',{'userId': '__userId__' }) }}">
-                            <i class="icon_register"></i>{{ 'user.register_profile.skip' | trans }}
+                            <i id="icon_register_skip" class="icon_register"></i>{{ 'user.register_profile.skip' | trans }}
                         </a>
                     </div>
 
                 {% endif %}
                 <div class="col-sm-offset-9 col-sm-2">
                     <button id="btn_register" name="register" type="submit" class="btn btn-lg pull-right btn-primary">
-                        <i class="icon_register"></i>
+                        <i id="icon_register" class="icon_register"></i>
                         {{ 'registration_profile.submit'|trans }}
                     </button>
                 </div>
@@ -132,20 +132,36 @@
                 sendFile = true;
             });
 
-            $("#skipBtn").click(function (e) {
-                e.preventDefault();
-                var redirect = $(this).attr('href');
-                $(".icon_register").addClass('icon-spinner icon-spin');
-
+            var registerUser = function(successCallback){
                 $.ajax({
                     url: '{{ path('chatea_client_register_user_ajax') }}',
                     type: 'POST',
-                    success: function(data){
-                        sendEvent("registration", "profile", "skip");
+                    success: successCallback,
+                    error: function(xhr, error){
+                        var errorText = xhr.responseText;
 
-                        window.location.href = redirect.replace('__userId__', data.userId);
+                        window.location.href = '{{ path('chatea_client_register_user') }}?formErrors=' + errorText;
                     }
                 });
+            };
+
+            $("#skipBtn").click(function (e) {
+                e.preventDefault();
+                var redirect = $(this).attr('href');
+                $("#icon_register_skip").addClass('icon-spinner icon-spin');
+                $("#btn_register").hide();
+
+                var doRedirect = function(data){
+                    sendEvent("registration", "profile", "skip");
+
+                    window.location.href = redirect.replace('__userId__', data.userId);
+                };
+
+                if(typeof(window.sessionUserData) == 'undefined'){
+                    registerUser(doRedirect);
+                }else{
+                    doRedirect(window.sessionUserData);
+                }
             });
 
 
@@ -165,7 +181,8 @@
             $('#profileForm')
                 .submit( function( e ) {
                     var self = this;
-                    $(".icon_register").addClass('icon-spinner icon-spin');
+                    $("#icon_register").addClass('icon-spinner icon-spin');
+                    $("#skipBtn").hide();
                     $("#btn_register").prop('disabled', true);
 
 
@@ -182,6 +199,9 @@
                     var onError = function(xhr, error){
                         var responseJSON = xhr.responseJSON;
                         $('.help-validate').remove();
+                        $(".icon_register").removeClass('icon-spinner icon-spin');
+                        $("#btn_register").prop('disabled', false);
+                        $(".icon_register, #skipBtn").show();
 
 
                         if(typeof responseJSON != 'undefined' && typeof responseJSON.errors != 'undefined'){
@@ -230,19 +250,20 @@
                                 url: '{{ api_endpoint }}/api/users/' + userId + '/profiles?access_token='+accessToken,
                                 type: 'POST',
                                 data: formData,
-                                success: onSuccess,
+                                success: onSuccess(userId),
                                 error: onError
                             });
                         }
                     };
 
-                    $.ajax({
-                       url: '{{ path('chatea_client_register_user_ajax') }}',
-                       type: 'POST',
-                       success: function(data){
-                           registerProfile(data.userId, data.accessToken);
-                       }
-                    });
+                    if(typeof(window.sessionUserData) == 'undefined'){ // we haven't registered the user at all
+                        registerUser(function(data){
+                            window.sessionUserData = data;
+                            registerProfile(window.sessionUserData.userId, window.sessionUserData.accessToken);
+                        });
+                    }else{ // we've registered the user previouly but we send only the profile form because of previous validation error
+                        registerProfile(window.sessionUserData.userId, window.sessionUserData.accessToken);
+                    }
 
                     sendEvent("registration", "profile", "compolete");
                     e.preventDefault();

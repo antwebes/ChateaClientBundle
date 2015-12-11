@@ -37,13 +37,24 @@ class UserController extends BaseController
             return $this->redirect($request->getBaseUrl());
         }
 
-            $formOptions = array(
+        $date = $request->getSession()->get('user_birthday', null);
+
+        if($date != null){
+            try{
+                $date = new \DateTime($date);
+            }catch(\Exception $e){
+                $date = null;
+            }
+        }
+
+        $formOptions = array(
             'language'              => $language,
             'cityLocationManager'   => $this->get('api_cities'),
             'ip'                    => $request->getClientIp(),
+            'birthday'              => $date
         );
 
-        $user = new User();
+        $user = $request->getSession()->get('user_data', new User());
         /** @var \Ant\Bundle\ChateaClientBundle\Manager\UserManager $userManager */
         $userManager = $this->get('api_users');
         $form = $this->createForm(new CreateUserType(), $user, $formOptions);
@@ -85,6 +96,9 @@ class UserController extends BaseController
                     }
                 }
             }
+        }else if($request->query->get('formErrors', '') != ''){
+            $e = new \Exception($request->query->get('formErrors', ''));
+            $this->addErrorsToForm($e, $form, 'UserRegistration');
         }
 
         $templateVars = array(
@@ -104,15 +118,20 @@ class UserController extends BaseController
     {
         $userManager = $this->get('api_users');
         $user = $request->getSession()->get('user_data');
-        $userManager->save($user);
-        $this->authenticateUser($user);
 
-        $onlineUser = $this->getUser();
+        try{
+            $userManager->save($user);
+            $this->authenticateUser($user);
 
-        return new JsonResponse(array(
-            'userId' => $onlineUser->getId(),
-            'accessToken' => $onlineUser->getAccessToken()
-        ));
+            $onlineUser = $this->getUser();
+
+            return new JsonResponse(array(
+                'userId' => $onlineUser->getId(),
+                'accessToken' => $onlineUser->getAccessToken()
+            ));
+        }catch(\Exception $e){
+            return new JsonResponse(json_decode($e->getMessage(), true), 400);
+        }
     }
 
     /**

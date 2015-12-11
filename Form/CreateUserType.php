@@ -69,7 +69,8 @@ class CreateUserType extends AbstractType
                 "years"	=> range (date('Y')-90, date('Y')-18),
                 "empty_value" => '',
                 "constraints" => new NotBlank(array("message" => "form.birthday.error_message")),
-                'label_attr' => array('class'=>'col-lg-3 control-label')
+                'label_attr' => array('class'=>'col-lg-3 control-label'),
+                'data' => $options['birthday']
             )
         );
 
@@ -114,6 +115,7 @@ class CreateUserType extends AbstractType
             'language' => null,
             //'client' => null,
             'ip'       => null,
+            'birthday' => null
         ));
         $resolver->setRequired(array(
             'cityLocationManager','language','ip'
