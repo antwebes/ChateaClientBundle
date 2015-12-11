@@ -68,15 +68,15 @@
             <div class="form-group row">
                 {% if canSkip %}
                     <div class="col-sm-1">
-                        <a id="skipBtn" class="btn btn-default" role="button" href="{{ path('chatea_client_register_user_success',{'userId': user.id }) }}">
-                            {{ 'user.register_profile.skip' | trans }}
+                        <a id="skipBtn" class="btn btn-default" role="button" href="{{ path('chatea_client_register_user_success',{'userId': '__userId__' }) }}">
+                            <i class="icon_register"></i>{{ 'user.register_profile.skip' | trans }}
                         </a>
                     </div>
 
                 {% endif %}
                 <div class="col-sm-offset-9 col-sm-2">
                     <button id="btn_register" name="register" type="submit" class="btn btn-lg pull-right btn-primary">
-                        <i id="icon_register" class=""></i>
+                        <i class="icon_register"></i>
                         {{ 'registration_profile.submit'|trans }}
                     </button>
                 </div>
@@ -132,8 +132,20 @@
                 sendFile = true;
             });
 
-            $("#skipBtn").click(function () {
-                sendEvent("registration", "profile", "skip");
+            $("#skipBtn").click(function (e) {
+                e.preventDefault();
+                var redirect = $(this).attr('href');
+                $(".icon_register").addClass('icon-spinner icon-spin');
+
+                $.ajax({
+                    url: '{{ path('chatea_client_register_user_ajax') }}',
+                    type: 'POST',
+                    success: function(data){
+                        sendEvent("registration", "profile", "skip");
+
+                        window.location.href = redirect.replace('__userId__', data.userId);
+                    }
+                });
             });
 
 
@@ -152,16 +164,19 @@
 
             $('#profileForm')
                 .submit( function( e ) {
-                    $("#icon_register").addClass('icon-spinner icon-spin');
+                    var self = this;
+                    $(".icon_register").addClass('icon-spinner icon-spin');
                     $("#btn_register").prop('disabled', true);
 
 
-                    var onSuccess = function(){
+                    var onSuccess = function(userId){
                         if(sendFile){
-                            window.location.href = '{{ path('chatea_client_register_user_success',{'userId': user.id , 'photoUploaded': 1}) }}';
+                            redirectUrl = '{{ path('chatea_client_register_user_success',{'userId': '__userId__' , 'photoUploaded': 1}) }}';
                         }else{
-                            window.location.href = '{{ path('chatea_client_register_user_success',{'userId': user.id }) }}';
+                            redirectUrl = '{{ path('chatea_client_register_user_success',{'userId': '__userId__' }) }}';
                         }
+
+                        window.location.href = redirectUrl.replace('__userId__', userId);
                     };
 
                     var onError = function(xhr, error){
@@ -191,31 +206,44 @@
                         }
                     };
 
-                    if(sendFile){
-                        var formData = new FormData( this );
+                    var registerProfile = function(userId, accessToken){
+                        if (sendFile) {
+                            var formData = new FormData(self);
 
-                        $.ajax( {
-                            url: '{{ api_endpoint }}/api/users/{{ user.id }}/profiles?access_token={{ access_token }}',
-                            type: 'POST',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            crossDomain: true,
-                            success: onSuccess,
-                            error: onError
-                        } );
-                    }else{
-                        //no file was choosen, we serialize the form in normal form
-                        var formData = $('#profileForm').serialize();
+                            $.ajax({
+                                url: '{{ api_endpoint }}/api/users/' + userId + '/profiles?access_token='+accessToken,
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                crossDomain: true,
+                                success: function(){
+                                    onSuccess(userId);
+                                },
+                                error: onError
+                            });
+                        } else {
+                            //no file was choosen, we serialize the form in normal form
+                            var formData = $('#profileForm').serialize();
 
-                        $.ajax( {
-                            url: '{{ api_endpoint }}/api/users/{{ user.id }}/profiles?access_token={{ access_token }}',
-                            type: 'POST',
-                            data: formData,
-                            success: onSuccess,
-                            error: onError
-                        } );
-                    }
+                            $.ajax({
+                                url: '{{ api_endpoint }}/api/users/' + userId + '/profiles?access_token='+accessToken,
+                                type: 'POST',
+                                data: formData,
+                                success: onSuccess,
+                                error: onError
+                            });
+                        }
+                    };
+
+                    $.ajax({
+                       url: '{{ path('chatea_client_register_user_ajax') }}',
+                       type: 'POST',
+                       success: function(data){
+                           registerProfile(data.userId, data.accessToken);
+                       }
+                    });
+
                     sendEvent("registration", "profile", "compolete");
                     e.preventDefault();
                 });
