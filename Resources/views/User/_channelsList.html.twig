@@ -25,7 +25,7 @@
     {% endfor %}
 </div>
 
-{% if channels | length > 0 %}
+{% if channels | length > wellcomeChannelsLimit %}
     <div class="row">
         <div class="col-lg-12">
             <a href="{{ view_all_channels_url }}" target="_blank">{{ 'user.wellcome.view_all_channels' | trans }}</a>

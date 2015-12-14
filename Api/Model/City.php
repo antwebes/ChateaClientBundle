@@ -104,6 +104,16 @@ class City implements BaseModel
         return $this->getTranslatedField('country', $language);
     }
 
+    public function setCountryObject($country)
+    {
+        $this->country = $country;
+    }
+
+    public function getCountryObject()
+    {
+        return $this->country;
+    }
+
     /**
      * @param int $id
      */

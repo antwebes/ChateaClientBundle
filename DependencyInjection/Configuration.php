@@ -62,6 +62,7 @@ class Configuration implements ConfigurationInterface
                 ->prototype('scalar')->end()
                 ->end()
             ->integerNode('visits_limit')->defaultValue(3)->end()
+            ->integerNode('wellcome_country_users_limit')->defaultValue(9)->end()
             ->integerNode('wellcome_channels_limit')->defaultValue(9)->end()
         ->end();
 

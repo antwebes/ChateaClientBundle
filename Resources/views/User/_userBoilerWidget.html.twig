@@ -1,0 +1,18 @@
+<div class="col-lg-4">
+    <a href="{{ boilerplate_users_base_url }}/{{ user.username }}-{{ user.id }}?autologin={{ app.user.accessToken }}" target="_blank" title="{{ user.username }}">
+        <div>
+            {% if user.profilePhoto %}
+                <img src="{{ user | userProfilePhotoUrl("icon") }}" class="avatar avatar-50 photo" width="50" height="50" title="{{ user.username }}">
+            {% else %}
+                {% image '@ChateaClientBundle/Resources/public/images/no-photo-icon.png'  output="images/no-photo-icon.jpg" %}
+                <img src="{{ asset_url }}">
+                {% endimage %}
+            {% endif %}
+        </div>
+        <div>
+            <div>
+                {{ user.username }}
+            </div>
+        </div>
+    </a>
+</div>

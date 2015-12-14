@@ -6,3 +6,7 @@ user.wellcome.enter_channels_owner: Entra en alguno de tus canales que eres prop
 user.wellcome.enter_channels_moderator: Entra en alguno de tus canales que eres moderador.
 user.wellcome.no_channels: No hay canales
 user.wellcome.view_all_channels: Ver todos los canales
+user.wellcome.become_fan_of_channel: Hazte fan de un canal
+user.wellcome.become_fan_of_channel.text: Aun no eres fan de ningún canal
+user.wellcome.become_fan_of_channel.browse: Busca canales aquí
+user.wellcome.people_near_city: Usuarios de %cityname%

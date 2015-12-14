@@ -12,6 +12,7 @@
  */
 
 namespace Ant\Bundle\ChateaClientBundle\Manager;
+use Ant\Bundle\ChateaClientBundle\Api\Model\Country;
 
 /**
  * Class CountryManager
@@ -23,10 +24,11 @@ class CountryManager extends BaseManager
 
     public function hydrate(array $item = null)
     {
-        $affiliate = new Affiliate();
-        $affiliate->setName(array_key_exists('name',$item)?$item['name']:'not-name');
-        $affiliate->setHost(array_key_exists('host',$item)?$item['host']:'not-host');
-        return $affiliate;
+        $country = new Country();
+        $country->setId(array_key_exists('id',$item)?$item['id']:null);
+        $country->setName(array_key_exists('name',$item)?$item['name']:'not-name');
+        $country->setCode(array_key_exists('country_code',$item)?$item['country_code']:'');
+        return $country;
     }
 
     public function getLimit()
@@ -62,6 +64,6 @@ class CountryManager extends BaseManager
 
     public function getModel()
     {
-        return 'Ant\Bundle\ChateaClientBundle\Api\Model\Affiliate';
+        return 'Ant\Bundle\ChateaClientBundle\Api\Model\Country';
     }
 } 

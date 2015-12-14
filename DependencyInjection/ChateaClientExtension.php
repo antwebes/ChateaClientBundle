@@ -45,6 +45,7 @@ class ChateaClientExtension extends Extension
         $container->setParameter('chatea_client.api_request_allow', $config['api_request_allow']);
         $container->setParameter('chatea_client.authenticate_client_as_guest', $config['authenticate_client_as_guest']);
         $container->setParameter('chatea_client.visits_limit', $config['visits_limit']);
+        $container->setParameter('chatea_client.wellcome_country_users_limit', $config['wellcome_country_users_limit']);
         $container->setParameter('chatea_client.wellcome_channels_limit', $config['wellcome_channels_limit']);
 
         if($config['filestore']['file_directory'] == 'default'){
