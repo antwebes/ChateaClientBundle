@@ -1,0 +1,52 @@
+{% trans_default_domain 'User' %}
+
+<div class="page-header">
+  <h1 class="text-center">{{ 'user.welcome' | trans({'%username%': app.user.username}) }} <small> {{ 'user.welcome.subtitle' | trans({'%username%': app.user.username}) }}</small></h1>
+</div>
+
+{% if visitors | length > 0 %}
+	<h1>{{ "user.welcome.last_visits" | trans }}</h1>
+	<div class="row well">
+		{% for visitor in visitors %}
+			{% include "ChateaClientBundle:User:Welcome/_userBoilerWidget.html.twig" with {'user': visitor} %}
+		{% else %}
+			<div class="col-lg-12">{{ 'user.welcome.no_visits' | trans }}</div>
+			<div class="col-lg-12">
+				<a href="{{ boilerplate_endpoint }}/perfil?autologin={{ app.user.accessToken }}" target="_blank">{{ 'user.edit_profile' | trans({}, 'UserChange') }}</a>
+			</div>
+		{% endfor %}
+	</div>
+{% endif %}
+
+{% if userMe.city %}
+	<h1>{{ 'user.welcome.people_near_city' | trans({ '%cityname%': userMe.city.getCountry(app.request.attributes.get('_locale')) }) }}</h1>
+	<div class="row well">
+		{% for user in usersCountry %}
+			{% include "ChateaClientBundle:User:Welcome/_userBoilerWidget.html.twig" with {'user': user, 'size_col': 'col-xs-4'} %}
+		{% endfor %}
+		<a href="{{ boilerplate_users_base_url }}/?advanced_search[country]={{ country.code }}&advanced_search[gender]=&autologin={{ app.user.accessToken }}" target="_blank">Ver m&aacute;s</a>
+	</div>
+	
+{% endif %}
+
+{% if userMe.channelsFan | length > 0 %}
+	<h1>{{ 'user.welcome.enter_channels_fan' | trans }}</h1>
+	{% include "ChateaClientBundle:User:_channelsList.html.twig" with {'channels': userMe.channelsFan, 'view_all_channels_url': user_channels_url ~ '/canales/fan?autologin=' ~ app.user.accessToken, 'welcomeChannelsLimit': welcomeChannelsLimit } %}
+{% else %}
+	<h3>{{ 'user.welcome.become_fan_of_channel' | trans }}</h3>
+	{{ 'user.welcome.become_fan_of_channel.text' | trans }}.
+	<a href="{{ boilerplate_channels_base_url }}/lista/?autologin={{ app.user.accessToken }}" target="_blank">
+		{{ 'user.welcome.become_fan_of_channel.browse' | trans }}
+	</a>.
+{% endif %}
+
+{% if userMe.channels | length > 0 %}
+	<h1>{{ 'user.welcome.enter_channels_owner' | trans }}</h1>
+	{% include "ChateaClientBundle:User:_channelsList.html.twig" with {'channels': userMe.channels, 'view_all_channels_url': user_channels_url ~ '/canales/owner?autologin=' ~ app.user.accessToken, 'welcomeChannelsLimit': welcomeChannelsLimit } %}
+{% endif %}
+
+{% if userMe.channelsModerated | length > 0 %}
+	<h1>{{ 'user.welcome.enter_channels_moderator' | trans }}</h1>
+	{% include "ChateaClientBundle:User:_channelsList.html.twig" with {'channels': userMe.channelsModerated, 'view_all_channels_url': user_channels_url ~ '/canales/moderator?autologin=' ~ app.user.accessToken, 'welcomeChannelsLimit': welcomeChannelsLimit } %}
+{% endif %}
+<br />

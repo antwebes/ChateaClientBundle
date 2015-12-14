@@ -1,7 +1,7 @@
 {% trans_default_domain 'User' %}
 
 <div class="row">
-    {% for channel in channels | slice(0, wellcomeChannelsLimit) %}
+    {% for channel in channels | slice(0, welcomeChannelsLimit) %}
         <div class="col-lg-4">
             <a href="{{ boilerplate_channels_base_url }}/{{ channel.slug }}?autologin={{ app.user.accessToken }}" target="_blank">
                 <div>
@@ -21,14 +21,14 @@
             </a>
         </div>
     {% else %}
-        <div class="col-lg-12">{{ 'user.wellcome.no_channels' | trans }}</div>
+        <div class="col-lg-12">{{ 'user.welcome.no_channels' | trans }}</div>
     {% endfor %}
 </div>
 
-{% if channels | length > wellcomeChannelsLimit %}
+{% if channels | length > welcomeChannelsLimit %}
     <div class="row">
         <div class="col-lg-12">
-            <a href="{{ view_all_channels_url }}" target="_blank">{{ 'user.wellcome.view_all_channels' | trans }}</a>
+            <a href="{{ view_all_channels_url }}" target="_blank">{{ 'user.welcome.view_all_channels' | trans }}</a>
         </div>
     </div>
 {% endif %}

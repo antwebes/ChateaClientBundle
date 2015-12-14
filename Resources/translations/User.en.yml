@@ -1,12 +1,13 @@
-user.wellcome: Hello %username%
-user.wellcome.last_visitis: Last users that visited you
-user.wellcome.no_visits: You have no visits. To receive visits we suggest to edit your profile.
-user.wellcome.enter_channels_fan: Enter in some of the rooms you're fan.
-user.wellcome.enter_channels_owner: Enter in some of the rooms you're owner.
-user.wellcome.enter_channels_moderator: Enter in some of the rooms you're moderator.
-user.wellcome.no_channels: There are no rooms
-user.wellcome.view_all_channels: View all rooms
-user.wellcome.become_fan_of_channel: Become fan of a channel
-user.wellcome.become_fan_of_channel.text: You aren't fan of any rooms yet
-user.wellcome.become_fan_of_channel.browse: Explore rooms here
-user.wellcome.people_near_city: Users from %cityname%
+user.welcome: Hello %username%
+user.welcome.subtitle: Here you can see all activity all our community
+user.welcome.last_visits: Last users that visited you
+user.welcome.no_visits: You have no visits. To receive visits we suggest to edit your profile.
+user.welcome.enter_channels_fan: Enter in some of the rooms you're fan.
+user.welcome.enter_channels_owner: Enter in some of the rooms you're owner.
+user.welcome.enter_channels_moderator: Enter in some of the rooms you're moderator.
+user.welcome.no_channels: There are no rooms
+user.welcome.view_all_channels: View all rooms
+user.welcome.become_fan_of_channel: Become fan of a channel
+user.welcome.become_fan_of_channel.text: You aren't fan of any rooms yet
+user.welcome.become_fan_of_channel.browse: Explore rooms here
+user.welcome.people_near_city: Users from %cityname%

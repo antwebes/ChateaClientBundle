@@ -37,8 +37,8 @@ chatea_client:
     app_id: %chatea_app_id%
     authenticate_client_as_guest: true|false #optional (by deafault false) to indicate if client authenticates as guest. In case of false it authenticates with client credentials
     visits_limit: INTEGER #optional (by default 3) the number of the last N visits to show in the welcome login page
-    wellcome_channels_limit: INTEGER #optional (by default 9) the number of channels (fan, owner, moderator) to show in the welcome login page
-    wellcome_country_users_limit: INTEGER #optional (by default 9) the number of user to find by country
+    welcome_channels_limit: INTEGER #optional (by default 9) the number of channels (fan, owner, moderator) to show in the welcome login page
+    welcome_country_users_limit: INTEGER #optional (by default 9) the number of user to find by country
     
 beelab_recaptcha2:
     site_key:  %recaptcha_public_key%
@@ -134,10 +134,10 @@ class AreaRestringidaController
 
 Dicha annotación es gestionada por el listener ```Ant\Bundle\ChateaClientBundle\EventListener\AuthTokenUpdaterListener``` que escucha al evento del controlador para averiguar si debe actualizar el access token del usuario en caso necesario.
 
-Make wellcome login page work
+Make welcome login page work
 ----
 
-In order to make the wellcome login page work, you have to configure the twig globals ```boilerplate_users_base_url``` and  ```boilerplate_channels_base_url```. For example:
+In order to make the welcome login page work, you have to configure the twig globals ```boilerplate_users_base_url``` and  ```boilerplate_channels_base_url```. For example:
 
 ```
 twig:
@@ -146,4 +146,4 @@ twig:
         boilerplate_channels_base_url: http://myboilerplate.com/channels
 ```
 
-To redirect the user after login to the wellcome page configure in your firewall the ```default_target_path``` to ```chatea_client_wellcome``` and the ```always_use_default_target_path``` to ```true```
+To redirect the user after login to the welcome page configure in your firewall the ```default_target_path``` to ```chatea_client_welcome``` and the ```always_use_default_target_path``` to ```true```

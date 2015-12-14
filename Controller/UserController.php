@@ -261,13 +261,13 @@ class UserController extends BaseController
      * @APIUser
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function wellcomeAction(Request $request)
+    public function welcomeAction(Request $request)
     {
         $userManager = $this->get('api_users');
         $cityManager = $this->get('api_cities');
         $visitsLimit = $this->container->getParameter('chatea_client.visits_limit');
-        $wellcomeChannelsLimit = $this->container->getParameter('chatea_client.wellcome_channels_limit');
-        $wellcomeCountryUsersLimit = $this->container->getParameter('chatea_client.wellcome_country_users_limit');
+        $welcomeChannelsLimit = $this->container->getParameter('chatea_client.welcome_channels_limit');
+        $welcomeCountryUsersLimit = $this->container->getParameter('chatea_client.welcome_country_users_limit');
         $userMe = $userManager->findMeUser();
         $visitors = $userManager->getUserVisits($userMe, $visitsLimit);
 
@@ -275,16 +275,16 @@ class UserController extends BaseController
             $city = $cityManager->findById($userMe->getCity()->getId());
             $country = $city->getCountryObject();
             $filters = array('country' => $country->getCode());
-            $usersCountry = $userManager->findAll(1, $filters, $wellcomeCountryUsersLimit, array('hasProfilePhoto' => 'desc', 'lastLogin' => 'desc'));
+            $usersCountry = $userManager->findAll(1, $filters, $welcomeCountryUsersLimit, array('hasProfilePhoto' => 'desc', 'lastLogin' => 'desc'));
         }else{
             $usersCountry = array();
             $country = null;
         }
 
-        return $this->render('ChateaClientBundle:User:wellcome.html.twig', array(
+        return $this->render('ChateaClientBundle:User:Welcome/welcome.html.twig', array(
             'userMe' => $userMe,
             'visitors' => $visitors,
-            'wellcomeChannelsLimit' => $wellcomeChannelsLimit,
+            'welcomeChannelsLimit' => $welcomeChannelsLimit,
             'usersCountry' => $usersCountry,
             'country' => $country
         ));

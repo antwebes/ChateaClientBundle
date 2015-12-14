@@ -1,12 +1,13 @@
-user.wellcome: Hola %username%
-user.wellcome.last_visitis: Últimos usuarios que te visitaron
-user.wellcome.no_visits: No has recibido visitas. Para recibir visitas te sugerimos que edites tu perfil.
-user.wellcome.enter_channels_fan: Entra en alguno de tus canales que eres fan.
-user.wellcome.enter_channels_owner: Entra en alguno de tus canales que eres propietarios.
-user.wellcome.enter_channels_moderator: Entra en alguno de tus canales que eres moderador.
-user.wellcome.no_channels: No hay canales
-user.wellcome.view_all_channels: Ver todos los canales
-user.wellcome.become_fan_of_channel: Hazte fan de un canal
-user.wellcome.become_fan_of_channel.text: Aun no eres fan de ningún canal
-user.wellcome.become_fan_of_channel.browse: Busca canales aquí
-user.wellcome.people_near_city: Usuarios de %cityname%
+user.welcome: Hola %username%
+user.welcome.subtitle: Aquí verás la actividad de nuestra comunidad
+user.welcome.last_visits: Últimos usuarios que te visitaron
+user.welcome.no_visits: No has recibido visitas. Para recibir visitas te sugerimos que edites tu perfil.
+user.welcome.enter_channels_fan: Entra en alguno de tus canales que eres fan.
+user.welcome.enter_channels_owner: Entra en alguno de tus canales que eres propietarios.
+user.welcome.enter_channels_moderator: Entra en alguno de tus canales que eres moderador.
+user.welcome.no_channels: No hay canales
+user.welcome.view_all_channels: Ver todos los canales
+user.welcome.become_fan_of_channel: Hazte fan de un canal
+user.welcome.become_fan_of_channel.text: Aun no eres fan de ningún canal
+user.welcome.become_fan_of_channel.browse: Busca canales aquí
+user.welcome.people_near_city: Usuarios de %cityname%
