@@ -37,8 +37,6 @@ chatea_client:
     app_id: %chatea_app_id%
     authenticate_client_as_guest: true|false #optional (by deafault false) to indicate if client authenticates as guest. In case of false it authenticates with client credentials
     visits_limit: INTEGER #optional (by default 3) the number of the last N visits to show in the welcome login page
-    welcome_channels_limit: INTEGER #optional (by default 9) the number of channels (fan, owner, moderator) to show in the welcome login page
-    welcome_country_users_limit: INTEGER #optional (by default 9) the number of user to find by country
     
 beelab_recaptcha2:
     site_key:  %recaptcha_public_key%
