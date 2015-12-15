@@ -11,3 +11,11 @@ user.welcome.become_fan_of_channel: Hazte fan de un canal
 user.welcome.become_fan_of_channel.text: Aun no eres fan de ningún canal
 user.welcome.become_fan_of_channel.browse: Busca canales aquí
 user.welcome.people_near_city: Usuarios de %cityname%
+user.username: 'Nombre de usuario'
+user.location: Localización
+user.age: Edad
+user.gender: Sexo
+user.about_me: 'Sobre mi'
+user.you_want: 'Tu quieres'
+user.last_online: 'Última vez online'
+user.i_am_seeking: 'Estoy buscando'

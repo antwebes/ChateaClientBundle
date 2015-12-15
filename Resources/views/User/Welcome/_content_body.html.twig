@@ -1,52 +1,121 @@
 {% trans_default_domain 'User' %}
 
 <div class="page-header">
-  <h1 class="text-center">{{ 'user.welcome' | trans({'%username%': app.user.username}) }} <small> {{ 'user.welcome.subtitle' | trans({'%username%': app.user.username}) }}</small></h1>
+  <h1 class="text-center">
+      {% include "ChateaClientBundle:User:Welcome/_title.html.twig" %}
+  </h1>
 </div>
 
-{% if visitors | length > 0 %}
-	<h1>{{ "user.welcome.last_visits" | trans }}</h1>
-	<div class="row well">
-		{% for visitor in visitors %}
-			{% include "ChateaClientBundle:User:Welcome/_userBoilerWidget.html.twig" with {'user': visitor} %}
-		{% else %}
-			<div class="col-lg-12">{{ 'user.welcome.no_visits' | trans }}</div>
-			<div class="col-lg-12">
-				<a href="{{ boilerplate_endpoint }}/perfil?autologin={{ app.user.accessToken }}" target="_blank">{{ 'user.edit_profile' | trans({}, 'UserChange') }}</a>
-			</div>
-		{% endfor %}
-	</div>
-{% endif %}
 
-{% if userMe.city %}
-	<h1>{{ 'user.welcome.people_near_city' | trans({ '%cityname%': userMe.city.getCountry(app.request.attributes.get('_locale')) }) }}</h1>
-	<div class="row well">
-		{% for user in usersCountry %}
-			{% include "ChateaClientBundle:User:Welcome/_userBoilerWidget.html.twig" with {'user': user, 'size_col': 'col-xs-4'} %}
-		{% endfor %}
-		<a href="{{ boilerplate_users_base_url }}/?advanced_search[country]={{ country.code }}&advanced_search[gender]=&autologin={{ app.user.accessToken }}" target="_blank">Ver m&aacute;s</a>
-	</div>
-	
-{% endif %}
+<div class="row">
+    <div class="col-sm-3">
+        <div class="col-xs-12 center">
+            <div style="position: relative; left: 0; top: 0;" data-js-field="image">
+                {% if userMe.profilePhoto %}
+                  <img style="position: relative; top: 0; left: 0;" class="editable img-responsive" alt="{{ userMe.username | capitalize }}" id="avatar2" src="{{ userMe | userProfilePhotoUrl("medium") }}">
+                {% else %}
+                  {% image '@ChateaClientBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
+                  <img style="position: relative; top: 0; left: 0;" alt="{{ user.username | capitalize }}" id="avatar2" src="{{ asset_url }}">
+                  {% endimage %}
+                {% endif %}
 
-{% if userMe.channelsFan | length > 0 %}
-	<h1>{{ 'user.welcome.enter_channels_fan' | trans }}</h1>
-	{% include "ChateaClientBundle:User:_channelsList.html.twig" with {'channels': userMe.channelsFan, 'view_all_channels_url': user_channels_url ~ '/canales/fan?autologin=' ~ app.user.accessToken, 'welcomeChannelsLimit': welcomeChannelsLimit } %}
-{% else %}
-	<h3>{{ 'user.welcome.become_fan_of_channel' | trans }}</h3>
-	{{ 'user.welcome.become_fan_of_channel.text' | trans }}.
-	<a href="{{ boilerplate_channels_base_url }}/lista/?autologin={{ app.user.accessToken }}" target="_blank">
-		{{ 'user.welcome.become_fan_of_channel.browse' | trans }}
-	</a>.
-{% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-9">
+        <div class="profile-user-info" data-behat="profile">
+            <div class="profile-info-row" data-behat="profile-row">
+                <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.username" | trans }} </div>
 
-{% if userMe.channels | length > 0 %}
-	<h1>{{ 'user.welcome.enter_channels_owner' | trans }}</h1>
-	{% include "ChateaClientBundle:User:_channelsList.html.twig" with {'channels': userMe.channels, 'view_all_channels_url': user_channels_url ~ '/canales/owner?autologin=' ~ app.user.accessToken, 'welcomeChannelsLimit': welcomeChannelsLimit } %}
-{% endif %}
+                <div class="profile-info-value" data-behat="profile-row-value">
+                    <span>{{ userMe.username }}</span>
+                </div>
+            </div>
+            <div class="profile-info-row" data-behat="profile-row">
 
-{% if userMe.channelsModerated | length > 0 %}
-	<h1>{{ 'user.welcome.enter_channels_moderator' | trans }}</h1>
-	{% include "ChateaClientBundle:User:_channelsList.html.twig" with {'channels': userMe.channelsModerated, 'view_all_channels_url': user_channels_url ~ '/canales/moderator?autologin=' ~ app.user.accessToken, 'welcomeChannelsLimit': welcomeChannelsLimit } %}
-{% endif %}
-<br />
+                <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.location" | trans }} </div>
+                <div class="profile-info-value" data-behat="profile-row-value">
+                    <i class="fa fa-map-marker light-orange bigger-110"></i> &nbsp;
+                    {% if userMe.city is not null %}
+                        <span>
+					{{ userMe.city.getName(app.request.locale) }}{% if userMe.city.province is not empty %}, {{ userMe.city.getProvince(app.request.locale) }}{% endif %}{% if userMe.city.region is not empty %}, {{ userMe.city.getRegion(app.request.locale) }}{% endif %}{% if userMe.city.country is not empty %}, {{ userMe.city.getCountry(app.request.locale) }}{% endif %}
+				</span>
+                    {% else %}
+                        -
+                    {% endif %}
+                </div>
+            </div>
+            {% if userMe.profile %}
+                <div class="profile-info-row" data-behat="profile-row">
+                    <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.age" | trans }} </div>
+
+                    <div class="profile-info-value" data-behat="profile-row-value">
+                        <span>{{"now" |date("Y") - userMe.profile.birthday | date("Y")}}</span>
+                    </div>
+                </div>
+                {% if userMe.profile.gender %}
+                    <div class="profile-info-row" data-behat="profile-row">
+                        <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.gender" | trans }} </div>
+
+                        <div class="profile-info-value" data-behat="profile-row-value">
+                            <span>{{ ('userMe.profile.gender.'~userMe.profile.gender) | trans() }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if userMe.profile.about %}
+                    <div class="profile-info-row" data-behat="profile-row">
+                        <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.about_me" | trans }} </div>
+
+                        <div class="profile-info-value" data-behat="profile-row-value">
+                            <span>{{ userMe.profile.about }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if userMe.profile.youWant %}
+                    <div class="profile-info-row" data-behat="profile-row">
+                        <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.you_want" | trans }} </div>
+
+                        <div class="profile-info-value" data-behat="profile-row-value">
+                            <span>{{ userMe.profile.youWant }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if userMe.lastLogin %}
+                    <div class="profile-info-row" data-behat="profile-row">
+                        <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.last_online" | trans }} </div>
+
+                        <div class="profile-info-value" data-behat="profile-row-value">
+                            <span>{{ userMe.lastLogin | date }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if userMe.profile.seeking %}
+                    <div class="profile-info-row" data-behat="profile-row">
+                        <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.i_am_seeking" | trans }} </div>
+
+                        <div class="profile-info-value" data-behat="profile-row-value">
+                            <span>{{ ('user.profile.seeking.'~userMe.profile.seeking) | trans() }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <ul class="list-inline">
+            <li>
+                <a class="btn btn-lg btn-primary" href="{{ path('chatea_client_update_profile') }}">{{ 'user.edit_profile' | trans({}, 'UserRegistration') }}</a>
+            </li>
+            <li>
+                <a class="btn btn-lg btn-primary" data-behat="update-profile-photo" href="{{ path('chatea_client_update_profile_photo') }}">{{ 'user.edit_profile_photo' | trans({}, 'UserRegistration') }}</a>
+            </li>
+            <li>
+                <a class="btn btn-lg btn-primary" data-behat="update-city" href="{{ path('chatea_client_update_profile_city') }}">
+                    <i class="fa fa-map-marker"></i> {{ 'user.edit_city' | trans({}, 'UserChange') }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

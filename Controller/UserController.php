@@ -264,29 +264,10 @@ class UserController extends BaseController
     public function welcomeAction(Request $request)
     {
         $userManager = $this->get('api_users');
-        $cityManager = $this->get('api_cities');
-        $visitsLimit = $this->container->getParameter('chatea_client.visits_limit');
-        $welcomeChannelsLimit = $this->container->getParameter('chatea_client.welcome_channels_limit');
-        $welcomeCountryUsersLimit = $this->container->getParameter('chatea_client.welcome_country_users_limit');
         $userMe = $userManager->findMeUser();
-        $visitors = $userManager->getUserVisits($userMe, $visitsLimit);
-
-        if($userMe->getCity() != null){
-            $city = $cityManager->findById($userMe->getCity()->getId());
-            $country = $city->getCountryObject();
-            $filters = array('country' => $country->getCode());
-            $usersCountry = $userManager->findAll(1, $filters, $welcomeCountryUsersLimit, array('hasProfilePhoto' => 'desc', 'lastLogin' => 'desc'));
-        }else{
-            $usersCountry = array();
-            $country = null;
-        }
 
         return $this->render('ChateaClientBundle:User:Welcome/welcome.html.twig', array(
-            'userMe' => $userMe,
-            'visitors' => $visitors,
-            'welcomeChannelsLimit' => $welcomeChannelsLimit,
-            'usersCountry' => $usersCountry,
-            'country' => $country
+            'userMe' => $userMe
         ));
     }
 

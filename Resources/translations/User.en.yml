@@ -11,3 +11,23 @@ user.welcome.become_fan_of_channel: Become fan of a channel
 user.welcome.become_fan_of_channel.text: You aren't fan of any rooms yet
 user.welcome.become_fan_of_channel.browse: Explore rooms here
 user.welcome.people_near_city: Users from %cityname%
+user.username: Username
+user.location: Location
+user.age: Age
+user.gender: Gender
+user.about_me: 'About me'
+user.you_want: 'You want'
+user.last_online: 'Last online'
+user.i_am_seeking: 'I am seeking'
+user.profile.gender.male: Man
+user.profile.gender.female: Woman
+user.profile.gender.other: Other
+user.profile.seeking.women : Women
+user.profile.seeking.men : Men
+user.profile.seeking.both : Both, men and women
+user.profile.gender.male: Hombre
+user.profile.gender.female: Mujer
+user.profile.gender.other: -
+user.profile.seeking.women : Mujeres
+user.profile.seeking.men : Hombres
+user.profile.seeking.both : Busco tanto hombres como mujeres
