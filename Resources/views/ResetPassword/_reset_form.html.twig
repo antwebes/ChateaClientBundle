@@ -1,0 +1,13 @@
+    {% trans_default_domain 'ResetPassword' %}
+    
+    <form class="form-group" method="POST" action="{{ path('chatea_client_reset_password_perform') }}">
+        {{ form_errors(form) }}
+        <div class="form-group">
+            {{ form_label(form.email, 'reset-password.email', {'translation_domain' : 'ResetPassword'}) }}
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder':'reset-password.form.email.placeholder',  'required': true} , 'translation_domain' : 'ResetPassword'}) }}
+        </div>
+        {{ form_widget(form._token) }}
+        {{ form_rest(form) }}
+        <input name="register" type="submit" class="btn btn-primary" value="{{ "reset-password.submit" | trans}}" />
+    </form>

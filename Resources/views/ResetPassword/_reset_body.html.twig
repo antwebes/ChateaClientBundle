@@ -1,0 +1,10 @@
+{% trans_default_domain 'ResetPassword' %}
+
+<div class="page-header">
+	<h1>{{ 'reset-password.legend' | trans }}</h1>
+	<p><mark>{{ 'reset-password.info.highlight' | trans }}</mark></p>
+</div>
+	
+{% include "ChateaClientBundle:ResetPassword:_reset_form.html.twig" %}
+
+<script src="//www.google.com/recaptcha/api.js?hl={{ app.request.locale }}"></script>

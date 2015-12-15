@@ -5,17 +5,5 @@
 {% block chatea_title %}{{ 'reset-password.legend' | trans }}{% endblock %}
 
 {% block chatea_body %}
-    <h1>{{ 'reset-password.legend' | trans }}</h1>
-    <form class="form-group" method="POST" action="{{ path('chatea_client_reset_password_perform') }}">
-        {{ form_errors(form) }}
-        <div class="form-group">
-            {{ form_label(form.email, 'reset-password.email', {'translation_domain' : 'ResetPassword'}) }}
-            {{ form_errors(form.email) }}
-            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'required': true}}) }}
-        </div>
-        {{ form_widget(form._token) }}
-        {{ form_rest(form) }}
-        <input name="register" type="submit" class="btn btn-primary" value="{{ "reset-password.submit" | trans}}" />
-    </form>
-    <script src="//www.google.com/recaptcha/api.js?hl={{ app.request.locale }}"></script>
+    {% include "ChateaClientBundle:ResetPassword:_reset_body.html.twig" %}
 {% endblock %}

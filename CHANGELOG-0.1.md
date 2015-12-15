@@ -166,3 +166,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  
 * 0.1.33 (2015-12-10)
  * Added notifyPhotoWithMostPhotos method in notifications.js 
+ 
+* 0.1.34 (2015-12-??)
+ * Refix page reset password and separate in some subtemplates
