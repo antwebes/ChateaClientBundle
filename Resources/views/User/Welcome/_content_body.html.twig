@@ -6,6 +6,48 @@
   </h1>
 </div>
 
+<style>
+
+/* init styles to show profile user */
+
+.profile-user-info {
+    display: table;
+    margin: 0 auto;
+    width: calc(100% - 24px);
+}
+
+.profile-info-row {
+    display: table-row;
+}
+
+.profile-info-row:first-child .profile-info-name {
+    border-top: medium none;
+}
+
+.profile-info-row:first-child .profile-info-value {
+    border-top: medium none;
+}
+
+.profile-info-value {
+    border-top: 1px dotted #d5e4f1;
+    display: table-cell;
+    padding: 6px 4px 6px 6px;
+}
+
+.profile-info-name {
+    background-color: transparent;
+    border-top: 1px dotted #d5e4f1;
+    color: #667e99;
+    display: table-cell;
+    font-weight: normal;
+    padding: 6px 10px 6px 4px;
+    text-align: right;
+    vertical-align: middle;
+    width: 20%;
+}
+
+/* finish styles to show profile user */
+</style>
 
 <div class="row">
     <div class="col-sm-3">
@@ -15,10 +57,9 @@
                   <img style="position: relative; top: 0; left: 0;" class="editable img-responsive" alt="{{ userMe.username | capitalize }}" id="avatar2" src="{{ userMe | userProfilePhotoUrl("medium") }}">
                 {% else %}
                   {% image '@ChateaClientBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
-                  <img style="position: relative; top: 0; left: 0;" alt="{{ user.username | capitalize }}" id="avatar2" src="{{ asset_url }}">
+                  <img style="position: relative; top: 0; left: 0;" alt="{{ userMe.username | capitalize }}" id="avatar2" src="{{ asset_url }}">
                   {% endimage %}
                 {% endif %}
-
             </div>
         </div>
     </div>
@@ -58,7 +99,7 @@
                         <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.gender" | trans }} </div>
 
                         <div class="profile-info-value" data-behat="profile-row-value">
-                            <span>{{ ('userMe.profile.gender.'~userMe.profile.gender) | trans() }}</span>
+                            <span>{{ ('user.profile.gender.'~userMe.profile.gender) | trans() }}</span>
                         </div>
                     </div>
                 {% endif %}
@@ -102,6 +143,8 @@
         </div>
     </div>
 </div>
+
+<hr>
 <div class="row">
     <div class="col-sm-12">
         <ul class="list-inline">

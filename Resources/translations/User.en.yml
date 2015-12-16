@@ -1,4 +1,4 @@
-user.welcome: Hello %username%
+user.welcome: Welcome %username%
 user.welcome.subtitle: Here you can see all activity all our community
 user.welcome.last_visits: Last users that visited you
 user.welcome.no_visits: You have no visits. To receive visits we suggest to edit your profile.
@@ -25,9 +25,4 @@ user.profile.gender.other: Other
 user.profile.seeking.women : Women
 user.profile.seeking.men : Men
 user.profile.seeking.both : Both, men and women
-user.profile.gender.male: Hombre
-user.profile.gender.female: Mujer
-user.profile.gender.other: -
-user.profile.seeking.women : Mujeres
-user.profile.seeking.men : Hombres
-user.profile.seeking.both : Busco tanto hombres como mujeres
+user.years: years
