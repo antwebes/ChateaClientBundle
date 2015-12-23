@@ -75,7 +75,7 @@
 
                 {% endif %}
                 <div class="col-sm-offset-9 col-sm-2">
-                    <button id="btn_register" name="register" type="submit" class="btn btn-lg pull-right btn-primary">
+                    <button id="btn_register" name="register" type="submit" class="btn btn-lg pull-right btn-primary disabled" disabled="disabled" data-container="body" data-placement="left" data-content="{{ 'user.register_profile.need_upload_photo' | trans }}" data-trigger="manual">
                         <i id="icon_register" class="icon_register"></i>
                         {{ 'registration_profile.submit'|trans }}
                     </button>
@@ -130,6 +130,12 @@
             $('#profileForm input[type=file]').on('change', function(){ //we have choosen a file
                 sendEvent("registration", "profile", "send_photo");
                 sendFile = true;
+
+                // enable the send button and remove the info
+                $('#btn_register')
+                        .removeClass('disabled')
+                        .prop('disabled', false)
+                        .popover('hide');
             });
 
             var registerUser = function(successCallback){
@@ -272,6 +278,8 @@
             {% if not canSkip %}
             {% include "ChateaClientBundle:User:register_profile_not_skip_script.html.twig" %}
             {% endif %}
+
+            $('#btn_register').popover('show');
         });
     </script>
 {% endblock %}
