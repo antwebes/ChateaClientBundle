@@ -168,4 +168,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Added notifyPhotoWithMostPhotos method in notifications.js 
  
 * 0.1.34 (2015-12-??)
- * Refix page reset password and separate in some subtemplates
+ * ResetPassword: Include template footer to can include data in templat. Include ResetPassword:_reset_footer
