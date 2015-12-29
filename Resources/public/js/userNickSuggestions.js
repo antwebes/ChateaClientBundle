@@ -52,8 +52,11 @@ function userNickSuggestions(messages) {
 
         var suggestionMinlength = 4;
 
-        function transServerError(error){
-            sendEvent("registration", "error", error);
+        function transServerError(error, throwEvent){
+        	var throwEvent = typeof throwEvent !== 'undefined' ? throwEvent : true;
+        	if (throwEvent){
+        		sendEvent("registration", "error", error);
+        	}            
             if(typeof messages.server_errors[error] != 'undefined'){
                 return messages.server_errors[error];
             }
@@ -91,8 +94,8 @@ function userNickSuggestions(messages) {
                 error: function (responseError) {
                     var response = $.parseJSON(responseError.responseText);
                     var messageError = response.errors.email.message;
-                    $('span[data-id="email-suggestions"]').html('<p class="alert-danger">' + transServerError(messageError) + '</p>');
-                    sendEvent("registration", "error", response.errors.email.message);
+                    $('span[data-id="email-suggestions"]').html('<p class="alert-danger">' + transServerError(messageError, false) + '</p>');
+                    sendEvent("registration", "error", messageError);
                 }
 
             });
@@ -125,6 +128,7 @@ function userNickSuggestions(messages) {
 
         }
 
+        //check if nick is available, and show suggestions if is not available
         function findSuggestions(usernameInput, emailInput) {
             var url_source = '/api/users/username-available';
             
@@ -149,10 +153,18 @@ function userNickSuggestions(messages) {
                 error: function (responseError) {
                     var response = $.parseJSON(responseError.responseText);
                     writeUsernameSuggestions(response.suggestion);
-                    sendEvent("registration", "error", "username_not_available");
-                    if (response.errors.username){
-                        $('span[data-id="username-validate"]').html('<p class="alert-danger">' + transServerError(response.errors.username.message) + '</p>');
-                    }else if (response.errors.email){
+                    if (response.errors.username) {
+                    	var message;
+                    	if (response.suggestion){
+                    		//Dont send event in translation error
+                    		message = transServerError(response.errors.username.message, false);
+                    		sendEvent("registration", "error", "username_not_available");
+                        }else{
+                    		//Send event in translation error
+                        	message = transServerError(response.errors.username.message);
+                        }
+                        $('span[data-id="username-validate"]').html('<p class="alert-danger">' + message + '</p>');
+                    } else if (response.errors.email) {
                         $('span[data-id="username-validate"]').html('<p class="alert-danger">' + transServerError(response.errors.email.message) + '</p>');
                     }
                 }
