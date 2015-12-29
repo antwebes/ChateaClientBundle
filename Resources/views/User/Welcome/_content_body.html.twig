@@ -1,0 +1,164 @@
+{% trans_default_domain 'User' %}
+
+<div class="page-header">
+  <h1 class="text-center">
+      {% include "ChateaClientBundle:User:Welcome/_title.html.twig" %}
+  </h1>
+</div>
+
+<style>
+
+/* init styles to show profile user */
+
+.profile-user-info {
+    display: table;
+    margin: 0 auto;
+    width: calc(100% - 24px);
+}
+
+.profile-info-row {
+    display: table-row;
+}
+
+.profile-info-row:first-child .profile-info-name {
+    border-top: medium none;
+}
+
+.profile-info-row:first-child .profile-info-value {
+    border-top: medium none;
+}
+
+.profile-info-value {
+    border-top: 1px dotted #d5e4f1;
+    display: table-cell;
+    padding: 6px 4px 6px 6px;
+}
+
+.profile-info-name {
+    background-color: transparent;
+    border-top: 1px dotted #d5e4f1;
+    color: #667e99;
+    display: table-cell;
+    font-weight: normal;
+    padding: 6px 10px 6px 4px;
+    text-align: right;
+    vertical-align: middle;
+    width: 20%;
+}
+
+/* finish styles to show profile user */
+</style>
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="col-xs-12 center">
+            <div style="position: relative; left: 0; top: 0;" data-js-field="image">
+                {% if userMe.profilePhoto %}
+                  <img style="position: relative; top: 0; left: 0;" class="editable img-responsive" alt="{{ userMe.username | capitalize }}" id="avatar2" src="{{ userMe | userProfilePhotoUrl("medium") }}">
+                {% else %}
+                  {% image '@ChateaClientBundle/Resources/public/images/no-photo-medium.png'  output="images/no-photo-medium.png" %}
+                  <img style="position: relative; top: 0; left: 0;" alt="{{ userMe.username | capitalize }}" id="avatar2" src="{{ asset_url }}">
+                  {% endimage %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-9">
+        <div class="profile-user-info" data-behat="profile">
+            <div class="profile-info-row" data-behat="profile-row">
+                <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.username" | trans }} </div>
+
+                <div class="profile-info-value" data-behat="profile-row-value">
+                    <span>{{ userMe.username }}</span>
+                </div>
+            </div>
+            <div class="profile-info-row" data-behat="profile-row">
+
+                <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.location" | trans }} </div>
+                <div class="profile-info-value" data-behat="profile-row-value">
+                    <i class="fa fa-map-marker light-orange bigger-110"></i> &nbsp;
+                    {% if userMe.city is not null %}
+                        <span>
+					{{ userMe.city.getName(app.request.locale) }}{% if userMe.city.province is not empty %}, {{ userMe.city.getProvince(app.request.locale) }}{% endif %}{% if userMe.city.region is not empty %}, {{ userMe.city.getRegion(app.request.locale) }}{% endif %}{% if userMe.city.country is not empty %}, {{ userMe.city.getCountry(app.request.locale) }}{% endif %}
+				</span>
+                    {% else %}
+                        -
+                    {% endif %}
+                </div>
+            </div>
+            {% if userMe.profile %}
+                <div class="profile-info-row" data-behat="profile-row">
+                    <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.age" | trans }} </div>
+
+                    <div class="profile-info-value" data-behat="profile-row-value">
+                        <span>{{"now" |date("Y") - userMe.profile.birthday | date("Y")}}</span>
+                    </div>
+                </div>
+                {% if userMe.profile.gender %}
+                    <div class="profile-info-row" data-behat="profile-row">
+                        <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.gender" | trans }} </div>
+
+                        <div class="profile-info-value" data-behat="profile-row-value">
+                            <span>{{ ('user.profile.gender.'~userMe.profile.gender) | trans() }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if userMe.profile.about %}
+                    <div class="profile-info-row" data-behat="profile-row">
+                        <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.about_me" | trans }} </div>
+
+                        <div class="profile-info-value" data-behat="profile-row-value">
+                            <span>{{ userMe.profile.about }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if userMe.profile.youWant %}
+                    <div class="profile-info-row" data-behat="profile-row">
+                        <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.you_want" | trans }} </div>
+
+                        <div class="profile-info-value" data-behat="profile-row-value">
+                            <span>{{ userMe.profile.youWant }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if userMe.lastLogin %}
+                    <div class="profile-info-row" data-behat="profile-row">
+                        <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.last_online" | trans }} </div>
+
+                        <div class="profile-info-value" data-behat="profile-row-value">
+                            <span>{{ userMe.lastLogin | date }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if userMe.profile.seeking %}
+                    <div class="profile-info-row" data-behat="profile-row">
+                        <div class="profile-info-name" data-behat="profile-row-name"> {{ "user.i_am_seeking" | trans }} </div>
+
+                        <div class="profile-info-value" data-behat="profile-row-value">
+                            <span>{{ ('user.profile.seeking.'~userMe.profile.seeking) | trans() }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-sm-12">
+        <ul class="list-inline">
+            <li>
+                <a class="btn btn-lg btn-primary" href="{{ path('chatea_client_update_profile') }}">{{ 'user.edit_profile' | trans({}, 'UserRegistration') }}</a>
+            </li>
+            <li>
+                <a class="btn btn-lg btn-primary" data-behat="update-profile-photo" href="{{ path('chatea_client_update_profile_photo') }}">{{ 'user.edit_profile_photo' | trans({}, 'UserRegistration') }}</a>
+            </li>
+            <li>
+                <a class="btn btn-lg btn-primary" data-behat="update-city" href="{{ path('chatea_client_update_profile_city') }}">
+                    <i class="fa fa-map-marker"></i> {{ 'user.edit_city' | trans({}, 'UserChange') }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -51,7 +51,16 @@ class CityManager extends BaseManager
             $city->setProvince(array_key_exists('province_name',$item['city_es'])?$item['city_es']['province_name'] : null, 'es');
         }
 
+        if(array_key_exists('country', $item)){
+            $city->setCountryObject($this->hydrateCountry($item['country']));
+        }
+
         return $city;
+    }
+
+    private function hydrateCountry($data)
+    {
+        return $this->get('CountryManager')->hydrate($data);
     }
 
     public function findById($id)

@@ -1,0 +1,28 @@
+user.welcome: Bienvenido %username%
+user.welcome.subtitle: Aquí verás la actividad de nuestra comunidad
+user.welcome.last_visits: Últimos usuarios que te visitaron
+user.welcome.no_visits: No has recibido visitas. Para recibir visitas te sugerimos que edites tu perfil.
+user.welcome.enter_channels_fan: Estos son los canales de los que eres fan.
+user.welcome.enter_channels_owner: Aquí tienes los canales que eres propietario.
+user.welcome.enter_channels_moderator: Entra en alguno de tus canales que eres moderador.
+user.welcome.no_channels: No hay canales
+user.welcome.view_all_channels: Ver todos los canales
+user.welcome.become_fan_of_channel: Hazte fan de un canal
+user.welcome.become_fan_of_channel.text: Aun no eres fan de ningún canal
+user.welcome.become_fan_of_channel.browse: Busca canales aquí
+user.welcome.people_near_city: Usuarios de %cityname%
+user.username: 'Nombre de usuario'
+user.location: Localización
+user.age: Edad
+user.gender: Sexo
+user.about_me: 'Sobre mi'
+user.you_want: 'Tu quieres'
+user.last_online: 'Última vez online'
+user.i_am_seeking: 'Estoy buscando'
+user.profile.gender.male: Hombre
+user.profile.gender.female: Mujer
+user.profile.gender.other: Otro
+user.profile.seeking.women : Mujeres
+user.profile.seeking.men : Hombres
+user.profile.seeking.both : Amistad
+user.years: años

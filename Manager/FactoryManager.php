@@ -17,6 +17,7 @@ class FactoryManager
                                        'PhotoAlbumManager'       => '\Ant\Bundle\ChateaClientBundle\Manager\PhotoAlbumManager',
                                        'PhotoVoteManager'        => '\Ant\Bundle\ChateaClientBundle\Manager\PhotoVoteManager',
                                        'CityManager'             => '\Ant\Bundle\ChateaClientBundle\Manager\CityManager',
+                                       'CountryManager'          => '\Ant\Bundle\ChateaClientBundle\Manager\CountryManager',
                                        'ClientManager'           => '\Ant\Bundle\ChateaClientBundle\Manager\ClientManager',
                                        'OutstandingEntryManager' => '\Ant\Bundle\ChateaClientBundle\Manager\OutstandingEntryManager'
                                 );

@@ -24,3 +24,4 @@ form.mail_is_aviable: "Esta dirección de correo ya está en uso. Una dirección
 user.edit_city.success: "Tu ciudad ha sido actualizada con éxito"
 user.edit_city: "Editar tu ciudad"
 user.upload_photo.error: "Ha ocurrido un error subiendo la foto"
+user.edit_profile: "Editar perfil"

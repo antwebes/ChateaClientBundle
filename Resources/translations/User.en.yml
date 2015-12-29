@@ -1,0 +1,28 @@
+user.welcome: Welcome %username%
+user.welcome.subtitle: Here you can see all activity all our community
+user.welcome.last_visits: Last users that visited you
+user.welcome.no_visits: You have no visits. To receive visits we suggest to edit your profile.
+user.welcome.enter_channels_fan: Enter in some of the rooms you're fan.
+user.welcome.enter_channels_owner: Enter in some of the rooms you're owner.
+user.welcome.enter_channels_moderator: Enter in some of the rooms you're moderator.
+user.welcome.no_channels: There are no rooms
+user.welcome.view_all_channels: View all rooms
+user.welcome.become_fan_of_channel: Become fan of a channel
+user.welcome.become_fan_of_channel.text: You aren't fan of any rooms yet
+user.welcome.become_fan_of_channel.browse: Explore rooms here
+user.welcome.people_near_city: Users from %cityname%
+user.username: Username
+user.location: Location
+user.age: Age
+user.gender: Gender
+user.about_me: 'About me'
+user.you_want: 'You want'
+user.last_online: 'Last online'
+user.i_am_seeking: 'I am seeking'
+user.profile.gender.male: Man
+user.profile.gender.female: Woman
+user.profile.gender.other: Other
+user.profile.seeking.women : Women
+user.profile.seeking.men : Men
+user.profile.seeking.both : Both, men and women
+user.years: years

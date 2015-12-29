@@ -61,6 +61,7 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('api_request_allow')
                 ->prototype('scalar')->end()
                 ->end()
+            ->integerNode('visits_limit')->defaultValue(3)->end()
         ->end();
 
 

@@ -257,6 +257,20 @@ class UserController extends BaseController
             ));
     }
 
+    /**
+     * @APIUser
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function welcomeAction(Request $request)
+    {
+        $userManager = $this->get('api_users');
+        $userMe = $userManager->findMeUser();
+
+        return $this->render('ChateaClientBundle:User:Welcome/welcome.html.twig', array(
+            'userMe' => $userMe
+        ));
+    }
+
     private function getLanguageFromRequestAndSaveInSessionRequest(Request $request)
     {
         $language = $request->get('language', $this->container->getParameter('kernel.default_locale'));
