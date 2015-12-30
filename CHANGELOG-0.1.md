@@ -169,3 +169,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  
 * 0.1.34 (2015-12-28)
  * ResetPassword: Include template footer to can include data in templat. Include ResetPassword:_reset_footer
+ 
+ * 0.1.35 (2015-12-30)
+  * Page welcome
+  * Refix error in js check register available nick and email, send duplicated events analytics
