@@ -12,74 +12,77 @@
     {% endif %}
 
     <h1>{{ 'user.register_profile' | trans }}</h1>
-<div class="col-xs-12">
-    <form id="profileForm" class="form-horizontal" action="{{ path('chatea_user_profile') }}" {{ form_enctype(form) }} method="POST">
-        {% if alerts is not null %}
-            <div id="form-errors" class="alert alert-warning">
-                {{ alerts }}
-            </div>
-        {% endif %}
-        <div id="form-errors" class="alert alert-danger" style="display: none">
+    <div class="col-xs-12">
+        <form id="profileForm" class="form-horizontal" action="{{ path('chatea_user_profile') }}" {{ form_enctype(form) }} method="POST">
+            {% if alerts is not null %}
+                <div id="form-errors" class="alert alert-warning">
+                    {{ alerts }}
+                </div>
+            {% endif %}
+            <div id="form-errors" class="alert alert-danger" style="display: none">
 
-        </div>
+            </div>
 
-        <div class="form-group">
-            <label class="col-lg-3 control-label" for="user_profile_gender">{{ "form.label.gender" | trans }}</label>
-            <div class="col-lg-9">
-                {{ form_errors(form.gender) }}
-                {{ form_widget(form.gender, {'attr': {'class': 'form-control' }, 'translation_domain' : 'UserRegistration' }) }}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-3 control-label" for="user_profile_seeking">{{ "form.label.seeking" | trans }}</label>
-            <div class="col-lg-9">
-                {{ form_errors(form.seeking) }}
-                {{ form_widget(form.seeking, {'attr': {'class': 'form-control' }, 'translation_domain' : 'UserRegistration' }) }}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-3 control-label" for="user_profile_youWant">{{ "form.label.youWant" | trans }}</label>
-            <div class="col-lg-9">
-                {{ form_errors(form.youWant) }}
-                {{ form_widget(form.youWant, {'attr': {'class': 'form-control', 'placeholder': 'form.placeholder.youWant' }, 'translation_domain' : 'UserRegistration' }) }}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-3 control-label" for="user_profile_about">{{ "form.label.about" | trans }}</label>
-            <div class="col-lg-9">
-                {{ form_errors(form.about) }}
-                {{ form_widget(form.about, {'attr': {'class': 'form-control', 'placeholder': 'form.placeholder.about' }, 'translation_domain' : 'UserRegistration' }) }}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-3 control-label">{{ "form.label.image" | trans }}</label>
-            <div class="col-lg-9">
-                {{ form_errors(form.image) }}
-                {{ form_widget(form.image) }}
-                <br/>
-                <div class="alert alert-info">
-                    <strong>Info!</strong> {% trans from "UserRegistration" %}upload.pictures.alert.sexual_content{% endtrans %}
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="user_profile_gender">{{ "form.label.gender" | trans }}</label>
+                <div class="col-lg-9">
+                    {{ form_errors(form.gender) }}
+                    {{ form_widget(form.gender, {'attr': {'class': 'form-control' }, 'translation_domain' : 'UserRegistration' }) }}
                 </div>
             </div>
-        </div>
-        <div id="file-errors"></div>
-        {{ form_widget(form._token) }}
-        {{ form_rest(form) }}
-        <div class="form-group row">
-            <div class="col-sm-1">
-                <a id="skipBtn" class="btn btn-default" role="button" href="{{ path('chatea_client_register_user_success',{'userId': user.id }) }}">
-                    {{ 'user.register_profile.skip' | trans }}
-                </a>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="user_profile_seeking">{{ "form.label.seeking" | trans }}</label>
+                <div class="col-lg-9">
+                    {{ form_errors(form.seeking) }}
+                    {{ form_widget(form.seeking, {'attr': {'class': 'form-control' }, 'translation_domain' : 'UserRegistration' }) }}
+                </div>
             </div>
-            <div class="col-sm-offset-9 col-sm-2">
-                <button id="btn_register" name="register" type="submit" class="btn btn-lg pull-right btn-primary">
-                    <i id="icon_register" class=""></i>
-                    {{ 'registration_profile.submit'|trans }}
-                </button>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="user_profile_youWant">{{ "form.label.youWant" | trans }}</label>
+                <div class="col-lg-9">
+                    {{ form_errors(form.youWant) }}
+                    {{ form_widget(form.youWant, {'attr': {'class': 'form-control', 'placeholder': 'form.placeholder.youWant' }, 'translation_domain' : 'UserRegistration' }) }}
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label" for="user_profile_about">{{ "form.label.about" | trans }}</label>
+                <div class="col-lg-9">
+                    {{ form_errors(form.about) }}
+                    {{ form_widget(form.about, {'attr': {'class': 'form-control', 'placeholder': 'form.placeholder.about' }, 'translation_domain' : 'UserRegistration' }) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">{{ "form.label.image" | trans }}</label>
+                <div class="col-lg-9">
+                    {{ form_errors(form.image) }}
+                    {{ form_widget(form.image) }}
+                    <br/>
+                    <div class="alert alert-info">
+                        <strong>Info!</strong> {% trans from "UserRegistration" %}upload.pictures.alert.sexual_content{% endtrans %}
+                    </div>
+                </div>
+            </div>
+            <div id="file-errors"></div>
+            {{ form_widget(form._token) }}
+            {{ form_rest(form) }}
+            <div class="form-group row">
+                {% if canSkip %}
+                    <div class="col-sm-1">
+                        <a id="skipBtn" class="btn btn-default" role="button" href="{{ path('chatea_client_register_user_success',{'userId': '__userId__' }) }}">
+                            <i id="icon_register_skip" class="icon_register"></i>{{ 'user.register_profile.skip' | trans }}
+                        </a>
+                    </div>
+
+                {% endif %}
+                <div class="col-sm-offset-9 col-sm-2">
+                    <button id="btn_register" name="register" type="submit" class="btn btn-lg pull-right btn-primary disabled" disabled="disabled" data-container="body" data-placement="left" data-content="{{ 'user.register_profile.need_upload_photo' | trans }}" data-trigger="manual">
+                        <i id="icon_register" class="icon_register"></i>
+                        {{ 'registration_profile.submit'|trans }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 {% endblock %}
 
 {% block chatea_js %}
@@ -127,10 +130,44 @@
             $('#profileForm input[type=file]').on('change', function(){ //we have choosen a file
                 sendEvent("registration", "profile", "send_photo");
                 sendFile = true;
+
+                // enable the send button and remove the info
+                $('#btn_register')
+                        .removeClass('disabled')
+                        .prop('disabled', false)
+                        .popover('hide');
             });
 
-            $("#skipBtn").click(function () {
-                sendEvent("registration", "profile", "skip");
+            var registerUser = function(successCallback){
+                $.ajax({
+                    url: '{{ path('chatea_client_register_user_ajax') }}',
+                    type: 'POST',
+                    success: successCallback,
+                    error: function(xhr, error){
+                        var errorText = xhr.responseText;
+
+                        window.location.href = '{{ path('chatea_client_register_user') }}?formErrors=' + errorText;
+                    }
+                });
+            };
+
+            $("#skipBtn").click(function (e) {
+                e.preventDefault();
+                var redirect = $(this).attr('href');
+                $("#icon_register_skip").addClass('icon-spinner icon-spin');
+                $("#btn_register").hide();
+
+                var doRedirect = function(data){
+                    sendEvent("registration", "profile", "skip");
+
+                    window.location.href = redirect.replace('__userId__', data.userId);
+                };
+
+                if(typeof(window.sessionUserData) == 'undefined'){
+                    registerUser(doRedirect);
+                }else{
+                    doRedirect(window.sessionUserData);
+                }
             });
 
 
@@ -149,21 +186,28 @@
 
             $('#profileForm')
                 .submit( function( e ) {
+                    var self = this;
                     $("#icon_register").addClass('icon-spinner icon-spin');
+                    $("#skipBtn").hide();
                     $("#btn_register").prop('disabled', true);
 
 
-                    var onSuccess = function(){
+                    var onSuccess = function(userId){
                         if(sendFile){
-                            window.location.href = '{{ path('chatea_client_register_user_success',{'userId': user.id , 'photoUploaded': 1}) }}';
+                            redirectUrl = '{{ path('chatea_client_register_user_success',{'userId': '__userId__' , 'photoUploaded': 1}) }}';
                         }else{
-                            window.location.href = '{{ path('chatea_client_register_user_success',{'userId': user.id }) }}';
+                            redirectUrl = '{{ path('chatea_client_register_user_success',{'userId': '__userId__' }) }}';
                         }
+
+                        window.location.href = redirectUrl.replace('__userId__', userId);
                     };
 
                     var onError = function(xhr, error){
                         var responseJSON = xhr.responseJSON;
                         $('.help-validate').remove();
+                        $(".icon_register").removeClass('icon-spinner icon-spin');
+                        $("#btn_register").prop('disabled', false);
+                        $(".icon_register, #skipBtn").show();
 
 
                         if(typeof responseJSON != 'undefined' && typeof responseJSON.errors != 'undefined'){
@@ -188,34 +232,54 @@
                         }
                     };
 
-                    if(sendFile){
-                        var formData = new FormData( this );
+                    var registerProfile = function(userId, accessToken){
+                        if (sendFile) {
+                            var formData = new FormData(self);
 
-                        $.ajax( {
-                            url: '{{ api_endpoint }}/api/users/{{ user.id }}/profiles?access_token={{ access_token }}',
-                            type: 'POST',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            crossDomain: true,
-                            success: onSuccess,
-                            error: onError
-                        } );
-                    }else{
-                        //no file was choosen, we serialize the form in normal form
-                        var formData = $('#profileForm').serialize();
+                            $.ajax({
+                                url: '{{ api_endpoint }}/api/users/' + userId + '/profiles?access_token='+accessToken,
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                crossDomain: true,
+                                success: function(){
+                                    onSuccess(userId);
+                                },
+                                error: onError
+                            });
+                        } else {
+                            //no file was choosen, we serialize the form in normal form
+                            var formData = $('#profileForm').serialize();
 
-                        $.ajax( {
-                            url: '{{ api_endpoint }}/api/users/{{ user.id }}/profiles?access_token={{ access_token }}',
-                            type: 'POST',
-                            data: formData,
-                            success: onSuccess,
-                            error: onError
-                        } );
+                            $.ajax({
+                                url: '{{ api_endpoint }}/api/users/' + userId + '/profiles?access_token='+accessToken,
+                                type: 'POST',
+                                data: formData,
+                                success: onSuccess(userId),
+                                error: onError
+                            });
+                        }
+                    };
+
+                    if(typeof(window.sessionUserData) == 'undefined'){ // we haven't registered the user at all
+                        registerUser(function(data){
+                            window.sessionUserData = data;
+                            registerProfile(window.sessionUserData.userId, window.sessionUserData.accessToken);
+                        });
+                    }else{ // we've registered the user previouly but we send only the profile form because of previous validation error
+                        registerProfile(window.sessionUserData.userId, window.sessionUserData.accessToken);
                     }
+
                     sendEvent("registration", "profile", "compolete");
                     e.preventDefault();
                 });
+
+            {% if not canSkip %}
+            {% include "ChateaClientBundle:User:register_profile_not_skip_script.html.twig" %}
+            {% endif %}
+
+            $('#btn_register').popover('show');
         });
     </script>
 {% endblock %}

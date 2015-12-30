@@ -51,6 +51,7 @@ user.register.confirmed.message: "Has sido registrado correctamente. Puedes empe
 user.register.invalid_client: "Debido a problemas técnicos en este momento nos es imposible realizar registros. Por favor pongase en contacto con el administrador de la web."
 user.register_profile: 'Registrar perfil'
 user.register_profile.skip: 'No por ahora'
+user.register_profile.need_upload_photo: 'Para completar tu perfil necesitas subir una photo'
 user.profile.max_file_upload: 'Esta foto es demasiado grande. Tamaño máximo permitido 1Mb'
 page_confirm_email.write_our_email: Escribe a nuestro email de contacto
 registration_profile.submit: 'Enviar'
