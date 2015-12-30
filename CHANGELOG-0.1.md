@@ -165,4 +165,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Include new bundle of captcha
  
 * 0.1.33 (2015-12-10)
- * Added notifyPhotoWithMostPhotos method in notifications.js 
+ * Added notifyPhotoWithMostPhotos method in notifications.js
+
+* 0.1.34 (201?-??-??)
+ * Force user tu upload photo (optional with parameter) and can skip profile.
