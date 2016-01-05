@@ -5,6 +5,7 @@ form:
     seeking.empty_value: "Elija una opción"
     rfc_1459: "El canal irc no es valido. Ver RFC-1459"
     email.mismatch: "Los dos emails introducidos no coinciden"
+form.username_not_valid: "El nombre de usuario no es válido. El nombre de usuario no puede incluir espacios, ni empezar por un número, ni contener caracteres especiales"
 api.entity.channel.name.unique.constraints.message: El nombre del canal ya esta en uso
 api.entity.channel.slug.unique.constraints.message: El slug del canal ya esta en uso (cambia el nombre del canal)
 api.entity.channel.ircChannel.unique.constraints.message: El nombre irc del canal ya esta en uso
