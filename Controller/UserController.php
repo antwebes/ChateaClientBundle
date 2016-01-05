@@ -16,6 +16,7 @@ use Ant\Bundle\ChateaClientBundle\Event\UserEvent;
 use Ant\Bundle\ChateaClientBundle\Event\ChateaClientEvents;
 
 use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -36,13 +37,24 @@ class UserController extends BaseController
             return $this->redirect($request->getBaseUrl());
         }
 
-            $formOptions = array(
+        $date = $request->getSession()->get('user_birthday', null);
+
+        if($date != null){
+            try{
+                $date = new \DateTime($date);
+            }catch(\Exception $e){
+                $date = null;
+            }
+        }
+
+        $formOptions = array(
             'language'              => $language,
             'cityLocationManager'   => $this->get('api_cities'),
             'ip'                    => $request->getClientIp(),
+            'birthday'              => $date
         );
 
-        $user = new User();
+        $user = $request->getSession()->get('user_data', new User());
         /** @var \Ant\Bundle\ChateaClientBundle\Manager\UserManager $userManager */
         $userManager = $this->get('api_users');
         $form = $this->createForm(new CreateUserType(), $user, $formOptions);
@@ -61,15 +73,18 @@ class UserController extends BaseController
                     $event = new UserEvent($user, $request);
                     $this->container->get('event_dispatcher')->dispatch(ChateaClientEvents::USER_REGISTER_SUCCESS, $event);
 
-                    $userManager->save($user);
-                    $birthday = $form->get('birthday')->getData()->format('Y-m-d');
-                    $request->getSession()->set('user_'.$user->getId().'.birthday',$birthday);
-
-                    $this->authenticateUser($user);
-
                     if($this->container->getParameter('chatea_client.register_with_profile') == true){
+                        $birthday = $form->get('birthday')->getData()->format('Y-m-d');
+                        $request->getSession()->set('user_birthday',$birthday);
+                        $request->getSession()->set('user_data', $user);
+
                         return $this->redirect($this->generateUrl('chatea_user_profile'));
                     }
+
+                    $userManager->save($user);
+                    $this->authenticateUser($user);
+
+
                     return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
                 }catch(\Exception $e){
                     $serverErrorArray = json_decode($e->getMessage(), true);
@@ -81,6 +96,9 @@ class UserController extends BaseController
                     }
                 }
             }
+        }else if($request->query->get('formErrors', '') != ''){
+            $e = new \Exception($request->query->get('formErrors', ''));
+            $this->addErrorsToForm($e, $form, 'UserRegistration');
         }
 
         $templateVars = array(
@@ -94,6 +112,26 @@ class UserController extends BaseController
         );
 
         return $this->render('ChateaClientBundle:User:register.html.twig', $templateVars);
+    }
+
+    public function registerAjaxAction(Request $request)
+    {
+        $userManager = $this->get('api_users');
+        $user = $request->getSession()->get('user_data');
+
+        try{
+            $userManager->save($user);
+            $this->authenticateUser($user);
+
+            $onlineUser = $this->getUser();
+
+            return new JsonResponse(array(
+                'userId' => $onlineUser->getId(),
+                'accessToken' => $onlineUser->getAccessToken()
+            ));
+        }catch(\Exception $e){
+            return new JsonResponse(json_decode($e->getMessage(), true), 400);
+        }
     }
 
     /**
@@ -118,20 +156,17 @@ class UserController extends BaseController
 
     }
 
-    /**
-     * @APIUser
-     */
     public function registerProfileAction(Request $request)
     {
         /** @var \Ant\Bundle\ChateaClientBundle\Manager\UserManager $userManager */
         $userManager = $this->container->get('api_users');
         $api = $this->container->get('antwebes_chateaclient_manager');
 
-        $userId = $this->getUser()->getId();
+        //$userId = $this->getUser()->getId();
 
-        $user = $userManager->findById($userId);
+        $user = $request->getSession()->get('user_data');
 
-        $birthday = $request->getSession()->get('user_'.$user->getId().'.birthday');
+        $birthday = $request->getSession()->get('user_birthday');
 
         if (!is_null($user->getProfile())){
         	//HACER UN REDIRECT A LA URL DE MODIFICAR PERFIL
@@ -170,6 +205,7 @@ class UserController extends BaseController
                 }
             }
         }
+
         return $this->render('ChateaClientBundle:User:register_profile.html.twig', array(
             'user' => $user,
             'language' => $language,
@@ -177,8 +213,8 @@ class UserController extends BaseController
             'form' => $form->createView(),
             'alerts' => null,
             'errors' => $form->getErrors(),
-            'access_token' => $this->container->get('security.context')->getToken()->getUser()->getAccessToken(),
-            'api_endpoint' => $this->container->getParameter('api_endpoint')
+            'api_endpoint' => $this->container->getParameter('api_endpoint'),
+            'canSkip' => $this->container->getParameter('chatea_client.can_skip_register_profile')
         ));
 
     }

@@ -9,6 +9,9 @@
     <route id="chatea_client_register_user" path="/register">
         <default key="_controller">ChateaClientBundle:User:register</default>
     </route>
+    <route id="chatea_client_register_user_ajax" path="/registerAjax" methods="POST">
+        <default key="_controller">ChateaClientBundle:User:registerAjax</default>
+    </route>
     <route id="chatea_client_reset_password" path="/reset-password" methods="GET">
         <default key="_controller">ChateaClientBundle:ResetPassword:reset</default>
     </route>

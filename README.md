@@ -36,7 +36,12 @@ chatea_client:
     api_endpoint: %api_endpoint%
     app_id: %chatea_app_id%
     authenticate_client_as_guest: true|false #optional (by deafault false) to indicate if client authenticates as guest. In case of false it authenticates with client credentials
+<<<<<<< HEAD
     visits_limit: INTEGER #optional (by default 3) the number of the last N visits to show in the welcome login page
+=======
+    register_with_profile: true|false (by default true) to indicate if we whant to take the register profile step
+    can_skip_register_profile: true|false (by default true) to indicat if we allow the skip button in the register profile page
+>>>>>>> no_skip_register_register_end_step
     
 beelab_recaptcha2:
     site_key:  %recaptcha_public_key%
