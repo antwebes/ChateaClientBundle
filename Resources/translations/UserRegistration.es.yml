@@ -28,6 +28,8 @@ form.username_already_used: "Este nombre de usuario ya está en uso."
 form.username_not_valid: "El nombre de usuario no es válido. El nombre de usuario no puede incluir espacios, ni empezar por un número, ni contener caracteres especiales"
 form.nick_suggestions: "Sugerencias"
 form.email_already_used: "Esta dirección de correo ya está en uso. Una dirección solo puede ser usado por una única cuenta."
+form.email_already_used_notify_forget_password: Email ya registrado, recupera tu contraseña aquí
+form.email_already_used_notify_go_to_login: Inicia sesión
 form.email_not_valid: "La dirección de email no es válida."
 registration.submit: "Registrar"
 user.register.success: "El registro se ha realizado con éxito. Ahora solo es necesario que valides tu dirección de email."
@@ -51,6 +53,7 @@ user.register.confirmed.message: "Has sido registrado correctamente. Puedes empe
 user.register.invalid_client: "Debido a problemas técnicos en este momento nos es imposible realizar registros. Por favor pongase en contacto con el administrador de la web."
 user.register_profile: 'Registrar perfil'
 user.register_profile.skip: 'No por ahora'
+user.register.email_notify: Por cada email solo se permite un registro.
 user.profile.max_file_upload: 'Esta foto es demasiado grande. Tamaño máximo permitido 1Mb'
 page_confirm_email.write_our_email: Escribe a nuestro email de contacto
 registration_profile.submit: 'Enviar'

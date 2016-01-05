@@ -11,7 +11,7 @@
     <p data-behat="register-success">{{ 'user.register.success' | trans }}</p>
     {% if app.request.get('photoUploaded') == 1 %}
         <div id="uploadSuccess" class="alert alert-warning text-center">
-            <strong>{{ "atention_capital" | trans({}, 'messages') }}</strong> {{ 'user.edit_profile_photo.can_take_time_refresh' | trans({}, "UserRegistration") }}
+            <strong>{{ "attention_capital" | trans({}, 'messages') }}</strong> {{ 'user.edit_profile_photo.can_take_time_refresh' | trans({}, "UserRegistration") }}
         </div>
     {% endif %}
 {% endblock %}

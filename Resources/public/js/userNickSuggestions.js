@@ -94,7 +94,12 @@ function userNickSuggestions(messages) {
                 error: function (responseError) {
                     var response = $.parseJSON(responseError.responseText);
                     var messageError = response.errors.email.message;
-                    $('span[data-id="email-suggestions"]').html('<p class="alert-danger">' + transServerError(messageError, false) + '</p>');
+                    if (response.code == '34'){
+                    	$('span[data-id="email-suggestions"]').html('<div class="alert alert-danger alert-dismissible" role="alert">' + messages.email_already_used_notify_forget_password +'</div>');
+                    	$('span[data-id="email-suggestions"]').append('<p class="alert-danger">' + transServerError(messageError, false) + '</p>');
+                    }else{
+                    	$('span[data-id="email-suggestions"]').html('<p class="alert-danger">' + transServerError(messageError, false) + '</p>');
+                    }
                     sendEvent("registration", "error", messageError);
                 }
 
@@ -155,7 +160,7 @@ function userNickSuggestions(messages) {
                     writeUsernameSuggestions(response.suggestion);
                     if (response.errors.username) {
                     	var message;
-                    	if (response.suggestion){
+                    	if (response.errors.username.code == '34' || response.errors.username.message == 'This value is already used.'){
                     		//Dont send event in translation error
                     		message = transServerError(response.errors.username.message, false);
                     		sendEvent("registration", "error", "username_not_available");

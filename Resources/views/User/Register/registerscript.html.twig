@@ -25,7 +25,8 @@
             'Email already in use. An email only be used in chatsfree account at a time.': '{{ 'form.email_already_used' | trans }}',
             'This value is not a valid email address.': '{{ 'form.email_not_valid' | trans }}',
             'The username is not valid. The username can not include spaces, it can not start with number, or it can not include the special characters': '{{ 'form.username_not_valid' | trans }}'
-        }
+        },
+        email_already_used_notify_forget_password: '<a href="{{ path('chatea_client_reset_password') }}?notify_register">{{ 'form.email_already_used_notify_forget_password' | trans }}</a> {{ 'or' | trans({}, 'messages') }} <a href="{{ path('_antwebes_chateaclient_login') }}?notify_register">{{ 'form.email_already_used_notify_go_to_login' | trans }}</a>'
     };
 
     var onlyOnce = function(){
