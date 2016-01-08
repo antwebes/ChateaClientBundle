@@ -174,6 +174,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Page welcome
  * Refix error in js check register available nick and email, send duplicated events analytics
 
-* 0.1.36 (2016-01-??)
+* 0.1.36 (2016-01-08)
  * Force user tu upload photo (optional with parameter) and can skip profile.
  * Hotfix error in form register, when username is not valid, now translate message correctly
+ * Improve form register with text in rigthbar
