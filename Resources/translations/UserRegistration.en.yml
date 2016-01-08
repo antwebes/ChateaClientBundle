@@ -28,6 +28,8 @@ form.username_already_used: "This username is already being used."
 form.username_not_valid: "The username is not valid. The username can not include spaces, it can not start with number, or it can not include the special characters"
 form.nick_suggestions: "Suggetions"
 form.email_already_used: "Email already in use. An email only be used in a account at a time."
+form.email_already_used_notify_forget_password: This email is registered yet, you can recover your password
+form.email_already_used_notify_go_to_login: Go to Log in
 form.email_not_valid: "The value of email is not a valid email address."
 registration.submit: Register
 user.register.success: "You have been successfully registered"
@@ -52,6 +54,7 @@ user.register.invalid_client: "Due to tecnichal problems, it is impsible to regi
 user.register_profile: 'Register profile'
 user.register_profile.skip: 'Skip'
 user.register_profile.need_upload_photo: 'To complete your profile you need to upload a foto'
+user.register.email_notify: Each email is only one account is allowed.
 user.profile.max_file_upload: 'This photo is too large. Max file size allowed 1Mb'
 page_confirm_email.write_our_email: Write our email
 registration_profile.submit: 'Submit'
