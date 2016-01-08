@@ -1,7 +1,7 @@
 {% trans_default_domain 'UserRegistration' %}
 
 <ul>
-	<li>{{ 'become_community' | trans({}, 'messages')}} {% if client == 34 %}
+	<li>{{ 'become_community' | trans({}, 'messages')}} {% if client is defined and client == 34 %}
 			{{ "register.explication_credentials_chateagratis" | trans() }}
 		{% else %}
 			{{ "register.explication_credentials_chatzona" | trans }}

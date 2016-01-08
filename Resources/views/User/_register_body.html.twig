@@ -7,7 +7,7 @@
 	<h1>
 	{{ 'user.register' | trans }}
 	<small>
-		{% if client == 34 %}
+		{% if client is defined and client == 34 %}
 			{{ "register.explication_credentials_chateagratis" | trans() }}
 		{% else %}
 			{{ "register.explication_credentials_chatzona" | trans }}
