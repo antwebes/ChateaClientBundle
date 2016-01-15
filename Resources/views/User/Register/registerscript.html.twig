@@ -4,8 +4,17 @@
     window.api_endpoint = "{{ api_endpoint }}";
     window.language = "{{ app.request.locale }}";
 </script>
+<script>
+	if (typeof jQuery.ui == 'undefined') {
+		{% javascripts
+		    '@ChateaClientBundle/Resources/public/js/jquery-ui-1.10.3.custom.min.js'
+		%}
+		document.write('<script src="{{ asset_url }}">\x3C/script>');
+		{% endjavascripts %}
+	}
+</script>
+
 {% javascripts
-    '@ChateaClientBundle/Resources/public/js/jquery-ui-1.10.3.custom.min.js'
     '@ChateaClientBundle/Resources/public/js/cities.js'
     '@ChateaClientBundle/Resources/public/js/userNickSuggestions.js'
 %}

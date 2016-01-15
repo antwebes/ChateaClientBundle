@@ -4,16 +4,7 @@
     <div class="alert alert-warning" role="alert">{{ problem | trans }}</div>
 {% endif %}
 <div class="row">
-	<h1>
-	{{ 'user.register' | trans }}
-	<small>
-		{% if client is defined and client == 34 %}
-			{{ "register.explication_credentials_chateagratis" | trans() }}
-		{% else %}
-			{{ "register.explication_credentials_chatzona" | trans }}
-		{% endif %}
-	</small>
-	</h1>
+	{% include "ChateaClientBundle:User:Register/_title.html.twig" %}
 	<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-1">
 		<form class="form-horizontal" action="{{ path('chatea_client_register_user', {"language": app.request.locale }) }}" {{ form_enctype(form) }} method="POST">
 		    {% if alerts is not null %}
