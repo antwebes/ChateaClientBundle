@@ -85,7 +85,7 @@ class UserController extends BaseController
                     $this->authenticateUser($user);
 
 
-                    return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
+                    return $this->render('ChateaClientBundle:Register:registerSuccess.html.twig', array('user' => $user));
                 }catch(\Exception $e){
                     $serverErrorArray = json_decode($e->getMessage(), true);
 
@@ -111,7 +111,7 @@ class UserController extends BaseController
             'countries' => $this->loadCountries($countriesPath)
         );
 
-        return $this->render('ChateaClientBundle:User:register.html.twig', $templateVars);
+        return $this->render('ChateaClientBundle:Register:register.html.twig', $templateVars);
     }
 
     public function registerAjaxAction(Request $request)
@@ -149,7 +149,7 @@ class UserController extends BaseController
                 return $this->redirect($this->generateUrl('chatea_client_update_profile_index'));
             }
 
-            return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
+            return $this->render('ChateaClientBundle:Register:registerSuccess.html.twig', array('user' => $user));
         }else{
             throw $this->createNotFoundException();
         }
@@ -192,7 +192,7 @@ class UserController extends BaseController
                     $user->setProfile($userProfile);
                     $userManager->addUserProfile($user);
                     //$api->addPhoto($user->getId(), $filename, ' ');
-                    return $this->render('ChateaClientBundle:User:registerSuccess.html.twig', array('user' => $user));
+                    return $this->render('ChateaClientBundle:Register:registerSuccess.html.twig', array('user' => $user));
 
                 }catch(\Exception $e){
                     $serverErrorArray = json_decode($e->getMessage(), true);
@@ -206,7 +206,7 @@ class UserController extends BaseController
             }
         }
 
-        return $this->render('ChateaClientBundle:User:register_profile.html.twig', array(
+        return $this->render('ChateaClientBundle:Register:register_profile.html.twig', array(
             'user' => $user,
             'language' => $language,
             'problem' => $problem,

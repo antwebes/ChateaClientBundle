@@ -4,7 +4,7 @@
     <div class="alert alert-warning" role="alert">{{ problem | trans }}</div>
 {% endif %}
 <div class="row">
-	{% include "ChateaClientBundle:User:Register/_title.html.twig" %}
+	{% include "ChateaClientBundle:Register:_title.html.twig" %}
 	<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-1">
 		<form class="form-horizontal" action="{{ path('chatea_client_register_user', {"language": app.request.locale }) }}" {{ form_enctype(form) }} method="POST">
 		    {% if alerts is not null %}
@@ -134,6 +134,6 @@
 		</form>
 	</div>
 	<div class="col-md-3">
-		{% include "ChateaClientBundle:User:Register/_rightbar_register_body.html.twig" %}
+		{% include "ChateaClientBundle:Register:_rightbar_register_body.html.twig" %}
 	</div>
 </div>
