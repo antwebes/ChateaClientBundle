@@ -180,5 +180,7 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Improve form register with text in rigthbar
  * RENAME folder r->R : ChateaClientBundle:User:register -> ChateaClientBundle:User:Register
  
-* 0.1.37 (2016-01-??)
- *
+* 0.1.37 (2016-01-?28)
+ * url from register to login and reset-password with params type=notify_register
+ * delete text customize, now separate in templates, so client can override section of template register
+ * hotfix in template register and rightbar register var client is not defined
