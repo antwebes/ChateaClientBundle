@@ -181,6 +181,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * RENAME folder r->R : ChateaClientBundle:User:register -> ChateaClientBundle:User:Register
  
 * 0.1.37 (2016-01-?28)
- * url from register to login and reset-password with params type=notify_register
+ * url from register, when email is used, to login and reset-password with params type=notify_register
  * delete text customize, now separate in templates, so client can override section of template register
  * hotfix in template register and rightbar register var client is not defined
