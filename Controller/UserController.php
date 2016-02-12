@@ -33,8 +33,14 @@ class UserController extends BaseController
         $apiEndpoint = $this->container->getParameter('chatea_client.api_endpoint');
         $countriesPath = __DIR__ . '/../Resources/config/countries.json';
 
-        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            return $this->redirect($request->getBaseUrl());
+        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')){
+            $baseURL = $request->getBaseUrl();
+
+            if($baseURL === null || $baseURL == ''){
+                $baseURL = '/';
+            }
+
+            return $this->redirect($baseURL);
         }
 
         $date = $request->getSession()->get('user_birthday', null);
