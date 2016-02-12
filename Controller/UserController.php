@@ -366,7 +366,7 @@ class UserController extends BaseController
     {
         $translator = $this->get('translator');
         $errorMapping = array(
-            "This value should be the user current password." => "form.current_password_match",
+            "This value should be the user's current password." => "form.current_password_match",
             "This value is already used." => "form.username_already_used",
             "The email is already used" => "form.mail_is_aviable",
         );
