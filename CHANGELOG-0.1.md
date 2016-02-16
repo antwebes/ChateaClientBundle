@@ -187,3 +187,4 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  
 * 0.1.38 (2016-02-??)
  * The api change response "This value should be the user current password." -> "This value should be the user's current password."
+ * Redirect when user logued join in /register
