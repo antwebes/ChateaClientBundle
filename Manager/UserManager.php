@@ -373,13 +373,20 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         /*** @var \Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile $profile  */
         $profile = $object->getProfile() ? $object->getProfile() : null;
+
+        $birthday = $profile->getBirthday();
+
+        if($birthday instanceof \DateTime){
+            $birthday = $birthday->format('Y-m-d');
+        }
+
         $data = $this->getManager()->addUserProfile(
             $object->getId(),
             $profile->getAbout(),
             $profile->getSeeking(),
             $profile->getGender(),
             $profile->getYouWant(),
-            $profile->getBirthday(),
+            $birthday,
             $image
         );
         return $this->hydrate($data, $object);

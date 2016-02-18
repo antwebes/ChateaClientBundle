@@ -2,6 +2,7 @@
 
 namespace Ant\Bundle\ChateaClientBundle\Controller;
 
+use Ant\Bundle\ChateaClientBundle\Api\Model\UserProfile;
 use Ant\Bundle\ChateaClientBundle\Form\EditCityType;
 use Ant\Bundle\ChateaClientBundle\Form\EditUserProfilePhotoType;
 use Ant\Bundle\ChateaClientBundle\Form\Model\EditCity;
@@ -46,9 +47,11 @@ class ProfileController extends BaseController
     {
         $user = $this->getOnlineUserFromApi();
         $userManager = $this->container->get('api_users');
+		$isProfileNew = false;
 
     	if (is_null($user->getProfile())){
-    		return $this->redirect($this->generateUrl('chatea_user_profile'));
+			$userProfile = new UserProfile();
+			$isProfileNew = true;
     	}else{
     		$userProfile = $user->getProfile();
 
@@ -70,7 +73,14 @@ class ProfileController extends BaseController
     		if ($form->isValid()) {
     			try {
     				$user->setProfile($userProfile);
-    				$userManager->updateProfile($user);
+
+					if($isProfileNew){
+						$userManager->addUserProfile($user);
+					}else{
+						$userManager->updateProfile($user);
+					}
+
+
 					$success = true;
     			}catch(\Exception $e){
     				$serverErrorArray = json_decode($e->getMessage(), true);
