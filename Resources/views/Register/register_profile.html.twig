@@ -125,17 +125,54 @@
                 }
 
                 return msg;
-            }
+            };
+
+            var addFieldError = function(fieldSelector, messageError){
+                var $error = $('<span class="help-validate"><p class="alert-danger">'+ trans(messageError) +'</p></span>');
+                var $field = $(fieldSelector);
+                $error.insertBefore($field);
+            };
+
+            var getMimeType = function(input){
+                if(
+                    typeof(input.files) != 'undefined' &&
+                    typeof(input.files[0]) != 'undefined' &&
+                    typeof(input.files[0].type) != 'undefined'
+                ){
+                    return input.files[0].type;
+                }
+
+                return null;
+            };
 
             $('#profileForm input[type=file]').on('change', function(){ //we have choosen a file
+                var validMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
                 sendEvent("registration", "profile", "send_photo");
-                sendFile = true;
+                sendFile = $('#social_profile_image')[0].files.length > 0; // we choose a file
 
-                // enable the send button and remove the info
-                $('#btn_register')
-                        .removeClass('disabled')
-                        .prop('disabled', false)
-                        .popover('hide');
+                if(sendFile){
+                    var mimeType = getMimeType($('#social_profile_image')[0]);
+
+                    if(mimeType !== null && validMimeTypes.indexOf(mimeType) == -1){
+                        sendFile = false;
+                        var mimeTypeErrorMsg = 'Files of ClientMimetype ' + mimeType + ' or MimeType are not allowed.';
+
+                        addFieldError('#social_profile_image', mimeTypeErrorMsg);
+
+                        return;
+                    }
+
+                    // enable the send button and remove the info
+                    $('#btn_register')
+                            .removeClass('disabled')
+                            .prop('disabled', false)
+                            .popover('hide');
+                }else{
+                    $('#btn_register')
+                            .addClass('disabled')
+                            .prop('disabled', true)
+                            .popover('show');
+                }
             });
 
             var registerUser = function(successCallback){
@@ -213,9 +250,7 @@
                         if(typeof responseJSON != 'undefined' && typeof responseJSON.errors != 'undefined'){
                             if(typeof responseJSON.errors === 'object') {
                                 for(field in responseJSON.errors){
-                                    var $error = $('<span class="help-validate"><p class="alert-danger">'+ trans(responseJSON.errors[field].message) +'</p></span>');
-                                    var $field = $('#social_profile_'+field);
-                                    $error.insertBefore($field);
+                                    addFieldError('#social_profile_' + field, responseJSON.errors[field].message);
                                 }
                             }else {
                                 $('#form-errors')
