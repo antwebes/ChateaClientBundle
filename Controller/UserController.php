@@ -226,6 +226,8 @@ class UserController extends BaseController
     }
     public function confirmEmailAction()
     {
+        $rootRoute = $this->container->getParameter('chatea_client.root_route');
+
         if ($this->getUser() != null && !$this->getUser()->isValidated()){
             $accessToken = $this->getUser()->getAccessToken();
             $apiEndpoint = $this->container->getParameter('chatea_client.api_endpoint');
@@ -235,7 +237,7 @@ class UserController extends BaseController
             return $response;
         }
 
-        return $this->redirect($this->generateUrl('homepage'));
+        return $this->redirect($this->generateUrl($rootRoute));
     }
 
     /**

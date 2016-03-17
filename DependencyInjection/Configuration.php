@@ -75,6 +75,11 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
 
+        $rootNode
+            ->children()
+                ->scalarNode('root_route')->defaultValue('homepage')->end()
+            ->end();
+
         return $treeBuilder;
     }
 }

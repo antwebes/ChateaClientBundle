@@ -84,5 +84,6 @@ class ChateaClientExtension extends Extension
         $container->setParameter('chatea_client.countries_file', __DIR__.'/../Resources/config/countries.json');
         $container->setParameter('chatea_client.languages_file', 'languages.yml');
         $container->setParameter('chatea_client.languages_header', 'languages');
+        $container->setParameter('chatea_client.root_route', $config['root_route']);
     }
 }
