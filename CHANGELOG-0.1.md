@@ -185,7 +185,8 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * delete text customize, now separate in templates, so client can override section of template register
  * hotfix in template register and rightbar register var client is not defined
  
-* 0.1.38 (2016-02-??)
+* 0.1.38 (2016-03-18)
  * The api change response "This value should be the user current password." -> "This value should be the user's current password."
  * Redirect when user logued join in /register
  * Change way to create profile, before redirect but now always use form to edit profile and if user has not profile create profile or if user has profile so, edit profile
+ * Include param root_route, to redirect to route root of web client
