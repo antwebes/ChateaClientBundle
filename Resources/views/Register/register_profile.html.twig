@@ -133,35 +133,11 @@
                 $error.insertBefore($field);
             };
 
-            var getMimeType = function(input){
-                if(
-                    typeof(input.files) != 'undefined' &&
-                    typeof(input.files[0]) != 'undefined' &&
-                    typeof(input.files[0].type) != 'undefined'
-                ){
-                    return input.files[0].type;
-                }
-
-                return null;
-            };
-
             $('#profileForm input[type=file]').on('change', function(){ //we have choosen a file
-                var validMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
                 sendEvent("registration", "profile", "send_photo");
                 sendFile = $('#social_profile_image')[0].files.length > 0; // we choose a file
 
                 if(sendFile){
-                    var mimeType = getMimeType($('#social_profile_image')[0]);
-
-                    if(mimeType !== null && validMimeTypes.indexOf(mimeType) == -1){
-                        sendFile = false;
-                        var mimeTypeErrorMsg = 'Files of ClientMimetype ' + mimeType + ' or MimeType are not allowed.';
-
-                        addFieldError('#social_profile_image', mimeTypeErrorMsg);
-
-                        return;
-                    }
-
                     // enable the send button and remove the info
                     $('#btn_register')
                             .removeClass('disabled')
