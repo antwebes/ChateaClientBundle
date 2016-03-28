@@ -8,7 +8,7 @@ use Ant\Bundle\ChateaClientBundle\Api\Persistence\ObjectManager;
 class FactoryManager
 {
 	static private $arrayManagers = array();
-    static private $managerMap = array('ChannelManager'          => '\Ant\Bundle\ChateaClientBundle\Manager\ChannelManager',
+    static public $managerMap = array('ChannelManager'          => '\Ant\Bundle\ChateaClientBundle\Manager\ChannelManager',
                                        'PhotoManager'            => '\Ant\Bundle\ChateaClientBundle\Manager\PhotoManager',
                                        'UserManager'             => '\Ant\Bundle\ChateaClientBundle\Manager\UserManager',
                                        'UserProfileManager'      => '\Ant\Bundle\ChateaClientBundle\Manager\UserProfileManager',
@@ -19,7 +19,8 @@ class FactoryManager
                                        'CityManager'             => '\Ant\Bundle\ChateaClientBundle\Manager\CityManager',
                                        'CountryManager'          => '\Ant\Bundle\ChateaClientBundle\Manager\CountryManager',
                                        'ClientManager'           => '\Ant\Bundle\ChateaClientBundle\Manager\ClientManager',
-                                       'OutstandingEntryManager' => '\Ant\Bundle\ChateaClientBundle\Manager\OutstandingEntryManager'
+                                       'OutstandingEntryManager' => '\Ant\Bundle\ChateaClientBundle\Manager\OutstandingEntryManager',
+                                       'GlobalStatisticManager'  => '\Ant\Bundle\ChateaClientBundle\Manager\GlobalStatisticManager'
                                 );
 	
 	/**

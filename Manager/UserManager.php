@@ -84,6 +84,11 @@ class UserManager extends BaseManager implements ManagerInterface
             $user->setOutstandingEntry($outstandingEntry);
         }
 
+        if(isset($item['global_statistic'])){
+            $globalStatistic = $this->get('GlobalStatisticManager')->hydrate($item['global_statistic']);
+            $user->setGlobalStatistic($globalStatistic);
+        }
+
         return $user;
     }
 

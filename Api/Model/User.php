@@ -149,6 +149,8 @@ class User implements BaseModel
 
     private $outstandingEntry = null;
 
+    protected $globalStatistic;
+
     /**
      * @return int
      */
@@ -485,5 +487,21 @@ class User implements BaseModel
     public function setOutstandingEntry($outstandingEntry)
     {
         $this->outstandingEntry = $outstandingEntry;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGlobalStatistic()
+    {
+        return $this->globalStatistic;
+    }
+
+    /**
+     * @param mixed $globalStatistic
+     */
+    public function setGlobalStatistic($globalStatistic)
+    {
+        $this->globalStatistic = $globalStatistic;
     }
 }
