@@ -7,7 +7,8 @@
                 'The user already has a profile': '{{ 'user.allready_has_profile' | trans }}',
                 'profile.gender.choice': '{{ 'user.profile.gender.choice.invalid' | trans }}',
                 'profile.seeking.choice': '{{ 'user.profile.gender.seeking.invalid' | trans }}',
-                'upload.error': '{{ 'user.upload_photo.error' | trans({}, 'UserChange') }}'
+                'upload.error': '{{ 'user.upload_photo.error' | trans({}, 'UserChange') }}',
+                'This user has disabled photos, can not upload more': '{{ 'user.upload_photo.error.photos_disabled' | trans({}, 'UserChange') }}'
             };
 
             var trans = function(msg){
@@ -19,7 +20,6 @@
                     var test = regex.exec(msg);
 
                     if(test){
-                        console.log(test);
                         return invalidImage.replace('%mimtype%', test[1]);
                     }
                 }
