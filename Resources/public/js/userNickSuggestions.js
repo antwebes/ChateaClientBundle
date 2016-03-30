@@ -47,10 +47,43 @@
 var emailCheckMinlength = 4;
 
 function userNickSuggestions(messages) {
+    function disableRegsiterButton(){
+        $('input[data-role=send]').attr('disabled', 'disable');
+    }
+
+    function enableRegisterButton(){
+        if($('.alert-danger').length == 0){
+            $('input[data-role=send]').removeAttr('disabled');
+        }
+    }
+
     $(document).ready(function () {
         $('span[data-id="email-suggestions"]').html("");
 
         var suggestionMinlength = 4;
+
+        function isValidEmail(email){
+            // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript#answer-46181
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
+        function isValidNick(nick){
+            if(nick.length > 32 ){
+                return false;
+            }
+            for (i = 0; i < nick.length; i++) {
+                if(nick[i] >= 'A' && nick[i] <= '}'){
+                    continue;
+                }
+                if ((((nick[i] >= '0') && (nick[i] <= '9')) || (nick[i] == '-')) && i != 0 ){
+                    continue;
+                }
+                return false;
+            }
+
+            return true;
+        }
 
         function transServerError(error, throwEvent){
         	var throwEvent = typeof throwEvent !== 'undefined' ? throwEvent : true;
@@ -76,6 +109,12 @@ function userNickSuggestions(messages) {
                 url_source = window.homepage + url_source;
             }
 
+            if(!isValidEmail(emailInput)){
+                disableRegsiterButton();
+                $('span[data-id="email-suggestions"]').html('<p class="alert alert-danger">' + transServerError('This value is not a valid email address.', false) + '</p>');
+                return;
+            }
+
             $.ajax({
                 url: url_source,
                 data: {email: emailInput},
@@ -90,6 +129,7 @@ function userNickSuggestions(messages) {
                             sendEvent("registration", "warning", "smtp_validation");
                         }
                     }
+                    enableRegisterButton();
                 },
                 error: function (responseError) {
                     var response = $.parseJSON(responseError.responseText);
@@ -100,6 +140,7 @@ function userNickSuggestions(messages) {
                     }else{
                     	$('span[data-id="email-suggestions"]').html('<p class="alert-danger">' + transServerError(messageError, false) + '</p>');
                     }
+                    disableRegsiterButton();
                     sendEvent("registration", "error", messageError);
                 }
 
@@ -146,6 +187,15 @@ function userNickSuggestions(messages) {
                 url_source = window.homepage + url_source;
             }
 
+            if(!isValidNick(usernameInput)){
+                disableRegsiterButton();
+
+                var messageError = transServerError('The username is not valid. The username can not include spaces, it can not start with number, or it can not include the special characters', false);
+                $('span[data-id="username-validate"]').html('<p class="alert-danger">' + messageError + '</p>');
+
+                return;
+            }
+
             $('div[data-id="suggestions-username-block"]').hide();
             $.ajax({
                 url: url_source,
@@ -154,6 +204,7 @@ function userNickSuggestions(messages) {
                 contentType: "application/json",
                 success: function (response) {
                     $('span[data-id="username-validate"]').html('<p class="alert-success">' + messages.username_is_aviable + '</p>');
+                    enableRegisterButton();
                 },
                 error: function (responseError) {
                     var response = $.parseJSON(responseError.responseText);
@@ -172,6 +223,7 @@ function userNickSuggestions(messages) {
                     } else if (response.errors.email) {
                         $('span[data-id="username-validate"]').html('<p class="alert-danger">' + transServerError(response.errors.email.message) + '</p>');
                     }
+                    disableRegsiterButton();
                 }
 
             });
@@ -197,7 +249,7 @@ function userNickSuggestions(messages) {
         $('input[data-id="form_email_second"]').donetyping(function () {
             var value = $(this).val();
             if (value.length > emailCheckMinlength) {
-                checkEmail(value);
+                //checkEmail(value);
                 checkTwoFieldsEmailAndShowError(messages);
             }
         });
