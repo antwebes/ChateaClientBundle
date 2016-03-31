@@ -192,3 +192,6 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  
 * 0.1.39 (2016-03-18)
  * Include param root_route, to redirect to route root of web client
+ 
+* 0.1.40 (2016-04-??)
+ * Fix error in process register, if user select and unselect imagen, now disable button register again, before unselect image
