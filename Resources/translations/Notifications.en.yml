@@ -1,0 +1,5 @@
+user.no_profile_photo: "You don't have a profile photo. To have more visits we suggest you to upload a profile photo."
+user.no_city: "You don't have a city. To have more visits we suggest you to set your city."
+user.no_profile: "You don't have a profile. To have more visits we suggest you to fill your profile."
+user.profile_not_complete: "Your profile isn't complete. You have pending field to complete your profile"
+user.photo_with_votes: "Hy %user%, you've accomplished one of your photos to have %votes% votes"

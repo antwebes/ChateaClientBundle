@@ -72,6 +72,7 @@ class ChateaClientExtension extends Extension
         $container->setDefinition('antwebes_chateaclient_manager',$manager);
         $container->setParameter('chatea_client.register_with_profile',$config['register_with_profile']);
         $container->setParameter('chatea_client.can_skip_register_profile',$config['can_skip_register_profile']);
+        $container->setParameter('chatea_client.profile_properties_to_check', $config['profile_properties_to_check']);
 
         if(array_key_exists('languages',$config) && array_key_exists('dir',$config['languages'])){
             if($config['languages']['dir'] == null){

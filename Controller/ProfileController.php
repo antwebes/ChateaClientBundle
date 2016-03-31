@@ -16,7 +16,9 @@ class ProfileController extends BaseController
 {
 	public function updateIndexAction(Request $request)
 	{
-		return $this->render('ChateaClientBundle:User:edit_profile_index.html.twig');
+		$user = $this->getOnlineUserFromApi();
+
+		return $this->render('ChateaClientBundle:User:edit_profile_index.html.twig', array('user' => $user));
 	}
 
     /**
