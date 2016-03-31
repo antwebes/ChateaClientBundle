@@ -53,6 +53,10 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
             ->with('router')
             ->will($this->returnValue($this->routerMock));
 
+        $this->containerMock->expects($this->any())
+            ->method('has')
+            ->will($this->returnValue(true));
+
         $this->routerMock->expects($this->once())
             ->method('generate')
             ->with('chatea_client_update_profile_index')
@@ -76,12 +80,22 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
     {
         $user = $this->createUser(false);
 
+        $this->containerMock->expects($this->once())
+            ->method('has')
+            ->with('templating')
+            ->will($this->returnValue(true));
+
         $this->containerMock->expects($this->at(0))
             ->method('get')
             ->with('api_users')
             ->will($this->returnValue($this->userManagerMock));
 
-        $this->containerMock->expects($this->at(1))
+//        $this->containerMock->expects($this->at(1))
+//            ->method('get')
+//            ->with('api_users')
+//            ->will($this->returnValue($this->userManagerMock));
+
+        $this->containerMock->expects($this->at(2))
             ->method('get')
             ->with('templating')
             ->will($this->returnValue($this->templatingMock));
