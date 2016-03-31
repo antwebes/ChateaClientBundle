@@ -125,17 +125,30 @@
                 }
 
                 return msg;
-            }
+            };
+
+            var addFieldError = function(fieldSelector, messageError){
+                var $error = $('<span class="help-validate"><p class="alert-danger">'+ trans(messageError) +'</p></span>');
+                var $field = $(fieldSelector);
+                $error.insertBefore($field);
+            };
 
             $('#profileForm input[type=file]').on('change', function(){ //we have choosen a file
                 sendEvent("registration", "profile", "send_photo");
-                sendFile = true;
+                sendFile = $('#social_profile_image')[0].files.length > 0; // we choose a file
 
-                // enable the send button and remove the info
-                $('#btn_register')
-                        .removeClass('disabled')
-                        .prop('disabled', false)
-                        .popover('hide');
+                if(sendFile){
+                    // enable the send button and remove the info
+                    $('#btn_register')
+                            .removeClass('disabled')
+                            .prop('disabled', false)
+                            .popover('hide');
+                }else{
+                    $('#btn_register')
+                            .addClass('disabled')
+                            .prop('disabled', true)
+                            .popover('show');
+                }
             });
 
             var registerUser = function(successCallback){
@@ -213,9 +226,7 @@
                         if(typeof responseJSON != 'undefined' && typeof responseJSON.errors != 'undefined'){
                             if(typeof responseJSON.errors === 'object') {
                                 for(field in responseJSON.errors){
-                                    var $error = $('<span class="help-validate"><p class="alert-danger">'+ trans(responseJSON.errors[field].message) +'</p></span>');
-                                    var $field = $('#social_profile_'+field);
-                                    $error.insertBefore($field);
+                                    addFieldError('#social_profile_' + field, responseJSON.errors[field].message);
                                 }
                             }else {
                                 $('#form-errors')
