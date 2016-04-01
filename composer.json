@@ -18,12 +18,6 @@
 	"homepage" : "https://github.com/antwebes/ChateaClientBundle",
 	"license" : "MIT",
 	"require" : {
-		"symfony/framework-bundle" : "~2.3",
-		"symfony/form" : "2.3.*",
-		"symfony/validator" : "2.3.*",
-		"symfony/twig-bundle" : "2.3.*",
-		"symfony/security-bundle" : "2.3.*",
-		"symfony/assetic-bundle" : "~2.3",
 		"antwebes/chatea-common" : "0.1.0",
 		"antwebes/chatea-client-lib" : "0.1.7",
 		"antwebes/chatea-secure-bundle" : "0.1.6",
@@ -31,6 +25,12 @@
 		"doctrine/annotations" : "^1.2"
 	},
 	"require-dev" : {
+		"symfony/framework-bundle" : "~2.3",
+		"symfony/form" : "2.3.*",
+		"symfony/validator" : "2.3.*",
+		"symfony/twig-bundle" : "2.3.*",
+		"symfony/security-bundle" : "2.3.*",
+		"symfony/assetic-bundle" : "~2.3",
 		"raulfraile/ladybug" : "~1.0",
 		"sensio/framework-extra-bundle" : "^3.0",
 		"phpunit/phpunit" : ">=4.7.6"
