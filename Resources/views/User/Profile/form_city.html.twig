@@ -1,38 +1,24 @@
 {% trans_default_domain 'UserRegistration' %}
 
 <form id="profileForm" class="form-horizontal" action="{{ path('chatea_client_update_profile_city' ) }}" {{ form_enctype(form) }} method="POST">
-    {#{% if alerts is not null %}#}
-        {#<div id="form-errors" class="alert alert-warning" data-behat="msg-warning">#}
-            {#{{ alerts }}#}
-        {#</div>#}
-    {#{% endif %}#}
     {% if success is not null %}
         <div class="alert alert-success" data-behat="msg-success">
             {{ 'user.edit_city.success' | trans({}, 'UserChange') }}
         </div>
     {% endif %}
+
     <div id="form-errors" class="alert alert-danger" style="display: none">
     </div>
-    {#{% if errors | length > 0 %}
-    <div class="alert alert-danger">
-        {{ form_errors(form) }}
-    </div>
-    {% endif %}#}
 
     <div class="form-group">
-        <label class="col-lg-3 control-label" for="ountry">{{ "form.country" | trans }}</label>
+        <label class="col-lg-3 control-label" for="ountry">{{ "form.country" | trans }} *</label>
         <div class="col-lg-9">
-            <select class="form-control" id="form_search_country" name="edit_city[countryName]" data-city-finder="search_country">
-                {% for country in countries %}
-                    <option value="{{ country.value }}">{{ country.name }}</option>
-                {% endfor %}
-            </select>
+            {{ form_widget(form.searchCountry, {'attr': {'class': 'form-control', 'data-city-finder': 'search_country'}}) }}
         </div>
     </div>
-    <div id="register_select_city" class="form-group" {% if form.vars['errors'] is empty %}style="display: none "{% endif %}>
+    <div id="register_select_city" class="form-group" {% if form.vars['errors'] is empty and country is null %}style="display: none "{% endif %}>
         <label class="col-lg-3 control-label" for="search_city" >{{ "form.city" | trans }}</label>
         <div class="col-lg-9">
-            {{ form_errors(form) }}
             <input
                     id="registration_form_search_city"
                     type="text"
@@ -50,6 +36,9 @@
             <input data-city-finder="send" name="register" type="submit" class="btn btn-lg pull-right btn-primary" value="{{ 'registration_profile.submit'|trans }}" />
         </div>
     </div>
+
+    {{ form_widget(form.country) }}
     {{ form_widget(form.city) }}
     {{ form_widget(form._token) }}
+
 </form>

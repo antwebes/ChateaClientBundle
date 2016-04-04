@@ -116,12 +116,15 @@ class ProfileController extends BaseController
         $userOnline = $this->getOnlineUserFromApi();
         $editCity = new EditCity();
         $success = null;
+		$editCity->setCountry($userOnline->getCountry());
         $editCity->setCity($userOnline->getCity());
 
         $countriesPath = __DIR__ . '/../Resources/config/countries.json';
 
         $formOptions = array(
-            'cityLocationManager'   => $this->get('api_cities'),
+			'countryLocationManager' => $this->get('api_countries'),
+            'cityLocationManager'    => $this->get('api_cities'),
+			'countries'              => $this->loadCountries($countriesPath)
         );
 
         $form = $this->createForm(new EditCityType(), $editCity, $formOptions);
@@ -130,7 +133,7 @@ class ProfileController extends BaseController
             $form->submit($request);
             if ($form->isValid()) {
                 try{
-                    $this->get('api_users')->updateUserCity($userOnline, $editCity->getCity());
+                    $this->get('api_users')->updateUserCity($userOnline, $editCity->getCountry(), $editCity->getCity());
                     $success = true;
                 }catch(\Exception $e){
 
@@ -141,6 +144,7 @@ class ProfileController extends BaseController
         return $this->render('ChateaClientBundle:User:edit_city.html.twig', array(
             'form' => $form->createView(),
             'user' => $this->getUser(),
+			'country' => $editCity->getCountry(),
             'city' => $editCity->getCity(),
             'countries' => $this->loadCountries($countriesPath),
             'access_token' => $this->getUser()->getAccessToken(),
@@ -233,7 +237,7 @@ class ProfileController extends BaseController
             unset($entry['name']);
 
             $hasCities = $entry['has_cities'] ? 'true' : 'false';
-            $value = '{"country_code":"'.$entry['country_code'].'","has_cities":'.$hasCities.',"city_default":'.$entry['city_default'].'}';
+            $value = '{"country_code":"'.$entry['country_code'].'","has_cities":'.$hasCities.',"id":'.$entry['id'].'}';
 
             return array('value' => $value, 'name' => $country);
         };

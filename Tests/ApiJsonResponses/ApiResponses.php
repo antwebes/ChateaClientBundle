@@ -47,6 +47,11 @@ class ApiResponses
         return $this->getContentFromJsonFile(__DIR__ . '/Responses/findUserProfileById.json');
     }
 
+    public function findCountryByCode()
+    {
+        return $this->getContentFromJsonFile(__DIR__ . '/Responses/findCountryByCode.json');
+    }
+
     /**
      * @return mixed
      */

@@ -2,6 +2,7 @@
 namespace Ant\Bundle\ChateaClientBundle\Form;
 
 use Ant\Bundle\ChateaClientBundle\Form\Transformer\CityLocationTransformer;
+use Ant\Bundle\ChateaClientBundle\Form\Transformer\CountryLocationTransformer;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -83,23 +84,29 @@ class CreateUserType extends AbstractType
             )
         );
 
-        $builder->add('city','text',  array('required' => false));
-
+        $countryLocationTransformer = new CountryLocationTransformer($options['countryLocationManager']);
         $cityLocationTransformer = new CityLocationTransformer($options['cityLocationManager']);
 
-//        $clientTransformer = new ClientTransformer($options['clientManager']);
+        $builder->add($builder->create('country', 'hidden',   array('required' => true, 'attr' => array('data-city-finder' => 'current_country')))
+            ->addModelTransformer($countryLocationTransformer)
+        );
 
-        $builder->add(  $builder->create('city','hidden',   array('required' => false, 'attr' => array('data-city-finder' => 'current_city')))
+        $builder->add(  $builder->create('city', 'hidden',   array('required' => false, 'attr' => array('data-city-finder' => 'current_city')))
             ->addModelTransformer($cityLocationTransformer)
         );
 
-        /*$builder->add(  $builder->create('client','text',  array('required' => false,
-            'data' => $options['client']))
-            ->addModelTransformer($clientTransformer)
-        );*/
-
         $builder->add('ip',        'hidden',  array('required' => false,'data'  => $options['ip']));
         $builder->add('language', 'hidden',   array('required' => false,'data'  => $options['language']));
+
+        $builder->add(
+            'searchCountry',
+            'choice',
+            array(
+                'required' => true,
+                'mapped' => false,
+                'empty_value' => '',
+                'choices' => $this->buildCountriesOptions($options['countries'])
+            ));
 
         $builder->add('recaptcha', 'beelab_recaptcha2', array(
             'label' => false,
@@ -118,10 +125,11 @@ class CreateUserType extends AbstractType
             'birthday' => null
         ));
         $resolver->setRequired(array(
-            'cityLocationManager','language','ip'
+            'countryLocationManager', 'cityLocationManager', 'language', 'ip', 'countries'
         ));
 
         $resolver->setAllowedTypes(array(
+            'countryLocationManager' => 'Ant\Bundle\ChateaClientBundle\Manager\CountryManager',
             'cityLocationManager' => 'Ant\Bundle\ChateaClientBundle\Manager\CityManager'
         ));
     }
@@ -129,5 +137,16 @@ class CreateUserType extends AbstractType
     public function getName()
     {
         return 'user_registration';
+    }
+
+    private function buildCountriesOptions($countries)
+    {
+        $options = array();
+
+        foreach($countries as $country){
+            $options[$country['value']] = $country['name'];
+        }
+
+        return $options;
     }
 }

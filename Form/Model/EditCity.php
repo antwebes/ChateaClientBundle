@@ -16,12 +16,12 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class EditCity 
 {
     /**
-     * @var string
+     * @NotBlank
+     * @var Country
      */
-    protected $countryName;
+    protected $country;
 
     /**
-     * @NotBlank
      * @var City
      */
     protected $city;
@@ -64,18 +64,18 @@ class EditCity
     }
 
     /**
-     * @return string
+     * @return Country
      */
-    public function getCountryName()
+    public function getCountry()
     {
-        return $this->countryName;
+        return $this->country;
     }
 
     /**
-     * @param string $countryName
+     * @param Country $country
      */
-    public function setCountryName($countryName)
+    public function setCountry($country)
     {
-        $this->countryName = $countryName;
+        $this->country = $country;
     }
 }

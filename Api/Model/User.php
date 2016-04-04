@@ -123,6 +123,11 @@ class User implements BaseModel
     private $oCity = NULL;
 
     /**
+     * The value for country
+     */
+    private $oCountry = NULL;
+
+    /**
      * @var null
      */
     private $oClient = null;
@@ -485,5 +490,21 @@ class User implements BaseModel
     public function setOutstandingEntry($outstandingEntry)
     {
         $this->outstandingEntry = $outstandingEntry;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCountry()
+    {
+        return $this->oCountry;
+    }
+
+    /**
+     * @param mixed $oCountry
+     */
+    public function setCountry($oCountry)
+    {
+        $this->oCountry = $oCountry;
     }
 }

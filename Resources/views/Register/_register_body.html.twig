@@ -67,11 +67,7 @@
 		    <div class="form-group">
 		        <label class="col-lg-3 control-label" for="registration_form_country">{{ "form.country" | trans }}</label>
 		        <div class="col-lg-9">
-		            <select class="form-control" id="form_search_country" name="country" data-city-finder="search_country">
-						{% for country in countries %}
-							<option value="{{ country.value }}">{{ country.name }}</option>
-						{% endfor %}
-		            </select>
+					{{ form_widget(form.searchCountry, {'attr': {'class': 'form-control', 'data-city-finder': 'search_country'}}) }}
 		        </div>
 		    </div>
 		    <div id="register_select_city" class="form-group" style="display: none ">
