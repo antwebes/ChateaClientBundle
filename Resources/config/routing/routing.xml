@@ -33,6 +33,12 @@
     <route id="chatea_client_register_user_success" path="/register-user-success/{userId}" methods="GET|POST">
         <default key="_controller">ChateaClientBundle:User:registrationUserSuccess</default>
     </route>
+    <route id="chatea_user_delete_me" path="/delete-me" methods="GET">
+        <default key="_controller">ChateaClientBundle:User:deleteMe</default>
+    </route>
+    <route id="chatea_user_delete_me_confirm" path="/delete-me/confirm" methods="GET">
+        <default key="_controller">ChateaClientBundle:User:deleteMeConfirm</default>
+    </route>
     <route id="chatea_client_welcome" path="/welcome" methods="GET">
         <default key="_controller">ChateaClientBundle:User:welCome</default>
     </route>

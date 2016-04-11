@@ -89,6 +89,13 @@
             </div>
         </form>
     </div>
+
+    <h1>{{ 'user.delete_me' | trans }}</h1>
+    <div class="col-xs-12">
+        <p>{{ 'user.delete_me_inform' | trans }}</p>
+        <a href="{{ path('chatea_user_delete_me') }}" class="btn btn-lg btn-primary">{{ 'user.delete_me' | trans }}</a>
+    </div>
+    <p></p>
 {% endblock %}
 
 

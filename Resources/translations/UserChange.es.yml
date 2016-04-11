@@ -26,3 +26,8 @@ user.edit_city: "Editar tu ciudad"
 user.upload_photo.error: "Ha ocurrido un error subiendo la foto"
 user.upload_photo.error.photos_disabled: Tienes fotos deshabilitadas por contenido inapropiado. Mientras tengas una foto deshabilitada no podrás subir más. Si tienes dudas puedes contactar con los administradores de la página.
 user.edit_profile: "Editar perfil"
+user.delete_me: "Eliminar mi cuenta"
+user.delete_me_inform: "Esta acción eliminara todos los datos de usario, incluidas las fotos que has subido."
+user.delete_me_ask: "¿Estás seguro de que quieres eliminar esta cuenta?"
+user.delete_me_success: "Tu cuenta ha sido eliminada con éxito"
+user.delete_me_fail: "Ha ocurrido un error al intentar eliminar tu cuenta. Intentalo más tarde"

@@ -315,6 +315,56 @@ class UserController extends BaseController
         ));
     }
 
+    /**
+     * @APIUser
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteMeAction(Request $request)
+    {
+        $userManager = $this->get('api_users');
+        $userMe = $userManager->findMeUser();
+
+        return $this->render('ChateaClientBundle:User:deleteMe.html.twig', array(
+            'userMe' => $userMe
+        ));
+    }
+
+    /**
+     * @APIUser
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteMeConfirmAction(Request $request)
+    {
+        $translator = $this->get('translator');
+        $userManager = $this->get('api_users');
+        $message = $translator->trans('', array(), 'UserChange');
+
+        try{
+            $message = $translator->trans('user.delete_me_success', array(), 'UserChange');
+            $userManager->deleteMeUser();
+            $this->get('security.context')->setToken(null);
+            $this->get('request')->getSession()->invalidate();
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                $message
+            );
+
+            return $this->redirect($this->container->getParameter('chatea_client.root_route'));
+        }catch(\Exception $e){
+            $message = $translator->trans('user.delete_me_fail', array(), 'UserChange');
+            $this->get('security.context')->setToken(null);
+            $this->get('request')->getSession()->invalidate();
+
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                $message
+            );
+
+            return $this->redirect($this->getParameter('chatea_client_user_settings'));
+        }
+    }
+
     private function getLanguageFromRequestAndSaveInSessionRequest(Request $request)
     {
         $language = $request->get('language', $this->container->getParameter('kernel.default_locale'));

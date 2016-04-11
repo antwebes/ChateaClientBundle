@@ -26,3 +26,8 @@ user.edit_city: "Edit your city"
 user.upload_photo.error: "An error ocurred uploading the photo"
 user.upload_photo.error.photos_disabled: You have disabled photos due to none allowed content. You can't upload a photo having disabled photos. If you have a problem contact the admins of the page
 user.edit_profile: "Edit profile"
+user.delete_me: "Remove my account"
+user.delete_me_inform: "This action will remove all your user data, including your uploaded photos."
+user.delete_me_ask: "Are you sure you want to remove your account?"
+user.delete_me_success: "Your accounte has been removed successfull"
+user.delete_me_fail: "An error happend trying to remove your account. Try it later."
