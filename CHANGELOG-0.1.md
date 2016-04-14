@@ -197,5 +197,5 @@ To get the diff between two versions, go to https://github.com/antwebes/ChateaCl
  * Fix error in process register, if user select and unselect imagen, now disable button register again, before unselect image
  * Show error when user with photo disabled, want upload other photo
  
-* 0.1.41 (2016-04-??)
+* 0.1.41 (2016-04-14)
  * Show globalStatistics, as cont disabled photos
