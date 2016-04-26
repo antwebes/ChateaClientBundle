@@ -25,7 +25,7 @@
 		"symfony/security-bundle" : "2.3.*",
 		"symfony/assetic-bundle" : "~2.3",
 		"antwebes/chatea-common" : "0.1.0",
-		"antwebes/chatea-client-lib" : "0.1.7",
+		"antwebes/chatea-client-lib" : "1.0.0",
 		"antwebes/chatea-secure-bundle" : "0.1.6",
 		"beelab/recaptcha2-bundle" : "0.1.*",
 		"doctrine/annotations" : "^1.2"
