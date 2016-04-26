@@ -10,7 +10,13 @@
                 {% if city %}
                     fillSelectCountry( '{{ city.country |raw }}' );
                 {% else %}
-                    var selctedCity = '{{ form.countryName.vars.value | raw }}';
+                    var selctedCity = '{{ form.country.vars.value | raw }}';
+
+                    {% if country %}
+                        fillSelectCountry('{{ country }}');
+                    {% else %}
+                        fillSelectCountry('');
+                    {% endif %}
 
                     $countrySelect
                         .find('option')
@@ -22,7 +28,9 @@
         onlyOnce();
 
         $("#profileForm").submit(function(){
-            clearUserData();
+            if(typeof(clearUserData) == 'undefined' ){ // check if function aviable (notification script loaded)
+                clearUserData();
+            }
 
             if(typeof(window.sessionStorage) != 'undefined'){
                 sessionStorage.removeItem('has_city_{{ app.user.id }}');

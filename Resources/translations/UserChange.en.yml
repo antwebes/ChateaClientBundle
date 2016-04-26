@@ -23,6 +23,7 @@ form.email_not_valid_server: "The email '%email%' is not a valid email"
 form.mail_is_aviable: "Email already in use. An email only be used in a account at a time."
 user.edit_city.success: "Your city has been updated successfully"
 user.edit_city: "Edit your city"
+user.edit_localization: "Edit your localization"
 user.upload_photo.error: "An error ocurred uploading the photo"
 user.upload_photo.error.photos_disabled: You have disabled photos due to none allowed content. You can't upload a photo having disabled photos. If you have a problem contact the admins of the page
 user.edit_profile: "Edit profile"

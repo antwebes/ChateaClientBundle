@@ -23,6 +23,7 @@ form.email_not_valid_server: "El correo electrónico '%email%' no es un correo v
 form.mail_is_aviable: "Esta dirección de correo ya está en uso. Una dirección solo puede ser usado por una única cuenta."
 user.edit_city.success: "Tu ciudad ha sido actualizada con éxito"
 user.edit_city: "Editar tu ciudad"
+user.edit_localization: "Edita tu localización"
 user.upload_photo.error: "Ha ocurrido un error subiendo la foto"
 user.upload_photo.error.photos_disabled: Tienes fotos deshabilitadas por contenido inapropiado. Mientras tengas una foto deshabilitada no podrás subir más. Si tienes dudas puedes contactar con los administradores de la página.
 user.edit_profile: "Editar perfil"

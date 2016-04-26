@@ -41,7 +41,11 @@
     var onlyOnce = function(){
         if(!executed){
             executed = true;
-            fillSelectCountry( '{{ app.request.get('country')|raw }}' );
+            {% if user.country %}
+                fillSelectCountry( '{{ user.country.code }}' );
+            {% else %}
+                fillSelectCountry( '{{ app.request.get('country')|raw }}' );
+            {% endif %}
         }
     };
 

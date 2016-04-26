@@ -45,6 +45,12 @@ class CountryManager extends BaseManager
     {
         throw new \InvalidArgumentException("This method do not supported yet");
     }
+
+    public function findByCode($countryCode)
+    {
+        return $this->executeAndHydrateOrHandleApiException('getCountry', array('country_code' => $countryCode));
+    }
+
     public function findAll($page = 1, array $filters = null, $limit = null, array $order = null)
     {
         //return $this->hydrate($this->getManager()->showAffiliates());

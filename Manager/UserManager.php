@@ -66,10 +66,16 @@ class UserManager extends BaseManager implements ManagerInterface
             $user->setChannelsModerated($this->mapChannels($item['channels_moderated']));
         }
 
+        if(isset($item['country'])){
+            $country = $this->get('CountryManager')->hydrate($item['country']);
+            $user->setCountry($country);
+        }
+
         if(isset($item['city'])){
             $city = $this->get('CityManager')->hydrate($item['city']);
             $user->setCity($city);
         }
+
         if(isset($item['language'])){
             $user->setLanguage($item['language']);
         }
@@ -289,6 +295,7 @@ class UserManager extends BaseManager implements ManagerInterface
             $object->getPlainPassword(),
             $object->getClient()->getId(),
             $object->getIp(),
+            $object->getCountry()?$object->getCountry()->getId():null,
             $object->getCity()?$object->getCity()->getId():null,
             $object->getLanguage(),
             $object->getFacebookId(),
@@ -429,13 +436,15 @@ class UserManager extends BaseManager implements ManagerInterface
     /**
      * Updates a users city
      * @param $user
+     * @param $country
      * @param $city
      */
-    public function updateUserCity($user, $city)
+    public function updateUserCity($user, $country, $city = null)
     {
         $this->getManager()->updateUserCity(
             $user->getId(),
-            $city->getId()
+            $country->getId(),
+            $city !== null ? $city->getId() : null
         );
     }
 }

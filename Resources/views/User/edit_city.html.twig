@@ -11,11 +11,11 @@
         <div class="alert alert-warning" role="alert">{{ problem | trans }}</div>
     {% endif %}#}
 
-    <h1>{{ 'user.edit_city' | trans({}, 'UserChange') }}</h1>
+    <h1>{{ 'user.edit_localization' | trans({}, 'UserChange') }}</h1>
 
     <ol class="breadcrumb">
         <li><a href="{{ path('chatea_client_update_profile_index') }}">{{ 'user.change_profile' | trans }}</a></li>
-        <li class="active">{{ 'user.edit_city' | trans({}, 'UserChange') }}</li>
+        <li class="active">{{ 'user.edit_localization' | trans({}, 'UserChange') }}</li>
     </ol>
 
     <div class="col-xs-12">
@@ -37,8 +37,16 @@
         window.api_endpoint = "{{ api_endpoint }}";
         window.language = "{{ app.request.locale }}";
     </script>
+    <script>
+        if (typeof jQuery.ui == 'undefined') {
+            {% javascripts
+                '@ChateaClientBundle/Resources/public/js/jquery-ui-1.10.3.custom.min.js'
+            %}
+            document.write('<script src="{{ asset_url }}">\x3C/script>');
+            {% endjavascripts %}
+        }
+    </script>
     {% javascripts
-    '@ChateaClientBundle/Resources/public/js/jquery-ui-1.10.3.custom.min.js'
     '@ChateaClientBundle/Resources/public/js/cities.js'
     %}
     <script src="{{ asset(asset_url) }}"></script>

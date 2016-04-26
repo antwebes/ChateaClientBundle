@@ -5,13 +5,14 @@
         var country_auto_geo = '';
         var search_city_cache = {};
         var search_country_cache = {};
-        
+
         // selects a component by data-city-finder attribute
         var selectComponent = function(component){
             return $('*[data-city-finder="' + component  + '"]');
         };
 
         var $currentCity = selectComponent('current_city');
+        var $currentCountry = selectComponent('current_country');
         var $formSearchCountry = selectComponent('search_country');
         var $formSearchCity = selectComponent('search_city');
         var $suggestionCity = selectComponent('suggestion_city');
@@ -19,7 +20,7 @@
         var $sendButton = selectComponent('send');
 
         var disableButtonIfNoCity = function(){
-            if($currentCity.val().length == 0){
+            if($currentCity.val().length == 0 && $formSearchCountry.val() == ''){
                 $sendButton.attr('disabled','disabled');
             }else{
                 $sendButton.removeAttr('disabled');
@@ -45,13 +46,14 @@
                 //$('#form_search_country').val(response.country);
                 //$('#form_search_country option:contains('+country_auto_geo+')').prop('selected',true);
                 $formSearchCity.val('');
-                country_code = response.countryCode;
+                //country_code = response.countryCode;
 
                 //$("#form_search_country").trigger('change');
 
                 $suggestionCity.click(function (){
                     $formSearchCity.val(response.city +', '+ response.region);
                     $currentCity.val(response.id);
+                    $currentCountry.val(response.country_code);
                     selectActualCountry(response.country_code);
                 });
             });
@@ -101,12 +103,20 @@
 
             // search for the option that has the country code
             var $currentCountry = $countryOptions.filter(function(i, elem){
-                var data = JSON.parse($(elem).val());
+                var val = $(elem).val();
+
+                if(val == ''){ // don't proccess empty value
+                    return false;
+                }
+
+                var data = JSON.parse(val);
 
                 return data.country_code == countryCode;
             });
 
+            country_code = countryCode;
             $currentCountry.prop('selected', true);
+            setSelectedCity();
         }
 
         /*
@@ -115,9 +125,20 @@
         $formSearchCountry.change(function(){
             // user_registration_city
             var countryJSON = $(this).children(":selected").val();
-            countryJSON = $("<div/>").html(countryJSON).text();
+
+            // if empty city choosen empty values and return
+            if(countryJSON == null || countryJSON == ''){
+                $currentCity.val('');
+                $currentCountry.val('');
+                $formSearchCity.parent().parent().hide();
+
+                return;
+            }
 
             var country = $.parseJSON(countryJSON);
+
+            $currentCountry.val(country.country_code);
+
             country_code = country.country_code;
             //if country has not cities
             if (!country.has_cities){
@@ -125,7 +146,7 @@
                     $currentCity.val(country.city_default);
                 }else{
                     //error the country must has a city_default
-                    $currentCity.val('666');
+                    $currentCity.val('');
                 }
                 $formSearchCity.parent().parent().hide();
             }else{
@@ -139,11 +160,11 @@
 
             disableButtonIfNoCity();
         });
-        
+
       //fill value with data to city_es of api
         function fillItemWithValuesInSpanish(item, value){
         	var item_es = item.city_es;
-        	
+
         	if (item_es.name != ""){
         		value['name'] = item_es.name;
         	}
@@ -153,14 +174,14 @@
         	if (item_es.region_name != ""){
         		value['region_name'] = item_es.region_name;
         	}
-        	
+
         	return value;
         }
 
         //Show value to insert in options to choose city
         function getValueShowOptionsCity(item){
         	var value = new Array();
-        	
+
         	if (item.name != ""){
         		value['name'] = item.name;
         	}
@@ -170,15 +191,15 @@
         	if (item.region_name != ""){
         		value['region_name'] = item.region_name;
         	}
-        	
+
         	if (language == "es"){
         		value = fillItemWithValuesInSpanish(item, value);
-        	}    	
-        	
+        	}
+
         	var result = "";
         	var cont = 0;
         	var cont_comma = 0;
-        	
+
         	for (item in value) {
         		if (cont > cont_comma && value[item] != ""){
         			cont_comma++;
@@ -189,12 +210,12 @@
         			result += value[item];
         		}
         	}
-        	
+
         	return result;
         }
 
         var formSearchCitySelectChanged = false;
-        
+
         $formSearchCity.autocomplete({
             source: function( request, response ) {
                 var url_source = api_endpoint+'/geo/countries/'+ country_code + '/cities/' + $formSearchCity.val();
@@ -245,7 +266,7 @@
             if(formSearchCitySelectChanged){ // change occurs after changing city so we don't change current city to empty
                 formSearchCitySelectChanged = false;
             }else{
-                $currentCity.val(''); //the change does not occur due the autocomplete                 
+                $currentCity.val(''); //the change does not occur due the autocomplete
             }
 
             disableButtonIfNoCity();
@@ -257,10 +278,18 @@
             country_code = country.country_code;
 
             if(country.has_cities){
-                $('#register_select_city').show();
+                $formSearchCity.parent().parent().show();
             }
         };
 
         window.fillSelectCountry = fillSelectCountry;
+        disableButtonIfNoCity();
+
+        var currentCountryCode = $currentCountry.val();
+
+        if(currentCountryCode !== ''){
+            selectActualCountry(currentCountryCode);
+            disableButtonIfNoCity();
+        }
     });
 })(window, window.api_endpoint, window.language);

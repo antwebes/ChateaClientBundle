@@ -54,13 +54,16 @@ class UserController extends BaseController
         }
 
         $formOptions = array(
-            'language'              => $language,
-            'cityLocationManager'   => $this->get('api_cities'),
-            'ip'                    => $request->getClientIp(),
-            'birthday'              => $date
+            'language'               => $language,
+            'countryLocationManager' => $this->get('api_countries'),
+            'cityLocationManager'    => $this->get('api_cities'),
+            'ip'                     => $request->getClientIp(),
+            'birthday'               => $date,
+            'countries'              => $this->loadCountries($countriesPath)
         );
 
         $user = $request->getSession()->get('user_data', new User());
+
         /** @var \Ant\Bundle\ChateaClientBundle\Manager\UserManager $userManager */
         $userManager = $this->get('api_users');
         $form = $this->createForm(new CreateUserType(), $user, $formOptions);
@@ -114,7 +117,7 @@ class UserController extends BaseController
             'language' => $language,
             'api_endpoint' => $apiEndpoint,
             'problem' => $problem,
-            'countries' => $this->loadCountries($countriesPath)
+            'user' => $user
         );
 
         return $this->render('ChateaClientBundle:Register:register.html.twig', $templateVars);
@@ -398,7 +401,7 @@ class UserController extends BaseController
             unset($entry['name']);
 
             $hasCities = $entry['has_cities'] ? 'true' : 'false';
-            $value = '{"country_code":"'.$entry['country_code'].'","has_cities":'.$hasCities.',"city_default":'.$entry['city_default'].'}';
+            $value = '{"country_code":"'.$entry['country_code'].'","has_cities":'.$hasCities.',"id":'.$entry['id'].'}';
 
             return array('value' => $value, 'name' => $country);
         };
