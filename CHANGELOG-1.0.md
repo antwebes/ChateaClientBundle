@@ -18,3 +18,6 @@ And use chateaClientLib version 1.0.0
  * Fixed init country select selection on edit city & Fixed cities autocomplete
  * Changed label of edit city to edit your localization
  * Retain country when errors happen in register
+ 
+* 1.0.1 (2016-04-??)
+ * Include extension to check if profile of user is empty, with parameters by default to check fields of profile array('gender', 'youWant', 'about', 'seeking')
