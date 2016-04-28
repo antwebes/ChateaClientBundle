@@ -20,7 +20,7 @@
 	"require" : {
 		"symfony/framework-bundle" : "~2.3",
 		"symfony/form" : "2.3.*",
-		"symfony/validator" : "2.3.*",
+		"symfony/validator" : "^3.0",
 		"symfony/twig-bundle" : "2.3.*",
 		"symfony/security-bundle" : "2.3.*",
 		"symfony/assetic-bundle" : "~2.3",

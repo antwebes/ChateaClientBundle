@@ -1,0 +1,5 @@
+user.no_profile_photo: 'No tienes ninguna foto de perfil. Para tener más visitas te sugerimos que subas una foto de perfil.'
+user.no_city: "No tienes ninguna ciudad establecida. Prara tener más visitas te sugerimos que establezcas una ciudad."
+user.no_profile: "No tienes ningún perfil. Para tener más visitas te sugerimos que rellenes tu perfil."
+user.profile_not_complete: "Tu perfil está incompleto. Tienes campos pendientes por rellenar."
+user.photo_with_votes: "Hola %user%, has conseguido que una de tus fotos tenga %votes% votos"

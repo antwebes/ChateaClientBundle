@@ -74,5 +74,17 @@
 	        public="false">
 	        <tag name="twig.extension" />
 	    </service>
+
+        <service id="antwebs_chateaclient_bundle.twig.is_profile_empty_extension"
+                 class="Ant\Bundle\ChateaClientBundle\Twig\Extension\IsProfileEmptyExtension">
+            <argument type="service" id="antwebs_chateaclient_bundle.util.profile_empty_checker" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="antwebs_chateaclient_bundle.util.profile_empty_checker"
+                 class="Ant\Bundle\ChateaClientBundle\Util\ProfileEmptyChecker">
+            <argument>%chatea_client.profile_properties_to_check%</argument>
+        </service>
+
     </services>
 </container>

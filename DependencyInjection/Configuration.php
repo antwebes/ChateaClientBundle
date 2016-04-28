@@ -80,6 +80,13 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('root_route')->defaultValue('homepage')->end()
             ->end();
 
+        $rootNode->children()
+                ->arrayNode('profile_properties_to_check')
+                ->defaultValue(array('gender', 'youWant', 'about', 'seeking'))
+                ->prototype('scalar')->end()
+                ->end()
+            ->end();
+
         return $treeBuilder;
     }
 }

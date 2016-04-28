@@ -22,6 +22,9 @@ AnnotationRegistry::registerLoader(function ($class) {
     if (strpos($class, 'Ant\\Bundle\\ChateaClientBundle\\Security\\Authentication\\Annotation\\') === 0) {
         $path = __DIR__.'/../'.str_replace('\\', '/', substr($class, strlen('Ant\Bundle\ChateaClientBundle\\'))).'.php';
         require_once $path;
+    }else if(strpos($class, 'Symfony\\Component\\Validator') === 0){
+        $path = __DIR__.'/../vendor/symfony/validator/'.str_replace('\\', '/', substr($class, strlen('Symfony\\Component\\Validator\\'))).'.php';
+        require_once $path;
     }
     return class_exists($class, false);
 });
