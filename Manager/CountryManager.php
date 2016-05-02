@@ -28,6 +28,17 @@ class CountryManager extends BaseManager
         $country->setId(array_key_exists('id',$item)?$item['id']:null);
         $country->setName(array_key_exists('name',$item)?$item['name']:'not-name');
         $country->setCode(array_key_exists('country_code',$item)?$item['country_code']:'');
+
+        if(isset($item['translations'])){
+            $translations = array();
+
+            foreach($item['translations'] as $translation){
+                $translations[$translation['locale']] = $translation['country_name'];
+            }
+
+            $country->setTranslations($translations);
+        }
+
         return $country;
     }
 

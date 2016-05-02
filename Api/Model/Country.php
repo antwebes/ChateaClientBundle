@@ -36,6 +36,7 @@ class Country implements BaseModel
     private $id;
     private $code;
     private $name;
+    private $translations = array();
 
     /**
      * @param mixed $code
@@ -80,9 +81,18 @@ class Country implements BaseModel
     /**
      * @return mixed
      */
-    public function getName()
+    public function getName($locale = 'en')
     {
+        if(isset($this->translations[$locale])){
+            return $this->translations[$locale];
+        }
+
         return $this->name;
+    }
+
+    public function setTranslations(array $translations)
+    {
+        $this->translations = $translations;
     }
 
     public function __toString()
