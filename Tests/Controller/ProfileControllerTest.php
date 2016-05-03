@@ -19,11 +19,14 @@ class ProfileControllerTest extends \PHPUnit_Framework_TestCase
     private $sfContainer;
     private $routerMock;
     private $userManagerMock;
+    private $countryManagerMock;
     private $citiesManagerMock;
     private $templatingMock;
+    private $securityContext;
     private $profileController;
     private $tokenStorage;
     private $token;
+    private $sessionMock;
 
     protected function setUp()
     {
@@ -33,16 +36,24 @@ class ProfileControllerTest extends \PHPUnit_Framework_TestCase
         $this->routerMock = $this->getMock('Symfony\Component\Routing\RouterInterface');
         $this->templatingMock = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $this->tokenStorage = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface');
+        $this->securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
         $this->token = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
         $this->userManagerMock = $this->getMockBuilder('Ant\Bundle\ChateaClientBundle\Manager\UserManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->countryManagerMock = $this->getMockBuilder('Ant\Bundle\ChateaClientBundle\Manager\CountryManager')
             ->disableOriginalConstructor()
             ->getMock();
         $this->citiesManagerMock = $this->getMockBuilder('Ant\Bundle\ChateaClientBundle\Manager\CityManager')
             ->disableOriginalConstructor()
             ->getMock();
+        $this->sessionMock = $this->getMockBuilder('Symfony\Component\HttpFoundation\Session\Session')
+            ->setMethods(array('clear', 'start', 'getId'))
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $this->fakeCallMethod($this->containerMock, 'has', true, 'security.token_storage');
-        $this->fakeCallMethod($this->tokenStorage, 'getToken', $this->token);
+        $this->fakeCallMethod($this->containerMock, 'has', true, 'security.token');
+        $this->fakeCallMethod($this->securityContext, 'getToken', $this->token);
         $this->fakeCallMethod($this->token, 'getUser', $this->createSymfonyUser());
 
         $kernel = new AppKernel('test', true);
@@ -50,7 +61,10 @@ class ProfileControllerTest extends \PHPUnit_Framework_TestCase
         $this->sfContainer = $kernel->getContainer();
         $this->sfContainer->set('security.token_storage', $this->tokenStorage);
         $this->sfContainer->set('api_users', $this->userManagerMock);
+        $this->sfContainer->set('api_countries', $this->countryManagerMock);
         $this->sfContainer->set('api_cities', $this->citiesManagerMock);
+        $this->sfContainer->set('security.context', $this->securityContext);
+        $this->sfContainer->set('session', $this->sessionMock);
 
         $this->profileController = new ProfileController();
         $this->profileController->setContainer($this->sfContainer);
@@ -69,17 +83,31 @@ class ProfileControllerTest extends \PHPUnit_Framework_TestCase
     {
         $user = $this->createApiUser();
         $city = $this->createCity(3);
+        $country = $this->createCountry(2);
+        $csrfTokenProvider = $this->getMock('Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface');
+
+        $csrfTokenProvider->expects($this->any())
+            ->method('generateCsrfToken')
+            ->will($this->returnValue('abc'));
+
+        $csrfTokenProvider->expects($this->any())
+            ->method('isCsrfTokenValid')
+            ->will($this->returnValue(true));
 
         $this->fakeCallMethod($this->userManagerMock, 'findById', $user, 2);
         $this->fakeCallMethod($this->citiesManagerMock, 'findById', $city, 3);
+        $this->fakeCallMethod($this->countryManagerMock, 'findByCode', $country, 2);
 
         $this->userManagerMock->expects($this->once())
             ->method('updateUserCity')
-            ->with($user, $city);
+            ->with($user, $country, $city);
+
+        $this->sfContainer->set('form.csrf_provider', $csrfTokenProvider);
 
         $request = new Request();
         $request->setMethod('POST');
-        $request->request->set('edit_city', array('city' => 3));
+        $request->request->set('edit_city', array('city' => 3, 'searchCountry' => '{"country_code":"ES","has_cities":true,"id":2510769}', 'country' => 2, '_token' => 'abc'));
+        $request->request->set('_token', 'abc');
 
         $this->profileController->editCityAction($request);
     }
@@ -136,6 +164,17 @@ class ProfileControllerTest extends \PHPUnit_Framework_TestCase
         $this->fakeCallMethod($user, 'getCity', $this->createCity(12345));
 
         return $user;
+    }
+
+    private function createCountry($id)
+    {
+        $country = $this->getMockBuilder('Ant\Bundle\ChateaClientBundle\Api\Model\Country')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->fakeCallMethod($country, 'getId', $id);
+
+        return $country;
     }
 
     private function createCity($id)

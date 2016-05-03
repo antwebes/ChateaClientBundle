@@ -132,9 +132,9 @@ class ProfileController extends BaseController
         $form = $this->createForm(new EditCityType(), $editCity, $formOptions);
 
         if('POST' === $request->getMethod()){
-            $form->submit($request);
-            if ($form->isValid()) {
-                try{
+			$form->submit($request);
+			if ($form->isValid()) {
+				try{
                     $this->get('api_users')->updateUserCity($userOnline, $editCity->getCountry(), $editCity->getCity());
                     $success = true;
                 }catch(\Exception $e){

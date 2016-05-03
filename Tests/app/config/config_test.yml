@@ -19,7 +19,9 @@ chatea_secure:
     homepage_path: homepage
 
 framework:
+    secret: asecrete
     form:            ~
+    csrf_protection: ~
     session: ~
     validation:      { enable_annotations: true }
     templating:

@@ -18,11 +18,7 @@
 	"homepage" : "https://github.com/antwebes/ChateaClientBundle",
 	"license" : "MIT",
 	"require" : {
-		"symfony/framework-bundle" : "~2.3",
-		"symfony/form" : "2.3.*",
-		"symfony/validator" : "^3.0",
-		"symfony/twig-bundle" : "2.3.*",
-		"symfony/security-bundle" : "2.3.*",
+		"symfony/symfony" : "2.3.*",
 		"symfony/assetic-bundle" : "~2.3",
 		"antwebes/chatea-common" : "0.1.0",
 		"antwebes/chatea-client-lib" : "1.0.0",
