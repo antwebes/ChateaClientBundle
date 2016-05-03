@@ -19,6 +19,7 @@ And use chateaClientLib version 1.0.0
  * Changed label of edit city to edit your localization
  * Retain country when errors happen in register
  
-* 1.0.1 (2016-04-??)
+* 1.0.1 (2016-04-03)
  * Include extension to check if profile of user is empty, with parameters by default to check fields of profile array('gender', 'youWant', 'about', 'seeking')
  * Include translations in country, now api, return country and object with its translations
+ * Include test.sh, now test works
