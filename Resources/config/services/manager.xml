@@ -193,6 +193,10 @@
                 <argument type="string">Ant\Bundle\ChateaClientBundle\Manager\GlobalStatisticManager</argument>
             </service>
 
+			<service id="antwebes_chateaclient_bunle.manager.countries_loader" class="Ant\Bundle\ChateaClientBundle\Manager\CountriesLoader">
+                <argument type="string">%chatea_client.bundle_root_dir%/Resources/config/countries.json</argument>
+            </service>
+
             <service id="api_channels"          alias="antwebes_chateaclient_bundle.manager.channel_manager"           synthetic="true" />
             <service id="api_channels_types"    alias="antwebes_chateaclient_bundle.manager.channel_type_manager"      synthetic="true" />
             <service id="api_users"             alias="antwebes_chateaclient_bundle.manager.user_manager"              synthetic="true" />
