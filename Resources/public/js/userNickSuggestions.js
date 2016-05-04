@@ -46,6 +46,23 @@
 
 var emailCheckMinlength = 4;
 
+function isValidNick(nick){
+    if(nick.length > 32 ){
+        return false;
+    }
+    for (i = 0; i < nick.length; i++) {
+        if(nick[i] >= 'A' && nick[i] <= '}'){
+            continue;
+        }
+        if ((((nick[i] >= '0') && (nick[i] <= '9')) || (nick[i] == '-')) && i != 0 ){
+            continue;
+        }
+        return false;
+    }
+
+    return true;
+}
+
 function userNickSuggestions(messages) {
     function disableRegsiterButton(){
         $('input[data-role=send]').attr('disabled', 'disable');
@@ -66,23 +83,6 @@ function userNickSuggestions(messages) {
             // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript#answer-46181
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
-        }
-
-        function isValidNick(nick){
-            if(nick.length > 32 ){
-                return false;
-            }
-            for (i = 0; i < nick.length; i++) {
-                if(nick[i] >= 'A' && nick[i] <= '}'){
-                    continue;
-                }
-                if ((((nick[i] >= '0') && (nick[i] <= '9')) || (nick[i] == '-')) && i != 0 ){
-                    continue;
-                }
-                return false;
-            }
-
-            return true;
         }
 
         function transServerError(error, throwEvent){
