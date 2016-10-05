@@ -14,7 +14,7 @@ class EditUserProfileType extends AbstractType
                 'choices'   => array('male' => 'Male', 'female' => 'Female', 'other' => 'Not defined'),
             ))
             ->add('seeking', 'choice', array(
-                'choices'   	=> array("men" => "Men",  "women" => "Women", "both" => "Men and women"),
+                'choices'   	=> array("men" => "Inversor",  "women" => "Socio", "both" => "Networking"),
                 'empty_value' 	=> 'form.seeking.empty_value','required' => false,
                 'label'			=> 'form.seeking.label'
             ))

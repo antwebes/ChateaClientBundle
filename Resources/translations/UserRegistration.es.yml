@@ -54,7 +54,7 @@ user.register.invalid_client: "Debido a problemas técnicos en este momento nos 
 user.register_profile: 'Registrar perfil'
 user.register_profile.skip: 'No por ahora'
 user.register.email_notify: Por cada email solo se permite un registro.
-user.register_profile.need_upload_photo: 'Para completar tu perfil necesitas subir una photo'
+user.register_profile.need_upload_photo: 'Para completar tu perfil necesitas subir una foto'
 user.profile.max_file_upload: 'Esta foto es demasiado grande. Tamaño máximo permitido 1Mb'
 page_confirm_email.write_our_email: Escribe a nuestro email de contacto
 registration_profile.submit: 'Enviar'
@@ -86,5 +86,5 @@ user.edit_profile.success: "Tu perfil ha sido actualizado con éxito"
 user.edit_profile_photo.can_take_time_refresh: Puede que tarde unos minutos en que se vea la nueva foto de perfil en la pagina. Si no ves los cambios intenta refrescar la pagina con F5.
 user.register.change_password: También puedes cambiarte de email <a href="%path%" title="%title%">desde aquí</a>
 change_email: "Cambiar email"
-upload.pictures.alert.sexual_content:  No subas fotos con contenido sexual. Estas serán eliminadas sin previo aviso.
+upload.pictures.alert.sexual_content:  Sube una foto tuya para que te conozcan el resto de usuarios.
 user.last_visits: "Últimas visitas"
