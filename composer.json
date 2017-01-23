@@ -18,8 +18,8 @@
 	"homepage" : "https://github.com/antwebes/ChateaClientBundle",
 	"license" : "MIT",
 	"require" : {
-		"symfony/symfony" : "2.8.*",
-		"symfony/assetic-bundle" : "~2.8",
+		"symfony/symfony" : "2.7.*",
+		"symfony/assetic-bundle" : "2.7.*",
 		"antwebes/chatea-common" : "0.1.0",
 		"antwebes/chatea-client-lib" : "1.0.0",
 		"antwebes/chatea-secure-bundle" : "0.1.6",
