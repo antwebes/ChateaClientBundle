@@ -91,6 +91,11 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
 //            ->will($this->returnValue($this->userManagerMock));
 
         $this->containerMock->expects($this->at(1))
+            ->method('has')
+            ->with('templating')
+            ->will($this->returnValue(true));
+
+        $this->containerMock->expects($this->at(2))
             ->method('get')
             ->with('templating')
             ->will($this->returnValue($this->templatingMock));
