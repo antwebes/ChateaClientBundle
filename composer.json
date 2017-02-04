@@ -2,13 +2,7 @@
 	"name" : "antwebes/chatea-client-bundle",
 	"description" : "Symfony2 bundle for ChateaClient library, It makes it easy to use API of api.chatea.net",
 	"type" : "symfony-bundle",
-	"authors" : [{
-			"name" : "Xabier Fernández Rodríguez AS jjbier",
-			"email" : "jjbier@gmail.com",
-			"homepage" : "https://github.com/antwebes",
-			"role" : "Developer"
-		}
-	],
+	"authors" : [],
 	"keywords" : [
 		"chatea",
 		"chateagratis",
@@ -18,8 +12,8 @@
 	"homepage" : "https://github.com/antwebes/ChateaClientBundle",
 	"license" : "MIT",
 	"require" : {
-		"symfony/symfony" : "2.3.*",
-		"symfony/assetic-bundle" : "~2.3",
+		"symfony/symfony" : ">2.3",
+		"symfony/assetic-bundle" : ">2.3",
 		"antwebes/chatea-common" : "0.1.0",
 		"antwebes/chatea-client-lib" : "1.0.0",
 		"antwebes/chatea-secure-bundle" : "0.1.6",
