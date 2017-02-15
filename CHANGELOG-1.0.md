@@ -23,3 +23,6 @@ And use chateaClientLib version 1.0.0
  * Include extension to check if profile of user is empty, with parameters by default to check fields of profile array('gender', 'youWant', 'about', 'seeking')
  * Include translations in country, now api, return country and object with its translations
  * Include test.sh, now test works
+ 
+* 1.0.2  (2017-02-15)
+ * Allow configure first api proxy folder
