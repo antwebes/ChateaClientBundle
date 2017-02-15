@@ -38,6 +38,18 @@ class ApiProxyController extends Controller
             }
 
             $url_api = $pathInfo . $query_string;
+
+            /*
+             * Only is configurable the first folder
+             * internalapi/users/username-available
+             * is changed to api/users/username-available
+             */
+            $array = explode("/", $url_api);
+            unset($array[1]);
+            $text = implode("/", $array);
+
+            $url_api = "/api".$text;
+
             $apiUri = trim($url_api,'/');
             try{
                 return $this->container->get('antwebes_chateaclient_bundle.http.api_client')->sendRequest('GET',$apiUri);
