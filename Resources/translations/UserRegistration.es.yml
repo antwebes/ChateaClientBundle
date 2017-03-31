@@ -48,8 +48,8 @@ user.register.your_mail: "Tu cuenta de correo"
 user.register.write_your_mail: "Escribe to cuenta de correo para enviarte un correo para verificar la cuenta."
 user.register.confirm.submit: "Enviar"
 user.register.i_need_help: "Necesito ayuda"
-user.register.confirmed.title: "Felicidadesa !! Tu cuenta ha sido activada con éxiito"
-user.register.confirmed.message: "Has sido registrado correctamente. Puedes empezar a chatear ahora."
+user.register.confirmed.title: "Felicidades !! Tu cuenta ha sido activada con éxito"
+user.register.confirmed.message: "Has sido registrado correctamente. Bienvenid@ a la comunidad."
 user.register.invalid_client: "Debido a problemas técnicos en este momento nos es imposible realizar registros. Por favor pongase en contacto con el administrador de la web."
 user.register_profile: 'Registrar perfil'
 user.register_profile.skip: 'No por ahora'

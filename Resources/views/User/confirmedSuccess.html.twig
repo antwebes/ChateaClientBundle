@@ -5,6 +5,8 @@
 {% block chatea_title %}{{ 'user.register.confirm.success' | trans }}{% endblock %}
 
 {% block chatea_body %}
-    <h2>{% trans with { '%username%': app.user.username } %}user.register.confirmed.title{% endtrans %}</h2>
-    {% trans with { '%username%': app.user.username } %}user.register.confirmed.message{% endtrans %}
+    <div class="text-center">
+        <h2>{% trans with { '%username%': app.user.username } %}user.register.confirmed.title{% endtrans %}</h2>
+        {% trans with { '%username%': app.user.username } %}user.register.confirmed.message{% endtrans %}
+    </div>
 {% endblock %}

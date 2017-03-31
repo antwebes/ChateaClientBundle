@@ -244,7 +244,6 @@ class UserController extends BaseController
     }
 
     /**
-     * @deprecated
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
