@@ -8,7 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\True as CaptchaTrue;
 
 class EditCityType extends AbstractType

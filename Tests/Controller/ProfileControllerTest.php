@@ -48,12 +48,12 @@ class ProfileControllerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $this->sessionMock = $this->getMockBuilder('Symfony\Component\HttpFoundation\Session\Session')
-            ->setMethods(array('clear', 'start', 'getId'))
+            ->setMethods(array('clear', 'start', 'getId', 'isStarted', 'has', 'set'))
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->fakeCallMethod($this->containerMock, 'has', true, 'security.token');
-        $this->fakeCallMethod($this->securityContext, 'getToken', $this->token);
+        $this->fakeCallMethod($this->tokenStorage, 'getToken', $this->token);
         $this->fakeCallMethod($this->token, 'getUser', $this->createSymfonyUser());
 
         $kernel = new AppKernel('test', true);
@@ -102,7 +102,7 @@ class ProfileControllerTest extends \PHPUnit_Framework_TestCase
             ->method('updateUserCity')
             ->with($user, $country, $city);
 
-        $this->sfContainer->set('form.csrf_provider', $csrfTokenProvider);
+        $this->sfContainer->set('security.csrf.token_manager', $csrfTokenProvider);
 
         $request = new Request();
         $request->setMethod('POST');
