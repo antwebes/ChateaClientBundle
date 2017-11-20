@@ -8,7 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Beelab\Recaptcha2Bundle\Validator\Constraints\Recaptcha2;
 
 class CreateUserType extends AbstractType
@@ -78,7 +78,7 @@ class CreateUserType extends AbstractType
         $builder->add("terms_and_conditions", "checkbox", array(
                 "mapped" => false,
                 'translation_domain'=> 'UserRegistration',
-                "constraints" => new True(array("message" => "form.terms_and_conditions.error_message")),
+                "constraints" => new IsTrue(array("message" => "form.terms_and_conditions.error_message")),
                 'label'      => 'form.terms_and_conditions',
                 'label_attr' => array('class'=>'checkbox')
             )
