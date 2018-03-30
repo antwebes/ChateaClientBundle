@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb476336e2950c41ada86dd1d3b4f469",
+    "content-hash": "47d458e2e586bde24ba732dff7ae9f52",
     "packages": [
         {
             "name": "antwebes/chatea-client-lib",
@@ -98,7 +98,7 @@
         },
         {
             "name": "antwebes/chatea-secure-bundle",
-            "version": "dev-master",
+            "version": "v0.3.0",
             "target-dir": "Ant/Bundle/ChateaSecureBundle",
             "source": {
                 "type": "git",
@@ -2938,9 +2938,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "antwebes/chatea-secure-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
