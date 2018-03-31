@@ -25,9 +25,8 @@
         </service>
         <service id="antwebes_chateaclient_lib.client"
                  class="%antwebes_chateaclient_lib.client.class%"
-                 factory-class="%antwebes_chateaclient_lib.factory_client_app.class%"
-                 factory-method="factory"
                  public="false">
+            <factory class="%antwebes_chateaclient_lib.client.class%" method="factory" />
             <argument type="collection">
                 <argument key="client_id">%chatea_client.app_auth.client_id%</argument>
                 <argument key="secret">%chatea_client.app_auth.secret%</argument>
@@ -41,9 +40,8 @@
 
         <service id="antwebes_chateaclient_lib.client_auth"
                  class="%antwebes_chateaclient_lib.client.class%"
-                 factory-class="%antwebes_chateaclient_lib.factory_client_auth.class%"
-                 factory-method="factory"
                  public="false">
+            <factory class="%antwebes_chateaclient_lib.factory_client_auth.class%" method="factory" />
             <argument type="collection">
                 <argument key="client_id">%chatea_client.app_auth.client_id%</argument>
                 <argument key="secret">%chatea_client.app_auth.secret%</argument>
@@ -57,7 +55,7 @@
         </service>
         <service id="antwebes_client" alias="antwebes_chateaclient_lib.client" synthetic="true" />
         <service id="antwebes_client_auth" alias="antwebes_chateaclient_lib.client_auth" synthetic="true" />
-        
+
         <service id="antwebes_chateaclient_bundle.util.languages_loader" class="Ant\Bundle\ChateaClientBundle\Util\YamlFileLoader">
             <argument key="root_dir">%chatea_client.languages_dir%</argument>
             <argument key="file">%chatea_client.languages_file%</argument>
@@ -68,12 +66,12 @@
             <argument type="service" id="antwebes_chateaclient_bundle.util.languages_loader" />
             <tag name="validator.constraint_validator"  alias="chatea_language_validator"/>
         </service>
-        
-      	<service id="core.twig.user_profile_photo_url_extension"
-	        class="Ant\Bundle\ChateaClientBundle\Twig\Extension\UserProfilePhotoUrlExtension"
-	        public="false">
-	        <tag name="twig.extension" />
-	    </service>
+
+        <service id="core.twig.user_profile_photo_url_extension"
+                 class="Ant\Bundle\ChateaClientBundle\Twig\Extension\UserProfilePhotoUrlExtension"
+                 public="false">
+            <tag name="twig.extension" />
+        </service>
 
         <service id="antwebs_chateaclient_bundle.twig.is_profile_empty_extension"
                  class="Ant\Bundle\ChateaClientBundle\Twig\Extension\IsProfileEmptyExtension">
