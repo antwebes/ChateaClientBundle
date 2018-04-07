@@ -21,7 +21,7 @@
 
         <service id="antwewebs_event_listerner_auth_token_updater_listener" class="%antwewebs_event_listerner_auth_token_updater_listener.class%">
           <argument type="service" id="annotation_reader" />
-          <argument type="service" id="security.context" />
+          <argument type="service" id="security.token_storage" />
           <argument type="service" id="antwebes_chateaclient_lib.client" />
           <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
         </service>
@@ -36,7 +36,7 @@
 
         <service class="Ant\Bundle\ChateaClientBundle\EventListener\AccessDeniedHttpExceptionListener"
                  id="ant_chatea_client.event_listener.access_denied_http_exception_listener">
-            <argument id="security.context" type="service"/>
+            <argument id="security.token_storage" type="service"/>
             <argument id="router" type="service"/>
             <argument type="string">chatea_client_register_user_success</argument>
             <tag name="kernel.event_subscriber"/>

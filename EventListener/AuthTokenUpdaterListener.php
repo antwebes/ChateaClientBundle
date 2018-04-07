@@ -2,11 +2,11 @@
 namespace Ant\Bundle\ChateaClientBundle\EventListener;
 
 use Doctrine\Common\Annotations\Reader;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Ant\ChateaClient\Service\Client\ChateaGratisAppClient;
 use Ant\Bundle\ChateaSecureBundle\Security\User\User;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Request listener that updates the HTTP client access token of OAuth2 if an action requirs to be made by the loggedin user
@@ -24,10 +24,10 @@ class AuthTokenUpdaterListener
     /**
      * Constructor
      * @param Reader $annotationReader
-     * @param SecurityContextInterface $securityContext
+     * @param TokenStorageInterface $securityContext
      * @param ChateaGratisAppClient $client
      */
-    function __construct(Reader $annotationReader, SecurityContextInterface $securityContext, ChateaGratisAppClient $client)
+    function __construct(Reader $annotationReader, TokenStorageInterface $securityContext, $client)
     {
         $this->annotationReader = $annotationReader;
         $this->securityContext = $securityContext;

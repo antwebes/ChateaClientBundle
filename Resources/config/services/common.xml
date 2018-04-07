@@ -57,12 +57,12 @@
         <service id="antwebes_client_auth" alias="antwebes_chateaclient_lib.client_auth" synthetic="true" />
 
         <service id="antwebes_chateaclient_bundle.util.languages_loader" class="Ant\Bundle\ChateaClientBundle\Util\YamlFileLoader">
-            <argument key="root_dir">%chatea_client.languages_dir%</argument>
-            <argument key="file">%chatea_client.languages_file%</argument>
-            <argument key="header">%chatea_client.languages_header%</argument>
+            <argument key="$root_dir">%chatea_client.languages_dir%</argument>
+            <argument key="$file">%chatea_client.languages_file%</argument>
+            <argument key="$header">%chatea_client.languages_header%</argument>
         </service>
 
-        <service id="ntwebes_chateaclient_bundle.validator.constraints.languaje" class="Ant\Bundle\ChateaClientBundle\Validator\Constraints\LanguageValidator">
+        <service id="antwebes_chateaclient_bundle.validator.constraints.languaje" class="Ant\Bundle\ChateaClientBundle\Validator\Constraints\LanguageValidator">
             <argument type="service" id="antwebes_chateaclient_bundle.util.languages_loader" />
             <tag name="validator.constraint_validator"  alias="chatea_language_validator"/>
         </service>

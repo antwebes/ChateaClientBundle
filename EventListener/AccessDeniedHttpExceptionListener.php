@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 
 /**
@@ -28,7 +28,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class AccessDeniedHttpExceptionListener implements  EventSubscriberInterface
 {
     /**
-     * @var SecurityContextInterface
+     * @var TokenStorageInterface
      */
     private $securityContext;
 
@@ -45,12 +45,12 @@ class AccessDeniedHttpExceptionListener implements  EventSubscriberInterface
     /**
      * AccessDeniedHttpExceptionListener constructor.
      *
-     * @param SecurityContextInterface $securityContext
+     * @param TokenStorageInterface $securityContext
      * @param UrlGeneratorInterface $urlGenerator
      * @param string $routeIdUserNotValidated
      */
     public function __construct(
-        SecurityContextInterface $securityContext,
+        TokenStorageInterface $securityContext,
         UrlGeneratorInterface $urlGenerator,
         $routeIdUserNotValidated
     ) {
